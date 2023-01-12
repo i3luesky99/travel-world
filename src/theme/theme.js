@@ -31,6 +31,11 @@ const globalStyles = {
     alignItems: "center",
     justifyContent: "space-evenly",
   },
+  flexColumnEvenly: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-evenly",
+  },
 };
 const colors = {
   white: "#FFFFFF",
@@ -68,6 +73,7 @@ const colors = {
   lightBlack: "#242526",
   darkGrey: "#4c4c4c",
   blueLighter: "#2487fc",
+  lightestBrown: "#c8943c",
 };
 const sizes = {
   base: 8,
