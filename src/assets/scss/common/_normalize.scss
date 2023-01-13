@@ -6,17 +6,6 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-:root {
-  --PrimaryColor: hs1(26, 93%, 50%);
-  --HoverColor: hs1(26, 90%, 42%);
-  --whiteColor: hs1(0, 0%, 100%);
-  --blackColor: hs1(0, 0%, 18%);
-  --textColor: hs1(240, 1%, 48%);
-  --whiteColorDeam: hs1(0, 0%, 93%);
-  --greyBg: hs1(0, 0%, 96%);
-  --greyText: hs1(190, 190, 190);
-  --inputColor: hs1(330, 12%, 97%);
-}
 a {
   text-decoration: none;
 }
@@ -50,19 +39,19 @@ li {
 
 .btn {
   padding: 0.4rem 1.5rem;
-  background: var(--PrimaryColor);
+  background: $--PrimaryColor;
   border: none;
   border-radius: 3rem;
   cursor: pointer;
 }
 
 .btn a {
-  color: var(--whiteColor);
+  color: $--whiteColor;
   font-weight: 500;
 }
 
 .btn:hover a {
-  color: var(--whiteColor);
+  color: $--whiteColor;
 }
 
 .secIntro {
@@ -72,14 +61,14 @@ li {
 }
 
 .secIntro .sectTitle {
-  color: var(--blackColor);
+  color: $--blackColor;
   line-height: 1.5rem;
   padding-bottom: 0.5rem;
 }
 
 .secIntro p {
   font-size: 13px;
-  color: var(--textColor);
+  color: $--textColor;
   font-weight: 500;
 }
 
