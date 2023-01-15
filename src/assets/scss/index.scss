@@ -1,5 +1,6 @@
 @import "./common/variable";
 @import "./common/normalize";
 @import "./components/navbar";
-@import "./pages/home.scss";
-@import "./pages/popular.scss";
+@import "./components/popular";
+@import "./components/offers";
+@import "./pages/home";

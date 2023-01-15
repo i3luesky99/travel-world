@@ -17,6 +17,7 @@ export default function Navbar() {
   //   console.log("123");
   // };
   const [active, setActive] = useState("navBar");
+  const [transparent, setTransparent] = useState("header");
   const showNav = () => {
     setActive("navBar activeNavBar");
   };
@@ -24,9 +25,20 @@ export default function Navbar() {
   const closeNav = () => {
     setActive("navBar");
   };
+
+  const addBg = () => {
+    if (window.scrollY >= 10) {
+      setTransparent("header activeHeader");
+    } else {
+      setTransparent("header");
+    }
+  };
+
+  window.addEventListener("scroll", addBg);
+
   return (
     <section className="navBarSection">
-      <div className="header">
+      <div className={transparent}>
         <div className="logoDiv">
           <a href="#" className="logo">
             <h1 className="flex">

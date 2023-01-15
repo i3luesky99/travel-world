@@ -8,20 +8,27 @@
     width: 100%;
     padding: 1rem;
     z-index: 100;
-  }
-  .logoDiv {
-    .logo {
-      color: $--PrimaryColor;
-      font-weight: 500;
-      cursor: pointer;
-      align-items: center;
-      justify-content: center;
-      .icon {
+    .logoDiv {
+      .logo {
         color: $--PrimaryColor;
-        font-size: 25px;
+        font-weight: 500;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        .icon {
+          color: $--PrimaryColor;
+          font-size: 25px;
+          margin-right: 10px;
+        }
       }
     }
   }
+
+  .activeHeader {
+    background: $--lightGrey;
+    box-shadow: 0 2px 8px 2px rgba(178, 178, 178, 0.45);
+  }
+
   @media screen and (max-width: 768px) {
     .navBar {
       background: $--greyBg;

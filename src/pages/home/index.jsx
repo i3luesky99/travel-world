@@ -23,12 +23,12 @@ export default function Home() {
           </div>
 
           <div className="distDiv">
-            <label htmlFor="distance">Location</label>
+            <label htmlFor="distance">Distance</label>
             <input type="text" placeholder="Meters" />
           </div>
 
           <div className="priceDiv">
-            <label htmlFor="price">Location</label>
+            <label htmlFor="price">Price</label>
             <input type="text" placeholder="$149" />
           </div>
           <button className="btn">Search</button>
