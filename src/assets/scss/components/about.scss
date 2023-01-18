@@ -1,0 +1,120 @@
+.about {
+  .secContainer {
+    .title {
+      color: $--blackColor;
+      line-height: 1.5rem;
+      padding: 0.5rem;
+      text-align: center;
+      font-size: 1.5rem;
+      padding-bottom: 2rem;
+    }
+
+    .mainContent {
+      gap: 1rem;
+
+      .singleItem {
+        text-align: center;
+
+        img {
+          background: rgba(247, 0144, 54, 0.265);
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          padding: 0.3rem;
+        }
+
+        h3 {
+          font-weight: 700;
+          color: $--blackColor;
+          pad: 0.5rem;
+        }
+
+        p {
+          font-size: 13px;
+          font-weight: 500;
+          padding-bottom: 0.5rem;
+          color: $--textColor;
+        }
+      }
+    }
+
+    .videoCard {
+      margin-top: 2rem;
+      background: linear-gradient(rgba(0, 0, 0, 0.846), rgba(0, 0, 0, 0.759)),
+        url(../../picture/map.jpg);
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+
+      .cardContent {
+        gap: 2rem;
+        padding: 2rem 1rem;
+
+        .cardText {
+          h2 {
+            color: $--whiteColor;
+            font-weight: 600;
+            padding-bottom: 1rem;
+          }
+
+          p {
+            color: $--whiteColor;
+            opacity: 0.7;
+            font-size: 12px;
+            font-weight: 400;
+            letter-spacing: 1px;
+          }
+        }
+      }
+
+      .cardVideo {
+        border: 2px solid $--whiteColor;
+        height: 200px;
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+
+        video {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .about {
+    .secContainer {
+      .videoCard {
+        .cardContent {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 4rem;
+          padding: 4rem 3rem;
+
+          .cardText {
+            h2 {
+              font-size: 2rem;
+            }
+
+            p {
+              opacity: 0.7;
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .about {
+    .secContainer {
+      .mainContent {
+        padding: 2.5rem 0;
+      }
+    }
+  }
+}

@@ -54,6 +54,10 @@ li {
   color: $--whiteColor;
 }
 
+.btn:hover {
+  background: $--HoverColor;
+}
+
 .secIntro {
   max-width: 70%;
   text-align: center;
@@ -80,4 +84,52 @@ video {
 
 input {
   font-size: 100%;
+}
+
+@media screen and (min-width: 556px) {
+  .mainContent {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 884px) {
+  .mainContent {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .container {
+    width: 75% !important;
+    margin: auto;
+  }
+
+  .section {
+    padding: 5rem 0 3rem;
+  }
+
+  .secIntro {
+    margin: 0 auto 3rem;
+  }
+
+  .secIntro .sectTitle {
+    line-height: 2rem;
+    padding-bottom: 1rem;
+    font-size: 2.2rem;
+  }
+
+  .secIntro p {
+    font-size: 15px;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  body {
+    zoom: 1.7;
+  }
+}
+
+::selection {
+  background: $--PrimaryColor;
+  color: $--whiteColor;
 }

@@ -40,12 +40,17 @@ export default function Navbar() {
     <section className="navBarSection">
       <div className={transparent}>
         <div className="logoDiv">
-          <a href="#" className="logo">
+          {/* <a href="#" className="logo">
             <h1 className="flex">
               <SiYourtraveldottv className="icon" />
               DOT
             </h1>
-          </a>
+          </a> */}
+          <img
+            style={{ width: "80px", height: "80px", borderRadius: "50%" }}
+            src={require("../../assets/picture/logo.png")}
+            alt=""
+          />
         </div>
         <div className={active}>
           <ul className="navLists flex">

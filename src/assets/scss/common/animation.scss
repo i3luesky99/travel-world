@@ -1,0 +1,13 @@
+@keyframes animationLeftToRight {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(10px);
+  }
+}
+@mixin animationLeftToRight() {
+  animation: animationLeftToRight 1s infinite ease-in-out;
+}

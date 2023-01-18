@@ -26,7 +26,6 @@
 
   .activeHeader {
     background: $--lightGrey;
-    box-shadow: 0 2px 8px 2px rgba(178, 178, 178, 0.45);
   }
 
   @media screen and (max-width: 768px) {
@@ -38,7 +37,7 @@
       width: 100%;
       top: 0;
       left: -500%;
-      box-shadow: 0 2px 4px $--lightGrey;
+      @include boxShadow;
       transition: 0.8s ease;
       z-index: 100;
 
@@ -108,5 +107,75 @@
         color: $--PrimaryColor;
       }
     }
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .navBarSection {
+    .toggleNavBar,
+    .closeNavBar {
+      display: none;
+    }
+    .header {
+      padding: 1.5rem 2rem;
+      .navBar {
+        .navLists {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: row;
+
+          .navItem {
+            .navLink {
+              color: $--whiteColor;
+              padding: 0 0.45rem;
+              font-size: 0.9rem;
+              font-weight: 400;
+              &:hover {
+                color: $--PrimaryColor;
+              }
+            }
+          }
+
+          .btn {
+            margin-left: 0.6rem;
+
+            a {
+              color: $--whiteColor;
+              font-weight: 500;
+            }
+          }
+
+          .loginBtn {
+            background: none;
+            border: 1px solid $--PrimaryColor;
+            &:hover {
+              background: $--PrimaryColor;
+              a {
+                color: $--whiteColor;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .header {
+    .navBar {
+      .navLists {
+        .navItem {
+          padding: 0 0.7rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .header {
+    padding: 1rem 8.5rem !important;
   }
 }

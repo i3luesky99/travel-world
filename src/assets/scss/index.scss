@@ -1,6 +1,12 @@
 @import "./common/variable";
 @import "./common/normalize";
+@import "./common/mixin";
+@import "./common/animation";
 @import "./components/navbar";
 @import "./components/popular";
 @import "./components/offers";
+@import "./components/about";
+@import "./components/footer";
+@import "./components/blog";
+
 @import "./pages/home";

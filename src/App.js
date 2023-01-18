@@ -1,6 +1,6 @@
 import "./assets/scss/index.scss";
 import { Home } from "./pages";
-import { Navbar, Offers, Popular } from "./components";
+import { About, Blog, Footer, Navbar, Offers, Popular } from "./components";
 function App() {
   return (
     <div className="App">
@@ -8,6 +8,9 @@ function App() {
       <Home />
       <Popular />
       <Offers />
+      <About />
+      <Blog />
+      <Footer />
     </div>
   );
 }

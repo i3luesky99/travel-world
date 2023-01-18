@@ -7,8 +7,9 @@
         border-radius: 1rem;
         overflow: hidden;
         padding: 0.5rem;
-        box-shadow: 0 2px 8px 2px $--greyText;
-
+        @include boxShadow;
+        margin-bottom: 10px;
+        height: 100%;
         .icon {
           font-size: 20px;
           color: $--textColor;
@@ -28,6 +29,8 @@
 
           img {
             height: 100%;
+            transition: all 0.5s ease;
+            object-fit: cover;
           }
 
           .discount {
@@ -44,8 +47,10 @@
         }
 
         .offerBody {
+          height: calc(100% - 200px);
           padding: 1rem;
-
+          flex-direction: column;
+          justify-content: space-between;
           .price {
             justify-content: space-between;
 
@@ -89,15 +94,28 @@
             font-weight: 600;
             color: $--whiteColor;
             gap: 0.5rem;
-
+            border: 1px solid transparent;
+            transition: all 0.1s ease;
             .icon {
               color: $--whiteColor;
+            }
+
+            &:hover {
+              background: $--inputColor;
+              border-color: $--PrimaryColor;
+              color: $--PrimaryColor;
+              .icon {
+                color: $--PrimaryColor;
+                @include animationLeftToRight;
+              }
             }
           }
         }
 
-        &:hover{
-            transform: translateY(-7px);
+        &:hover {
+          img {
+            transform: scale(1.1);
+          }
         }
       }
     }
