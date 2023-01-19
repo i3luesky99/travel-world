@@ -14,8 +14,7 @@ export default function Navbar() {
   // const [selected, setSelected] = useState(0);
   // const onChangeSelected = () => {
   //   // setSelected(index);
-  //   console.log("123");
-  // };
+   // };
   const [active, setActive] = useState("navBar");
   const [transparent, setTransparent] = useState("header");
   const showNav = () => {
@@ -40,17 +39,17 @@ export default function Navbar() {
     <section className="navBarSection">
       <div className={transparent}>
         <div className="logoDiv">
-          {/* <a href="#" className="logo">
-            <h1 className="flex">
+          <a href="#" className="logo">
+            {/* <h1 className="flex">
               <SiYourtraveldottv className="icon" />
               DOT
-            </h1>
-          </a> */}
-          <img
-            style={{ width: "80px", height: "80px", borderRadius: "50%" }}
-            src={require("../../assets/picture/logo.png")}
-            alt=""
-          />
+            </h1> */}
+            <img
+              style={{ width: "80px", height: "80px", borderRadius: "50%" }}
+              src={require("../../assets/picture/logo.png")}
+              alt=""
+            />
+          </a>
         </div>
         <div className={active}>
           <ul className="navLists flex">
@@ -78,7 +77,7 @@ export default function Navbar() {
               <button className="btn loginBtn">
                 <a href="#">Login</a>
               </button>
-              <button className="btn loginBtn">
+              <button className="btn">
                 <a href="#">Sign Up</a>
               </button>
             </div>

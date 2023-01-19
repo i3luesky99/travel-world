@@ -120,16 +120,6 @@
             color: $--blackColor;
             position: relative;
             width: max-content;
-            &::after {
-              content: "";
-              background: $--PrimaryColor;
-              position: absolute;
-              top: 45%;
-              right: -150%;
-              height: 5px;
-              width: 45px;
-              border-radius: 1rem;
-            }
           }
 
           .destText {

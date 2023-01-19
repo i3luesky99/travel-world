@@ -1,17 +1,14 @@
 import "./assets/scss/index.scss";
-import { Home } from "./pages";
-import { About, Blog, Footer, Navbar, Offers, Popular } from "./components";
+import { Home, Login } from "./pages";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Home />
-      <Popular />
-      <Offers />
-      <About />
-      <Blog />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
