@@ -1,8 +1,8 @@
 import React from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { TbGridDots } from "react-icons/tb";
-import { SiYourtraveldottv } from "react-icons/si";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   // const menuBars = [
@@ -14,7 +14,7 @@ export default function Navbar() {
   // const [selected, setSelected] = useState(0);
   // const onChangeSelected = () => {
   //   // setSelected(index);
-   // };
+  // };
   const [active, setActive] = useState("navBar");
   const [transparent, setTransparent] = useState("header");
   const showNav = () => {
@@ -38,19 +38,9 @@ export default function Navbar() {
   return (
     <section className="navBarSection">
       <div className={transparent}>
-        <div className="logoDiv">
-          <a href="#" className="logo">
-            {/* <h1 className="flex">
-              <SiYourtraveldottv className="icon" />
-              DOT
-            </h1> */}
-            <img
-              style={{ width: "80px", height: "80px", borderRadius: "50%" }}
-              src={require("../../assets/picture/logo.png")}
-              alt=""
-            />
-          </a>
-        </div>
+        <a href="#" className="logo">
+          <img src={require("../../assets/picture/logo.png")} alt="" />
+        </a>
         <div className={active}>
           <ul className="navLists flex">
             <li className="navItem">
@@ -75,10 +65,15 @@ export default function Navbar() {
             </li>
             <div className="headerBtn flex">
               <button className="btn loginBtn">
-                <a href="#">Login</a>
+                <Link className="link" to="/login">
+                  Đăng nhập
+                </Link>
               </button>
+
               <button className="btn">
-                <a href="#">Sign Up</a>
+                <Link className="link" to="/register">
+                  Đăng ký
+                </Link>
               </button>
             </div>
           </ul>

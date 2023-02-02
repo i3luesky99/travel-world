@@ -1,0 +1,68 @@
+.register {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url(https://images.pexels.com/photos/760728/pexels-photo-760728.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940);
+  background-size: cover;
+
+  .card {
+    background: white;
+    padding: 2rem 3rem;
+    border-radius: 1rem;
+    .registerForm {
+      display: flex;
+      flex-direction: column;
+      .registerTitle {
+        font-size: 36px;
+        text-align: center;
+      }
+      overflow: hidden;
+      label {
+        margin: 10px 0;
+      }
+
+      .registerInput {
+        padding: 10px;
+        background-color: white;
+        // border: none;
+        border-radius: 0.3rem;
+      }
+      .bottom {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        .registerLoginButton {
+          margin-top: 20px;
+          background-color: lightcoral;
+          color: white;
+          width: 130px;
+          height: 40px;
+          margin-left: 1rem;
+          &:hover {
+            background-color: rgb(219, 92, 92);
+          }
+        }
+        .registerButton {
+          margin-top: 20px;
+          background-color: teal;
+          color: white;
+          width: 130px;
+          height: 40px;
+          &:hover {
+            background-color: rgb(7, 192, 192);
+          }
+        }
+      }
+    }
+  }
+  .registerAnimation {
+    @include animationRightToLeft;
+  }
+}

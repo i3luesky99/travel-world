@@ -8,24 +8,19 @@
     width: 100%;
     padding: 1rem;
     z-index: 100;
-    .logoDiv {
-      .logo {
-        color: $--PrimaryColor;
-        font-weight: 500;
-        cursor: pointer;
-        align-items: center;
-        justify-content: center;
-        .icon {
-          color: $--PrimaryColor;
-          font-size: 25px;
-          margin-right: 10px;
-        }
-      }
+    .logo {
+      cursor: pointer;
+      width: 80px;
+      height: 80px;
     }
   }
 
   .activeHeader {
     background: $--lightGrey;
+    .logo {
+      width: 0px;
+      height: 0px;
+    }
   }
 
   @media screen and (max-width: 768px) {

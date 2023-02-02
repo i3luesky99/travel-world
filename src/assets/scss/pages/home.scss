@@ -43,14 +43,35 @@
       gap: 1rem;
       justify-content: center;
       bottom: -25%;
-      transform: translate(-50%);
+      transform: translateX(-50%);
       left: 50%;
+      z-index: 10;
       @include boxShadow;
-
       .locationDiv,
       .distDiv,
       .priceDiv {
+        z-index: 10;
         width: 100%;
+        .date {
+          margin-top: 20px;
+          position: absolute;
+          transform: translate(-50%);
+          left: 50%;
+        }
+        .datePicker {
+          width: 100%;
+          padding: 10px;
+          background: $--inputColor;
+          border-radius: 10px;
+          font-size: 13px;
+          font-weight: 500;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: $--greyText;
+          cursor: pointer;
+        }
+
         label {
           display: block;
           color: $--textColor;
@@ -58,7 +79,6 @@
           font-size: 13px;
           padding-bottom: 0.4rem;
         }
-
         input {
           width: 100%;
           background: $--inputColor;
@@ -130,7 +150,7 @@
           line-height: 4rem;
         }
         .subTitle {
-          width: 70%;
+          width: 80%;
         }
       }
 
@@ -152,7 +172,7 @@
       }
 
       .homeCard {
-        width: 70%;
+        width: 80%;
       }
     }
   }
