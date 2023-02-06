@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { BsArrowLeftShort } from "react-icons/bs";
 import { BsArrowRightShort } from "react-icons/bs";
-import { BsDot } from "react-icons/bs";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useState } from "react";
@@ -15,117 +14,85 @@ export default function Popular() {
   const destinationArr = [
     {
       id: 1,
-      img: require("../../assets/picture/pic1.jpg"),
-      title: "Machu Picchu",
-      location: "Peru",
-      grade: "CULTURAL RELAX",
-      description: "",
-      page: 2,
+      img: [
+        require("../../assets/picture/pic1.jpg"),
+        require("../../assets/picture/pic2.jpg"),
+      ],
+      title: "Tour du lịch Đà Nẵng ",
+      location: "Đà Nẵng",
+      totalDays: 3,
+      dateStart: "22/03/2023",
+      slots: 10,
+      prices: 3000000,
+      desc: "Du lịch Đà Nẵng - Huế - Thánh Địa La Vang - Động Phong Phong Nha từ Sài Gòn 2023. Du lịch Miền Trung - Tour Du lịch Đà Nẵng được thiên nhiên đặc biệt ưu đãi, mảnh đất miền Trung đẹp với nhiều dãy núi hùng vỹ xanh rì, những bờ biển cát trắng mịn thoai thoải và những dòng sông trong vắt thơ mộng. Không những vậy, trên con đường di sản miền Trung cùng Du Lịch Việt, du khách còn được thưởng ngoạn những di sản thế giới cuả Việt Nam đó là Phố cổ Hội An – nơi bến cảng một thời sầm uất nhất Đông Dương, quần thể di tích Cố Đô Huế với hệ thống đền đài lăng tẩm nguy nga tráng lệ và Động Phong Nha với nhiều hang động kì bí của tạo hóa.",
+      foreign: false,
     },
     {
       id: 2,
-      img: require("../../assets/picture/pic2.jpg"),
-      title: "Meci Picchu",
-      location: "Brazil",
-      grade: "CULTURAL CHILLS",
+      img: [
+        require("../../assets/picture/pic2.jpg"),
+        require("../../assets/picture/pic3.jpg"),
+      ],
+      title: "Tour du lịch Đà Nẵng ",
+      location: "Đà Nẵng",
+      totalDays: 3,
+      dateStart: "22/03/2023",
+      slots: 10,
+      prices: 4000000,
+      desc: "Du lịch Đà Nẵng - Huế - Thánh Địa La Vang - Động Phong Phong Nha từ Sài Gòn 2023. Du lịch Miền Trung - Tour Du lịch Đà Nẵng được thiên nhiên đặc biệt ưu đãi, mảnh đất miền Trung đẹp với nhiều dãy núi hùng vỹ xanh rì, những bờ biển cát trắng mịn thoai thoải và những dòng sông trong vắt thơ mộng. Không những vậy, trên con đường di sản miền Trung cùng Du Lịch Việt, du khách còn được thưởng ngoạn những di sản thế giới cuả Việt Nam đó là Phố cổ Hội An – nơi bến cảng một thời sầm uất nhất Đông Dương, quần thể di tích Cố Đô Huế với hệ thống đền đài lăng tẩm nguy nga tráng lệ và Động Phong Nha với nhiều hang động kì bí của tạo hóa.",
+      foreign: false,
     },
     {
       id: 3,
-      img: require("../../assets/picture/pic3.jpg"),
-      title: "Chill Picchu",
-      location: "America",
-      grade: "FANTASTIC",
+      img: [
+        require("../../assets/picture/pic4.jpg"),
+        require("../../assets/picture/pic2.jpg"),
+      ],
+      title: "Tour du lịch Đà Nẵng ",
+      location: "Đà Nẵng",
+      totalDays: 3,
+      dateStart: "22/03/2023",
+      slots: 10,
+      prices: 6000000,
+      desc: "Du lịch Đà Nẵng - Huế - Thánh Địa La Vang - Động Phong Phong Nha từ Sài Gòn 2023. Du lịch Miền Trung - Tour Du lịch Đà Nẵng được thiên nhiên đặc biệt ưu đãi, mảnh đất miền Trung đẹp với nhiều dãy núi hùng vỹ xanh rì, những bờ biển cát trắng mịn thoai thoải và những dòng sông trong vắt thơ mộng. Không những vậy, trên con đường di sản miền Trung cùng Du Lịch Việt, du khách còn được thưởng ngoạn những di sản thế giới cuả Việt Nam đó là Phố cổ Hội An – nơi bến cảng một thời sầm uất nhất Đông Dương, quần thể di tích Cố Đô Huế với hệ thống đền đài lăng tẩm nguy nga tráng lệ và Động Phong Nha với nhiều hang động kì bí của tạo hóa.",
+      foreign: false,
     },
     {
       id: 4,
-      img: require("../../assets/picture/pic4.jpg"),
-      title: "Places Picchu",
-      location: "England",
-      grade: "CULTURAL RELAX",
+      img: [
+        require("../../assets/picture/pic5.jpg"),
+        require("../../assets/picture/pic2.jpg"),
+      ],
+      title: "Tour du lịch Đà Nẵng ",
+      location: "Đà Nẵng",
+      totalDays: 3,
+      dateStart: "22/03/2023",
+      slots: 10,
+      prices: 1000000,
+      desc: "Du lịch Đà Nẵng - Huế - Thánh Địa La Vang - Động Phong Phong Nha từ Sài Gòn 2023. Du lịch Miền Trung - Tour Du lịch Đà Nẵng được thiên nhiên đặc biệt ưu đãi, mảnh đất miền Trung đẹp với nhiều dãy núi hùng vỹ xanh rì, những bờ biển cát trắng mịn thoai thoải và những dòng sông trong vắt thơ mộng. Không những vậy, trên con đường di sản miền Trung cùng Du Lịch Việt, du khách còn được thưởng ngoạn những di sản thế giới cuả Việt Nam đó là Phố cổ Hội An – nơi bến cảng một thời sầm uất nhất Đông Dương, quần thể di tích Cố Đô Huế với hệ thống đền đài lăng tẩm nguy nga tráng lệ và Động Phong Nha với nhiều hang động kì bí của tạo hóa.",
+      foreign: false,
     },
     {
       id: 5,
-      img: require("../../assets/picture/pic5.jpg"),
-      title: "Machu Picchu",
-      location: "Peru",
-      grade: "CULTURAL RELAX",
-    },
-    {
-      id: 1,
-      img: require("../../assets/picture/pic1.jpg"),
-      title: "Machu Picchu",
-      location: "Peru",
-      grade: "CULTURAL RELAX",
-      description: "",
-    },
-    {
-      id: 2,
-      img: require("../../assets/picture/pic2.jpg"),
-      title: "Meci Picchu",
-      location: "Brazil",
-      grade: "CULTURAL CHILLS",
-    },
-    {
-      id: 3,
-      img: require("../../assets/picture/pic3.jpg"),
-      title: "Chill Picchu",
-      location: "America",
-      grade: "FANTASTIC",
-    },
-    {
-      id: 4,
-      img: require("../../assets/picture/pic4.jpg"),
-      title: "Places Picchu",
-      location: "England",
-      grade: "CULTURAL RELAX",
-    },
-    {
-      id: 5,
-      img: require("../../assets/picture/pic5.jpg"),
-      title: "Machu Picchu",
-      location: "Peru",
-      grade: "CULTURAL RELAX",
-    },
-    {
-      id: 1,
-      img: require("../../assets/picture/pic1.jpg"),
-      title: "Machu Picchu",
-      location: "Peru",
-      grade: "CULTURAL RELAX",
-      description: "",
-    },
-    {
-      id: 2,
-      img: require("../../assets/picture/pic2.jpg"),
-      title: "Meci Picchu",
-      location: "Brazil",
-      grade: "CULTURAL CHILLS",
-    },
-    {
-      id: 3,
-      img: require("../../assets/picture/pic3.jpg"),
-      title: "Chill Picchu",
-      location: "America",
-      grade: "FANTASTIC",
-    },
-    {
-      id: 4,
-      img: require("../../assets/picture/pic4.jpg"),
-      title: "Places Picchu",
-      location: "England",
-      grade: "CULTURAL RELAX",
-    },
-    {
-      id: 5,
-      img: require("../../assets/picture/pic5.jpg"),
-      title: "Machu Picchu",
-      location: "Peru",
-      grade: "CULTURAL RELAX",
+      img: [
+        require("../../assets/picture/pic7.jpg"),
+        require("../../assets/picture/pic2.jpg"),
+      ],
+      title: "Tour du lịch Đà Nẵng ",
+      location: "Đà Nẵng",
+      totalDays: 3,
+      dateStart: "22/03/2023",
+      slots: 10,
+      prices: 2000000,
+      desc: "Du lịch Đà Nẵng - Huế - Thánh Địa La Vang - Động Phong Phong Nha từ Sài Gòn 2023. Du lịch Miền Trung - Tour Du lịch Đà Nẵng được thiên nhiên đặc biệt ưu đãi, mảnh đất miền Trung đẹp với nhiều dãy núi hùng vỹ xanh rì, những bờ biển cát trắng mịn thoai thoải và những dòng sông trong vắt thơ mộng. Không những vậy, trên con đường di sản miền Trung cùng Du Lịch Việt, du khách còn được thưởng ngoạn những di sản thế giới cuả Việt Nam đó là Phố cổ Hội An – nơi bến cảng một thời sầm uất nhất Đông Dương, quần thể di tích Cố Đô Huế với hệ thống đền đài lăng tẩm nguy nga tráng lệ và Động Phong Nha với nhiều hang động kì bí của tạo hóa.",
+      foreign: false,
     },
   ];
+
   const destinations = destinationArr.filter((destination, index) =>
     console.log()
   );
+
   const onNext = () => {};
 
   return (
@@ -137,10 +104,10 @@ export default function Popular() {
             data-aos-duration="2500"
             className="textDiv"
           >
-            <h2 className="secTitle">Popular Destination</h2>
+            <h2 className="secTitle">Tour trong nước</h2>
             <p>
-              From historical cities to natural specular, come see the best of
-              the world!
+              Từ những di tích lịch sử, phong cảnh trữ tình cho đến những danh
+              lam thắng cảnh được UNESCO công nhận .
             </p>
           </div>
 
@@ -157,34 +124,31 @@ export default function Popular() {
         <div className="mainContent grid">
           {destinationArr.map((destination, index) => (
             <div key={`key-${index}-destination`}>
-              {}
               <div className="singleDestination" data-aos="fade-up">
                 <div className="destImage">
-                  <img src={destination?.img} alt="Img title" />
+                  <img src={destination?.img[0]} alt="Img title" />
 
                   <div className="overplayInfo">
                     <h3>{destination?.title}</h3>
-                    <p>Lorem ipsum dolor sit amet .</p>
+                    <p>{destination?.desc}</p>
 
                     <BsArrowRightShort className="icon" />
                   </div>
                 </div>
 
                 <div className="destFooter">
-                  {index > 9 ? (
-                    <div className="number">{index}</div>
+                  {index < 9 ? (
+                    <div className="number">0{index + 1}</div>
                   ) : (
-                    <div className="number">0{index}</div>
+                    <div className="number">{index + 1}</div>
                   )}
 
                   <div className="destText flex">
                     <h6>{destination?.location}</h6>
-                    <span className="flex">
-                      <span className="dot">
-                        <BsDot className="icon" />
-                      </span>
-                      Dot
-                    </span>
+                    <div>
+                      <span className="flex">{destination?.prices} VND</span>
+                      <p>Chỗ đặt tour còn: {destination?.slots}</p>
+                    </div>
                   </div>
                 </div>
               </div>
