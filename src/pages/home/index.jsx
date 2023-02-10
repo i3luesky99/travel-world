@@ -6,14 +6,16 @@ import {
   Footer,
   Navbar,
   Offers,
-  Popular,
+  Country,
+  Foreign,
 } from "../../components/index";
 export default function Home() {
   return (
     <div>
       <Navbar />
       <HomeBase />
-      <Popular />
+      <Country />
+      <Foreign />
       <Offers />
       <About />
       <Blog />

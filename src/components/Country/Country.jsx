@@ -5,7 +5,7 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import { useState } from "react";
 
-export default function Popular() {
+export default function Country() {
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -96,7 +96,7 @@ export default function Popular() {
   const onNext = () => {};
 
   return (
-    <section className="popular section container">
+    <section className="country section container">
       <div className="secContainer ">
         <div className="secHeader flex ">
           <div
