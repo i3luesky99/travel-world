@@ -1,12 +1,13 @@
-.offer {
+.hotels {
   .secContainer {
     .mainContent {
       gap: 1rem;
 
-      .singleOffer {
+      .singleHotel {
         border-radius: 1rem;
         overflow: hidden;
         padding: 0.5rem;
+        min-width: 363px;
         @include boxShadow;
         margin-bottom: 10px;
         height: 100%;
@@ -46,7 +47,7 @@
           }
         }
 
-        .offerBody {
+        .hotelBody {
           height: calc(100% - 200px);
           padding: 1rem;
           flex-direction: column;
@@ -117,6 +118,16 @@
             transform: scale(1.1);
           }
         }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .hotels {
+    .secContainer {
+      .mainContent {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
   }

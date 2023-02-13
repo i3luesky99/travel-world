@@ -5,7 +5,7 @@ import {
   Blog,
   Footer,
   Navbar,
-  Offers,
+  Hotels,
   Country,
   Foreign,
 } from "../../components/index";
@@ -16,7 +16,7 @@ export default function Home() {
       <HomeBase />
       <Country />
       <Foreign />
-      <Offers />
+      <Hotels />
       <About />
       <Blog />
       <Footer />

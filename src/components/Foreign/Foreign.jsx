@@ -3,13 +3,12 @@ import { BsArrowLeftShort } from "react-icons/bs";
 import { BsArrowRightShort } from "react-icons/bs";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { useState } from "react";
+import { formatCurrency } from "../../theme/functions";
 
 export default function Foreign() {
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
-  const [page, setPage] = useState(1);
 
   const destinationArr = [
     {
@@ -89,10 +88,6 @@ export default function Foreign() {
     },
   ];
 
-  const destinations = destinationArr.filter((destination, index) =>
-    console.log()
-  );
-
   const onNext = () => {};
 
   return (
@@ -136,19 +131,20 @@ export default function Foreign() {
                   </div>
                 </div>
 
-                <div className="destFooter">
+                <div className="destFooter flex">
                   {index < 9 ? (
                     <div className="number">0{index + 1}</div>
                   ) : (
                     <div className="number">{index + 1}</div>
                   )}
-
                   <div className="destText flex">
-                    <h6>{destination?.location}</h6>
-                    <div>
-                      <span className="flex">{destination?.prices} VND</span>
-                      <p>Chỗ đặt tour còn: {destination?.slots}</p>
-                    </div>
+                    <p className="destination">
+                      Địa điểm: {destination?.location}
+                    </p>
+                    <h6>Ngày khởi hàng: {destination?.dateStart}</h6>
+                    <h6>Lịch trình: {destination?.totalDays}</h6>
+                    <h6>Chỗ đặt tour còn: {destination?.slots}</h6>
+                    <span>{formatCurrency(destination?.prices)}</span>
                   </div>
                 </div>
               </div>

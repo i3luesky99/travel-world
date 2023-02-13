@@ -92,12 +92,6 @@ input {
   }
 }
 
-@media screen and (min-width: 884px) {
-  .mainContent {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
 @media screen and (min-width: 1024px) {
   .container {
     width: 75% !important;

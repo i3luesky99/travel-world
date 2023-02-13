@@ -8,8 +8,9 @@ import { MdLocationOn } from "react-icons/md";
 import { BsArrowRightShort } from "react-icons/bs";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import { formatCurrency } from "../../theme/functions";
 
-export default function Offers() {
+export default function Hotels() {
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -20,14 +21,14 @@ export default function Offers() {
       img: require("../../assets/picture/pic6.jpg"),
       title: "Machu Picchu",
       location: "Peru",
-      price: "$123.4",
+      price: "300000",
       discount: "11%",
       amenities: {
         bed: 3,
         bath: 2,
         wifi: true,
         shuttle: true,
-        food: true,
+        buffet: true,
       },
     },
     {
@@ -36,7 +37,7 @@ export default function Offers() {
       title: "Meci Picchu",
       location: "Brazil",
       grade: "CULTURAL CHILLS",
-      price: "$32412.4",
+      price: "300000",
       discount: "32%",
       amenities: {
         bed: 4,
@@ -50,7 +51,7 @@ export default function Offers() {
       title: "Chill Picchu",
       location: "America",
       grade: "FANTASTIC",
-      price: "$321412.4",
+      price: "300000",
       discount: "55%",
       amenities: {
         bed: 1,
@@ -63,7 +64,7 @@ export default function Offers() {
       title: "Places Picchu",
       location: "England",
       grade: "CULTURAL RELAX",
-      price: "$4444.4",
+      price: "300000",
       discount: "4%",
       amenities: {
         bed: 4,
@@ -76,28 +77,30 @@ export default function Offers() {
       title: "Machu Picchu",
       location: "Peru",
       grade: "CULTURAL RELAX",
-      price: "$512.4",
+      price: "300000",
       discount: "15%",
       amenities: {
         bed: 4,
         bath: 3,
         wifi: true,
-        food: true,
+        buffet: true,
       },
     },
   ];
   return (
-    <section className="offer container section">
+    <section className="hotels container section">
       <div className="secContainer">
         <div
           className="secIntro"
           data-aos="fade-right"
           data-aos-duration="2500"
         >
-          <h2 className="secTitle">Special Offers</h2>
+          <h2 className="secTitle">
+            Những chỗ nghỉ nổi bật khuyến nghị cho bạn:
+          </h2>
           <p>
-            Form historical cities to natural spectaculars, come see the best of
-            world!
+            Tất cả khách sạn đẹp nhất, tuyệt vời nhất đang chờ bạn đến để trải
+            nghiệm
           </p>
         </div>
         <div className="mainContent grid">
@@ -106,42 +109,32 @@ export default function Offers() {
               data-aos="fade-up"
               data-aos-duration="3000"
               key={`key-offer-${index}`}
-              className="singleOffer"
+              className="singleHotel"
             >
               <div className="destImage">
                 <img src={offer?.img} alt={offer?.title} />
                 <span className="discount">{offer?.discount} Off</span>
               </div>
 
-              <div className="offerBody flex">
+              <div className="hotelBody flex">
                 <div style={{ width: "100%" }}>
                   <div className="price flex">
-                    <h4>{offer?.price}</h4>
-                    <span className="status">For rent</span>
+                    <h4>{formatCurrency(offer?.price)}</h4>
+                    <span className="status">Cho thuê</span>
                   </div>
 
                   <div className="amenities flex">
-                    {offer?.amenities?.bed > 1 ? (
+                    {offer?.amenities.bed && (
                       <div className="singleAmenity flex">
                         <BedIcon className="icon" />
-                        <small>{offer?.amenities?.bed} Beds</small>
-                      </div>
-                    ) : (
-                      <div className="singleAmenity flex">
-                        <BedIcon className="icon" />
-                        <small>{offer?.amenities?.bed} Bed</small>
+                        <small>{offer?.amenities?.bed} Phòng ngủ</small>
                       </div>
                     )}
 
-                    {offer?.amenities?.bath > 1 ? (
+                    {offer?.amenities?.bath && (
                       <div className="singleAmenity flex">
                         <BathIcon className="icon" />
-                        <small>{offer?.amenities?.bath} Baths</small>
-                      </div>
-                    ) : (
-                      <div className="singleAmenity flex">
-                        <BathIcon className="icon" />
-                        <small>{offer?.amenities?.bath} Bath</small>
+                        <small>{offer?.amenities?.bath} Nhà tắm</small>
                       </div>
                     )}
 
@@ -154,14 +147,14 @@ export default function Offers() {
                     {offer?.amenities?.shuttle && (
                       <div className="singleAmenity flex">
                         <ShuttleIcon className="icon" />
-                        <small>Shuttle</small>
+                        <small>Xe đón</small>
                       </div>
                     )}
 
-                    {offer?.amenities?.food && (
+                    {offer?.amenities?.buffet && (
                       <div className="singleAmenity flex">
                         <FoodIcon className="icon" />
-                        <small>Food</small>
+                        <small>Buffet</small>
                       </div>
                     )}
                   </div>
@@ -174,7 +167,7 @@ export default function Offers() {
                   </div>
 
                   <button className="btn flex">
-                    View detail
+                    Chi tiết
                     <BsArrowRightShort className="icon" />
                   </button>
                 </div>

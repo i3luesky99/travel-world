@@ -46,6 +46,7 @@
       padding: 2rem 0;
       gap: 1rem;
       .singleDestination {
+        min-width: 363px;
         overflow: hidden;
         border-radius: 1rem;
         @include boxShadow;
@@ -118,33 +119,31 @@
 
         .destFooter {
           padding: 1rem;
+          justify-content: space-between;
 
           .number {
-            font-size: 2rem;
+            font-size: 4.5rem;
             font-weight: 700;
             color: $--blackColor;
-            position: relative;
             width: max-content;
           }
 
           .destText {
-            justify-content: space-between;
-            align-items: center;
-
+            align-items: flex-end;
+            flex-direction: column;
+            .destination {
+              font-size: 16px;
+              font-weight: 700;
+            }
             span {
               color: $--PrimaryColor;
+              font-size: 20px;
+              font-weight: 700;
             }
             h6 {
               color: $--blackColor;
-              font-size: 15px;
-            }
-            .flex {
-              font-size: 16px;
-              font-weight: 600;
-              align-items: flex-start;
-              .icon {
-                color: $--PrimaryColor;
-              }
+              font-size: 14px;
+              font-weight: 500;
             }
           }
         }
@@ -190,16 +189,8 @@
   }
 }
 
-@media screen and (min-width: 720px) {
+@media screen and (min-width: 1500px) {
   .foreign {
-    padding-top: 10rem;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .foreign {
-    padding-top: 13rem;
-
     .secContainer {
       .secHeader {
         .textDiv {
@@ -214,6 +205,9 @@
       .mainContent {
         grid-template-columns: repeat(3, 1fr);
         gap: 1.5rem;
+        .singleDestination {
+          min-width: 300px;
+        }
       }
     }
   }
