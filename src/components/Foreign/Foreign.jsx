@@ -142,7 +142,10 @@ export default function Foreign() {
                       Địa điểm: {destination?.location}
                     </p>
                     <h6>Ngày khởi hàng: {destination?.dateStart}</h6>
-                    <h6>Lịch trình: {destination?.totalDays}</h6>
+                    <h6>
+                      Lịch trình: {destination?.totalDays} ngày&nbsp;
+                      {destination?.totalDays - 1} đêm
+                    </h6>
                     <h6>Chỗ đặt tour còn: {destination?.slots}</h6>
                     <span>{formatCurrency(destination?.prices)}</span>
                   </div>

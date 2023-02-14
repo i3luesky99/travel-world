@@ -4,7 +4,6 @@ import {
   About,
   Blog,
   Footer,
-  Navbar,
   Hotels,
   Country,
   Foreign,
@@ -12,7 +11,6 @@ import {
 export default function Home() {
   return (
     <div>
-      <Navbar />
       <HomeBase />
       <Country />
       <Foreign />
