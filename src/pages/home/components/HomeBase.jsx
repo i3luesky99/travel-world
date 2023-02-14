@@ -95,10 +95,10 @@ export default function HomeBase() {
                   )}
                 </div>
               </div>
+              <button data-aos-duration="2000" className="btn">
+                Search
+              </button>
             </div>
-            <button data-aos-duration="2000" className="btn">
-              Search
-            </button>
           </div>
         </section>
       </>
