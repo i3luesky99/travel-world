@@ -13,12 +13,22 @@
   .secContainer {
     .homeText {
       text-align: center;
-      .title {
-        color: $--whiteColor;
-        font-size: 2rem;
-        font-weight: 700;
-        line-height: 2.5rem;
+      .logo {
+        cursor: pointer;
+        .textLogo {
+          font-family: "PalmspringsPersonalUseRegular-d9VDV";
+          font-size: 80px;
+          background: linear-gradient(
+            90deg,
+            rgb(209, 131, 131) 0%,
+            rgb(223 204 70) 50%,
+            #e08d21 100%
+          );
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
       }
+
       .subTitle {
         color: $--whiteColor;
         opacity: 0.9;
@@ -128,9 +138,6 @@
   .home {
     .secContainer {
       .homeText {
-        .title {
-          font-size: 2.5rem;
-        }
         .subTitle {
           font-size: 18px;
         }
@@ -144,11 +151,7 @@
     .secContainer {
       .homeText {
         padding: 1rem 10rem;
-        .title {
-          font-size: 3.5rem;
-          margin: auto;
-          line-height: 4rem;
-        }
+
         .subTitle {
           width: 80%;
         }

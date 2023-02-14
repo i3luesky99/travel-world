@@ -3,24 +3,20 @@
     position: fixed;
     display: flex;
     align-items: "center";
-    justify-content: space-between;
+    justify-content: flex-end;
     background: transparent;
     width: 100%;
     padding: 1rem;
     z-index: 100;
-    .logo {
-      cursor: pointer;
-      width: 80px;
-      height: 80px;
-    }
   }
 
   .activeHeader {
-    background: rgb(80, 78, 78);
-    .logo {
-      width: 0px;
-      height: 0px;
-    }
+    background: linear-gradient(
+      90deg,
+      rgb(127 101 40) 0%,
+      rgb(89 88 77) 50%,
+      rgb(51 58 64) 100%
+    );
   }
 
   @media screen and (max-width: 768px) {
@@ -44,6 +40,12 @@
 
         .navItem {
           padding: 1rem 0;
+
+          .onSelected {
+            color: $--PrimaryColor;
+            font-size: 0.9rem;
+            font-weight: 600;
+          }
 
           .navLink {
             color: $--textColor;
@@ -112,7 +114,7 @@
       display: none;
     }
     .header {
-      padding: 1.5rem 2rem;
+      padding: 1.5rem 1rem;
       .navBar {
         .navLists {
           display: flex;
@@ -121,6 +123,16 @@
           flex-direction: row;
 
           .navItem {
+            .onSelected {
+              color: $--PrimaryColor;
+              padding: 0 0.45rem;
+              font-size: 0.9rem;
+              font-weight: 400;
+              &:hover {
+                color: $--HoverColor;
+              }
+            }
+
             .navLink {
               color: $--whiteColor;
               padding: 0 0.45rem;
@@ -171,6 +183,6 @@
 
 @media screen and (min-width: 1024px) {
   .header {
-    padding: 1rem 8.5rem !important;
+    padding: 1rem 5.5rem !important;
   }
 }
