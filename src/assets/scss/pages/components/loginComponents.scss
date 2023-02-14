@@ -1,0 +1,50 @@
+.calendar {
+  flex-direction: column;
+  .boxTop {
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(
+      90deg,
+      rgb(209, 131, 131) 0%,
+      rgb(223 204 70) 50%,
+      #e08d21 100%
+    );
+    box-shadow: 0 13px 15px rgb(242 141 18 / 62%);
+    width: 180px;
+    height: 60px;
+    border-radius: 10px;
+    .time {
+      font-family: "digital-7 (italic)";
+      font-size: 3.5rem;
+      color: $--whiteColor;
+    }
+    .icon {
+      font-size: 3.5rem;
+      color: $--whiteColor;
+    }
+  }
+  .top {
+    .time {
+      width: 180px;
+    }
+    .boxNumber {
+      flex-direction: row;
+      color: $--whiteColor;
+      padding: 1rem 1.5rem;
+      .icon {
+        font-size: 25px;
+      }
+      .text {
+        color: $--whiteColor;
+        font-family: "digital-7 (italic)";
+        font-size: 18px;
+        margin-left: 10px;
+      }
+      .deg {
+        font-family: "digital-7 (italic)";
+        margin-top: -2px;
+        font-size: 15px;
+      }
+    }
+  }
+}

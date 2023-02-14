@@ -6,6 +6,18 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
+@font-face {
+  font-family: "digital-7 (italic)";
+  src: local("digital-7 (italic)"), url("../../font/digital-7\ \(italic\).ttf");
+}
+
+@font-face {
+  font-family: "PalmspringsPersonalUseRegular-d9VDV";
+  src: local("PalmspringsPersonalUseRegular-d9VDV"),
+    url("../../font/PalmspringsPersonalUseRegular-d9VDV.ttf");
+}
+
 a {
   text-decoration: none;
 }

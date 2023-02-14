@@ -10,14 +10,17 @@
       align-items: center;
       justify-content: center;
       .logo {
-        color: $--blackColor;
-        font-weight: 500;
-        cursor: pointer;
-        padding-bottom: 0.5rem;
-        .icon {
+        .textLogo {
+          font-family: "PalmspringsPersonalUseRegular-d9VDV";
           font-size: 25px;
-          color: $--PrimaryColor;
-          margin-right: 0.5rem;
+          background: linear-gradient(
+            90deg,
+            rgb(209, 131, 131) 0%,
+            rgb(223 204 70) 50%,
+            #e08d21 100%
+          );
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
       }
     }
@@ -29,7 +32,12 @@
 
       .icon {
         font-size: 30px;
-        background: $--PrimaryColor;
+        background: linear-gradient(
+          90deg,
+          rgb(209, 131, 131) 0%,
+          rgb(223 204 70) 50%,
+          #e08d21 100%
+        );
         border-radius: 50%;
         color: $--whiteColor;
         padding: 8px;

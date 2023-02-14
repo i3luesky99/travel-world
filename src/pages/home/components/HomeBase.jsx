@@ -9,6 +9,7 @@ import ClickAwayListener from "@mui/base/ClickAwayListener";
 import * as locales from "react-date-range/dist/locale";
 import moment from "moment";
 import "moment/locale/vi";
+import Calender from "./Calender";
 import { Navbar } from "../../../components";
 moment.locale("vi");
 
@@ -40,9 +41,9 @@ export default function HomeBase() {
         <section className="home">
           <div className="secContainer container">
             <div className="homeText">
-              <h1 data-aos="fade-up" className="title">
-                Plan Your Trip With Travel Dot
-              </h1>
+              <div className="logo" data-aos="fade-up">
+                <p className="textLogo">LEVART</p>
+              </div>
 
               <p
                 data-aos="fade-up"
@@ -51,6 +52,7 @@ export default function HomeBase() {
               >
                 Travel to your favorite city with respectful of the environment
               </p>
+              <Calender />
 
               <button
                 data-aos="fade-up"
@@ -93,11 +95,10 @@ export default function HomeBase() {
                   )}
                 </div>
               </div>
-
-              <button data-aos-duration="2000" className="btn">
-                Search
-              </button>
             </div>
+            <button data-aos-duration="2000" className="btn">
+              Search
+            </button>
           </div>
         </section>
       </>

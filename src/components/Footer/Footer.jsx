@@ -15,12 +15,9 @@ export default function Footer() {
       <div className="secContainer container grid">
         <div data-aos="fade-right" data-aos-duration={2000} className="logoDiv">
           <div className="footerLogo flex">
-            <a href="#" className="logo">
-              <h1 className="flex">
-                <SiYourtraveldottv className="icon" />
-                Dot
-              </h1>
-            </a>
+            <div className="logo ">
+              <p className="textLogo">LEVART</p>
+            </div>
           </div>
 
           <div className="social flex">

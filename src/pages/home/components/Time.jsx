@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import moment from "moment";
-import { styled } from "@mui/system";
-import { colors, sizes } from "../../../theme";
 
 export default function Time() {
   let time = moment().format("LTS");
@@ -13,10 +11,5 @@ export default function Time() {
   };
   setInterval(updateTime, 1000);
 
-  return <Text>{currentTime}</Text>;
+  return <div className="time">{currentTime}</div>;
 }
-const Text = styled("p")({
-  fontSize: sizes.medium,
-  color: colors.blackest,
-  fontWeight: "700",
-});
