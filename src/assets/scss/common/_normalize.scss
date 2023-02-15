@@ -95,7 +95,7 @@ video {
 }
 
 input {
-  // font-size: 100%;
+  font-size: 100%;
 }
 
 @media screen and (min-width: 556px) {
@@ -133,9 +133,4 @@ input {
   body {
     zoom: 1.7;
   }
-}
-
-::selection {
-  background: $--PrimaryColor;
-  color: $--whiteColor;
 }

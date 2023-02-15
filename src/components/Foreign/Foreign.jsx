@@ -5,7 +5,8 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import { formatCurrency } from "../../theme/functions";
 
-export default function Foreign() {
+export default function Foreign(props) {
+  const { countrySection } = props;
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -91,7 +92,7 @@ export default function Foreign() {
   const onNext = () => {};
 
   return (
-    <section className="foreign section container">
+    <section className="foreign section container" ref={countrySection}>
       <div className="secContainer ">
         <div className="secHeader flex ">
           <div

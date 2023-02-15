@@ -17,14 +17,14 @@
         cursor: pointer;
         .textLogo {
           font-family: "PalmspringsPersonalUseRegular-d9VDV";
-          font-size: 80px;
+          font-size: 60px;
           background: linear-gradient(
             90deg,
             rgb(209, 131, 131) 0%,
             rgb(223 204 70) 50%,
             #e08d21 100%
           );
-          -webkit-background-clip: text;
+          background-clip: text;
           -webkit-text-fill-color: transparent;
         }
       }
@@ -41,6 +41,14 @@
       }
       .btn {
         padding: 0.6rem 1.5rem;
+        border-radius: 10px;
+        color: $--whiteColor;
+        background: linear-gradient(
+          90deg,
+          #e08d21 0%,
+          rgb(239 204 99) 50%,
+          rgb(235, 94, 94) 100%
+        );
       }
     }
 
@@ -139,6 +147,11 @@
   .home {
     .secContainer {
       .homeText {
+        .logo {
+          .textLogo {
+            font-size: 65px;
+          }
+        }
         .subTitle {
           font-size: 18px;
         }
@@ -152,7 +165,11 @@
     .secContainer {
       .homeText {
         padding: 1rem 10rem;
-
+        .logo {
+          .textLogo {
+            font-size: 70px;
+          }
+        }
         .subTitle {
           width: 80%;
         }
@@ -170,6 +187,11 @@
   .home {
     .secContainer {
       .homeText {
+        .logo {
+          .textLogo {
+            font-size: 80px;
+          }
+        }
         .subTitle {
           font-size: 20px;
         }

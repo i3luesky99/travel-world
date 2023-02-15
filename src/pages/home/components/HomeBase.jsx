@@ -13,7 +13,8 @@ import Calender from "./Calender";
 import { Navbar } from "../../../components";
 moment.locale("vi");
 
-export default function HomeBase() {
+export default function HomeBase(props) {
+  const { countrySection } = props;
   const [calendar, setCalendar] = useState(false);
   useEffect(() => {
     Aos.init({ duration: 2000 });
@@ -34,10 +35,17 @@ export default function HomeBase() {
     setCalendar(false);
   };
 
+  const onScrollToCountry = () => {
+    window.scrollTo({
+      top: countrySection.current.offsetTop,
+      behavior: "smooth",
+    });
+  };
+
   return (
-    <ClickAwayListener onClickAway={handleClickAway}>
-      <>
-        <Navbar />
+    <>
+      <Navbar />
+      <ClickAwayListener onClickAway={handleClickAway}>
         <section className="home">
           <div className="secContainer container">
             <div className="homeText">
@@ -58,50 +66,51 @@ export default function HomeBase() {
                 data-aos="fade-up"
                 data-aos-duration="3000"
                 className="btn"
+                onClick={onScrollToCountry}
               >
-                <a href="#">Explore Now</a>
+                <p>Khám phá</p>
               </button>
             </div>
 
-            <div className="grid homeCard">
-              <div data-aos-duration="2000" className="locationDiv">
-                <label htmlFor="location">Location</label>
-                <input type="text" placeholder="Dream Destination" />
-              </div>
-
-              <div data-aos-duration="3000" className="priceDiv">
-                <label htmlFor="price">Price</label>
-                <input type="text" placeholder="$149" />
-              </div>
-
-              <div data-aos-duration="2500" className="distDiv">
-                <label htmlFor="distance">Date</label>
-                <div className="datePicker" onClick={openCalendar}>
-                  <p>
-                    {`${moment(`${date[0].startDate}`).format("L")}`} -{` `}
-                    {`${moment(`${date[0].endDate}`).format("L")}`}
-                  </p>
-                </div>
-
-                <div className="date">
-                  {calendar && (
-                    <DateRange
-                      editableDateInputs={true}
-                      onChange={(item) => setDate([item.selection])}
-                      moveRangeOnFirstSelection={false}
-                      ranges={date}
-                      locale={locales["vi"]}
-                    />
-                  )}
-                </div>
-              </div>
-              <button data-aos-duration="2000" className="btn">
-                Search
-              </button>
+            {/* <div className="grid homeCard">
+            <div data-aos-duration="2000" className="locationDiv">
+              <label htmlFor="location">Location</label>
+              <input type="text" placeholder="Dream Destination" />
             </div>
+
+            <div data-aos-duration="3000" className="priceDiv">
+              <label htmlFor="price">Price</label>
+              <input type="text" placeholder="$149" />
+            </div>
+
+            <div data-aos-duration="2500" className="distDiv">
+              <label htmlFor="distance">Date</label>
+              <div className="datePicker" onClick={openCalendar}>
+                <p>
+                  {`${moment(`${date[0].startDate}`).format("L")}`} -{` `}
+                  {`${moment(`${date[0].endDate}`).format("L")}`}
+                </p>
+              </div>
+
+              <div className="date">
+                {calendar && (
+                  <DateRange
+                    editableDateInputs={true}
+                    onChange={(item) => setDate([item.selection])}
+                    moveRangeOnFirstSelection={false}
+                    ranges={date}
+                    locale={locales["vi"]}
+                  />
+                )}
+              </div>
+            </div>
+            <button data-aos-duration="2000" className="btn">
+              Search
+            </button>
+          </div> */}
           </div>
         </section>
-      </>
-    </ClickAwayListener>
+      </ClickAwayListener>
+    </>
   );
 }

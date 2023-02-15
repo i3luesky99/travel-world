@@ -1,23 +1,14 @@
 import React from "react";
-import HomeBase from "./components/HomeBase";
-import {
-  About,
-  Blog,
-  Footer,
-  Hotels,
-  Country,
-  Foreign,
-} from "../../components/index";
-export default function Home() {
+import { About, Blog, Hotels, Country, Foreign } from "../../components/index";
+export default function Home(props) {
+  const { countrySection } = props;
   return (
     <div>
-      <HomeBase />
       <Country />
-      <Foreign />
+      <Foreign countrySection={countrySection} />
       <Hotels />
       <About />
       <Blog />
-      <Footer />
     </div>
   );
 }

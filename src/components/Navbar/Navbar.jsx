@@ -10,9 +10,9 @@ export default function Navbar() {
   const [transparent, setTransparent] = useState("header");
 
   const menuBars = [
-    { id: 0, text: "Trong nước", link: "/" },
-    { id: 1, text: "Ngoài nước", link: "/" },
-    { id: 2, text: "Blog", link: "/" },
+    { id: 0, text: "Trong nước", link: "/tour-country" },
+    { id: 1, text: "Ngoài nước", link: "/tour-foreign" },
+    { id: 2, text: "Blog", link: "/blog" },
   ];
 
   const showNav = () => {
@@ -71,7 +71,7 @@ export default function Navbar() {
             {menuBars.map((menu, index) => (
               <li className="navItem" key={`${index}-menuBar`}>
                 <Link
-                  to="/"
+                  to={menu.link}
                   onClick={() => onChangeSelected(menu.text)}
                   className={
                     isSelected === menu.text ? "onSelected" : "navLink"

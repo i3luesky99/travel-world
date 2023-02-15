@@ -88,8 +88,6 @@ export default function Country() {
     },
   ];
 
-  const onNext = () => {};
-
   return (
     <section className="country section container">
       <div className="secContainer ">
