@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { BsArrowLeftShort } from "react-icons/bs";
 import { BsArrowRightShort } from "react-icons/bs";
+import { FaListAlt } from "react-icons/fa";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { formatCurrency } from "../../theme/functions";
@@ -89,8 +89,6 @@ export default function Foreign(props) {
     },
   ];
 
-  const onNext = () => {};
-
   return (
     <section className="foreign section container" ref={countrySection}>
       <div className="secContainer ">
@@ -112,8 +110,8 @@ export default function Foreign(props) {
             data-aos-duration="2500"
             className="iconsDiv flex"
           >
-            <BsArrowLeftShort onClick={onNext} className="icon leftIcon" />
-            <BsArrowRightShort className="icon" />
+            <FaListAlt className="icon" />
+            Xem tất cả
           </div>
         </div>
 

@@ -1,0 +1,79 @@
+.tour-country {
+  .secContainer {
+    .secHeader {
+      border-top: 1px solid $--lightGrey;
+      border-bottom: 1px solid $--lightGrey;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+
+      padding: 20px 0px 20px 0px;
+      .textDiv {
+        justify-content: space-between;
+        width: 100%;
+        .secTitle {
+          color: $--blackColor;
+          line-height: 1.5rem;
+          padding-bottom: 0.5rem;
+        }
+      }
+
+      .iconsDiv {
+        font-weight: 500;
+        font-size: 13px;
+        color: $--textColor;
+        width: 50%;
+        justify-self: flex-end;
+        justify-content: space-between;
+        cursor: pointer;
+        .iconText {
+          margin-left: 10px;
+        }
+        .icon {
+          font-size: 15px;
+          margin-right: 5px;
+          margin-bottom: 3px;
+        }
+        .textSelected {
+          margin-left: 10px;
+          color: $--PrimaryColor;
+        }
+      }
+    }
+
+    .content {
+      padding: 2rem 0;
+      gap: 1rem;
+      .singleDestination {
+      }
+    }
+  }
+}
+
+// @media screen and (min-width: 556px) {
+//   .tour-country {
+//     .secContainer {
+//       .secHeader {
+//         width: 100%;
+//         flex-direction: row;
+//         justify-content: space-between;
+//         align-items: center;
+
+//         .textDiv {
+//           text-align: start;
+//           max-width: 70%;
+//         }
+
+//         .iconsDiv {
+//           justify-content: flex-end;
+//         }
+//       }
+//     }
+//   }
+// }
+
+@media screen and (min-width: 1000px) {
+  .tour-country {
+    width: 90% !important;
+  }
+}

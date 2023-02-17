@@ -4,6 +4,7 @@ import { BsArrowRightShort } from "react-icons/bs";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { formatCurrency } from "../../theme/functions";
+import { Link } from "react-router-dom";
 
 export default function Country() {
   useEffect(() => {
@@ -103,15 +104,16 @@ export default function Country() {
               lam thắng cảnh được UNESCO công nhận .
             </p>
           </div>
-
-          <div
-            data-aos="fade-left"
-            data-aos-duration="2500"
-            className="iconsDiv flex"
-          >
-            <FaListAlt className="icon" />
-            Xem tất cả
-          </div>
+          <Link to="/tour-country">
+            <div
+              data-aos="fade-left"
+              data-aos-duration="2500"
+              className="iconsDiv flex"
+            >
+              <FaListAlt className="icon" />
+              Xem tất cả
+            </div>
+          </Link>
         </div>
 
         <div className="mainContent grid">

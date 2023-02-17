@@ -20,24 +20,16 @@
       }
 
       .iconsDiv {
-        gap: 0.5rem;
+        font-weight: 500;
+        font-size: 13px;
+        color: $--textColor;
+
         .icon {
-          padding: 0.5rem;
-          background: $--greyText;
-          border-radius: 50%;
-          font-size: 2.5rem;
-          &:hover {
-            background: $--blackColor;
-            color: $--whiteColor;
-          }
+          font-size: 15px;
+          margin-right: 5px;
         }
-        .leftIcon {
-          background: $--blackColor;
-          color: $--whiteColor;
-          &:hover {
-            background: $--greyText;
-            column-rule: $--blackColor;
-          }
+        &:hover {
+          color: $--PrimaryColor;
         }
       }
     }

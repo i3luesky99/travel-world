@@ -64,7 +64,7 @@ export default function About() {
 
             <div
               className="cardVideo"
-              data-aos="fade-left"
+              data-aos="fade-right"
               data-aos-duration={2000}
             >
               <video src={video} autoPlay loop muted type="video/mp4" />

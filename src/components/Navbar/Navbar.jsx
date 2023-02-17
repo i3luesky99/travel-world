@@ -2,13 +2,12 @@ import React from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { TbGridDots } from "react-icons/tb";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
-  const [isSelected, setIsSelected] = useState("Trang chủ");
   const [active, setActive] = useState("navBar");
   const [transparent, setTransparent] = useState("header");
-
+  const params = useLocation().pathname;
   const menuBars = [
     { id: 0, text: "Trong nước", link: "/tour-country" },
     { id: 1, text: "Ngoài nước", link: "/tour-foreign" },
@@ -31,25 +30,13 @@ export default function Navbar() {
     }
   };
 
-  const scrollToBottom = (string) => {
-    onChangeSelected(string);
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: "smooth",
-    });
-  };
-
-  const scrollToTop = (string) => {
-    onChangeSelected(string);
+  const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
   };
 
-  const onChangeSelected = (string) => {
-    setIsSelected(string);
-  };
   window.addEventListener("scroll", addBg);
 
   return (
@@ -57,12 +44,10 @@ export default function Navbar() {
       <div className={transparent}>
         <div className={active}>
           <ul className="navLists flex">
-            <li className="navItem" onClick={() => scrollToTop("Trang chủ")}>
+            <li className="navItem" onClick={scrollToTop}>
               <Link
                 to="/"
-                className={
-                  isSelected === "Trang chủ" ? "onSelected" : "navLink"
-                }
+                className={params === "/" ? "onSelected" : "navLink"}
               >
                 Trang chủ
               </Link>
@@ -72,10 +57,7 @@ export default function Navbar() {
               <li className="navItem" key={`${index}-menuBar`}>
                 <Link
                   to={menu.link}
-                  onClick={() => onChangeSelected(menu.text)}
-                  className={
-                    isSelected === menu.text ? "onSelected" : "navLink"
-                  }
+                  className={params === menu.link ? "onSelected" : "navLink"}
                 >
                   {menu.text}
                 </Link>
@@ -84,9 +66,8 @@ export default function Navbar() {
 
             <li className="navItem">
               <Link
-                to="/"
-                onClick={() => scrollToBottom("Liên hệ")}
-                className={isSelected === "Liên hệ" ? "onSelected" : "navLink"}
+                to="/contact"
+                className={params === "/contact" ? "onSelected" : "navLink"}
               >
                 Liên hệ
               </Link>

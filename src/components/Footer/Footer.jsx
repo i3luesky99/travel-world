@@ -13,7 +13,7 @@ export default function Footer() {
   return (
     <div className="footer">
       <div className="secContainer container grid">
-        <div data-aos="fade-right" data-aos-duration={2000} className="logoDiv">
+        <div className="logoDiv">
           <div className="footerLogo flex">
             <div className="logo ">
               <p className="textLogo">LEVART</p>
@@ -27,11 +27,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div
-          data-aos="fade-right"
-          data-aos-duration={2000}
-          className="footerLinks"
-        >
+        <div className="footerLinks">
           <span className="linkTitle">Information</span>
           <li>
             <a href="#">Home</a>
@@ -47,11 +43,7 @@ export default function Footer() {
           </li>
         </div>
 
-        <div
-          data-aos="fade-left"
-          data-aos-duration={2000}
-          className="footerLinks"
-        >
+        <div className="footerLinks">
           <span className="linkTitle">Helpful links</span>
           <li>
             <a href="#">Destination</a>
@@ -67,11 +59,7 @@ export default function Footer() {
           </li>
         </div>
 
-        <div
-          data-aos="fade-left"
-          data-aos-duration={2000}
-          className="footerLinks"
-        >
+        <div className="footerLinks">
           <span className="linkTitle">Contact</span>
           <span className="phone">0906 624 069</span>
           <span className="email">nghieu18101999@gmail.com</span>

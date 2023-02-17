@@ -24,6 +24,7 @@ function App() {
           <Route path="/tour-country" element={<TourCounty />} />
           <Route path="/tour-foreign" element={<TourCounty />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/contact" element={<Blog />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

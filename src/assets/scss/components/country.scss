@@ -1,5 +1,4 @@
 .country {
-  padding-top: 15rem;
   .secContainer {
     .secHeader {
       flex-direction: column;
@@ -30,7 +29,7 @@
           margin-right: 5px;
         }
         &:hover {
-           color: $--PrimaryColor;
+          color: $--PrimaryColor;
         }
       }
     }
@@ -160,12 +159,6 @@
   }
 }
 
-@media screen and (min-width: 480px) {
-  .country {
-    padding-top: 10rem;
-  }
-}
-
 @media screen and (min-width: 556px) {
   .country {
     .secContainer {
@@ -188,16 +181,8 @@
   }
 }
 
-@media screen and (min-width: 720px) {
-  .country {
-    padding-top: 10rem;
-  }
-}
-
 @media screen and (min-width: 1500px) {
   .country {
-    padding-top: 13rem;
-
     .secContainer {
       .secHeader {
         .textDiv {

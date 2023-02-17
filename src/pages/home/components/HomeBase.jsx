@@ -73,41 +73,47 @@ export default function HomeBase(props) {
             </div>
 
             {/* <div className="grid homeCard">
-            <div data-aos-duration="2000" className="locationDiv">
-              <label htmlFor="location">Location</label>
-              <input type="text" placeholder="Dream Destination" />
-            </div>
-
-            <div data-aos-duration="3000" className="priceDiv">
-              <label htmlFor="price">Price</label>
-              <input type="text" placeholder="$149" />
-            </div>
-
-            <div data-aos-duration="2500" className="distDiv">
-              <label htmlFor="distance">Date</label>
-              <div className="datePicker" onClick={openCalendar}>
-                <p>
-                  {`${moment(`${date[0].startDate}`).format("L")}`} -{` `}
-                  {`${moment(`${date[0].endDate}`).format("L")}`}
-                </p>
+              <div
+                data-aos-duration="2000"
+                data-aos="fade-right"
+                className="locationDiv"
+              >
+                <label htmlFor="location">Địa điểm</label>
+                <input type="text" placeholder="Dream Destination" />
               </div>
 
-              <div className="date">
-                {calendar && (
-                  <DateRange
-                    editableDateInputs={true}
-                    onChange={(item) => setDate([item.selection])}
-                    moveRangeOnFirstSelection={false}
-                    ranges={date}
-                    locale={locales["vi"]}
-                  />
-                )}
+              <div
+                data-aos="fade-right"
+                data-aos-duration="2000"
+                className="priceDiv"
+              >
+                <label htmlFor="price">Giá</label>
+                <input type="text" placeholder="$149" />
               </div>
-            </div>
-            <button data-aos-duration="2000" className="btn">
-              Search
-            </button>
-          </div> */}
+
+              <div className="distDiv">
+                <label htmlFor="distance">Ngày</label>
+                <div className="datePicker" onClick={openCalendar}>
+                  <p>
+                    {`${moment(`${date[0].startDate}`).format("L")}`} -{` `}
+                    {`${moment(`${date[0].endDate}`).format("L")}`}
+                  </p>
+                </div>
+
+                <div className="date">
+                  {calendar && (
+                    <DateRange
+                      editableDateInputs={true}
+                      onChange={(item) => setDate([item.selection])}
+                      moveRangeOnFirstSelection={false}
+                      ranges={date}
+                      locale={locales["vi"]}
+                    />
+                  )}
+                </div>
+              </div>
+              <button className="btn">Tìm kiếm</button>
+            </div> */}
           </div>
         </section>
       </ClickAwayListener>
