@@ -1,11 +1,11 @@
 import React from "react";
-import { About, Blog, Hotels, Country, Foreign } from "../../components/index";
+import { About, Blog, Hotels } from "../../components/index";
+import { TourCountry, TourForeign } from "../../pages/index";
 export default function Home(props) {
-  const { countrySection } = props;
   return (
     <div>
-      <Country />
-      <Foreign countrySection={countrySection} />
+      <TourCountry />
+      <TourForeign />
       <Hotels />
       <About />
       <Blog />

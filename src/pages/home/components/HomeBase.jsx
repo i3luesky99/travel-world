@@ -11,11 +11,24 @@ import moment from "moment";
 import "moment/locale/vi";
 import Calender from "./Calender";
 import { Navbar } from "../../../components";
+import useModel from "../../../hook/useModel";
+import Fab from "@mui/material/Fab";
+import Zoom from "@mui/material/Zoom";
+import { AiOutlinePlus } from "react-icons/ai";
+import { FiSearch } from "react-icons/fi";
+import { IoIosArrowUp } from "react-icons/io";
+import { useRef } from "react";
+import { AiFillCloseCircle } from "react-icons/ai";
+
 moment.locale("vi");
 
 export default function HomeBase(props) {
-  const { countrySection } = props;
+  const searchSection = useRef();
   const [calendar, setCalendar] = useState(false);
+  const { isOpen: isOpenSearchBar, openModel: openSearchBar } =
+    useModel("grid homeCard");
+  const { isOpen: isOpenFloating, openModel: openFloating } = useModel(false);
+
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -35,19 +48,30 @@ export default function HomeBase(props) {
     setCalendar(false);
   };
 
-  const onScrollToCountry = () => {
+  const onScrollToSearchBar = () => {
+    openSearchBar("grid homeCard active");
     window.scrollTo({
-      top: countrySection.current.offsetTop,
+      top: searchSection.current.offsetTop,
       behavior: "smooth",
     });
   };
 
+  const onCloseSearchBar = () => {
+    openSearchBar("grid homeCard");
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <>
       <Navbar />
       <ClickAwayListener onClickAway={handleClickAway}>
         <section className="home">
-          <div className="secContainer container">
+          <div className="secContainer container flex">
             <div className="homeText">
               <div className="logo" data-aos="fade-up">
                 <p className="textLogo">LEVART</p>
@@ -66,20 +90,20 @@ export default function HomeBase(props) {
                 data-aos="fade-up"
                 data-aos-duration="3000"
                 className="btn"
-                onClick={onScrollToCountry}
               >
                 <p>Khám phá</p>
               </button>
             </div>
 
-            {/* <div className="grid homeCard">
+            <div className={isOpenSearchBar}>
               <div
                 data-aos-duration="2000"
                 data-aos="fade-right"
                 className="locationDiv"
+                ref={searchSection}
               >
                 <label htmlFor="location">Địa điểm</label>
-                <input type="text" placeholder="Dream Destination" />
+                <input type="text" placeholder="Điểm đến mong ước" />
               </div>
 
               <div
@@ -88,7 +112,7 @@ export default function HomeBase(props) {
                 className="priceDiv"
               >
                 <label htmlFor="price">Giá</label>
-                <input type="text" placeholder="$149" />
+                <input type="text" placeholder="1.000.000₫" />
               </div>
 
               <div className="distDiv">
@@ -113,7 +137,67 @@ export default function HomeBase(props) {
                 </div>
               </div>
               <button className="btn">Tìm kiếm</button>
-            </div> */}
+
+              <div className="closeSearchBar" onClick={onCloseSearchBar}>
+                <AiFillCloseCircle className="icon" />
+              </div>
+            </div>
+          </div>
+          <div className="floatingButton flex">
+            {isOpenFloating && (
+              <div className="activeFloating flex">
+                <Zoom in={true} timeout={{ enter: 500, exit: 500 }}>
+                  <Fab
+                    size="small"
+                    sx={{
+                      marginTop: "10px",
+                      background: "#e08d21",
+                      "&:hover": {
+                        background: "#cb5e0b",
+                      },
+                    }}
+                    aria-label="add"
+                  >
+                    <FiSearch className="icon" onClick={onScrollToSearchBar} />
+                  </Fab>
+                </Zoom>
+                <Zoom in={true} timeout={{ enter: 500, exit: 500 }}>
+                  <Fab
+                    size="small"
+                    sx={{
+                      marginTop: "10px",
+                      background: "#e08d21",
+                      "&:hover": {
+                        background: "#cb5e0b",
+                      },
+                    }}
+                    aria-label="add"
+                  >
+                    <IoIosArrowUp className="icon" onClick={scrollToTop} />
+                  </Fab>
+                </Zoom>
+              </div>
+            )}
+
+            <Zoom
+              in={true}
+              timeout={{ enter: 500, exit: 500 }}
+              onClick={() => openFloating(!isOpenFloating)}
+            >
+              <Fab
+                size="medium"
+                sx={{
+                  marginTop: "10px",
+                  background: "#f67009",
+                  "&:hover": {
+                    background: "#cb5e0b",
+                  },
+                }}
+                aria-label="add"
+              >
+                <AiOutlinePlus className="icon" />
+              </Fab>
+            </Zoom>
           </div>
         </section>
       </ClickAwayListener>

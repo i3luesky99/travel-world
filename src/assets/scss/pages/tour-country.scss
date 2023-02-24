@@ -1,20 +1,20 @@
 .tour-country {
   .secContainer {
     .secHeader {
-      border-top: 1px solid $--lightGrey;
-      border-bottom: 1px solid $--lightGrey;
       flex-direction: column;
       align-items: flex-start;
-      width: 100%;
-
-      padding: 20px 0px 20px 0px;
+      gap: 1rem;
       .textDiv {
-        justify-content: space-between;
-        width: 100%;
         .secTitle {
           color: $--blackColor;
           line-height: 1.5rem;
           padding-bottom: 0.5rem;
+        }
+
+        p {
+          font-size: 13px;
+          color: $--textColor;
+          font-weight: 500;
         }
       }
 
@@ -22,58 +22,214 @@
         font-weight: 500;
         font-size: 13px;
         color: $--textColor;
-        width: 50%;
-        justify-self: flex-end;
-        justify-content: space-between;
-        cursor: pointer;
-        .iconText {
-          margin-left: 10px;
-        }
+
         .icon {
           font-size: 15px;
           margin-right: 5px;
-          margin-bottom: 3px;
-        }
-        .textSelected {
-          margin-left: 10px;
-          color: $--PrimaryColor;
         }
       }
     }
 
-    .content {
+    .mainContent {
       padding: 2rem 0;
+      padding-left: 50px;
+      padding-right: 50px;
       gap: 1rem;
       .singleDestination {
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 1rem;
+        @include boxShadow;
+        .destImage {
+          height: 200px;
+          width: 100%;
+          position: relative;
+          overflow: hidden;
+
+          img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+          }
+
+          .overplayInfo {
+            position: absolute;
+            display: flex;
+            align-items: flex-start;
+            padding: 0;
+            justify-content: center;
+            flex-direction: column;
+            bottom: 0;
+            width: 100%;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 0;
+            padding: 1rem 1.5rem;
+            height: 0;
+
+            h3 {
+              color: $--whiteColor;
+              font-weight: 600;
+            }
+
+            p {
+              display: block;
+              display: -webkit-box;
+              line-height: 1.3;
+              -webkit-line-clamp: 3;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              color: $--whiteColor;
+              opacity: 0.7;
+              font-size: 13px;
+            }
+
+            .icon {
+              position: absolute;
+              right: 10px;
+              bottom: 10px;
+              padding: 0.5rem;
+              background: $--PrimaryColor;
+              font-size: 2.5rem;
+              border-radius: 50%;
+              color: $--whiteColor;
+              border: 1px solid transparent;
+              transition: 0.3s ease;
+            }
+          }
+        }
+
+        .destFooter {
+          padding: 1rem;
+          justify-content: space-between;
+
+          .number {
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: $--blackColor;
+            width: max-content;
+          }
+
+          .destText {
+            align-items: flex-end;
+            flex-direction: column;
+            .destination {
+              font-size: 16px;
+              font-weight: 700;
+            }
+            span {
+              color: $--PrimaryColor;
+              font-size: 20px;
+              font-weight: 700;
+            }
+            h6 {
+              color: $--blackColor;
+              font-size: 13px;
+              font-weight: 500;
+            }
+          }
+        }
       }
     }
   }
 }
 
-// @media screen and (min-width: 556px) {
-//   .tour-country {
-//     .secContainer {
-//       .secHeader {
-//         width: 100%;
-//         flex-direction: row;
-//         justify-content: space-between;
-//         align-items: center;
+@media screen and (min-width: 556px) {
+  .tour-country {
+    .secContainer {
+      .secHeader {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
 
-//         .textDiv {
-//           text-align: start;
-//           max-width: 70%;
-//         }
+        .textDiv {
+          text-align: start;
+          max-width: 70%;
+        }
 
-//         .iconsDiv {
-//           justify-content: flex-end;
-//         }
-//       }
-//     }
-//   }
-// }
+        .iconsDiv {
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 765px) {
+  .tour-country {
+    .secContainer {
+      .secHeader {
+        padding-top: 10%;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 772px) {
+  .tour-country {
+    .secContainer {
+      .secHeader {
+        padding-top: 14%;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .tour-country {
+    .secContainer {
+      .secHeader {
+        padding-top: 10%;
+      }
+    }
+  }
+}
 
 @media screen and (min-width: 1000px) {
-  .tour-country {
-    width: 90% !important;
+  .tour-country,
+  .container {
+    width: 100% !important;
+    .secContainer {
+      .secHeader {
+        .textDiv {
+          .secTitle {
+            font-size: 2.2rem;
+          }
+          p {
+            font-size: 15px;
+          }
+        }
+      }
+      .mainContent {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .tour-country,
+  .container {
+    width: 100% !important;
+    .secContainer {
+      .secHeader {
+        .textDiv {
+          .secTitle {
+            font-size: 2.2rem;
+          }
+          p {
+            font-size: 15px;
+          }
+        }
+      }
+      .mainContent {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+      }
+    }
   }
 }

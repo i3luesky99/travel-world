@@ -11,6 +11,8 @@
   margin: auto;
   position: relative;
   .secContainer {
+    justify-content: center;
+    align-items: center;
     .homeText {
       text-align: center;
       .logo {
@@ -60,7 +62,7 @@
       position: absolute;
       gap: 1rem;
       justify-content: center;
-      bottom: -25%;
+      bottom: -30%;
       transform: translateX(-50%);
       left: 50%;
       z-index: 10;
@@ -125,19 +127,48 @@
         font-weight: 600;
       }
     }
+    .displayHomeCard {
+      display: none;
+    }
+  }
+  .closeSearchBar {
+    position: absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+    color: $--PrimaryColor;
+    &:hover .icon {
+      color: $--HoverColor;
+    }
+  }
+  .floatingButton {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 10;
+    flex-direction: column;
+    .icon {
+      color: $--whiteColor;
+      font-size: 22px;
+    }
+
+    .activeFloating {
+      flex-direction: column;
+    }
   }
 }
-
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 350px) {
   .home {
     .secContainer {
       .homeCard {
-        bottom: -100px;
+        display: none;
         width: 90%;
         grid-template-columns: repeat(2, 1fr);
         .btn {
           transform: translateY(15px);
         }
+      }
+      .active {
+        display: grid !important;
       }
     }
   }
@@ -160,7 +191,7 @@
   }
 }
 
-@media screen and (min-width: 720px) {
+@media screen and (min-width: 769px) {
   .home {
     .secContainer {
       .homeText {
@@ -174,9 +205,35 @@
           width: 80%;
         }
       }
-
+      .closeSearchBar {
+        display: none;
+      }
       .homeCard {
-        bottom: -20%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .home {
+    .secContainer {
+      .homeText {
+        padding: 1rem 10rem;
+        .logo {
+          .textLogo {
+            font-size: 70px;
+          }
+        }
+        .subTitle {
+          width: 80%;
+        }
+      }
+      .closeSearchBar {
+        display: none;
+      }
+      .homeCard {
         grid-template-columns: repeat(4, 1fr);
       }
     }

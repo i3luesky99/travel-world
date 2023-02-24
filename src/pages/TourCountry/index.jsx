@@ -1,20 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { FaListAlt } from "react-icons/fa";
-import { BsArrowRightShort } from "react-icons/bs";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { formatCurrency } from "../../theme/functions";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import Carousel from "../../components/Carousel/Carousel";
 
 export default function TourCountry() {
-  const [isSelected, setIsSelected] = useState("");
-  const filterTexts = [
-    { text: "Sắp xếp: Ngày khởi hành", icon: true },
-    { text: "Giá cả" },
-    { text: "Phổ biến" },
-  ];
+  const [page, setPage] = useState(3);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  const handleResize = () => {
+    setScreenWidth(window.innerWidth);
+  };
+
   useEffect(() => {
+    if (screenWidth <= 500) {
+      setPage(1);
+    } else if (screenWidth <= 1200) {
+      setPage(2);
+    } else if (screenWidth <= 1500) {
+      setPage(3);
+    } else {
+      setPage(4);
+    }
+    window.addEventListener("resize", handleResize);
     Aos.init({ duration: 2000 });
-  }, []);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, [screenWidth]);
 
   const destinationArr = [
     {
@@ -94,83 +108,26 @@ export default function TourCountry() {
     },
   ];
 
-  const onHandleFilter = (text) => {
-    setIsSelected(text);
-  };
   return (
     <section className="tour-country section container">
-      <div className="secContainer ">
-        <div className="secHeader flex ">
-          <div
-            data-aos="fade-right"
-            data-aos-duration="2500"
-            className="textDiv flex"
-          >
-            <h2 className="secTitle">Danh sách các tour trong nước</h2>
-            <div
-              data-aos="fade-left"
-              data-aos-duration="2500"
-              className="iconsDiv flex"
-            >
-              {filterTexts.map((filterText, index) => (
-                <div
-                  key={index}
-                  className={
-                    isSelected === filterText.text
-                      ? "textSelected flex"
-                      : "iconText flex"
-                  }
-                  onClick={() => onHandleFilter(filterText.text)}
-                >
-                  {filterText.icon && <FaListAlt className="icon" />}
-                  <p>{filterText.text}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="content grid">
-          {destinationArr.map((destination, index) => (
-            <div
-              key={`key-${index}-destination`}
-              className="singleDestination"
-              data-aos="fade-up"
-            >
-              <div className="destImage">
-                <img src={destination?.img[0]} alt="Img title" />
-
-                <div className="overplayInfo">
-                  <h3>{destination?.title}</h3>
-                  <p>{destination?.desc}</p>
-
-                  <BsArrowRightShort className="icon" />
-                </div>
-              </div>
-
-              <div className="destFooter flex">
-                {index < 9 ? (
-                  <div className="number">0{index + 1}</div>
-                ) : (
-                  <div className="number">{index + 1}</div>
-                )}
-                <div className="destText flex">
-                  <p className="destination">
-                    Địa điểm: {destination?.location}
-                  </p>
-                  <h6>Ngày khởi hàng: {destination?.dateStart}</h6>
-                  <h6>
-                    Lịch trình: {destination?.totalDays} ngày&nbsp;
-                    {destination?.totalDays - 1} đêm
-                  </h6>
-                  <h6>Chỗ đặt tour còn: {destination?.slots}</h6>
-                  <span>{formatCurrency(destination?.prices)}</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <Carousel
+        destinationArr={destinationArr}
+        page={page}
+        title="Tour miền Nam"
+        link="/tour-country/southern"
+      />
+      <Carousel
+        destinationArr={destinationArr}
+        page={page}
+        title="Tour miền Trung"
+        link="/tour-country/central"
+      />
+      <Carousel
+        destinationArr={destinationArr}
+        page={page}
+        title="Tour miền Bắc"
+        link="/tour-country/north"
+      />
     </section>
   );
 }

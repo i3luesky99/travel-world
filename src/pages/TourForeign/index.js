@@ -1,15 +1,34 @@
-import React, { useEffect } from "react";
-import { FaListAlt } from "react-icons/fa";
-import { BsArrowRightShort } from "react-icons/bs";
+import React, { useEffect, useState } from "react";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { formatCurrency } from "../../theme/functions";
-import { Link } from "react-router-dom";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import Carousel from "../../components/Carousel/Carousel";
 
-export default function Country() {
+export default function TourForeign() {
+  const [page, setPage] = useState(3);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+  const handleResize = () => {
+    setScreenWidth(window.innerWidth);
+  };
+
   useEffect(() => {
+    if (screenWidth <= 500) {
+      setPage(1);
+    } else if (screenWidth <= 1200) {
+      setPage(2);
+    } else if (screenWidth <= 1500) {
+      setPage(3);
+    } else {
+      setPage(4);
+    }
+    window.addEventListener("resize", handleResize);
     Aos.init({ duration: 2000 });
-  }, []);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
+  }, [screenWidth]);
 
   const destinationArr = [
     {
@@ -90,71 +109,25 @@ export default function Country() {
   ];
 
   return (
-    <section className="country section container">
-      <div className="secContainer ">
-        <div className="secHeader flex ">
-          <div
-            data-aos="fade-right"
-            data-aos-duration="2500"
-            className="textDiv"
-          >
-            <h2 className="secTitle">Tour trong nước</h2>
-            <p>
-              Từ những di tích lịch sử, phong cảnh trữ tình cho đến những danh
-              lam thắng cảnh được UNESCO công nhận .
-            </p>
-          </div>
-          <Link to="/tour-country">
-            <div
-              data-aos="fade-left"
-              data-aos-duration="2500"
-              className="iconsDiv flex"
-            >
-              <FaListAlt className="icon" />
-              Xem tất cả
-            </div>
-          </Link>
-        </div>
-
-        <div className="mainContent grid">
-          {destinationArr.map((destination, index) => (
-            <div key={`key-${index}-destination`}>
-              <div className="singleDestination" data-aos="fade-up">
-                <div className="destImage">
-                  <img src={destination?.img[0]} alt="Img title" />
-
-                  <div className="overplayInfo">
-                    <h3>{destination?.title}</h3>
-                    <p>{destination?.desc}</p>
-
-                    <BsArrowRightShort className="icon" />
-                  </div>
-                </div>
-
-                <div className="destFooter flex">
-                  {index < 9 ? (
-                    <div className="number">0{index + 1}</div>
-                  ) : (
-                    <div className="number">{index + 1}</div>
-                  )}
-                  <div className="destText flex">
-                    <p className="destination">
-                      Địa điểm: {destination?.location}
-                    </p>
-                    <h6>Ngày khởi hàng: {destination?.dateStart}</h6>
-                    <h6>
-                      Lịch trình: {destination?.totalDays} ngày&nbsp;
-                      {destination?.totalDays - 1} đêm
-                    </h6>
-                    <h6>Chỗ đặt tour còn: {destination?.slots}</h6>
-                    <span>{formatCurrency(destination?.prices)}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+    <section className="tour-country section container">
+      <Carousel
+        destinationArr={destinationArr}
+        page={page}
+        title="Tour Châu ÂU"
+        link="/tour-foreign/europe"
+      />
+      <Carousel
+        destinationArr={destinationArr}
+        page={page}
+        title="Tour Châu Á"
+        link="/tour-foreign/asia"
+      />
+      <Carousel
+        destinationArr={destinationArr}
+        page={page}
+        title="Tour Châu Mỹ"
+        link="/tour-foreign/america"
+      />
     </section>
   );
 }

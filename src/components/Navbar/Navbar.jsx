@@ -3,24 +3,18 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { TbGridDots } from "react-icons/tb";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import useModel from "../../hook/useModel";
 
 export default function Navbar() {
-  const [active, setActive] = useState("navBar");
   const [transparent, setTransparent] = useState("header");
+  const { isOpen: isOpenNavbar, openModel: openNavbar } = useModel("navBar");
+
   const params = useLocation().pathname;
   const menuBars = [
     { id: 0, text: "Trong nước", link: "/tour-country" },
     { id: 1, text: "Ngoài nước", link: "/tour-foreign" },
     { id: 2, text: "Blog", link: "/blog" },
   ];
-
-  const showNav = () => {
-    setActive("navBar activeNavBar");
-  };
-
-  const closeNav = () => {
-    setActive("navBar");
-  };
 
   const addBg = () => {
     if (window.scrollY >= 10) {
@@ -30,21 +24,14 @@ export default function Navbar() {
     }
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   window.addEventListener("scroll", addBg);
 
   return (
     <section className="navBarSection">
       <div className={transparent}>
-        <div className={active}>
+        <div className={isOpenNavbar}>
           <ul className="navLists flex">
-            <li className="navItem" onClick={scrollToTop}>
+            <li className="navItem">
               <Link
                 to="/"
                 className={params === "/" ? "onSelected" : "navLink"}
@@ -87,13 +74,16 @@ export default function Navbar() {
               </button>
             </div>
           </ul>
-          <div className="closeNavBar" onClick={closeNav}>
+          <div className="closeNavBar" onClick={() => openNavbar("navBar")}>
             <AiFillCloseCircle className="icon" />
           </div>
         </div>
 
-        <div className="toggleNavBar" onClick={showNav}>
-          <TbGridDots className="icon" />
+        <div className="toggleNavBar">
+          <TbGridDots
+            className="icon"
+            onClick={() => openNavbar("navBar activeNavBar")}
+          />
         </div>
       </div>
     </section>

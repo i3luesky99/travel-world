@@ -1,28 +1,48 @@
 import "./assets/scss/index.scss";
-import { Home, Login, Register, Blog } from "./pages";
+import {
+  Home,
+  Login,
+  Register,
+  Blog,
+  TourSouthern,
+  TourNorth,
+  TourCentral,
+  TourCountry,
+  TourForeign,
+  TourEurope,
+  TourAmerica,
+  TourAsia,
+  TourDetail,
+} from "./pages";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
-import TourCounty from "./pages/TourCountry";
 import { Footer } from "./components";
 import HomeBase from "./pages/Home/components/HomeBase";
-import { useRef } from "react";
 function App() {
-  const countrySection = useRef(null);
-
   return (
     <BrowserRouter>
       <Routes>
         <Route
           element={
             <>
-              <HomeBase countrySection={countrySection} />
+              <HomeBase />
               <Outlet />
               <Footer />
             </>
           }
         >
-          <Route path="/" element={<Home countrySection={countrySection} />} />
-          <Route path="/tour-country" element={<TourCounty />} />
-          <Route path="/tour-foreign" element={<TourCounty />} />
+          <Route path="/" element={<Home />} />
+
+          <Route path="/tour-country" element={<TourCountry />} />
+          <Route path="/tour-country/southern" element={<TourSouthern />} />
+          <Route path="/tour-country/north" element={<TourNorth />} />
+          <Route path="/tour-country/central" element={<TourCentral />} />
+
+          <Route path="/tour-foreign" element={<TourForeign />} />
+          <Route path="/tour-foreign/europe" element={<TourEurope />} />
+          <Route path="/tour-foreign/america" element={<TourAmerica />} />
+          <Route path="/tour-foreign/asia" element={<TourAsia />} />
+          <Route path="/tour-detail" element={<TourDetail />} />
+
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Blog />} />
         </Route>

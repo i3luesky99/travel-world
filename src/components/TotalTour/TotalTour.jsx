@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { BsArrowRightShort } from "react-icons/bs";
-import { FaListAlt } from "react-icons/fa";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { formatCurrency } from "../../theme/functions";
+import { Link } from "react-router-dom";
 
-export default function Foreign(props) {
-  const { countrySection } = props;
+export default function TotalTour(props) {
+  const { title } = props;
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -90,7 +90,7 @@ export default function Foreign(props) {
   ];
 
   return (
-    <section className="foreign section container" ref={countrySection}>
+    <section className="country section container">
       <div className="secContainer ">
         <div className="secHeader flex ">
           <div
@@ -98,20 +98,11 @@ export default function Foreign(props) {
             data-aos-duration="2500"
             className="textDiv"
           >
-            <h2 className="secTitle">Tour ngoài nước</h2>
+            <h2 className="secTitle">Tất cả tour {title}</h2>
             <p>
               Từ những di tích lịch sử, phong cảnh trữ tình cho đến những danh
               lam thắng cảnh được UNESCO công nhận .
             </p>
-          </div>
-
-          <div
-            data-aos="fade-left"
-            data-aos-duration="2500"
-            className="iconsDiv flex"
-          >
-            <FaListAlt className="icon" />
-            Xem tất cả
           </div>
         </div>
 
