@@ -4,16 +4,34 @@ import { TbGridDots } from "react-icons/tb";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import useModel from "../../hook/useModel";
+import DropList from "../DropDown/DropDown";
 
 export default function Navbar() {
   const [transparent, setTransparent] = useState("header");
   const { isOpen: isOpenNavbar, openModel: openNavbar } = useModel("navBar");
 
   const params = useLocation().pathname;
-  const menuBars = [
-    { id: 0, text: "Trong nước", link: "/tour-country" },
-    { id: 1, text: "Ngoài nước", link: "/tour-foreign" },
-    { id: 2, text: "Blog", link: "/blog" },
+  const tours = [
+    {
+      id: 0,
+      text: "Trong nước",
+      link: "/tour-country",
+      regions: [
+        { name: "Miền Nam", link: "/tour-country/southern" },
+        { name: "Miền Trung", link: "/tour-country/central" },
+        { name: "Miền Bắc", link: "/tour-country/north" },
+      ],
+    },
+    {
+      id: 1,
+      text: "Ngoài nước",
+      link: "/tour-foreign",
+      regions: [
+        { name: "Châu Âu", link: "/tour-country/europe" },
+        { name: "Châu Mỹ", link: "/tour-country/america" },
+        { name: "Châu Á", link: "/tour-country/asia" },
+      ],
+    },
   ];
 
   const addBg = () => {
@@ -39,8 +57,11 @@ export default function Navbar() {
                 Trang chủ
               </Link>
             </li>
+            <DropList tour={tours[0]} params={params} />
+            <DropList tour={tours[1]} params={params} />
 
-            {menuBars.map((menu, index) => (
+            {/* <DropList /> */}
+            {/* {menuBars.map((menu, index) => (
               <li className="navItem" key={`${index}-menuBar`}>
                 <Link
                   to={menu.link}
@@ -49,7 +70,7 @@ export default function Navbar() {
                   {menu.text}
                 </Link>
               </li>
-            ))}
+            ))} */}
 
             <li className="navItem">
               <Link
