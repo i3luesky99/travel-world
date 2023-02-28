@@ -1,5 +1,5 @@
 import React from "react";
-import { TotalTour } from "../../components";
+import { TotalTour } from "../../../components";
 
 function TourAmerica() {
   return (

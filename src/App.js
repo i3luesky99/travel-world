@@ -6,11 +6,8 @@ import {
   Blog,
   TourCountry,
   TourForeign,
-  TourEurope,
-  TourAmerica,
-  TourAsia,
   TourDetail,
-} from "./pages";
+} from "./pages/indexInit";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { Footer } from "./components";
 import HomeBase from "./pages/Home/components/HomeBase";
@@ -19,6 +16,11 @@ import {
   TourNorth,
   TourSouthern,
 } from "./pages/TourCountry/components";
+import {
+  TourEurope,
+  TourAmerica,
+  TourAsia,
+} from "./pages/TourForeign/components";
 function App() {
   return (
     <BrowserRouter>
