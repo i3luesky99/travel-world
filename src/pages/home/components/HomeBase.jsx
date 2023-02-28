@@ -14,12 +14,13 @@ import { Navbar } from "../../../components";
 import useModel from "../../../hook/useModel";
 import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
-import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 import { IoIosArrowUp } from "react-icons/io";
 import { useRef } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { RiFunctionFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 moment.locale("vi");
 
@@ -73,9 +74,9 @@ export default function HomeBase(props) {
         <section className="home">
           <div className="secContainer container flex">
             <div className="homeText flex">
-              <div className="logo" data-aos="fade-up">
+              <Link to={"/"} className="logo" data-aos="fade-up">
                 <p className="textLogo">LEVART</p>
-              </div>
+              </Link>
 
               <p
                 data-aos="fade-up"
@@ -162,6 +163,39 @@ export default function HomeBase(props) {
           <div className="floatingButton flex">
             {isOpenFloating && (
               <div className="activeFloating flex">
+                <Zoom in={true} timeout={{ enter: 500, exit: 500 }}>
+                  <Fab
+                    size="small"
+                    sx={{
+                      marginTop: "10px",
+                      background: "#e08d21",
+                      "&:hover": {
+                        background: "#cb5e0b",
+                      },
+                      borderRadius: "5px",
+                      width: "100px",
+                      position: "absolute",
+                      top: "-50px",
+                      right: "0px",
+                    }}
+                    aria-label="add"
+                  >
+                    <AiOutlinePlusCircle
+                      onClick={onScrollToSearchBar}
+                      style={{ fontSize: "20px", color: "white" }}
+                    />
+                    <p
+                      style={{
+                        fontSize: "11px",
+                        textTransform: "capitalize",
+                        color: "white",
+                        marginLeft: "3px",
+                      }}
+                    >
+                      Thêm Tour
+                    </p>
+                  </Fab>
+                </Zoom>
                 <Zoom in={true} timeout={{ enter: 500, exit: 500 }}>
                   <Fab
                     size="small"

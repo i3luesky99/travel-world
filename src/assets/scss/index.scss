@@ -3,17 +3,17 @@
 @import "./common/mixin";
 @import "./common/animation";
 @import "./components/navbar";
-@import "./components/country";
+@import "./components/totalTour";
 @import "./components/hotels";
 @import "./components/about";
 @import "./components/footer";
 @import "./components/blog";
 @import "./components/dropdown";
+@import "./components/carousel";
 
 @import "./pages/home";
 @import "./pages/login";
 @import "./pages/components/loginComponents.scss";
 @import "./pages/register";
 @import "./pages/blog";
-@import "./pages/tour-country";
-@import "./pages/tour-detail";
+@import "./pages/tourDetail";

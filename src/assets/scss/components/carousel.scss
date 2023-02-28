@@ -106,7 +106,7 @@
         }
 
         .destFooter {
-          padding: 1rem;
+          padding: 0 1rem;
           justify-content: space-between;
 
           .number {
@@ -122,16 +122,37 @@
             .destination {
               font-size: 16px;
               font-weight: 700;
+              line-height: 20px;
             }
-            span {
-              color: $--PrimaryColor;
-              font-size: 20px;
-              font-weight: 700;
+            h6 {
+              line-height: 20px;
+              font-size: 13px;
+              font-weight: 500;
             }
+          }
+        }
+        .bottom {
+          flex-direction: column;
+          padding: 0px 20px 20px 20px;
+          span {
+            color: $--PrimaryColor;
+            font-size: 20px;
+            font-weight: 700;
+          }
+          .bottomLeft {
+            justify-content: space-between;
+            width: 100%;
             h6 {
               color: $--blackColor;
               font-size: 13px;
               font-weight: 500;
+            }
+          }
+          .btn {
+            margin-top: 10px;
+            color: $--whiteColor;
+            &:hover {
+              background-color: $--HoverColor;
             }
           }
         }

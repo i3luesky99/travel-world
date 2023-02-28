@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { formatCurrency } from "../../theme/functions";
 
 export default function Carousel(props) {
-  const { destinationArr, page, title, link, foreign } = props;
+  const { destinations, page, title, link, foreign } = props;
 
   return (
     <div className="secContainer ">
@@ -42,7 +42,7 @@ export default function Carousel(props) {
         className="mainContent grid"
         spaceBetween={30}
       >
-        {destinationArr.map((destination, index) => (
+        {destinations.map((destination, index) => (
           <SwiperSlide key={`key-${index}-destination`}>
             <div className="singleDestination" data-aos="fade-up">
               <Link
@@ -79,11 +79,22 @@ export default function Carousel(props) {
                       Lịch trình: {destination?.totalDays} ngày&nbsp;
                       {destination?.totalDays - 1} đêm
                     </h6>
-                    <h6>Chỗ đặt tour còn: {destination?.slots}</h6>
-                    <span>{formatCurrency(destination?.prices)}</span>
                   </div>
                 </div>
               </Link>
+
+              <div className="bottom flex">
+                <div className="bottomLeft flex">
+                  <h6>
+                    Chỗ đặt tour còn:
+                    <span style={{ fontSize: 24, marginLeft: 10 }}>
+                      {destination?.slots}
+                    </span>
+                  </h6>
+                  <span>{formatCurrency(destination?.prices)}</span>
+                </div>
+                <p className="btn">BOOK NGAY</p>
+              </div>
             </div>
           </SwiperSlide>
         ))}

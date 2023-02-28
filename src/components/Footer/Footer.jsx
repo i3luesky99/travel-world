@@ -5,6 +5,7 @@ import { BsTwitter } from "react-icons/bs";
 import { AiFillInstagram } from "react-icons/ai";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import { Link } from "react-router-dom";
 export default function Footer() {
   useEffect(() => {
     Aos.init({ duration: 2000 });
@@ -15,9 +16,9 @@ export default function Footer() {
       <div className="secContainer container grid">
         <div className="logoDiv">
           <div className="footerLogo flex">
-            <div className="logo ">
+            <Link className="logo" to={"/"}>
               <p className="textLogo">LEVART</p>
-            </div>
+            </Link>
           </div>
 
           <div className="social flex">
