@@ -27,9 +27,9 @@ export default function Navbar() {
       text: "Ngoài nước",
       link: "/tour-foreign",
       regions: [
-        { name: "Châu Âu", link: "/tour-country/europe" },
-        { name: "Châu Mỹ", link: "/tour-country/america" },
-        { name: "Châu Á", link: "/tour-country/asia" },
+        { name: "Châu Âu", link: "/tour-foreign/europe" },
+        { name: "Châu Mỹ", link: "/tour-foreign/america" },
+        { name: "Châu Á", link: "/tour-foreign/asia" },
       ],
     },
   ];
@@ -59,19 +59,6 @@ export default function Navbar() {
             </li>
             <DropList tour={tours[0]} params={params} />
             <DropList tour={tours[1]} params={params} />
-
-            {/* <DropList /> */}
-            {/* {menuBars.map((menu, index) => (
-              <li className="navItem" key={`${index}-menuBar`}>
-                <Link
-                  to={menu.link}
-                  className={params === menu.link ? "onSelected" : "navLink"}
-                >
-                  {menu.text}
-                </Link>
-              </li>
-            ))} */}
-
             <li className="navItem">
               <Link
                 to="/contact"

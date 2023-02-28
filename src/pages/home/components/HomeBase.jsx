@@ -19,14 +19,14 @@ import { FiSearch } from "react-icons/fi";
 import { IoIosArrowUp } from "react-icons/io";
 import { useRef } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { RiFunctionFill } from "react-icons/ri";
 
 moment.locale("vi");
 
 export default function HomeBase(props) {
   const searchSection = useRef();
   const [calendar, setCalendar] = useState(false);
-  const { isOpen: isOpenSearchBar, openModel: openSearchBar } =
-    useModel("grid homeCard");
+  const { isOpen: isOpenSearchBar, openModel: openSearchBar } = useModel(false);
   const { isOpen: isOpenFloating, openModel: openFloating } = useModel(false);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function HomeBase(props) {
   };
 
   const onScrollToSearchBar = () => {
-    openSearchBar("grid homeCard active");
+    openSearchBar(true);
     window.scrollTo({
       top: searchSection.current.offsetTop,
       behavior: "smooth",
@@ -57,7 +57,7 @@ export default function HomeBase(props) {
   };
 
   const onCloseSearchBar = () => {
-    openSearchBar("grid homeCard");
+    openSearchBar(false);
   };
 
   const scrollToTop = () => {
@@ -72,7 +72,7 @@ export default function HomeBase(props) {
       <ClickAwayListener onClickAway={handleClickAway}>
         <section className="home">
           <div className="secContainer container flex">
-            <div className="homeText">
+            <div className="homeText flex">
               <div className="logo" data-aos="fade-up">
                 <p className="textLogo">LEVART</p>
               </div>
@@ -89,59 +89,75 @@ export default function HomeBase(props) {
               <button
                 data-aos="fade-up"
                 data-aos-duration="3000"
-                className="btn"
+                className="btn flex"
+                onClick={() => openSearchBar(!isOpenSearchBar)}
               >
+                <FiSearch
+                  className="iconSearch"
+                  onClick={onScrollToSearchBar}
+                />
                 <p>Khám phá</p>
               </button>
             </div>
-
-            <div className={isOpenSearchBar}>
-              <div
-                data-aos-duration="2000"
-                data-aos="fade-right"
-                className="locationDiv"
-                ref={searchSection}
-              >
-                <label htmlFor="location">Địa điểm</label>
-                <input type="text" placeholder="Điểm đến mong ước" />
-              </div>
-
-              <div
-                data-aos="fade-right"
-                data-aos-duration="2000"
-                className="priceDiv"
-              >
-                <label htmlFor="price">Giá</label>
-                <input type="text" placeholder="1.000.000₫" />
-              </div>
-
-              <div className="distDiv">
-                <label htmlFor="distance">Ngày</label>
-                <div className="datePicker" onClick={openCalendar}>
-                  <p>
-                    {`${moment(`${date[0].startDate}`).format("L")}`} -{` `}
-                    {`${moment(`${date[0].endDate}`).format("L")}`}
-                  </p>
+            {isOpenSearchBar && (
+              <div className={"grid homeCard active"}>
+                <div
+                  data-aos-duration="2000"
+                  data-aos="fade-right"
+                  className="locationDiv"
+                  ref={searchSection}
+                >
+                  <label htmlFor="location">Địa điểm</label>
+                  <input type="text" placeholder="Điểm đến mong ước" />
                 </div>
 
-                <div className="date">
-                  {calendar && (
-                    <DateRange
-                      editableDateInputs={true}
-                      onChange={(item) => setDate([item.selection])}
-                      moveRangeOnFirstSelection={false}
-                      ranges={date}
-                      locale={locales["vi"]}
-                    />
-                  )}
+                <div
+                  data-aos="fade-right"
+                  data-aos-duration="2000"
+                  className="priceDiv"
+                >
+                  <label htmlFor="price">Giá</label>
+                  <input type="text" placeholder="1.000.000₫" />
+                </div>
+
+                <div
+                  className="distDiv"
+                  data-aos="fade-right"
+                  data-aos-duration="2500"
+                >
+                  <label htmlFor="distance">Ngày</label>
+                  <div className="datePicker" onClick={openCalendar}>
+                    <p>
+                      {`${moment(`${date[0].startDate}`).format("L")}`} -{` `}
+                      {`${moment(`${date[0].endDate}`).format("L")}`}
+                    </p>
+                  </div>
+
+                  <div className="date">
+                    {calendar && (
+                      <DateRange
+                        editableDateInputs={true}
+                        onChange={(item) => setDate([item.selection])}
+                        moveRangeOnFirstSelection={false}
+                        ranges={date}
+                        locale={locales["vi"]}
+                      />
+                    )}
+                  </div>
+                </div>
+                <button
+                  className="btn"
+                  data-aos="fade-right"
+                  data-aos-duration="3000"
+                >
+                  Tìm kiếm
+                </button>
+
+                <div className="closeSearchBar" onClick={onCloseSearchBar}>
+                  <AiFillCloseCircle className="icon" />
                 </div>
               </div>
-              <button className="btn">Tìm kiếm</button>
-
-              <div className="closeSearchBar" onClick={onCloseSearchBar}>
-                <AiFillCloseCircle className="icon" />
-              </div>
-            </div>
+            )}
           </div>
           <div className="floatingButton flex">
             {isOpenFloating && (
@@ -195,7 +211,7 @@ export default function HomeBase(props) {
                 }}
                 aria-label="add"
               >
-                <AiOutlinePlus className="icon" />
+                <RiFunctionFill className="icon" />
               </Fab>
             </Zoom>
           </div>

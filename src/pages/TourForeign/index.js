@@ -113,18 +113,21 @@ export default function TourForeign() {
       <Carousel
         destinationArr={destinationArr}
         page={page}
+        foreign={true}
         title="Tour Châu ÂU"
         link="/tour-foreign/europe"
       />
       <Carousel
         destinationArr={destinationArr}
         page={page}
+        foreign={true}
         title="Tour Châu Á"
         link="/tour-foreign/asia"
       />
       <Carousel
         destinationArr={destinationArr}
         page={page}
+        foreign={true}
         title="Tour Châu Mỹ"
         link="/tour-foreign/america"
       />

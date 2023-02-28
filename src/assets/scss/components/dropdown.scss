@@ -3,10 +3,22 @@
   display: inline-block;
   .dropdown-toggle {
     padding: 0 0.7rem;
-    border-radius: 4px;
     font-size: 0.9rem;
     color: white;
     cursor: pointer;
+    &:hover {
+      color: $--PrimaryColor;
+    }
+  }
+
+  .selectDropdown {
+    color: $--PrimaryColor;
+    padding: 0 0.7rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    &:hover {
+      color: $--HoverColor;
+    }
   }
 
   .dropdown-list {
@@ -17,12 +29,26 @@
     background-color: #fff;
     list-style: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-
-    li {
+    flex-direction: column;
+    .link {
       padding: 8px;
       font-size: 0.9rem;
       color: $--PrimaryColor;
       text-align: center;
+      width: 100%;
+      cursor: pointer;
+      &:hover {
+        background-color: $--PrimaryColor;
+        color: $--whiteColor;
+      }
+    }
+
+    .activeLink {
+      padding: 8px;
+      font-size: 0.9rem;
+      color: black;
+      text-align: center;
+      width: 100%;
       cursor: pointer;
       &:hover {
         background-color: $--PrimaryColor;

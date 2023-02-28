@@ -1,5 +1,6 @@
 .tour-country {
   .secContainer {
+    margin-bottom: 80px;
     .secHeader {
       flex-direction: column;
       align-items: flex-start;
@@ -26,6 +27,9 @@
         .icon {
           font-size: 15px;
           margin-right: 5px;
+        }
+        &:hover {
+          color: $--PrimaryColor;
         }
       }
     }
@@ -153,36 +157,6 @@
         .iconsDiv {
           justify-content: flex-end;
         }
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 765px) {
-  .tour-country {
-    .secContainer {
-      .secHeader {
-        padding-top: 10%;
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 772px) {
-  .tour-country {
-    .secContainer {
-      .secHeader {
-        padding-top: 14%;
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 900px) {
-  .tour-country {
-    .secContainer {
-      .secHeader {
-        padding-top: 10%;
       }
     }
   }
