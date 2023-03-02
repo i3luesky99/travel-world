@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { SiYourtraveldottv } from "react-icons/si";
 import { ImFacebook } from "react-icons/im";
 import { BsTwitter } from "react-icons/bs";
 import { AiFillInstagram } from "react-icons/ai";

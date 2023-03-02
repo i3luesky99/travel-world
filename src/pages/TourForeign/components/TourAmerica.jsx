@@ -7,7 +7,7 @@ function TourAmerica() {
 
   return (
     <div>
-      <TotalTour title="Châu Mỹ" destinations={destinations} />
+      <TotalTour title="Châu Mỹ" destinations={destinations} foreign={true}/>
     </div>
   );
 }

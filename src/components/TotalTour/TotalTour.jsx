@@ -6,7 +6,7 @@ import { formatCurrency } from "../../theme/functions";
 import { Link } from "react-router-dom";
 
 export default function TotalTour(props) {
-  const { title, destinations } = props;
+  const { title, destinations, foreign } = props;
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -33,7 +33,11 @@ export default function TotalTour(props) {
             <div key={`key-${index}-destination`}>
               <div className="singleDestination" data-aos="fade-up">
                 <Link
-                  to={`/tour-country/tour-detail/:${destination?.id}`}
+                  to={
+                    foreign
+                      ? `/tour-foreign/tour-detail/${destination.id}`
+                      : `/tour-country/tour-detail/${destination.id}`
+                  }
                   style={{ color: "black" }}
                 >
                   <div className="destImage">
