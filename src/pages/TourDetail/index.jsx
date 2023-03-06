@@ -1,7 +1,9 @@
 import React from "react";
 import { destDesc } from "../../theme/data";
+import { formatCurrency } from "../../theme/functions";
 
 const TourDetail = () => {
+  const price = formatCurrency(1000000);
   return (
     <div className="tour-detail">
       <div className="tour-image-container">
@@ -11,23 +13,22 @@ const TourDetail = () => {
           alt="Tour"
         />
         <div className="tour-image-text">
-          <h1 className="tour-name">Amazing Tour of London</h1>
-          <span className="tour-duration">3 days</span>
-          <span className="tour-price">$799 per person</span>
+          <h1 className="tour-name">Đà Nẵng Tour</h1>
+          <span className="tour-duration">3 ngày 2 đêm</span>
+          <span className="tour-price">{price}</span>
         </div>
       </div>
       <div className="tour-details">
-        <h2 className="tour-heading">Tour Details</h2>
+        <h2 className="tour-heading">Chi tiết tour</h2>
         <p className="tour-description">{destDesc}</p>
-        <h2 className="tour-heading">What's Included</h2>
+        <h2 className="tour-heading">Tour gồm những gì ?</h2>
         <ul className="tour-inclusions">
-          <li>Accommodation in a 5-star hotel</li>
-          <li>Guided tour of London</li>
-          <li>Transportation to and from airport</li>
-          <li>All meals and snacks</li>
+          <li>Khách sạn 5*</li>
+          <li>Phương tiện đưa đón tới khách sạn</li>
+          <li>Buffet</li>
         </ul>
         <div className="tour-cta">
-          <a href="#">Book Now</a>
+          <a href="#">Book ngay</a>
         </div>
       </div>
     </div>

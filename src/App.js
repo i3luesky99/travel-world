@@ -7,6 +7,7 @@ import {
   TourCountry,
   TourForeign,
   TourDetail,
+  Payment,
 } from "./pages/indexInit";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { Footer } from "./components";
@@ -52,7 +53,7 @@ function App() {
             path="/tour-foreign/tour-detail/:tourId"
             element={<TourDetail />}
           />
-
+          <Route path="/payment" element={<Payment />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Blog />} />
         </Route>

@@ -1,0 +1,59 @@
+// PaymentPage.scss
+
+// Define variables for colors and font families
+$primary-color: #003d71;
+$secondary-color: #ff9800;
+
+.payment-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+
+  .payment-form {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    @include boxShadow;
+    gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    .optionPayment {
+      //   display: flex;
+      label {
+        color: $primary-color;
+        font-size: 18px;
+        white-space: nowrap;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-bottom: 2px solid $primary-color;
+        border-radius: 0;
+        font-size: 16px;
+        margin-bottom: 20px;
+
+        &:focus {
+          outline: none;
+          border-color: $secondary-color;
+        }
+      }
+    }
+    button[type="submit"] {
+      background-color: $primary-color;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+
+      &:hover {
+        background-color: darken($primary-color, 10%);
+      }
+    }
+  }
+}

@@ -5,3 +5,4 @@ export { default as Blog } from "./BlogPage/index";
 export { default as TourDetail } from "./TourDetail/index";
 export { default as TourCountry } from "./TourCountry/index";
 export { default as TourForeign } from "./TourForeign/index";
+export { default as Payment } from "./Payment/Payment";
