@@ -1,0 +1,226 @@
+.country {
+  .secContainer {
+    .secHeader {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      .textDiv {
+        .secTitle {
+          color: $--blackColor;
+          line-height: 1.5rem;
+          padding-bottom: 0.5rem;
+        }
+
+        p {
+          font-size: 13px;
+          color: $--textColor;
+          font-weight: 500;
+        }
+      }
+
+      .iconsDiv {
+        font-weight: 500;
+        font-size: 13px;
+        color: $--textColor;
+
+        .icon {
+          font-size: 15px;
+          margin-right: 5px;
+        }
+        &:hover {
+          color: $--PrimaryColor;
+        }
+      }
+    }
+
+    .mainContent {
+      padding: 2rem 0;
+      gap: 1rem;
+      .singleDestination {
+        min-width: 363px;
+        overflow: hidden;
+        border-radius: 1rem;
+        @include boxShadow;
+        .destImage {
+          height: 200px;
+          width: 100%;
+          position: relative;
+          overflow: hidden;
+
+          img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+          }
+
+          .overplayInfo {
+            position: absolute;
+            display: flex;
+            align-items: flex-start;
+            padding: 0;
+            justify-content: center;
+            flex-direction: column;
+            bottom: 0;
+            width: 100%;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 0;
+            padding: 1rem 1.5rem;
+            height: 0;
+
+            h3 {
+              color: $--whiteColor;
+              font-weight: 600;
+            }
+
+            p {
+              display: block;
+              display: -webkit-box;
+              line-height: 1.3;
+              -webkit-line-clamp: 3;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              color: $--whiteColor;
+              opacity: 0.7;
+              font-size: 13px;
+            }
+
+            .icon {
+              position: absolute;
+              right: 10px;
+              bottom: 10px;
+              padding: 0.5rem;
+              background: $--PrimaryColor;
+              font-size: 2.5rem;
+              border-radius: 50%;
+              color: $--whiteColor;
+              border: 1px solid transparent;
+              transition: 0.3s ease;
+
+              &:hover {
+                background: $--inputColor;
+                border: 1px solid $--PrimaryColor;
+                color: $--PrimaryColor;
+              }
+            }
+          }
+        }
+
+        .destFooter {
+          padding: 0 1rem;
+          justify-content: space-between;
+
+          .number {
+            font-size: 4.5rem;
+            font-weight: 700;
+            color: $--blackColor;
+            width: max-content;
+          }
+
+          .destText {
+            align-items: flex-end;
+            flex-direction: column;
+            .destination {
+              font-size: 16px;
+              font-weight: 700;
+              line-height: 20px;
+            }
+            h6 {
+              line-height: 20px;
+              font-size: 13px;
+              font-weight: 500;
+            }
+          }
+        }
+
+        &:hover {
+          .overplayInfo {
+            opacity: 1;
+            height: 100%;
+            background: linear-gradient(
+              rgba(0, 0, 0, 0.846),
+              rgba(0, 0, 0, 0.759)
+            );
+          }
+
+          img {
+            transform: scale(1.1);
+          }
+        }
+        .bottom {
+          flex-direction: column;
+          padding: 0px 20px 20px 20px;
+          span {
+            color: $--PrimaryColor;
+            font-size: 20px;
+            font-weight: 700;
+          }
+          .bottomLeft {
+            justify-content: space-between;
+            width: 100%;
+            h6 {
+              color: $--blackColor;
+              font-size: 13px;
+              font-weight: 500;
+            }
+          }
+          .btn {
+            margin-top: 10px;
+            color: $--whiteColor;
+            &:hover{
+              background-color: $--HoverColor;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 556px) {
+  .country {
+    .secContainer {
+      .secHeader {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .textDiv {
+          text-align: start;
+          max-width: 70%;
+        }
+
+        .iconsDiv {
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .country {
+    .secContainer {
+      .secHeader {
+        .textDiv {
+          .secTitle {
+            font-size: 2.2rem;
+          }
+          p {
+            font-size: 15px;
+          }
+        }
+      }
+      .mainContent {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        .singleDestination {
+          min-width: 300px;
+        }
+      }
+    }
+  }
+}

@@ -1,46 +1,105 @@
-// PaymentPage.scss
-
-// Define variables for colors and font families
 $primary-color: #003d71;
-$secondary-color: #ff9800;
-
+.title {
+  font-size: 1.8rem;
+  padding-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
 .payment-page {
   max-width: 800px;
   margin: 0 auto;
-  padding: 40px;
+  padding: 40px 20px 20px 20px;
+
+  .tourDetail {
+    margin-bottom: 40px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      .topTable {
+        tr,
+        td {
+          background-color: $--PrimaryColor;
+          height: 50px;
+          border: 1px solid white;
+          text-align: right;
+          padding-right: 10px;
+          color: white;
+        }
+      }
+      .botTable {
+        tr,
+        td {
+          background-color: rgb(241, 200, 78);
+          height: 50px;
+          border: 1px solid white;
+          text-align: right;
+          padding-right: 10px;
+          color: white;
+        }
+      }
+    }
+  }
 
   .payment-form {
     background-color: #fff;
     padding: 40px;
     border-radius: 10px;
     @include boxShadow;
-    gap: 1rem;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    flex-direction: column;
 
-    .optionPayment {
-      //   display: flex;
-      label {
-        color: $primary-color;
-        font-size: 18px;
-        white-space: nowrap;
+    .info {
+      gap: 2.5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-bottom: 20px;
+      .optionPayment {
+        label {
+          color: $primary-color;
+          font-size: 18px;
+          white-space: nowrap;
+        }
+
+        input {
+          width: 100%;
+          padding: 5px;
+          border: none;
+          border-bottom: 2px solid $primary-color;
+          border-radius: 0;
+          font-size: 16px;
+          margin-bottom: 20px;
+
+          &:focus {
+            outline: none;
+            border-color: $--PrimaryColor;
+          }
+        }
       }
-
-      input[type="text"] {
-        width: 100%;
-        padding: 10px;
-        border: none;
-        border-bottom: 2px solid $primary-color;
-        border-radius: 0;
-        font-size: 16px;
-        margin-bottom: 20px;
-
-        &:focus {
-          outline: none;
-          border-color: $secondary-color;
+      .optionSelect {
+        label {
+          display: flex;
+          flex-direction: row;
+          color: $primary-color;
+          font-size: 18px;
+          white-space: nowrap;
+          p {
+            margin-left: 10px;
+          }
+          .icon {
+            margin-left: 5px;
+            margin-top: 2px;
+            width: 20px;
+            height: 20px;
+          }
+          img {
+            width: 40px;
+            height: 20px;
+            margin-top: 2px;
+            margin-left: -1px;
+          }
         }
       }
     }
+
     button[type="submit"] {
       background-color: $primary-color;
       color: #fff;
@@ -55,5 +114,9 @@ $secondary-color: #ff9800;
         background-color: darken($primary-color, 10%);
       }
     }
+  }
+
+  .tourTotalPrice {
+    margin-top: 40px;
   }
 }

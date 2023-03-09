@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { destDesc } from "../../theme/data";
 import { formatCurrency } from "../../theme/functions";
 
@@ -28,7 +29,7 @@ const TourDetail = () => {
           <li>Buffet</li>
         </ul>
         <div className="tour-cta">
-          <a href="#">Book ngay</a>
+          <Link to={"/payment"}>Book ngay</Link>
         </div>
       </div>
     </div>

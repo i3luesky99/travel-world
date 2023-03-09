@@ -10,7 +10,12 @@
       color: $--PrimaryColor;
     }
   }
-
+  #dropdownListID::-webkit-scrollbar {
+    width: 5px;
+  }
+  #dropdownListID::-webkit-scrollbar-track {
+    background: red;
+  }
   .selectDropdown {
     color: $--PrimaryColor;
     padding: 0 0.7rem;
@@ -26,10 +31,13 @@
     top: 100%;
     left: 0;
     width: 100%;
+    max-height: 50px;
+    overflow-y: auto;
     background-color: #fff;
     list-style: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     flex-direction: column;
+
     .link {
       padding: 8px;
       font-size: 0.9rem;
