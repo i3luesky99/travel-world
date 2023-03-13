@@ -72,6 +72,9 @@ $primary-color: #003d71;
             outline: none;
             border-color: $--PrimaryColor;
           }
+          &:hover {
+            border-bottom: 2px solid $--PrimaryColor;
+          }
         }
       }
       .optionSelect {

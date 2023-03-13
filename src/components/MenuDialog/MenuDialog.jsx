@@ -1,35 +1,44 @@
+import { ClickAwayListener } from "@mui/material";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
 function MenuDialog(props) {
-  const { banks, params } = props;
+  const { banks } = props;
   const [isOpen, setIsOpen] = useState(false);
-
+  const [isSelect, setIsSelect] = useState("");
+  const handleOpenMenu = () => {
+    setIsOpen(true);
+  };
+  const handleCloseMenu = () => {
+    setIsOpen(false);
+  };
+  const selectBank = (bank) => {
+    setIsSelect(bank);
+  };
   return (
-    <div className="dropdown">
-      <div
-        onMouseEnter={() => setIsOpen(true)}
-        onMouseLeave={() => setIsOpen(false)}
-      >
-        {banks.name}
-      </div>
-
-      <div onMouseLeave={() => setIsOpen(false)}>
+    <ClickAwayListener onClickAway={handleCloseMenu}>
+      <div className="menu">
+        <div onClick={handleOpenMenu} className="bankDiv">
+          <p>{isSelect}</p>
+        </div>
         {isOpen && (
-          <ul className="dropdown-list flex">
-            {banks.map((banks, index) => (
-              <Link
-                className={params ? "activeLink" : "link"}
-                onMouseEnter={() => setIsOpen(true)}
-                key={`banks-${index}`}
-              >
-                {banks.name}
-              </Link>
+          <ul className="menu-list flex" id="menuListID">
+            {banks.map((bank, index) => (
+              <div className="bank flex">
+                <img src={bank.icon} alt="" className="icon" />
+                <li
+                  className="bankName"
+                  onMouseEnter={() => setIsOpen(true)}
+                  key={`bank-${index}`}
+                  onClick={() => selectBank(bank.name)}
+                >
+                  {bank.name}
+                </li>
+              </div>
             ))}
           </ul>
         )}
       </div>
-    </div>
+    </ClickAwayListener>
   );
 }
 
