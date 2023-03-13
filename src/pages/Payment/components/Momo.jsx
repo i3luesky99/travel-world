@@ -3,28 +3,13 @@ import React from "react";
 export default function Momo(props) {
   const { paymentInfo, handleInputChange } = props;
   return (
-    <>
-      <div className="optionPayment">
-        <label>Số thẻ :</label>
-        <input
-          type="text"
-          name="cardNumber"
-          value={paymentInfo.cardNumber}
-          onChange={handleInputChange}
-        />
+    <div className="momo">
+      <label>Trả qua số điện thoại: 0906624069</label>
+      <div className="QRCode flex">
+        <p>Hoặc</p>
+        <label>Quét mã QR</label>
+        <img src={require("../../../assets/picture/momoQR.jpg")} alt="" />
       </div>
-      <div className="optionPayment">
-        <label htmlFor="cvv">Loại thẻ :</label>
-      </div>
-      <div className="optionPayment">
-        <label>Ngày hết hạn :</label>
-        <input
-          type="text"
-          name="expirationDate"
-          value={paymentInfo.expirationDate}
-          onChange={handleInputChange}
-        />
-      </div>
-    </>
+    </div>
   );
 }

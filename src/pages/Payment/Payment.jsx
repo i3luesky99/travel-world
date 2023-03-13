@@ -66,14 +66,19 @@ function Payment() {
           {selectedOption === "Internet Banking" && (
             <InternetBanking {...props} />
           )}
-          {selectedOption === "Momo" && <Momo {...props} />}
+          {selectedOption === "Tiền mặt" && (
+            <div className="optionPayment">
+              <label>Đi đến cửa hàng để thanh toán trực tiếp</label>
+            </div>
+          )}
+        </div>
+        {selectedOption === "Momo" && <Momo {...props} />}
+        <p className="totalText">Tổng tiền</p>
+        <div className="tourTotalPrice flex">
+          <label>{formatCurrency(total)}</label>
         </div>
         <button type="submit">Thanh toán</button>
       </form>
-
-      <div className="tourTotalPrice">
-        <div>{formatCurrency(total)}</div>
-      </div>
     </div>
   );
 }

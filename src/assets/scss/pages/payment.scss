@@ -46,7 +46,35 @@ $primary-color: #003d71;
     border-radius: 10px;
     @include boxShadow;
     flex-direction: column;
-
+    .totalText {
+      color: $primary-color;
+      font-size: 20px;
+      text-align: right;
+      width: 100%;
+      margin-bottom: -20px;
+     }
+    .momo {
+      .QRCode {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      label {
+        color: $primary-color;
+        font-size: 30px;
+        white-space: nowrap;
+        margin-bottom: 20px;
+      }
+      p {
+        font-size: 20px;
+        color: $--PrimaryColor;
+      }
+      img {
+        width: 400px;
+        height: 480px;
+        margin-bottom: 40px;
+      }
+    }
     .info {
       gap: 2.5rem;
       display: grid;
@@ -121,5 +149,15 @@ $primary-color: #003d71;
 
   .tourTotalPrice {
     margin-top: 40px;
+    width: 100%;
+    justify-content: flex-end;
+    margin-bottom: 35px;
+    border-top: 2px solid $primary-color;
+    padding-top: 20px;
+    border-style: dashed none none none;
+    label {
+      font-size: 30px;
+      color: $--PrimaryColor;
+    }
   }
 }
