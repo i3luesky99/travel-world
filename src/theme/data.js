@@ -260,7 +260,19 @@ Buổi sáng: Sau khi ăn sáng, quý khách sẽ được đưa đến sân bay
 
 Tour du lịch Đà Lạt sẽ là một trải nghiệm đáng nhớ, giúp quý khách khám phá vẻ đẹp thiên nhiên và văn hóa độc đáo của vùng đất cao nguyên này. Nếu bạn muốn trải nghiệm một chuyến du lịch khác biệt và đầy ý nghĩa, hãy tham gia tour du lịch Đà Lạt.`;
 
+const intro = `
+Levart - trang web du lịch hàng đầu để khám phá những điểm đến tuyệt vời trên khắp thế giới!
+
+Levart - một tên gọi ngược của travel - là một nơi để bạn có thể tìm kiếm và đặt tour du lịch trọn gói đến những địa điểm hấp dẫn nhất trên thế giới. Tại Levart, chúng tôi cam kết mang đến cho bạn những trải nghiệm du lịch đáng nhớ nhất với các tour đa dạng, phong phú và độc đáo.
+
+Với đội ngũ hướng dẫn viên chuyên nghiệp và giàu kinh nghiệm, Levart sẽ giúp bạn khám phá những điểm đến mới lạ và tuyệt vời nhất trên thế giới. Từ những bãi biển đẹp nhất ở châu Á, đến những cánh đồng hoa mênh mang ở châu Âu, Levart sẽ đưa bạn đến những nơi mà bạn chỉ có thể mơ ước.
+
+Ngoài ra, chúng tôi còn cung cấp các dịch vụ đặc biệt như tour du lịch thực tế ảo, đi bộ đường dài, leo núi, du thuyền, du lịch công nghệ và nhiều hơn nữa. Tất cả các tour du lịch của chúng tôi đều được thiết kế để đáp ứng mọi nhu cầu của bạn, từ khám phá đến thư giãn.
+
+Hãy đến với Levart để khám phá thế giới và tạo ra những kỷ niệm đáng nhớ trong cuộc đời của bạn. Chúng tôi sẽ mang đến cho bạn những trải nghiệm du lịch tuyệt vời nhất. Cảm ơn bạn đã ghé thăm Levart!`;
+
 export {
+  intro,
   destinationSouthern,
   destinationCentral,
   destinationNorth,

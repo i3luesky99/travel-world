@@ -1,7 +1,6 @@
 import React from "react";
 
-export default function Momo(props) {
-  const { paymentInfo, handleInputChange } = props;
+export default function Momo() {
   return (
     <div className="momo">
       <label>Trả qua số điện thoại: 0906624069</label>

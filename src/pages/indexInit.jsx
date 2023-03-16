@@ -6,4 +6,4 @@ export { default as TourDetail } from "./TourDetail/index";
 export { default as TourCountry } from "./TourCountry/index";
 export { default as TourForeign } from "./TourForeign/index";
 export { default as Payment } from "./Payment/Payment";
-export { default as Contact } from "./Contact/Contact";
+export { default as Introduce } from "./Introduce/Introduce";

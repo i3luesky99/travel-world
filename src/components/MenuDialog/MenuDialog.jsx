@@ -23,7 +23,7 @@ function MenuDialog(props) {
         {isOpen && (
           <ul className="menu-list flex" id="menuListID">
             {banks.map((bank, index) => (
-              <div className="bank flex">
+              <div className="bank flex" key={`${index} - bank`}>
                 <img src={bank.icon} alt="" className="icon" />
                 <li
                   className="bankName"

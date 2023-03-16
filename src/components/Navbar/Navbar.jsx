@@ -61,13 +61,12 @@ export default function Navbar() {
             <DropList tour={tours[1]} params={params} />
             <li className="navItem">
               <Link
-                to="/contact"
-                className={params === "/contact" ? "onSelected" : "navLink"}
+                to="/introduce"
+                className={params === "/introduce" ? "onSelected" : "navLink"}
               >
-                Liên hệ
+                Giới thiệu
               </Link>
             </li>
-
             <div className="headerBtn flex">
               <button className="btn loginBtn">
                 <Link className="link" to="/login">

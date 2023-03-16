@@ -28,39 +28,39 @@ export default function Footer() {
         </div>
 
         <div className="footerLinks">
-          <span className="linkTitle">Information</span>
+          <span className="linkTitle">Thông tin</span>
           <li>
-            <a href="#">Home</a>
+            <a href="/">Trang chủ</a>
           </li>
           <li>
-            <a href="#">Explore</a>
+            <a href="/tour-country">Trong nước</a>
           </li>
           <li>
-            <a href="#">Travel</a>
+            <a href="/tour-foreign">Ngoài nước</a>
           </li>
           <li>
-            <a href="#">Blog</a>
-          </li>
-        </div>
-
-        <div className="footerLinks">
-          <span className="linkTitle">Helpful links</span>
-          <li>
-            <a href="#">Destination</a>
-          </li>
-          <li>
-            <a href="#">Support</a>
-          </li>
-          <li>
-            <a href="#">Travel & Conditions</a>
-          </li>
-          <li>
-            <a href="#">Privacy</a>
+            <a href="/">Giới thiệu</a>
           </li>
         </div>
 
         <div className="footerLinks">
-          <span className="linkTitle">Contact</span>
+          <span className="linkTitle">Các liên kết</span>
+          <li>
+            <a href="/">Địa điểm</a>
+          </li>
+          <li>
+            <a href="/">Support</a>
+          </li>
+          <li>
+            <a href="/">Khám phá</a>
+          </li>
+          <li>
+            <a href="/">Chính sách</a>
+          </li>
+        </div>
+
+        <div className="footerLinks">
+          <span className="linkTitle">Liên hệ</span>
           <span className="phone">0906 624 069</span>
           <span className="email">nghieu18101999@gmail.com</span>
         </div>

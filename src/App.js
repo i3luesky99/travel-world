@@ -8,7 +8,7 @@ import {
   TourForeign,
   TourDetail,
   Payment,
-  Contact,
+  Introduce,
 } from "./pages/indexInit";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { Footer } from "./components";
@@ -56,7 +56,7 @@ function App() {
           />
           <Route path="/payment" element={<Payment />} />
           <Route path="/blog" element={<Blog />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/introduce" element={<Introduce />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
