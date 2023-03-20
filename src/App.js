@@ -3,7 +3,7 @@ import {
   Home,
   Login,
   Register,
-  Blog,
+  BlogPage,
   TourCountry,
   TourForeign,
   TourDetail,
@@ -11,7 +11,7 @@ import {
   Introduce,
 } from "./pages/indexInit";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
-import { Footer } from "./components";
+import { Footer, ScrollToTop } from "./components";
 import HomeBase from "./pages/Home/components/HomeBase";
 import {
   TourCentral,
@@ -26,6 +26,7 @@ import {
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route
           element={
@@ -55,7 +56,7 @@ function App() {
             element={<TourDetail />}
           />
           <Route path="/payment" element={<Payment />} />
-          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog" element={<BlogPage />} />
           <Route path="/introduce" element={<Introduce />} />
         </Route>
         <Route path="/login" element={<Login />} />

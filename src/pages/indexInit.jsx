@@ -1,9 +1,9 @@
-export { default as Home } from "./Home/index";
-export { default as Login } from "./Login/index";
-export { default as Register } from "./Register/index";
-export { default as Blog } from "./BlogPage/index";
-export { default as TourDetail } from "./TourDetail/index";
-export { default as TourCountry } from "./TourCountry/index";
-export { default as TourForeign } from "./TourForeign/index";
+export { default as Home } from "./Home/Home";
+export { default as Login } from "./Login/Login";
+export { default as Register } from "./Register/Register";
+export { default as BlogPage } from "./BlogPage/BlogPage";
+export { default as TourDetail } from "./TourDetail/TourDetail";
+export { default as TourCountry } from "./TourCountry/TourCountry";
+export { default as TourForeign } from "./TourForeign/TourForeign";
 export { default as Payment } from "./Payment/Payment";
 export { default as Introduce } from "./Introduce/Introduce";

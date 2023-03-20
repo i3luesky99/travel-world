@@ -1,7 +1,6 @@
 import React from "react";
 import { About, Blog, Hotels } from "../../components/index";
-import TourCountry from "../TourCountry";
-import TourForeign from "../TourForeign";
+import { TourCountry, TourForeign } from "../indexInit";
 export default function Home(props) {
   return (
     <>
