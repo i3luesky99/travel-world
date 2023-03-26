@@ -7,3 +7,4 @@ export { default as TourCountry } from "./TourCountry/TourCountry";
 export { default as TourForeign } from "./TourForeign/TourForeign";
 export { default as Payment } from "./Payment/Payment";
 export { default as Introduce } from "./Introduce/Introduce";
+export { default as Admin } from "./Admin/Admin";

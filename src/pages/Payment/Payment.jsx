@@ -5,6 +5,7 @@ import GuestContact from "./components/GuestContact";
 import PaymentMethod from "./components/PaymentMethod";
 import Momo from "./components/Momo";
 import TourPriceDetail from "./components/TourPriceDetail";
+import { useLocation } from "react-router-dom";
 
 function Payment() {
   const [paymentInfo, setPaymentInfo] = useState({
@@ -15,7 +16,7 @@ function Payment() {
     expirationDate: "",
     cvv: "",
   });
-
+  const { state } = useLocation();
   const [selectedOption, setSelectedOption] = useState("Tiền mặt");
   const [adult, setAdult] = useState(1);
   const [kids, setKids] = useState(0);

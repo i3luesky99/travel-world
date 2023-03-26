@@ -9,6 +9,7 @@ import {
   TourDetail,
   Payment,
   Introduce,
+  Admin,
 } from "./pages/indexInit";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { Footer, ScrollToTop } from "./components";
@@ -61,6 +62,7 @@ function App() {
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );

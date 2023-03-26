@@ -29,7 +29,7 @@ const TourDetail = () => {
           <li>Buffet</li>
         </ul>
         <div className="tour-cta">
-          <Link to={"/payment"}>Book ngay</Link>
+          <Link to={"/payment"} state={{text:'hello'}}>Book ngay</Link>
         </div>
       </div>
     </div>
