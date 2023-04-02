@@ -1,55 +1,80 @@
 import React, { useState } from "react";
-
-function UserForm() {
+import { handleCreateUserApi } from "../../../services/userService";
+function UserForm(props) {
+  const { email } = props;
   const [userForm, setUserForm] = useState({
-    name: "",
-    phone: "",
-    address: "",
-    password: "",
-    confirmPassword: "",
+    email: email,
+    fullName: '',
+    phone: '',
+    address: '',
+    password: '',
+    confirmPassword: '',
+    roleId: 'R2'
   });
   const [warning, setWarning] = useState(false);
   const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
   const str = "0906624069";
   const handleClear = () => {
     setUserForm({
-      name: "",
-      phone: "",
-      address: "",
-      password: "",
-      confirmPassword: "",
+
+      fullName: '',
+      phone: '',
+      address: '',
+      password: '',
+      confirmPassword: '',
     });
   };
-
+  // let data = await handleCreateUserApi(userForm);
   const handleChangeInput = (inputName, inputValue) => {
     setUserForm((state) => ({
       ...state,
       [inputName]: inputValue,
     }));
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  };
+  const handleCreateUser = async () => {
     for (const [key, value] of Object.entries(userForm)) {
       if (value === "" && key !== "address") {
+
         setWarning(true);
         return;
       }
     }
-    setWarning(false);
-    window.location.replace("/");
+
+    await handleCreateUserApi(userForm);
+
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+
+      for (const [key, value] of Object.entries(userForm)) {
+        if (value === "" && key !== "address") {
+
+          setWarning(true);
+          return;
+        }
+      }
+      setWarning(false);
+      //window.location.replace("/");
+    } catch (error) {
+
+      console.log(error)
+    }
+
   };
 
+  //
   return (
     <form className="registerForm" onSubmit={handleSubmit}>
       <span className="registerTitle">Thông tin</span>
       <label>Họ và tên</label>
       <input
-        value={userForm.name}
+        value={userForm.fullName}
         type="text"
         className="registerInput"
         placeholder="Ví dụ: Nguyễn Văn A"
-        onChange={(e) => handleChangeInput("name", e.target.value)}
+        onChange={(e) => handleChangeInput("fullName", e.target.value)}
         style={{
           borderColor: userForm.name === "" && warning ? "red" : "black",
         }}
@@ -99,7 +124,7 @@ function UserForm() {
       />
 
       <div className="bottom">
-        <button className="btn registerButton" type="submit">
+        <button className="btn registerButton" onClick={handleCreateUser}>
           Tiếp tục
         </button>
         <button className="btn registerLoginButton" onClick={handleClear}>
