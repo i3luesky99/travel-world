@@ -23,16 +23,18 @@ function Sidebar() {
     <div className="sidebar">
       <div className="logo">
         <Link to={"/admin"}>
-          <p className="textLogo">LEVART</p>
+          <p>LEVART</p>
         </Link>
       </div>
       <div className="base-menu">
         {adminPanel.map((panel, index) => (
           <div key={`${index}-panel`}>
-            <div>{panel.message}</div>
+            <div className="title-menu">{panel.message}</div>
             <div>
               {panel?.children?.map((child, index) => (
-                <div key={`${index}-child`}>{child.message}</div>
+                <div className="child-menu" key={`${index}-child`}>
+                  {child.message}
+                </div>
               ))}
             </div>
           </div>
