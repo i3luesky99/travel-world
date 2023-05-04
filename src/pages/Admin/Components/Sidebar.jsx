@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 function Sidebar() {
@@ -23,30 +23,21 @@ function Sidebar() {
     },
     {
       message: "Khách hàng",
-      link: "/admin/clients",
+      // link: "/admin/clients",
       iconPath: require("../../../assets/picture/icon/person.png"),
-      children: [
-        // { message: "Tạo tour", to: "/admin/tour/create", iconPath: "" },
-        // { message: "Xóa tour", to: "/admin/delete", iconPath: "" },
-      ],
+      children: [],
     },
     {
       message: "Cài đặt",
-      link: "/admin/setting",
+      // link: "/admin/setting",
       iconPath: require("../../../assets/picture/icon/setting.png"),
-      children: [
-        // { message: "Tạo tour", to: "/admin/tour/create", iconPath: "" },
-        // { message: "Xóa tour", to: "/admin/delete", iconPath: "" },
-      ],
+      children: [],
     },
     {
       message: "Thống kê",
-      link: "/admin/chart",
+      // link: "/admin/chart",
       iconPath: require("../../../assets/picture/icon/chart.png"),
-      children: [
-        // { message: "Tạo tour", to: "/admin/tour/create", iconPath: "" },
-        // { message: "Xóa tour", to: "/admin/delete", iconPath: "" },
-      ],
+      children: [],
     },
   ];
 
@@ -60,25 +51,26 @@ function Sidebar() {
       <div className="base-menu">
         {adminPanel.map((panel, index) => (
           <div key={`${index}-panel`} className="title-menu">
-            <div
+            <Link
+              to={panel.link}
               className={
                 params === panel.link
                   ? "title-message active-link"
                   : "title-message"
               }
-              style={{ marginTop: index === 0 && "30px" }}
+              style={{ marginTop: index === 0 && "10px" }}
             >
               <img src={panel.iconPath} alt="" className="icon" />
-              <Link to={panel.link}>{panel.message}</Link>
-            </div>
-            <div>
+              <div>{panel.message}</div>
+            </Link>
+            {/* <div>
               {panel?.children?.map((child, index) => (
                 <div className="children-message" key={`${index}-child`}>
                   <img src={child.iconPath} alt="" className="icon" />
                   <div>{child.message}</div>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
         ))}
       </div>

@@ -1,7 +1,7 @@
 .menu {
   border-bottom: 2px solid #003d71;
   &:hover {
-    border-bottom: 2px solid $--PrimaryColor;
+    border-bottom: 2px solid $primary-color;
   }
   position: relative;
   .bankDiv {
@@ -44,7 +44,7 @@
       width: 100%;
       color: #003d71;
       &:hover {
-        background-color: $--PrimaryColor;
+        background-color: $primary-color;
         color: $--whiteColor;
       }
       .bankName {

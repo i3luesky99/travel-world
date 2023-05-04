@@ -42,7 +42,7 @@
           padding: 1rem 0;
 
           .onSelected {
-            color: $--PrimaryColor;
+            color: $primary-color;
             font-size: 0.9rem;
             font-weight: 600;
           }
@@ -52,7 +52,7 @@
             font-size: 0.9rem;
             font-weight: 600;
             &:hover {
-              color: $--PrimaryColor;
+              color: $primary-color;
             }
           }
         }
@@ -69,9 +69,9 @@
           }
           .loginBtn {
             background: none;
-            border: 1px solid $--PrimaryColor;
+            border: 1px solid $primary-color;
             a {
-              color: $--PrimaryColor;
+              color: $primary-color;
             }
             &:hover {
               background: $--HoverColor;
@@ -86,7 +86,7 @@
         position: absolute;
         top: 1rem;
         right: 1.5rem;
-        color: $--PrimaryColor;
+        color: $primary-color;
         &:hover .icon {
           color: $--HoverColor;
         }
@@ -101,7 +101,7 @@
       font-size: 25px;
       color: $--whiteColor;
       &:hover {
-        color: $--PrimaryColor;
+        color: $primary-color;
       }
     }
   }
@@ -124,7 +124,7 @@
 
           .navItem {
             .onSelected {
-              color: $--PrimaryColor;
+              color: $primary-color;
               padding: 0 0.45rem;
               font-size: 0.9rem;
               font-weight: 400;
@@ -139,7 +139,7 @@
               font-size: 0.9rem;
               font-weight: 400;
               &:hover {
-                color: $--PrimaryColor;
+                color: $primary-color;
               }
             }
           }
@@ -155,9 +155,9 @@
 
           .loginBtn {
             background: none;
-            border: 1px solid $--PrimaryColor;
+            border: 1px solid $primary-color;
             &:hover {
-              background: $--PrimaryColor;
+              background: $primary-color;
               a {
                 color: $--whiteColor;
               }
