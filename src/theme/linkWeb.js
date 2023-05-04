@@ -1,4 +1,4 @@
-import TourAdmin from "../pages/Admin/pages/TourAdmin";
+import TourAdmin from "../pages/Admin/pages/Tour/TourAdmin";
 import {
   TourCentral,
   TourNorth,
@@ -87,7 +87,7 @@ export const adminWeb = [
     component: <Admin />,
   },
   {
-    link: "/admin/tour",
+    link: "/admin/tours",
     component: <TourAdmin />,
   },
 ];

@@ -1,10 +1,9 @@
 import "./assets/scss/index.scss";
-import { Login, Register, Admin } from "./pages/indexInit";
+import { Login, Register } from "./pages/indexInit";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { Footer, ScrollToTop } from "./components";
 import HomeBase from "./pages/Home/components/HomeBase";
-import { clientWeb } from "./theme/linkWeb";
-import TourAdmin from "./pages/Admin/pages/TourAdmin";
+import { adminWeb, clientWeb } from "./theme/linkWeb";
 import DashboardAdmin from "./pages/Admin/Components/DashboardAdmin";
 import store from "./redux/store";
 import { Provider } from "react-redux";
@@ -41,8 +40,13 @@ function App() {
               </>
             }
           >
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/admin/tour" element={<TourAdmin />} />
+            {adminWeb.map((web, index) => (
+              <Route
+                key={`${index}-admin`}
+                path={web.link}
+                element={web.component}
+              />
+            ))}
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

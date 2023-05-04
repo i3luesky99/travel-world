@@ -11,13 +11,18 @@ function Sidebar() {
     },
     {
       message: "Tour",
-      link: "/admin/tour",
+      link: "/admin/tours",
       iconPath: require("../../../assets/picture/icon/note.png"),
       children: [
         {
-          message: "Tạo tour mới",
-          to: "/admin/tour/create",
-          iconPath: require("../../../assets/picture/icon/pencil.png"),
+          message: "Danh sách tour",
+          link: "/admin/tours",
+          iconPath: require("../../../assets/picture/icon/list.png"),
+        },
+        {
+          message: "Thêm tour",
+          link: "/admin/tours",
+          iconPath: require("../../../assets/picture/icon/plus.png"),
         },
       ],
     },
@@ -53,24 +58,28 @@ function Sidebar() {
           <div key={`${index}-panel`} className="title-menu">
             <Link
               to={panel.link}
-              className={
-                params === panel.link
-                  ? "title-message active-link"
-                  : "title-message"
-              }
+              className={"title-message"}
               style={{ marginTop: index === 0 && "10px" }}
             >
               <img src={panel.iconPath} alt="" className="icon" />
               <div>{panel.message}</div>
             </Link>
-            {/* <div>
+            <div>
               {panel?.children?.map((child, index) => (
-                <div className="children-message" key={`${index}-child`}>
+                <Link
+                  to={child.link}
+                  className={
+                    params === panel.link
+                      ? "children-message"
+                      : "children-message active-link"
+                  }
+                  key={`${index}-child`}
+                >
                   <img src={child.iconPath} alt="" className="icon" />
                   <div>{child.message}</div>
-                </div>
+                </Link>
               ))}
-            </div> */}
+            </div>
           </div>
         ))}
       </div>

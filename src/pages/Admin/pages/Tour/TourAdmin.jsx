@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import BaseTable from "../Components/BaseTable";
+import BaseTable from "../../Components/BaseTable";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 export default function TourAdmin() {
   const [name, setName] = useState("");
@@ -7,6 +9,7 @@ export default function TourAdmin() {
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [page, setPage] = useState(1);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,6 +24,11 @@ export default function TourAdmin() {
     setPrice("");
     setImage("");
   };
+
+  const onPageChange = (e, value) => {
+    setPage(value);
+  };
+
   return (
     <div className="tour-admin">
       <div className="title-admin">Quản lý Tour</div>
@@ -37,6 +45,15 @@ export default function TourAdmin() {
         </div>
       </div>
       <BaseTable />
+      <Stack className="stack">
+        <Pagination
+          count={10}
+          page={page}
+          variant="outlined"
+          color="primary"
+          onChange={onPageChange}
+        />
+      </Stack>
     </div>
   );
 }
