@@ -54,7 +54,7 @@ function Sidebar() {
     <div className="sidebar">
       <div className="logo">
         <Link to={"/admin"}>
-          <p className="textLogo">LEVART</p>
+          <p>LEVART</p>
         </Link>
       </div>
       <div className="base-menu">

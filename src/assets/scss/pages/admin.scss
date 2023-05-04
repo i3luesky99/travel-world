@@ -1,10 +1,15 @@
 .admin {
+  display: flex;
   .sidebar {
     width: 250px;
+    width: 250px;
     height: 100vh;
+
     .logo {
       height: 120px;
       background-color: #4b1f11;
+      height: 100px;
+      background-color: #5b382d;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -21,6 +26,33 @@
         background-clip: text;
         -webkit-text-fill-color: transparent;
       }
+    }
+    .base-menu {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+      .title-menu {
+        height: 40px;
+      }
+      .child-menu {
+        height: 40px;
+      }
+    }
+  }
+  .content {
+    height: 100vh;
+    width: calc(100% - 250px);
+    .header {
+      height: 72px;
+    }
+    .layout {
+      box-shadow: inset 11px 0 9px -7px rgb(0 0 0 / 10%),
+        inset 0px 11px 9px -7px rgb(0 0 0 / 10%);
+      height: calc(100vh - 72px);
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      padding-top: 35px;
+      padding-bottom: 35px;
+      background-color: #f8f8ff;
     }
     .base-menu {
       width: 100%;
