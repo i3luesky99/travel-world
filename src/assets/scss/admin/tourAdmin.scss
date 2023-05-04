@@ -1,0 +1,14 @@
+.tour-admin {
+  .search {
+    margin-top: 20px;
+    color: $grey1;
+    .search-bar {
+      display: flex;
+      margin-top: 15px;
+      .button {
+        width: 100px;
+        margin-left: 15px;
+      }
+    }
+  }
+}

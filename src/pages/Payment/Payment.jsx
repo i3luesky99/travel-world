@@ -16,7 +16,6 @@ function Payment() {
     expirationDate: "",
     cvv: "",
   });
-  const { state } = useLocation();
   const [selectedOption, setSelectedOption] = useState("Tiền mặt");
   const [adult, setAdult] = useState(1);
   const [kids, setKids] = useState(0);
@@ -38,7 +37,6 @@ function Payment() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("123123");
     // Here you can implement your payment logic using the paymentInfo state
   };
   const props = {

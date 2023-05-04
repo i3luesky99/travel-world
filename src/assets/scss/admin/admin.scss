@@ -25,7 +25,7 @@
     }
     .base-menu {
       a {
-        color: $primary-color;
+        color: #f67009;
       }
       width: 100%;
       .title-menu {
@@ -68,11 +68,10 @@
     width: calc(100% - 250px);
     .header {
       height: 72px;
-      // background-color: red;
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      color: $primary-color;
+      color: #f67009;
       cursor: pointer;
       &:hover {
         opacity: 0.5;
@@ -96,21 +95,11 @@
 
       .main-content {
         background-color: white;
-        // min-height: 300px;
         padding: 30px;
         border-radius: 10px;
         .title-admin {
           font-size: 20px;
-        }
-        .tour-admin {
-          .search {
-            margin-top: 20px;
-            color: $grey1;
-
-            .button {
-              width: 100px;
-            }
-          }
+          font-weight: 600;
         }
       }
     }

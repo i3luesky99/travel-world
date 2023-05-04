@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BaseTable from "../Components/BaseTable";
 
 export default function TourAdmin() {
   const [name, setName] = useState("");
@@ -25,7 +26,7 @@ export default function TourAdmin() {
       <div className="title-admin">Quản lý Tour</div>
       <div className="search">
         <div>Tên Tour / Mã Tour</div>
-        <div>
+        <div className="search-bar">
           <input
             type="text"
             value={searchTerm}
@@ -35,6 +36,7 @@ export default function TourAdmin() {
           <div className="button">Tìm kiếm</div>
         </div>
       </div>
+      <BaseTable />
     </div>
   );
 }
