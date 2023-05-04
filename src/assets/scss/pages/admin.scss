@@ -1,9 +1,9 @@
 .admin {
   .sidebar {
-    width: 200px;
+    width: 250px;
     height: 100vh;
     .logo {
-      height: 100px;
+      height: 120px;
       background-color: #4b1f11;
       display: flex;
       justify-content: center;
@@ -22,5 +22,45 @@
         -webkit-text-fill-color: transparent;
       }
     }
+    .base-menu {
+      width: 100%;
+      .title-menu {
+        width: 100%;
+        margin-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        .title-message {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          height: 40px;
+          border-radius: 8px;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.5;
+            background-color: #e0eaf7;
+          }
+          a {
+            color: $--PrimaryColor;
+          }
+        }
+        .icon {
+          height: 20px;
+          width: 20px;
+          margin-right: 10px;
+          margin-left: 10px;
+        }
+        .children-message {
+          height: 50px;
+          padding-left: 15px;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  .active-link {
+    background-color: #e0eaf7;
   }
 }
