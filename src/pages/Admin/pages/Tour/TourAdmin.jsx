@@ -2,58 +2,90 @@ import React, { useState } from "react";
 import BaseTable from "../../Components/BaseTable";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import { destinationSouthern } from "../../../../theme/data";
+import useModel from "../../../../hook/useModel";
+import Loading from "../../../../components/Loading/Loading";
 
 export default function TourAdmin() {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [image, setImage] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchItem, setSearchItem] = useState("");
   const [page, setPage] = useState(1);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Lưu trữ thông tin tour vào cơ sở dữ liệu
-    const newTour = { name, description, price, image };
-    // Các thao tác lưu trữ vào cơ sở dữ liệu ở đây
-
-    // Xóa form sau khi hoàn tất
-    setName("");
-    setDescription("");
-    setPrice("");
-    setImage("");
-  };
+  const [tours, setTours] = useState(destinationSouthern);
+  const { isOpen: isLoading, openModel: setIsLoading } = useModel(false);
 
   const onPageChange = (e, value) => {
     setPage(value);
   };
 
+  const onFindTour = () => {
+    if (searchItem) {
+      const tourById = destinationSouthern.filter((tour) => {
+        return (
+          tour.location.toLowerCase().includes(searchItem.toLowerCase()) ||
+          tour.id.toString() === searchItem
+        );
+      });
+      fetchTour(tourById);
+    } else {
+      fetchTour();
+    }
+  };
+
+  const fetchTour = (newTour) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      setSearchItem("");
+      setTours(newTour || destinationSouthern);
+    }, 2000);
+  };
+
+  const props = {
+    tours: tours,
+    setTours: setTours,
+  };
+
   return (
     <div className="tour-admin">
-      <div className="title-admin">Quản lý Tour</div>
+      <div className="title-admin">Danh sách Tour</div>
       <div className="search">
-        <div>Tên Tour / Mã Tour</div>
+        <div>Địa điểm / Mã Tour</div>
         <div className="search-bar">
           <input
             type="text"
-            value={searchTerm}
+            value={searchItem}
             className="form-control"
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => setSearchItem(e.target.value)}
           />
-          <div className="button">Tìm kiếm</div>
+          <div className="button" onClick={onFindTour}>
+            Tìm kiếm
+          </div>
+          <div className="reload-button" onClick={() => fetchTour()}>
+            <img
+              src={require("../../../../assets/picture/icon/reload.png")}
+              alt=""
+              className="icon"
+            />
+          </div>
         </div>
       </div>
-      <BaseTable />
-      <Stack className="stack">
-        <Pagination
-          count={10}
-          page={page}
-          variant="outlined"
-          color="primary"
-          onChange={onPageChange}
-        />
-      </Stack>
+      {tours.length > 0 ? (
+        <>
+          <BaseTable {...props} />
+          <Stack className="stack">
+            <Pagination
+              count={10}
+              page={page}
+              variant="outlined"
+              color="primary"
+              onChange={onPageChange}
+            />
+          </Stack>
+        </>
+      ) : (
+        <div className="empty-text">Không có tour nào</div>
+      )}
+
+      {isLoading && <Loading />}
     </div>
   );
 }

@@ -10,7 +10,7 @@ const tourCountry = {
             require("../assets/picture/pic2.jpg"),
           ],
           title: "Tour du lịch Đà Nẵng ",
-          location: "Đà Nẵng",
+          location: "Hà Nội",
           totalDays: 3,
           dateGo: "22/03/2023",
           slots: 10,

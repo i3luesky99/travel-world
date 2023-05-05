@@ -3,14 +3,14 @@ import { useCallback } from "react";
 import { useEffect } from "react";
 import { Popup } from "../../../components";
 import Loading from "../../../components/Loading/Loading";
-import { destinationSouthern } from "../../../theme/data";
 import { formatCurrency } from "../../../theme/functions";
 import "../../../assets/scss/components/loading.scss";
-export default function BaseTable() {
+import useModel from "../../../hook/useModel";
+export default function BaseTable(props) {
   const headerTable = {
     delete: "",
     id: "Mã tour",
-    title: "Tên tour",
+    location: "Địa điểm",
     img: "Bộ sưu tập",
     dateGo: "Ngày đi",
     dateBack: "Ngày về",
@@ -20,8 +20,8 @@ export default function BaseTable() {
   const [isAccept, setIsAccept] = useState(false);
   const [selectedId, setSelectedId] = useState();
   const headerArr = Object.values(headerTable);
-  const [isLoading, setIsLoading] = useState(false);
-  const [tours, setTours] = useState(destinationSouthern);
+  const { isOpen: isLoading, openModel: setIsLoading } = useModel(false);
+  const { tours, setTours } = props;
   const handleOpenDialog = (id) => {
     setSelectedId(id);
     setOpen(true);
@@ -32,19 +32,19 @@ export default function BaseTable() {
       const deleteTour = tours.filter((tour) => {
         return tour.id !== selectedId;
       });
-      setTours(deleteTour);
-      setIsAccept(false);
+      setTimeout(() => {
+        setIsLoading(false);
+        setTours(deleteTour);
+        setIsAccept(false);
+      }, 2000);
     }
-  }, [selectedId, tours, isAccept]);
+  }, [selectedId, tours, setTours, isAccept, setIsLoading]);
 
   useEffect(() => {
     handleDeleteTour();
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  }, [handleDeleteTour]);
+  }, [handleDeleteTour, setIsLoading]);
 
-  const props = {
+  const propsPopup = {
     open: open,
     setOpen: setOpen,
     isDelete: isAccept,
@@ -73,7 +73,7 @@ export default function BaseTable() {
                 />
               </td>
               <td>{destination?.id}</td>
-              <td>{destination?.title}</td>
+              <td>{destination?.location}</td>
               <td>
                 <img className="collection" src={destination?.img[0]} alt="" />
               </td>
@@ -84,7 +84,7 @@ export default function BaseTable() {
           ))}
         </tbody>
       </table>
-      <Popup {...props} />
+      <Popup {...propsPopup} />
       {isLoading && <Loading />}
     </div>
   );

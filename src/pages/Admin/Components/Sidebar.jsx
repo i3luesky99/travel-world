@@ -8,6 +8,13 @@ function Sidebar() {
       message: "Admin",
       link: "/admin",
       iconPath: require("../../../assets/picture/icon/home.png"),
+      children: [
+        {
+          message: "Trang chủ",
+          link: "/admin",
+          iconPath: require("../../../assets/picture/icon/list.png"),
+        },
+      ],
     },
     {
       message: "Tour",
@@ -21,7 +28,7 @@ function Sidebar() {
         },
         {
           message: "Thêm tour",
-          link: "/admin/tours",
+          link: "/admin/tour/create",
           iconPath: require("../../../assets/picture/icon/plus.png"),
         },
       ],
@@ -69,9 +76,9 @@ function Sidebar() {
                 <Link
                   to={child.link}
                   className={
-                    params === panel.link
-                      ? "children-message"
-                      : "children-message active-link"
+                    params === child.link
+                      ? "children-message active-link"
+                      : "children-message"
                   }
                   key={`${index}-child`}
                 >
