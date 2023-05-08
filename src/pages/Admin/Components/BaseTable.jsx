@@ -15,6 +15,8 @@ export default function BaseTable(props) {
     dateGo: "Ngày đi",
     dateBack: "Ngày về",
     price: "Giá gốc",
+    person: "Số lượng người lớn",
+    children: "Số lượng người trẻ em",
   };
   const [open, setOpen] = useState(false);
   const [isAccept, setIsAccept] = useState(false);
