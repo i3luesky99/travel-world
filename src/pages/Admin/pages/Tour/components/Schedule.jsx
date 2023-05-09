@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Schedule(props) {
-  const { days, setDays } = props;
+  const { dayDetail, setDayDetail } = props;
   const handleAddDay = () => {
-    setDays([
-      ...days,
+    setDayDetail([
+      ...dayDetail,
       {
         title: "",
         schedule: "",
@@ -13,27 +13,27 @@ function Schedule(props) {
   };
 
   const handleDeleteDay = () => {
-    const newDays = days.slice(0, -1);
-    setDays(newDays);
+    const newDays = dayDetail.slice(0, -1);
+    setDayDetail(newDays);
   };
 
   const handleScheduleChangeSchedule = (index, e) => {
-    const newDays = [...days];
+    const newDays = [...dayDetail];
     newDays[index].schedule = e.target.value;
-    setDays(newDays);
+    setDayDetail(newDays);
   };
 
   const handleScheduleChangeTitle = (index, e) => {
-    const newDays = [...days];
+    const newDays = [...dayDetail];
     newDays[index].title = e.target.value;
-    setDays(newDays);
+    setDayDetail(newDays);
   };
 
   return (
-    <div>
+    <div className="border">
       <label>Lịch trình :</label>
-      {days?.map((day, index) => (
-        <div className="days" key={`${index}-days`}>
+      {dayDetail?.map((day, index) => (
+        <div className="dayDetail" key={`${index}-dayDetail`}>
           <div className="day">
             <p>Ngày {index + 1} : </p>
             <input
@@ -56,16 +56,20 @@ function Schedule(props) {
           <div className="line" />
         </div>
       ))}
-      {days.length === 0 ? (
-        <div className="bottom" onClick={handleAddDay}>
+      {dayDetail.length === 0 ? (
+        <div
+          className="bottom"
+          style={{ marginBottom: "15px" }}
+          onClick={handleAddDay}
+        >
           <div className="button">Tạo lịch trình</div>
         </div>
       ) : (
-        <div className="bottom">
+        <div className="bottom" style={{ marginBottom: "15px" }}>
           <div className="button" onClick={handleAddDay}>
             Thêm ngày
           </div>
-          {days.length > 1 && (
+          {dayDetail.length > 1 && (
             <div
               className="button"
               onClick={handleDeleteDay}

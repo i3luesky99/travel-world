@@ -15,8 +15,8 @@ export default function BaseTable(props) {
     dateGo: "Ngày đi",
     dateBack: "Ngày về",
     price: "Giá gốc",
-    person: "Số lượng người lớn",
-    children: "Số lượng người trẻ em",
+    // person: "Số lượng người lớn",
+    // children: "Số lượng người trẻ em",
   };
   const [open, setOpen] = useState(false);
   const [isAccept, setIsAccept] = useState(false);
@@ -42,6 +42,10 @@ export default function BaseTable(props) {
     }
   }, [selectedId, tours, setTours, isAccept, setIsLoading]);
 
+  const handleToTouDetail = (id) => {
+    window.location.replace(`/admin/tour-detail/${id}`);
+  };
+
   useEffect(() => {
     handleDeleteTour();
   }, [handleDeleteTour, setIsLoading]);
@@ -65,7 +69,10 @@ export default function BaseTable(props) {
         </thead>
         <tbody>
           {tours?.map((destination, index) => (
-            <tr key={`${index}-destination`}>
+            <tr
+              key={`${index}-destination`}
+              onClick={() => handleToTouDetail(destination?.id)}
+            >
               <td>
                 <img
                   src={require("../../../assets/picture/icon/delete.png")}

@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import { formatCurrency } from "../../../../../theme/functions";
+import React from "react";
 
 export default function Price(props) {
-  const { tour, setTour, handleChangeInput } = props;
-  const [errorMessage, setErrorMessage] = useState("");
+  const { tour, handleChangeInput } = props;
 
   const handleKeyDown = (event) => {
     const keyCode = event.keyCode || event.which; // Get the keyCode of the key pressed
@@ -11,27 +9,24 @@ export default function Price(props) {
     if (!regex.test(String.fromCharCode(keyCode))) {
       // Check if the key pressed is a number
       event.preventDefault(); // Prevent the default action of the key down event
-      setErrorMessage("Please enter only numbers");
-    } else {
-      setErrorMessage("");
     }
   };
 
-  const onEdit = () => {};
   return (
-    <div className="price" style={{ marginBottom: "10px" }}>
+    <div className="border" style={{ marginBottom: "10px" }}>
       <div
         style={{
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "space-between",
+          marginBottom: "20px",
         }}
       >
         <div
           style={{
             display: "flex",
             flexDirection: "column",
+            marginRight: "20px",
           }}
         >
           <div
@@ -70,6 +65,7 @@ export default function Price(props) {
           style={{
             display: "flex",
             flexDirection: "column",
+            marginRight: "20px",
           }}
         >
           <div
@@ -118,11 +114,9 @@ export default function Price(props) {
           >
             <label>Giá trẻ sơ sinh:</label>
             <input
-              value={tour.childrenPrice}
+              value={tour.babyPrice}
               className="form-control"
-              onChange={(e) =>
-                handleChangeInput("childrenPrice", e.target.value)
-              }
+              onChange={(e) => handleChangeInput("babyPrice", e.target.value)}
               style={{ maxWidth: "300px", margin: "0px" }}
               onKeyDown={handleKeyDown}
             />
@@ -130,11 +124,9 @@ export default function Price(props) {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <label>Số lượng trẻ sơ sinh:</label>
             <input
-              value={tour.childrenSlot}
+              value={tour.babySlot}
               className="form-control"
-              onChange={(e) =>
-                handleChangeInput("childrenSlot", e.target.value)
-              }
+              onChange={(e) => handleChangeInput("babySlot", e.target.value)}
               style={{ maxWidth: "300px", margin: "0px" }}
               onKeyDown={handleKeyDown}
             />

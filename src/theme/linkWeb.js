@@ -20,6 +20,7 @@ import {
   TourForeign,
 } from "../pages/indexInit";
 import NewTour from "../pages/Admin/pages/Tour/NewTour";
+import TourDetailAdmin from "../pages/Admin/pages/Tour/TourDetailAdmin";
 
 export const clientWeb = [
   {
@@ -94,5 +95,9 @@ export const adminWeb = [
   {
     link: "/admin/tour/create",
     component: <NewTour />,
+  },
+  {
+    link: "/admin/tour-detail/:id",
+    component: <TourDetailAdmin />,
   },
 ];
