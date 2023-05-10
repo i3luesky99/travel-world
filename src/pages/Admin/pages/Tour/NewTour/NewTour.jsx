@@ -104,8 +104,8 @@ export default function NewTour() {
                 ranges={date}
                 locale={locales["vi"]}
               />
-              <TourNameCreate {...props} />
-              <TransportationCreate {...props} />
+              <PlaceGoCreate {...props} />
+              <PlaceDestCreate {...props} />
             </div>
             <div className="day">
               <div style={{ display: "flex" }}>
@@ -113,8 +113,8 @@ export default function NewTour() {
                 <p style={{ marginLeft: "10px", marginRight: "10px" }}>-</p>
                 Ngày về :<p>{endDate}</p>
               </div>
-              <PlaceGoCreate {...props} />
-              <PlaceDestCreate {...props} />
+              <TourNameCreate {...props} />
+              <TransportationCreate {...props} />
               <NoteCreate {...props} />
             </div>
           </div>

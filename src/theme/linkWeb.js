@@ -1,4 +1,3 @@
-import TourAdmin from "../pages/Admin/pages/Tour/TourAdmin";
 import {
   TourCentral,
   TourNorth,
@@ -19,8 +18,9 @@ import {
   TourDetail,
   TourForeign,
 } from "../pages/indexInit";
-import TourDetailAdmin from "../pages/Admin/pages/Tour/TourDetailAdmin";
 import NewTour from "../pages/Admin/pages/Tour/NewTour/NewTour";
+import TourDetailAdmin from "../pages/Admin/pages/Tour/TourDetailAdmin/TourDetailAdmin";
+import TourAdmin from "../pages/Admin/pages/Tour/TourAdmin/TourAdmin";
 
 export const clientWeb = [
   {

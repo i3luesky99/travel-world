@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import BaseTable from "../../Components/BaseTable";
+import BaseTable from "../../../Components/BaseTable";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-import { destinationSouthern } from "../../../../theme/data";
-import useModel from "../../../../hook/useModel";
-import Loading from "../../../../components/Loading/Loading";
+import { destinationSouthern } from "../../../../../theme/data";
+import useModel from "../../../../../hook/useModel";
+import Loading from "../../../../../components/Loading/Loading";
 
 export default function TourAdmin() {
   const [searchItem, setSearchItem] = useState("");
@@ -61,7 +61,7 @@ export default function TourAdmin() {
           </div>
           <div className="reload-button" onClick={() => fetchTour()}>
             <img
-              src={require("../../../../assets/picture/icon/reload.png")}
+              src={require("../../../../../assets/picture/icon/reload.png")}
               alt=""
               className="icon"
             />

@@ -17,7 +17,7 @@
     border: 1px solid #ccc;
     border-radius: 0.5rem;
     resize: none;
-    height: 250px !important;
+    height: 300px !important;
     padding-top: 0.5rem;
     margin-top: 10px;
     font-size: 14px;
@@ -29,6 +29,11 @@
   .border {
     width: 100%;
     border-bottom: 2px solid #f1f1f1;
+    margin-bottom: 10px;
+  }
+  .border-white {
+    width: 100%;
+    border-bottom: 2px solid white;
     margin-bottom: 10px;
   }
   .calendar {
