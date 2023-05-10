@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import axios from "axios";
 import { handleLoginApi } from "../../services/loginService";
 import { color } from "@mui/system";
-
+import localStorageService from "../../services/localStorageService";
 export default function Login() {
 
   const [loginInfo, setLoginInfo] = useState({
@@ -24,7 +24,7 @@ export default function Login() {
 
 
   }
-  const handleLogin = async () => {
+  const handleLogin = async (req, res) => {
     setLoginInfo({ ...loginInfo, errMessage: '' })
     try {
       let data = await handleLoginApi(loginInfo.email, loginInfo.password);
@@ -32,7 +32,11 @@ export default function Login() {
         setLoginInfo({ ...loginInfo, errMessage: data.errMessage })
       }
       if (data && data.errCode === 0) {
-        alert('Đăng nhập thành công');
+        // alert('Đăng nhập thành công');
+        // Login in successfully
+        localStorageService.saveUser(data.accessToken);
+        window.location.replace("/");
+
       }
 
     } catch (error) {

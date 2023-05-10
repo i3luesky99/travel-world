@@ -56,6 +56,10 @@ function App() {
             path="/tour-foreign/tour-detail/:tourId"
             element={<TourDetail />}
           />
+          <Route
+            path="/Payment/:tourId"
+            element={<Payment />}
+          />
           <Route path="/payment" element={<Payment />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/introduce" element={<Introduce />} />

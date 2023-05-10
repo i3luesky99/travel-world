@@ -5,20 +5,20 @@ function UserForm(props) {
   const [userForm, setUserForm] = useState({
     email: email,
     fullName: '',
-    phone: '',
+    phoneNumber: '',
     address: '',
     password: '',
     confirmPassword: '',
     roleId: 'R2'
   });
   const [warning, setWarning] = useState(false);
-  const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
+  const phoneNumberRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
   const str = "0906624069";
   const handleClear = () => {
     setUserForm({
 
       fullName: '',
-      phone: '',
+      phoneNumber: '',
       address: '',
       password: '',
       confirmPassword: '',
@@ -56,7 +56,7 @@ function UserForm(props) {
         }
       }
       setWarning(false);
-      //window.location.replace("/");
+      //
     } catch (error) {
 
       console.log(error)
@@ -81,14 +81,14 @@ function UserForm(props) {
       />
       <label>Số điện thoại</label>
       <input
-        value={userForm.phone}
+        value={userForm.phoneNumber}
         type="number"
         className="registerInput"
         placeholder="Ví dụ: 090123456"
-        onChange={(e) => handleChangeInput("phone", e.target.value)}
+        onChange={(e) => handleChangeInput("phoneNumber", e.target.value)}
         style={{
           borderColor:
-            !userForm.phone.match(phoneRegex) && warning ? "red" : "black",
+            !userForm.phoneNumber.match(phoneNumberRegex) && warning ? "red" : "black",
         }}
       />
       <label>Địa chỉ</label>

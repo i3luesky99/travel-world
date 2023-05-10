@@ -1,9 +1,31 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { destDesc } from "../../theme/data";
 import { formatCurrency } from "../../theme/functions";
+import { handleGetTourById } from "../../services/tourService";
 
 const TourDetail = () => {
+  useEffect(() => { fetchTour(); }, []);
+  const [tour, setTour] = useState({});
+
+  const { tourId } = useParams();
+  const fetchTour = async () => {
+    try {
+      const data = await handleGetTourById(tourId);
+      const tourData = data.tour;
+
+      // /console.log(tourData);
+      setTour(tourData);
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+  const handleOnClickBookNow = async () => {
+    await window.location.replace("/payment/" + tour.id);
+  }
+
   const price = formatCurrency(1000000);
   return (
     <div className="tour-detail">
@@ -14,14 +36,14 @@ const TourDetail = () => {
           alt="Tour"
         />
         <div className="tour-image-text">
-          <h1 className="tour-name">Đà Nẵng Tour</h1>
+          <h1 className="tour-name">{tour.nameTour}</h1>
           <span className="tour-duration">3 ngày 2 đêm</span>
-          <span className="tour-price">{price}</span>
+          <span className="tour-price">{tour.adultPrice}</span>
         </div>
       </div>
       <div className="tour-details">
         <h2 className="tour-heading">Chi tiết tour</h2>
-        <p className="tour-description">{destDesc}</p>
+        <p className="tour-description">{tour.note}</p>
         <h2 className="tour-heading">Tour gồm những gì ?</h2>
         <ul className="tour-inclusions">
           <li>Khách sạn 5*</li>
@@ -29,7 +51,9 @@ const TourDetail = () => {
           <li>Buffet</li>
         </ul>
         <div className="tour-cta">
-          <Link to={"/payment"} state={{text:'hello'}}>Book ngay</Link>
+          <Link onClick={() => {
+            handleOnClickBookNow();
+          }} state={{ text: 'hello' }}>Book ngay</Link>
         </div>
       </div>
     </div>

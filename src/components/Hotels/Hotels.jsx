@@ -6,6 +6,7 @@ import { MdAirportShuttle as ShuttleIcon } from "react-icons/md";
 import { MdFastfood as FoodIcon } from "react-icons/md";
 import { MdLocationOn } from "react-icons/md";
 import { BsArrowRightShort } from "react-icons/bs";
+import { handleGetHotelApi } from "../../services/hotelService"
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { formatCurrency } from "../../theme/functions";
@@ -14,7 +15,9 @@ export default function Hotels() {
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
-
+  const handleGetHotel = async () => {
+    console.log(await handleGetHotel("ALL"));
+  }
   const offerArr = [
     {
       id: 1,
@@ -110,6 +113,7 @@ export default function Hotels() {
               data-aos-duration="3000"
               key={`key-offer-${index}`}
               className="singleHotel"
+              onFocus={handleGetHotel}
             >
               <div className="destImage">
                 <img src={offer?.img} alt={offer?.title} />
