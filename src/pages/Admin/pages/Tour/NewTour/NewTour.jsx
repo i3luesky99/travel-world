@@ -1,9 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Schedule from "./components/Schedule";
-import Price from "./components/Price";
 import { DateRange } from "react-date-range";
 import moment from "moment";
 import * as locales from "react-date-range/dist/locale";
+import TourNameCreate from "./components/TourNameCreate";
+import TransportationCreate from "./components/TransportationCreate";
+import PlaceGoCreate from "./components/PlaceGoCreate";
+import PlaceDestCreate from "./components/PlaceDestCreate";
+import NoteCreate from "./components/NoteCreate";
+import PriceCreate from "./components/PriceCreate";
+import ScheduleCreate from "./components/ScheduleCreate";
 moment.locale("vi");
 
 export default function NewTour() {
@@ -33,11 +38,7 @@ export default function NewTour() {
 
   const startDate = `${moment(`${date[0].startDate}`).format("L")}`;
   const endDate = `${moment(`${date[0].endDate}`).format("L")}`;
-  const transportation = [
-    "Máy bay khứ hồi",
-    "Xe du lịch đời mới",
-    "Xe du lịch đời mới & Máy bay khứ hồi",
-  ];
+
   const handleSubmit = (e) => {
     const newTour = {
       ...tour,
@@ -95,7 +96,7 @@ export default function NewTour() {
         <div className="top border">
           <label>Thời điểm :</label>
           <div className="calendar">
-            <div style={{}}>
+            <div>
               <DateRange
                 editableDateInputs={true}
                 onChange={(item) => setDate([item.selection])}
@@ -103,36 +104,8 @@ export default function NewTour() {
                 ranges={date}
                 locale={locales["vi"]}
               />
-              <div style={{ marginTop: "10px" }}>
-                <div>Tên Tour :</div>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={tour.nameTour}
-                  style={{
-                    marginTop: "10px",
-                    marginBottom: "5px",
-                  }}
-                  onChange={(e) =>
-                    handleChangeInput("nameTour", e.target.value)
-                  }
-                />
-              </div>
-              <div style={{ marginTop: "10px" }}>
-                <div style={{ marginBottom: "10px" }}>Phương tiện đưa đón:</div>
-                <select
-                  className="form-control"
-                  value={tour.transportation}
-                  style={{ fontSize: "14px" }}
-                  onChange={(e) =>
-                    handleChangeInput("transportation", e.target.value)
-                  }
-                >
-                  {transportation.map((transport, index) => (
-                    <option key={`${index}-transport`}>{transport}</option>
-                  ))}
-                </select>
-              </div>
+              <TourNameCreate {...props} />
+              <TransportationCreate {...props} />
             </div>
             <div className="day">
               <div style={{ display: "flex" }}>
@@ -140,51 +113,14 @@ export default function NewTour() {
                 <p style={{ marginLeft: "10px", marginRight: "10px" }}>-</p>
                 Ngày về :<p>{endDate}</p>
               </div>
-              <div style={{ marginTop: "10px" }}>
-                <div>Xuất phát :</div>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={tour.placeGo}
-                  style={{
-                    margin: "0px",
-                    marginTop: "10px",
-                    marginBottom: "10px",
-                  }}
-                  onChange={(e) => handleChangeInput("placeGo", e.target.value)}
-                />
-              </div>
-              <div>
-                Điểm đến :
-                <input
-                  type="text"
-                  className="form-control"
-                  value={tour.placeDest}
-                  style={{
-                    margin: "0px",
-                    marginTop: "10px",
-                    marginBottom: "10px",
-                  }}
-                  onChange={(e) =>
-                    handleChangeInput("placeDest", e.target.value)
-                  }
-                />
-              </div>
-              <div>
-                <div>Mô tả :</div>
-                <textarea
-                  value={tour.note}
-                  className="form-control"
-                  onChange={(e) => handleChangeInput("note", e.target.value)}
-                  style={{ marginBottom: "10px" }}
-                />
-              </div>
+              <PlaceGoCreate {...props} />
+              <PlaceDestCreate {...props} />
+              <NoteCreate {...props} />
             </div>
           </div>
         </div>
-
-        <Price {...props} />
-        <Schedule {...props} />
+        <PriceCreate {...props} />
+        <ScheduleCreate {...props} />
         <div className="border">
           <label>
             Ảnh :
@@ -203,7 +139,7 @@ export default function NewTour() {
               <div className="picture" key={`${index}-image`}>
                 <img src={image.url} alt="Selected" />
                 <img
-                  src={require("../../../../assets/picture/icon/cancel.png")}
+                  src={require("../../../../../assets/picture/icon/cancel.png")}
                   alt=""
                   className="icon"
                   onClick={() => deleteImage(index)}

@@ -1,6 +1,6 @@
 import React from "react";
 
-function Schedule(props) {
+export default function ScheduleCreate(props) {
   const { dayDetail, setDayDetail } = props;
   const handleAddDay = () => {
     setDayDetail([
@@ -83,5 +83,3 @@ function Schedule(props) {
     </div>
   );
 }
-
-export default Schedule;

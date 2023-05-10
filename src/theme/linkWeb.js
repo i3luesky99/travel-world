@@ -19,8 +19,8 @@ import {
   TourDetail,
   TourForeign,
 } from "../pages/indexInit";
-import NewTour from "../pages/Admin/pages/Tour/NewTour";
 import TourDetailAdmin from "../pages/Admin/pages/Tour/TourDetailAdmin";
+import NewTour from "../pages/Admin/pages/Tour/NewTour/NewTour";
 
 export const clientWeb = [
   {

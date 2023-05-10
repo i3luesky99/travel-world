@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Price(props) {
+export default function PriceCreate(props) {
   const { tour, handleChangeInput } = props;
 
   const handleKeyDown = (event) => {
