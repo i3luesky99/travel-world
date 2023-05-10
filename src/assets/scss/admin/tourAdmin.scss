@@ -1,0 +1,41 @@
+.tour-admin {
+  .search {
+    margin-top: 20px;
+    color: $grey1;
+    .search-bar {
+      display: flex;
+      align-items: center;
+      margin-top: 15px;
+      .button {
+        width: 100px;
+        margin-left: 15px;
+      }
+    }
+    input {
+      width: 200px;
+    }
+    .icon {
+      margin-left: 20px;
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  }
+  .stack {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .empty-text {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 20px;
+  }
+}

@@ -7,12 +7,12 @@
     color: white;
     cursor: pointer;
     &:hover {
-      color: $--PrimaryColor;
+      color: $primary-color;
     }
   }
 
   .selectDropdown {
-    color: $--PrimaryColor;
+    color: $primary-color;
     padding: 0 0.7rem;
     font-size: 0.9rem;
     font-weight: 400;
@@ -34,12 +34,12 @@
     .link {
       padding: 8px;
       font-size: 0.9rem;
-      color: $--PrimaryColor;
+      color: $primary-color;
       text-align: center;
       width: 100%;
       cursor: pointer;
       &:hover {
-        background-color: $--PrimaryColor;
+        background-color: $primary-color;
         color: $--whiteColor;
       }
     }
@@ -52,7 +52,7 @@
       width: 100%;
       cursor: pointer;
       &:hover {
-        background-color: $--PrimaryColor;
+        background-color: $primary-color;
         color: $--whiteColor;
       }
     }

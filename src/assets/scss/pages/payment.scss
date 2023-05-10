@@ -18,7 +18,7 @@ $primary-color: #003d71;
       .topTable {
         tr,
         td {
-          background-color: $--PrimaryColor;
+          background-color: $primary-color;
           height: 50px;
           border: 1px solid white;
           text-align: right;
@@ -52,7 +52,7 @@ $primary-color: #003d71;
       text-align: right;
       width: 100%;
       margin-bottom: -20px;
-     }
+    }
     .momo {
       .QRCode {
         flex-direction: column;
@@ -67,7 +67,7 @@ $primary-color: #003d71;
       }
       p {
         font-size: 20px;
-        color: $--PrimaryColor;
+        color: $primary-color;
       }
       img {
         width: 400px;
@@ -98,10 +98,10 @@ $primary-color: #003d71;
 
           &:focus {
             outline: none;
-            border-color: $--PrimaryColor;
+            border-color: $primary-color;
           }
           &:hover {
-            border-bottom: 2px solid $--PrimaryColor;
+            border-bottom: 2px solid $primary-color;
           }
         }
       }
@@ -157,7 +157,7 @@ $primary-color: #003d71;
     border-style: dashed none none none;
     label {
       font-size: 30px;
-      color: $--PrimaryColor;
+      color: $primary-color;
     }
   }
 }

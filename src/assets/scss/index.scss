@@ -20,4 +20,8 @@
 @import "./pages/tourDetail";
 @import "./pages/payment";
 @import "./pages/introduce";
-@import "./pages/admin";
+
+@import "./admin/admin";
+@import "./admin/tourAdmin";
+@import "./admin/baseTable";
+@import "./admin/newTour";

@@ -1,0 +1,190 @@
+.tour-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem auto;
+  width: 80%;
+  max-width: 500px;
+}
+.new-tour {
+  input {
+    margin-top: 10px;
+  }
+
+  textarea {
+    width: 100%;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    resize: none;
+    height: 300px !important;
+    padding-top: 0.5rem;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+  .form-control {
+    text-align: left;
+    width: 100%;
+  }
+  .border {
+    width: 100%;
+    border-bottom: 2px solid #f1f1f1;
+    margin-bottom: 10px;
+  }
+  .border-white {
+    width: 100%;
+    border-bottom: 2px solid white;
+    margin-bottom: 10px;
+  }
+  .calendar {
+    background-color: #e7eaed;
+    padding: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    // max-width: 800px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    .day {
+      width: 100%;
+      display: flex;
+      margin-left: 20px;
+
+      // justify-content: space-around;
+      flex-direction: column;
+    }
+  }
+  .icon {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+  }
+}
+
+label {
+  display: block;
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+}
+
+/* Style cho div bao quanh tour */
+.tour {
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style cho hình ảnh tour */
+.tour-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Style cho tên tour */
+.tour-name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Style cho mô tả tour */
+.tour-description {
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+/* Style cho giá tour */
+.tour-price {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #f44336;
+}
+
+.image-selected {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  .picture {
+    margin-top: 10px;
+    padding: 10px;
+    width: 150px;
+    height: 150px;
+    border: 2px solid #bababa;
+    border-radius: 8px;
+    margin-right: 10px;
+    position: relative;
+    margin-bottom: 10px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .icon {
+      width: 25px;
+      height: 25px;
+      position: absolute;
+      top: 5px;
+      right: 3px;
+      cursor: pointer;
+    }
+  }
+}
+
+#image-place {
+  display: none;
+}
+.button-select {
+  min-height: 60px;
+  width: 100%;
+  border: 1px solid #bababa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  border-style: dashed;
+  &:hover {
+    border: 1px solid #f67009;
+    border-style: dashed;
+    color: #f67009;
+  }
+}
+.bottom {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  .button {
+    width: 120px;
+  }
+}
+
+.dayDetail {
+  padding-left: 15px;
+  .day {
+    display: flex;
+    align-items: center;
+  }
+  input {
+    margin-top: 10px;
+  }
+  p {
+    margin-top: 10px;
+    white-space: nowrap;
+    margin-right: 10px;
+  }
+  .line {
+    width: 100%;
+    border: 1px solid #bababa;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-style: dashed;
+  }
+}

@@ -18,7 +18,6 @@ function Payment() {
     expirationDate: "",
     cvv: "",
   });
-  const { state } = useLocation();
   const [selectedOption, setSelectedOption] = useState("Tiền mặt");
   const [adult, setAdult] = useState(1);
   const [kids, setKids] = useState(0);
@@ -47,6 +46,11 @@ function Payment() {
       ...paymentInfo,
       [event.target.name]: event.target.value,
     });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Here you can implement your payment logic using the paymentInfo state
   };
   const props = {
     adultPrice: tour.adultPrice,

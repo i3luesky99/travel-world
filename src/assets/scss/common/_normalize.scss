@@ -51,7 +51,7 @@ li {
 
 .btn {
   padding: 0.4rem 1.5rem;
-  background: $--PrimaryColor;
+  background: $primary-color;
   border: none;
   border-radius: 3rem;
   cursor: pointer;
@@ -122,6 +122,35 @@ input {
 
   .secIntro p {
     font-size: 15px;
+  }
+}
+
+.form-control {
+  height: 35px;
+  border-radius: 0.25rem;
+  border: 1px solid $grey1;
+  padding-left: 15px;
+  padding-right: 5px;
+  width: 160px;
+  font-size: 14px;
+  outline: none;
+  &:focus {
+    border: 1px solid $primary-color;
+    border-radius: 0.25rem;
+  }
+}
+
+.button {
+  background-color: $primary-color;
+  color: white;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
   }
 }
 

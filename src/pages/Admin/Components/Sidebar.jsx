@@ -1,38 +1,90 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Sidebar() {
+  const params = useLocation().pathname;
   const adminPanel = [
     {
       message: "Admin",
-      to: "/admin",
-      iconPath: "",
+      link: "/admin",
+      iconPath: require("../../../assets/picture/icon/home.png"),
+      children: [
+        {
+          message: "Trang chủ",
+          link: "/admin",
+          iconPath: require("../../../assets/picture/icon/list.png"),
+        },
+      ],
     },
     {
       message: "Tour",
-      to: "/admin/tour",
-      iconPath: "",
+      link: "/admin/tours",
+      iconPath: require("../../../assets/picture/icon/note.png"),
       children: [
-        { message: "Tạo tour", to: "/admin/tour/create", iconPath: "" },
-        // { message: "Tạo tour", to: "/admin/tour/create", iconPath: "" },
-        // { message: "Xóa tour", to: "/admin/delete", iconPath: "" },
+        {
+          message: "Danh sách tour",
+          link: "/admin/tours",
+          iconPath: require("../../../assets/picture/icon/list.png"),
+        },
+        {
+          message: "Thêm tour",
+          link: "/admin/tour/create",
+          iconPath: require("../../../assets/picture/icon/plus.png"),
+        },
       ],
     },
+    {
+      message: "Khách hàng",
+      // link: "/admin/clients",
+      iconPath: require("../../../assets/picture/icon/person.png"),
+      children: [],
+    },
+    {
+      message: "Cài đặt",
+      // link: "/admin/setting",
+      iconPath: require("../../../assets/picture/icon/setting.png"),
+      children: [],
+    },
+    {
+      message: "Thống kê",
+      // link: "/admin/chart",
+      iconPath: require("../../../assets/picture/icon/chart.png"),
+      children: [],
+    },
   ];
+
   return (
     <div className="sidebar">
       <div className="logo">
         <Link to={"/admin"}>
-          <p className="textLogo">LEVART</p>
+          <p>LEVART</p>
         </Link>
       </div>
       <div className="base-menu">
         {adminPanel.map((panel, index) => (
-          <div key={`${index}-panel`}>
-            <div>{panel.message}</div>
+          <div key={`${index}-panel`} className="title-menu">
+            <Link
+              to={panel.link}
+              className={"title-message"}
+              style={{ marginTop: index === 0 && "10px" }}
+            >
+              <img src={panel.iconPath} alt="" className="icon" />
+              <div>{panel.message}</div>
+            </Link>
             <div>
               {panel?.children?.map((child, index) => (
-                <div key={`${index}-child`}>{child.message}</div>
+                <Link
+                  to={child.link}
+                  className={
+                    params === child.link
+                      ? "children-message active-link"
+                      : "children-message"
+                  }
+                  key={`${index}-child`}
+                >
+                  <img src={child.iconPath} alt="" className="icon" />
+                  <div>{child.message}</div>
+                </Link>
               ))}
             </div>
           </div>

@@ -70,7 +70,7 @@ export default function TotalTour(props) {
                     <p className="destination">
                       Địa điểm: {destination?.location}
                     </p>
-                    <h6>Ngày khởi hàng: {destination?.dateStart}</h6>
+                    <h6>Ngày khởi hàng: {destination?.dateGo}</h6>
                     <h6>
                       Lịch trình: {destination?.totalDays} ngày&nbsp;
                       {destination?.totalDays - 1} đêm

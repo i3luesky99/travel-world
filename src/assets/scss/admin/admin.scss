@@ -1,0 +1,115 @@
+.admin {
+  display: flex;
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    left: 0px;
+    .logo {
+      height: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      p {
+        cursor: pointer;
+        font-family: "PalmspringsPersonalUseRegular-d9VDV";
+        font-size: 30px;
+        background: linear-gradient(
+          90deg,
+          rgb(209, 131, 131) 0%,
+          rgb(223 204 70) 50%,
+          #e08d21 100%
+        );
+        background-clip: text;
+        text-shadow: 12px 6px 7px #b7b1b4;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+    .base-menu {
+      a {
+        color: #f67009;
+      }
+      width: 100%;
+      .title-menu {
+        width: 100%;
+        margin-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        .title-message {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          height: 40px;
+          border-radius: 8px;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.5;
+          }
+        }
+        .icon {
+          height: 20px;
+          width: 20px;
+          margin-right: 10px;
+          margin-left: 10px;
+        }
+        .children-message {
+          height: 50px;
+          padding-left: 15px;
+          display: flex;
+          align-items: center;
+          color: rgb(223 204 70);
+          border-radius: 10px;
+          cursor: pointer;
+          &:hover {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+  }
+  .right-content {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    .header {
+      height: 72px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      color: #f67009;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.5;
+      }
+      img {
+        height: 20px;
+        width: 20px;
+        margin-left: 5px;
+      }
+    }
+
+    .content {
+      box-shadow: inset 11px 0 9px -7px rgba(0, 0, 0, 0.1),
+        inset 0px 11px 9px -7px rgba(0, 0, 0, 0.1);
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      padding-top: 35px;
+      padding-bottom: 35px;
+      background-color: #f8f8ff;
+      min-height: 100vh;
+
+      .main-content {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        .title-admin {
+          font-size: 20px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .active-link {
+    background-color: #e0eaf7;
+  }
+}
