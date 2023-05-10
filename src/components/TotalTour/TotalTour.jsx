@@ -7,9 +7,18 @@ import { Link } from "react-router-dom";
 
 export default function TotalTour(props) {
   const { title, destinations, foreign } = props;
+  //console.log(destinations, 'total');
+  // const ten = destinations.map((dep) => {
+  //   console.log(dep);
+  // });
+  const handleOnClick = async (id) => {
+    await window.location.replace("/tour-country/tour-detail/" + id)
+  }
   useEffect(() => {
     Aos.init({ duration: 2000 });
+
   }, []);
+  //{destinations?.}
 
   return (
     <section className="country section container">
@@ -31,44 +40,44 @@ export default function TotalTour(props) {
         <div className="mainContent grid">
           {destinations?.map((destination, index) => (
             <div key={`key-${index}-destination`}>
-              <div className="singleDestination" data-aos="fade-up">
-                <Link
+              <div className="singleDestination" data-aos="fade-up" onClick={() => handleOnClick("" + destination.id)} >
+                {/* <Link
                   to={
                     foreign
                       ? `/tour-foreign/tour-detail/${destination.id}`
                       : `/tour-country/tour-detail/${destination.id}`
                   }
                   style={{ color: "black" }}
-                >
-                  <div className="destImage">
-                    <img src={destination?.img[0]} alt="Img title" />
+                > */}
+                <div className="destImage">
+                  <img src={destination?.img[0]} alt="Img title" />
 
-                    <div className="overplayInfo">
-                      <h3>{destination?.title}</h3>
-                      <p>{destination?.desc}</p>
+                  <div className="overplayInfo">
+                    <h3>{destination?.title}</h3>
+                    <p>{destination?.desc}</p>
 
-                      <BsArrowRightShort className="icon" />
-                    </div>
+                    <BsArrowRightShort className="icon" />
                   </div>
+                </div>
 
-                  <div className="destFooter flex">
-                    {index < 9 ? (
-                      <div className="number">0{index + 1}</div>
-                    ) : (
-                      <div className="number">{index + 1}</div>
-                    )}
-                    <div className="destText flex">
-                      <p className="destination">
-                        Địa điểm: {destination?.location}
-                      </p>
-                      <h6>Ngày khởi hàng: {destination?.dateGo}</h6>
-                      <h6>
-                        Lịch trình: {destination?.totalDays} ngày&nbsp;
-                        {destination?.totalDays - 1} đêm
-                      </h6>
-                    </div>
+                <div className="destFooter flex">
+                  {index < 9 ? (
+                    <div className="number">0{index + 1}</div>
+                  ) : (
+                    <div className="number">{index + 1}</div>
+                  )}
+                  <div className="destText flex">
+                    <p className="destination">
+                      Địa điểm: {destination?.location}
+                    </p>
+                    <h6>Ngày khởi hàng: {destination?.dateGo}</h6>
+                    <h6>
+                      Lịch trình: {destination?.totalDays} ngày&nbsp;
+                      {destination?.totalDays - 1} đêm
+                    </h6>
                   </div>
-                </Link>
+                </div>
+                {/* </Link> */}
 
                 <div className="bottom flex">
                   <div className="bottomLeft flex">
@@ -80,13 +89,13 @@ export default function TotalTour(props) {
                     </h6>
                     <span>{formatCurrency(destination?.prices)}</span>
                   </div>
-                  <p className="btn">BOOK NGAY</p>
+                  <p className="btn" onClick={() => handleOnClick("" + destination.id)}>BOOK NGAY</p>
                 </div>
               </div>
             </div>
           ))}
         </div>
       </div>
-    </section>
+    </section >
   );
 }

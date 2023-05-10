@@ -42,7 +42,7 @@ export default function Carousel(props) {
         className="mainContent grid"
         spaceBetween={30}
       >
-        {destinations.map((destination, index) => (
+        {destinations?.map((destination, index) => (
           <SwiperSlide key={`key-${index}-destination`}>
             <div className="singleDestination" data-aos="fade-up">
               <Link
