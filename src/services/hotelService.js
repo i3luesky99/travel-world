@@ -1,8 +1,5 @@
-import axios from '../axios';
+import axios from "../axios";
 const handleGetHotelApi = (id) => {
-    return axios.get('/api/get-all-hotel?id=' + id);
-}
-export {
-
-    handleGetHotelApi
-}
+  return axios.get("/api/get-all-hotel?id=" + id);
+};
+export { handleGetHotelApi };

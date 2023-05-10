@@ -5,7 +5,9 @@ import { formatCurrency } from "../../theme/functions";
 import { handleGetTourById } from "../../services/tourService";
 
 const TourDetail = () => {
-  useEffect(() => { fetchTour(); }, []);
+  useEffect(() => {
+    fetchTour();
+  }, []);
   const [tour, setTour] = useState({});
 
   const { tourId } = useParams();
@@ -16,15 +18,13 @@ const TourDetail = () => {
 
       // /console.log(tourData);
       setTour(tourData);
-
     } catch (error) {
       console.log(error);
     }
-
-  }
-  const handleOnClickBookNow = async () => {
-    await window.location.replace("/payment/" + tour.id);
-  }
+  };
+  const handleOnClickBookNow = () => {
+    window.location.replace("/payment/" + tour.id);
+  };
 
   const price = formatCurrency(1000000);
   return (
@@ -51,9 +51,14 @@ const TourDetail = () => {
           <li>Buffet</li>
         </ul>
         <div className="tour-cta">
-          <Link onClick={() => {
-            handleOnClickBookNow();
-          }} state={{ text: 'hello' }}>Book ngay</Link>
+          <Link
+            onClick={() => {
+              handleOnClickBookNow();
+            }}
+            state={{ text: "hello" }}
+          >
+            Book ngay
+          </Link>
         </div>
       </div>
     </div>

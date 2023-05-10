@@ -9,7 +9,9 @@ import { useLocation, useParams } from "react-router-dom";
 import { handleGetTourById } from "../../services/tourService";
 
 function Payment() {
-  useEffect(() => { fetchTour(); }, []);
+  useEffect(() => {
+    fetchTour();
+  }, []);
   const [paymentInfo, setPaymentInfo] = useState({
     name: "",
     email: "",
@@ -35,12 +37,8 @@ function Payment() {
 
     setTour(tourData);
     //console.log(props);
-  }
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("123123");
-    // Here you can implement your payment logic using the paymentInfo state
   };
+
   const handleInputChange = (event) => {
     setPaymentInfo({
       ...paymentInfo,
@@ -71,8 +69,6 @@ function Payment() {
   const total = adultPrice
     ? tour.adultPrice * adult + tour.childPrice * kids + tour.babyPrice * baby
     : 0;
-
-
 
   return (
     <div className="payment-page">

@@ -1,8 +1,6 @@
-import axios from '../axios';
+import axios from "../axios";
 const handleOtpApi = (data) => {
-    return axios.post('/api/verifyOtp', data);
-}
+  return axios.post("/api/verifyOtp", data);
+};
 
-export {
-    handleOtpApi
-}
+export { handleOtpApi };

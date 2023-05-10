@@ -46,16 +46,12 @@ function App() {
                 path={web.link}
                 element={web.component}
               />
-          <Route
-            path="/Payment/:tourId"
-            element={<Payment />}
-          />
             ))}
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
-      </BrowserRouter>{" "}
+      </BrowserRouter>
     </Provider>
   );
 }
