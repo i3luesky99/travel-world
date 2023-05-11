@@ -12,11 +12,10 @@ export default function TotalTour(props) {
   //   console.log(dep);
   // });
   const handleOnClick = async (id) => {
-    await window.location.replace("/tour-country/tour-detail/" + id)
-  }
+    await window.location.replace("/tour-country/tour-detail/" + id);
+  };
   useEffect(() => {
     Aos.init({ duration: 2000 });
-
   }, []);
   //{destinations?.}
 
@@ -40,7 +39,11 @@ export default function TotalTour(props) {
         <div className="mainContent grid">
           {destinations?.map((destination, index) => (
             <div key={`key-${index}-destination`}>
-              <div className="singleDestination" data-aos="fade-up" onClick={() => handleOnClick("" + destination.id)} >
+              <div
+                className="singleDestination"
+                data-aos="fade-up"
+                onClick={() => handleOnClick("" + destination.id)}
+              >
                 {/* <Link
                   to={
                     foreign
@@ -77,7 +80,6 @@ export default function TotalTour(props) {
                     </h6>
                   </div>
                 </div>
-                {/* </Link> */}
 
                 <div className="bottom flex">
                   <div className="bottomLeft flex">
@@ -89,13 +91,18 @@ export default function TotalTour(props) {
                     </h6>
                     <span>{formatCurrency(destination?.prices)}</span>
                   </div>
-                  <p className="btn" onClick={() => handleOnClick("" + destination.id)}>BOOK NGAY</p>
+                  <p
+                    className="btn"
+                    onClick={() => handleOnClick("" + destination.id)}
+                  >
+                    ĐẶT NGAY
+                  </p>
                 </div>
               </div>
             </div>
           ))}
         </div>
       </div>
-    </section >
+    </section>
   );
 }

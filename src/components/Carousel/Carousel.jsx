@@ -93,7 +93,7 @@ export default function Carousel(props) {
                   </h6>
                   <span>{formatCurrency(destination?.prices)}</span>
                 </div>
-                <p className="btn">BOOK NGAY</p>
+                <p className="btn">ĐẶT NGAY</p>
               </div>
             </div>
           </SwiperSlide>

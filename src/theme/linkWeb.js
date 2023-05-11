@@ -70,7 +70,7 @@ export const clientWeb = [
     component: <TourDetail />,
   },
   {
-    link: "/Payment/:tourId",
+    link: "/payment/:tourId",
     component: <Payment />,
   },
   {
