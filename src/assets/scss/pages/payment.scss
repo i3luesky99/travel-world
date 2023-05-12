@@ -78,7 +78,7 @@ $primary-color: #003d71;
     .info {
       gap: 2.5rem;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       margin-bottom: 20px;
       .optionPayment {
         label {
@@ -98,10 +98,10 @@ $primary-color: #003d71;
 
           &:focus {
             outline: none;
-            border-color: $primary-color;
+            border-color: #f67009;
           }
           &:hover {
-            border-bottom: 2px solid $primary-color;
+            border-bottom: 2px solid #f67009;
           }
         }
       }

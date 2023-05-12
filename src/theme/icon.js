@@ -5,6 +5,7 @@ const iconLocation = require("../assets/picture/icon/location.png");
 const iconPaperClip = require("../assets/picture/icon/paper-clip.png");
 const iconNoteColor = require("../assets/picture/icon/note-color.png");
 const iconSchedule = require("../assets/picture/icon/schedule.png");
+const iconPrint = require("../assets/picture/icon/print.png");
 
 export {
   iconPencil,
@@ -14,4 +15,5 @@ export {
   iconSchedule,
   iconNoteColor,
   iconPaperClip,
+  iconPrint,
 };

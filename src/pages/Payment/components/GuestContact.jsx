@@ -25,24 +25,6 @@ export default function GuestContact(props) {
           />
         </div>
         <div className="optionPayment">
-          <label>Email :</label>
-          <input
-            type="text"
-            name="email"
-            value={paymentInfo.email}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="optionPayment">
-          <label>Số điện thoại :</label>
-          <input
-            type="text"
-            name="phone"
-            value={paymentInfo.phone}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="optionPayment">
           <label>Người lớn :</label>
           <input
             type="number"

@@ -7,11 +7,9 @@ import Momo from "./components/Momo";
 import TourPriceDetail from "./components/TourPriceDetail";
 import { useLocation, useParams } from "react-router-dom";
 import { handleGetTourById } from "../../services/tourService";
+import AuthMethods from "./components/AuthMethods";
 
 function Payment() {
-  useEffect(() => {
-    fetchTour();
-  }, []);
   const [paymentInfo, setPaymentInfo] = useState({
     name: "",
     email: "",
@@ -33,10 +31,8 @@ function Payment() {
   const fetchTour = async () => {
     const data = await handleGetTourById(tourId);
     const tourData = data.tour;
-    ////console.log(tourData);
 
     setTour(tourData);
-    //console.log(props);
   };
 
   const handleInputChange = (event) => {
@@ -70,13 +66,18 @@ function Payment() {
     ? tour.adultPrice * adult + tour.childPrice * kids + tour.babyPrice * baby
     : 0;
 
+  useEffect(() => {
+    // fetchTour();
+  }, []);
+
   return (
     <div className="payment-page">
       <TourPriceDetail {...props} />
       <form className="payment-form flex" onSubmit={handleSubmit}>
         <GuestContact {...props} />
+        <AuthMethods {...props} />
         <PaymentMethod {...props} />
-        <div className="info">
+        <div className="info" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
           {selectedOption === "Internet Banking" && (
             <InternetBanking {...props} />
           )}

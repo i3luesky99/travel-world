@@ -9,7 +9,7 @@ export default function PaymentMethod(props) {
   return (
     <>
       <p className="title">PHƯƠNG THỨC THANH TOÁN</p>
-      <div className="info">
+      <div className="info" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
         <div className="optionSelect">
           <label>
             <input
