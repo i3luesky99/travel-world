@@ -46,7 +46,7 @@ export default function NewTour() {
 
       // imgURL: selectedImages,
     };
-
+    // imageToBase64();
     const { tourId } = await handleCreateTour(newTour);
     window.location.replace(`/admin/tour-detail/${tourId}`);
   };
@@ -81,6 +81,17 @@ export default function NewTour() {
     },
     [selectedImages]
   );
+
+  // const imageToBase64 = () => {
+  //   console.log(fileList[0].url);
+  //   var reader = new FileReader();
+  //   reader.readAsDataURL(fileList[0].url);
+  //   reader.onloadend = function () {
+  //     var base64data = reader.result;
+  //     console.log(base64data);
+  //   };
+  // };
+
   const props = {
     tour: tour,
     setTour: setTour,

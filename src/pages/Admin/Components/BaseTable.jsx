@@ -88,9 +88,16 @@ export default function BaseTable(props) {
               <td>{formatCurrency(destination?.adultPrice)}</td>
               <td
                 onClick={() => handleToTouDetail(destination?.id)}
-                style={{ display: "flex", justifyContent: "center" }}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  borderBottom: "none",
+                }}
               >
-                <div className="button" style={{ width: "120px" }}>
+                <div
+                  className="button"
+                  style={{ width: "120px" }}
+                >
                   Xem chi tiết
                 </div>
               </td>
