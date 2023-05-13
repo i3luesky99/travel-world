@@ -45,20 +45,21 @@ const TourDetail = () => {
   useEffect(() => {
     fetchTour();
   }, []);
-  const daysDetail = [
-    {
-      title: "TP.HCM – TRƯƠNG GIA GIỚI (Ăn nhẹ, Ăn tối)",
-      schedule: `Ăn sáng. Làm thủ tục trả phòng. Đoàn khởi hành đi Phượng Hoàng Cổ Trấn. Trên đường đi, đoàn tham quan:
 
-      Đức Hang Miêu Trại,  trải nghiệm thưởng thức tiệc Trường Long và có cơ hội tìm hiểu Phong tục chặn cửa đón khách, mời rượu, hát hò - đây là nét đẹp văn hoá đặc trưng của người dân tộc Miêu bản địa. Đoàn dùng bữa trưa tại đây.`,
-    },
-    {
-      title: "TRƯƠNG GIA GIỚI – PHƯỢNG HOÀNG CỔ TRẤN (Ăn ba bữa)",
-      schedule: `Ăn sáng. Làm thủ tục trả phòng. Đoàn khởi hành đi Phượng Hoàng Cổ Trấn. Trên đường đi, đoàn tham quan:
+  // const daysDetail = [
+  //   {
+  //     title: "TP.HCM – TRƯƠNG GIA GIỚI (Ăn nhẹ, Ăn tối)",
+  //     schedule: `Ăn sáng. Làm thủ tục trả phòng. Đoàn khởi hành đi Phượng Hoàng Cổ Trấn. Trên đường đi, đoàn tham quan:
 
-      Đức Hang Miêu Trại,  trải nghiệm thưởng thức tiệc Trường Long và có cơ hội tìm hiểu Phong tục chặn cửa đón khách, mời rượu, hát hò - đây là nét đẹp văn hoá đặc trưng của người dân tộc Miêu bản địa. Đoàn dùng bữa trưa tại đây.`,
-    },
-  ];
+  //     Đức Hang Miêu Trại,  trải nghiệm thưởng thức tiệc Trường Long và có cơ hội tìm hiểu Phong tục chặn cửa đón khách, mời rượu, hát hò - đây là nét đẹp văn hoá đặc trưng của người dân tộc Miêu bản địa. Đoàn dùng bữa trưa tại đây.`,
+  //   },
+  //   {
+  //     title: "TRƯƠNG GIA GIỚI – PHƯỢNG HOÀNG CỔ TRẤN (Ăn ba bữa)",
+  //     schedule: `Ăn sáng. Làm thủ tục trả phòng. Đoàn khởi hành đi Phượng Hoàng Cổ Trấn. Trên đường đi, đoàn tham quan:
+
+  //     Đức Hang Miêu Trại,  trải nghiệm thưởng thức tiệc Trường Long và có cơ hội tìm hiểu Phong tục chặn cửa đón khách, mời rượu, hát hò - đây là nét đẹp văn hoá đặc trưng của người dân tộc Miêu bản địa. Đoàn dùng bữa trưa tại đây.`,
+  //   },
+  // ];
 
   const headerTable = {
     id: "Mã tour",
@@ -70,8 +71,8 @@ const TourDetail = () => {
   };
   const headerArr = Object.values(headerTable);
 
-  const price = formatCurrency(1000000);
-
+  const price = formatCurrency(tour.adultPrice);
+  const daysDetail = tour.tourDetailData;
   const handelToPDF = useReactToPrint({
     content: () => componentPDF.current,
     onAfterPrint: () => {
@@ -88,8 +89,7 @@ const TourDetail = () => {
     <div>
       <div className="tour-detail" ref={componentPDF}>
         <div className="title">
-          Du lịch Hè - Tour Trương Gia Giới - Phượng Hoàng Cổ Trấn 6 ngày từ Sài
-          Gòn 2023
+          {tour.nameTour}
         </div>
         <div className="top-tour">
           <div className="tour-image-container">
@@ -102,16 +102,16 @@ const TourDetail = () => {
           <div className="top-right">
             <div className="top">
               <div className="title border">
-                Du lịch Hè - Tour Trương Gia Giới - Phượng Hoàng Cổ Trấn 6 ngày
-                từ Sài Gòn 2023
+                {tour.nameTour}
               </div>
-              <div className="border data">Mã tour : 10001</div>
+              <div className="border data">Mã tour : {tour.id}</div>
               <div className="border data">Thời gian: 6 ngày 5 đêm</div>
-              <div className="border data">Khởi hành: 09,16/05/2023</div>
+              <div className="border data">Khởi hành: {tour.dateGo}</div>
               <div className="border data">
-                Vận Chuyển: Xe du lịch đời mới & Máy bay khứ hồi{" "}
+                {tour.transportation}
+                {/* Vận Chuyển: Xe du lịch đời mới & Máy bay khứ hồi{" "} */}
               </div>
-              <div className="data">Xuất phát: Từ Hồ Chí Minh </div>
+              <div className="data">Xuất phát: {tour.placeGo}</div>
             </div>
             <div className="bottom-right">
               <div className="price-box">
@@ -139,7 +139,8 @@ const TourDetail = () => {
               </div>
             </div>
             <div style={{ textAlign: "justify", fontStyle: "italic" }}>
-              Du lịch Trương Gia Giới mùa Hè là nơi hội tụ những kỳ quan thiên
+              {tour.note}
+              {/* Du lịch Trương Gia Giới mùa Hè là nơi hội tụ những kỳ quan thiên
               nhiên kỳ ảo bậc nhất Trung Hoa. Tour Trương Gia Giới mùa Hè có thể
               tham quan những gì? Trước khi tham gia Tour Trương Gia Giới hãy
               cùng Du Lịch Việt chúng tôi tìm hiểu ngay nhé! Tour du lịchTrương
@@ -149,7 +150,7 @@ const TourDetail = () => {
               này tạo thành sông, thung lũng và các hẻm núi. Nhờ vào sự kiến tạo
               này, Trương Gia Giới sở hữu những khối trụ sa thạch cao vút, độc
               đáo, trở thành bối cảnh cho những ngọn núi bay trong phim chiếu
-              rạp nổi tiếng "Avatar".
+              rạp nổi tiếng "Avatar". */}
             </div>
             <div className="days">
               <div className="border">
@@ -243,11 +244,11 @@ const TourDetail = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>112</td>
-                  <td>22/04/2023</td>
-                  <td>23/04/2023</td>
+                  <td>{tour.id}</td>
+                  <td>{tour.dateGo}</td>
+                  <td>{tour.dateBack}</td>
                   <td>{price}</td>
-                  <td>10</td>
+                  <td>{tour.adultSlot + tour.childrenSlot}</td>
                   <td
                     style={{
                       display: "flex",

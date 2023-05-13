@@ -17,6 +17,7 @@ function Payment() {
     cardNumber: "",
     expirationDate: "",
     cvv: "",
+    otp: "",
   });
   const [selectedOption, setSelectedOption] = useState("Tiền mặt");
   const [adult, setAdult] = useState(1);
@@ -50,6 +51,7 @@ function Payment() {
     adultPrice: tour.adultPrice,
     kidPrice: tour.childPrice,
     babyPrice: tour.babyPrice,
+    totalSlot: tour.adultSlot + tour.childrenSlot,
     adult: adult,
     setAdult: setAdult,
     kids: kids,
@@ -61,13 +63,15 @@ function Payment() {
     selectedOption: selectedOption,
     setSelectedOption: setSelectedOption,
   };
+  const handleCreateUserNew = () => {
 
+  }
   const total = adultPrice
     ? tour.adultPrice * adult + tour.childPrice * kids + tour.babyPrice * baby
     : 0;
 
   useEffect(() => {
-    // fetchTour();
+    fetchTour();
   }, []);
 
   return (
