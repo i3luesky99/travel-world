@@ -1,15 +1,20 @@
 import React from "react";
 import { iconPencil } from "../../../../../../theme/icon";
 import ButtonGroup from "./ButtonGroup";
+import { handleCreateTourDetail } from "../../../../../../services/tourService";
+import { useParams } from "react-router-dom";
 
 export default function Schedule(props) {
   const { dayDetail, setDayDetail } = props;
+  const { id } = useParams();
+
   const handleAddDay = () => {
     setDayDetail([
       ...dayDetail,
       {
         title: "",
         schedule: "",
+        tourId: id,
         isEdit: false,
       },
     ]);
@@ -42,7 +47,9 @@ export default function Schedule(props) {
     onEnableToEdit(index, true);
   };
 
-  const onSave = (index) => {
+  const onSave = async (index) => {
+    const { title, schedule, tourId } = dayDetail[index ];
+    await handleCreateTourDetail({ title, schedule, tourId });
     onEnableToEdit(index, false);
   };
 

@@ -1,47 +1,54 @@
 import React, { useState } from "react";
 import BaseTable from "../../../Components/BaseTable";
 import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
-import { destinationSouthern } from "../../../../../theme/data";
 import useModel from "../../../../../hook/useModel";
 import Loading from "../../../../../components/Loading/Loading";
+import { handleGetAllTour } from "../../../../../services/tourService";
+import { useEffect } from "react";
 
 export default function TourAdmin() {
   const [searchItem, setSearchItem] = useState("");
   const [page, setPage] = useState(1);
-  const [tours, setTours] = useState(destinationSouthern);
+  const [tours, setTours] = useState();
   const { isOpen: isLoading, openModel: setIsLoading } = useModel(false);
 
   const onPageChange = (e, value) => {
     setPage(value);
   };
 
-  const onFindTour = () => {
+  const onFindTour = async () => {
+    const data = await handleGetAllTour();
     if (searchItem) {
-      const tourById = destinationSouthern.filter((tour) => {
+      const newTour = data.tour.filter((tour) => {
         return (
-          tour.location.toLowerCase().includes(searchItem.toLowerCase()) ||
+          tour.placeDest.toLowerCase().includes(searchItem.toLowerCase()) ||
           tour.id.toString() === searchItem
         );
       });
-      fetchTour(tourById);
+      fetchTour(newTour);
     } else {
       fetchTour();
     }
   };
 
-  const fetchTour = (newTour) => {
+  const fetchTour = async (newTour) => {
+    const data = await handleGetAllTour();
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
       setSearchItem("");
-      setTours(newTour || destinationSouthern);
-    }, 2000);
+      setTours(newTour || data.tour);
+    }, 1000);
   };
+
+  useEffect(() => {
+    fetchTour();
+  }, []);
 
   const props = {
     tours: tours,
     setTours: setTours,
+    fetchTour: fetchTour,
   };
 
   return (
@@ -68,10 +75,10 @@ export default function TourAdmin() {
           </div>
         </div>
       </div>
-      {tours.length > 0 ? (
+      {tours?.length > 0 ? (
         <>
           <BaseTable {...props} />
-          <Stack className="stack">
+          {/* <Stack className="stack">
             <Pagination
               count={10}
               page={page}
@@ -79,7 +86,7 @@ export default function TourAdmin() {
               color="primary"
               onChange={onPageChange}
             />
-          </Stack>
+          </Stack> */}
         </>
       ) : (
         <div className="empty-text">Không có tour nào</div>

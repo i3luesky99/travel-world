@@ -11,6 +11,8 @@ import Day from "./components/Day";
 import Price from "./components/Price";
 import Schedule from "./components/Schedule";
 import Images from "./components/Images";
+import { useParams } from "react-router-dom";
+import { handleGetTourById } from "../../../../../services/tourService";
 moment.locale("vi");
 
 export default function TourDetailAdmin() {
@@ -20,15 +22,13 @@ export default function TourDetailAdmin() {
     placeGo: "",
     state: 0,
     adultPrice: "",
-    childrenPrice: "",
+    childPrice: "",
     adultSlot: "",
-    childrenSlot: "",
     babyPrice: "",
-    babySlot: "",
     note: "",
     transportation: "Xe du lịch đời mới",
   });
-
+  const { id } = useParams();
   const [isEdit, setIsEdit] = useState({
     nameTour: false,
     day: false,
@@ -49,9 +49,7 @@ export default function TourDetailAdmin() {
   ]);
 
   const [selectedImages, setSelectedImages] = useState([]);
-  const [dayDetail, setDayDetail] = useState([
-    { title: "trye", schedule: "123" },
-  ]);
+  const [dayDetail, setDayDetail] = useState([]);
 
   const startDate = `${moment(`${date[0].startDate}`).format("L")}`;
   const endDate = `${moment(`${date[0].endDate}`).format("L")}`;
@@ -98,8 +96,16 @@ export default function TourDetailAdmin() {
     setSelectedImages: setSelectedImages,
     deleteImage: deleteImage,
   };
+  const handleFetchTour = async () => {
+    const { tour } = await handleGetTourById(id);
+    setDayDetail(tour.tourDetailData);
+    setTour(tour);
+  };
 
-  useEffect(() => {}, [deleteImage]);
+  useEffect(() => {
+    handleFetchTour();
+  }, [deleteImage]);
+
   return (
     <div className="new-tour">
       <div className="title-admin">Chi tiết Tour</div>

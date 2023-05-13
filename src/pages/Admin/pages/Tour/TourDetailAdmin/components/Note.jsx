@@ -35,7 +35,11 @@ export default function Note(props) {
             <div>
               <div style={{ marginRight: "10px" }}>Mô tả :</div>
               {!isEdit.note && (
-                <div style={{ whiteSpace: "pre" }}>{tour?.note}</div>
+                <div
+                  style={{ whiteSpace: " break-spaces", textAlign: "justify", padding:'10px' }}
+                >
+                  {tour?.note}
+                </div>
               )}
             </div>
             {!isEdit.note ? (

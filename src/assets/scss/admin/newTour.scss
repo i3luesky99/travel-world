@@ -165,26 +165,3 @@ label {
     width: 120px;
   }
 }
-
-.dayDetail {
-  padding-left: 15px;
-  .day {
-    display: flex;
-    align-items: center;
-  }
-  input {
-    margin-top: 10px;
-  }
-  p {
-    margin-top: 10px;
-    white-space: nowrap;
-    margin-right: 10px;
-  }
-  .line {
-    width: 100%;
-    border: 1px solid #bababa;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    border-style: dashed;
-  }
-}

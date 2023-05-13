@@ -8,7 +8,7 @@ import PlaceGoCreate from "./components/PlaceGoCreate";
 import PlaceDestCreate from "./components/PlaceDestCreate";
 import NoteCreate from "./components/NoteCreate";
 import PriceCreate from "./components/PriceCreate";
-import ScheduleCreate from "./components/ScheduleCreate";
+import { handleCreateTour } from "../../../../../services/tourService";
 moment.locale("vi");
 
 export default function NewTour() {
@@ -16,16 +16,16 @@ export default function NewTour() {
     nameTour: "",
     placeDest: "",
     placeGo: "",
-    state: 0,
+    state: "s1",
     adultPrice: "",
-    childrenPrice: "",
+    childPrice: "",
     adultSlot: "",
-    childrenSlot: "",
     babyPrice: "",
-    babySlot: "",
     note: "",
     transportation: "Xe du lịch đời mới",
+    destinationId: 1,
   });
+
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -34,20 +34,21 @@ export default function NewTour() {
     },
   ]);
   const [selectedImages, setSelectedImages] = useState([]);
-  const [dayDetail, setDayDetail] = useState([]);
 
   const startDate = `${moment(`${date[0].startDate}`).format("L")}`;
   const endDate = `${moment(`${date[0].endDate}`).format("L")}`;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     const newTour = {
       ...tour,
       dateGo: startDate,
       dateBack: endDate,
-      dayDetail: dayDetail,
-      imgURL: selectedImages,
+
+      // imgURL: selectedImages,
     };
-    console.log(newTour);
+
+    const { tourId } = await handleCreateTour(newTour);
+    window.location.replace(`/admin/tour-detail/${tourId}`);
   };
 
   const handleChangeInput = (inputName, inputValue) => {
@@ -81,8 +82,6 @@ export default function NewTour() {
     [selectedImages]
   );
   const props = {
-    dayDetail: dayDetail,
-    setDayDetail: setDayDetail,
     tour: tour,
     setTour: setTour,
     handleChangeInput: handleChangeInput,
@@ -120,7 +119,6 @@ export default function NewTour() {
           </div>
         </div>
         <PriceCreate {...props} />
-        <ScheduleCreate {...props} />
         <div className="border">
           <label>
             Ảnh :
@@ -150,7 +148,7 @@ export default function NewTour() {
         </div>
         <div className="bottom">
           <div onClick={handleSubmit} className="button">
-            Tạo tour
+            Tạo lịch trình
           </div>
         </div>
       </form>

@@ -53,42 +53,18 @@ export default function Price(props) {
               marginRight: "20px",
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                marginBottom: "10px",
-              }}
-            >
-              <div style={{ display: !isEdit.price && "flex" }}>
-                <div style={{ marginRight: "10px" }}>Giá người lớn:</div>
-                {!isEdit.price ? (
-                  <div style={{ whiteSpace: "pre" }}>
-                    {formatCurrency(tour?.adultPrice)}
-                  </div>
-                ) : (
-                  <input
-                    value={tour.adultPrice}
-                    className="form-control"
-                    onChange={(e) =>
-                      handleChangeInput("adultPrice", e.target.value)
-                    }
-                    onKeyDown={handleKeyDown}
-                    style={{ maxWidth: "300px", margin: "0px" }}
-                  />
-                )}
-              </div>
-            </div>
             <div style={{ display: !isEdit.price && "flex" }}>
-              <div style={{ marginRight: "10px" }}>Số lượng người lớn:</div>
+              <div style={{ marginRight: "10px" }}>Giá người lớn:</div>
               {!isEdit.price ? (
-                <div style={{ whiteSpace: "pre" }}>{tour?.adultSlot}</div>
+                <div style={{ whiteSpace: "pre" }}>
+                  {formatCurrency(tour?.adultPrice)}
+                </div>
               ) : (
                 <input
-                  value={tour.adultSlot}
+                  value={tour.adultPrice}
                   className="form-control"
                   onChange={(e) =>
-                    handleChangeInput("adultSlot", e.target.value)
+                    handleChangeInput("adultPrice", e.target.value)
                   }
                   onKeyDown={handleKeyDown}
                   style={{ maxWidth: "300px", margin: "0px" }}
@@ -103,42 +79,18 @@ export default function Price(props) {
               marginRight: "20px",
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                marginBottom: "10px",
-              }}
-            >
-              <div style={{ display: !isEdit.price && "flex" }}>
-                <div style={{ marginRight: "10px" }}>Giá trẻ em:</div>
-                {!isEdit.price ? (
-                  <div style={{ whiteSpace: "pre" }}>
-                    {formatCurrency(tour?.childrenPrice)}
-                  </div>
-                ) : (
-                  <input
-                    value={tour.childrenPrice}
-                    className="form-control"
-                    onChange={(e) =>
-                      handleChangeInput("childrenPrice", e.target.value)
-                    }
-                    onKeyDown={handleKeyDown}
-                    style={{ maxWidth: "300px", margin: "0px" }}
-                  />
-                )}
-              </div>
-            </div>
             <div style={{ display: !isEdit.price && "flex" }}>
-              <div style={{ marginRight: "10px" }}>Số lượng trẻ em:</div>
+              <div style={{ marginRight: "10px" }}>Giá trẻ em:</div>
               {!isEdit.price ? (
-                <div style={{ whiteSpace: "pre" }}>{tour?.childrenSlot}</div>
+                <div style={{ whiteSpace: "pre" }}>
+                  {formatCurrency(tour?.childPrice)}
+                </div>
               ) : (
                 <input
-                  value={tour.childrenSlot}
+                  value={tour.childPrice}
                   className="form-control"
                   onChange={(e) =>
-                    handleChangeInput("childrenSlot", e.target.value)
+                    handleChangeInput("childPrice", e.target.value)
                   }
                   onKeyDown={handleKeyDown}
                   style={{ maxWidth: "300px", margin: "0px" }}
@@ -152,42 +104,42 @@ export default function Price(props) {
               flexDirection: "column",
             }}
           >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                marginBottom: "10px",
-              }}
-            >
-              <div style={{ display: !isEdit.price && "flex" }}>
-                <div style={{ marginRight: "10px" }}>Giá trẻ sơ sinh:</div>
-                {!isEdit.price ? (
-                  <div style={{ whiteSpace: "pre" }}>
-                    {formatCurrency(tour?.babyPrice)}
-                  </div>
-                ) : (
-                  <input
-                    value={tour.babyPrice}
-                    className="form-control"
-                    onChange={(e) =>
-                      handleChangeInput("babyPrice", e.target.value)
-                    }
-                    onKeyDown={handleKeyDown}
-                    style={{ maxWidth: "300px", margin: "0px" }}
-                  />
-                )}
-              </div>
-            </div>
             <div style={{ display: !isEdit.price && "flex" }}>
-              <div style={{ marginRight: "10px" }}>Số lượng trẻ sơ sinh:</div>
+              <div style={{ marginRight: "10px" }}>Giá trẻ sơ sinh:</div>
               {!isEdit.price ? (
-                <div style={{ whiteSpace: "pre" }}>{tour?.babySlot}</div>
+                <div style={{ whiteSpace: "pre" }}>
+                  {formatCurrency(tour?.babyPrice)}
+                </div>
               ) : (
                 <input
-                  value={tour.babySlot}
+                  value={tour.babyPrice}
                   className="form-control"
                   onChange={(e) =>
-                    handleChangeInput("babySlot", e.target.value)
+                    handleChangeInput("babyPrice", e.target.value)
+                  }
+                  onKeyDown={handleKeyDown}
+                  style={{ maxWidth: "300px", margin: "0px" }}
+                />
+              )}
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              marginLeft: "20px",
+            }}
+          >
+            <div style={{ display: !isEdit.price && "flex" }}>
+              <div style={{ marginRight: "10px" }}>Số lượng chỗ:</div>
+              {!isEdit.price ? (
+                <div style={{ whiteSpace: "pre" }}>{tour?.adultSlot}</div>
+              ) : (
+                <input
+                  value={tour.adultSlot}
+                  className="form-control"
+                  onChange={(e) =>
+                    handleChangeInput("adultSlot", e.target.value)
                   }
                   onKeyDown={handleKeyDown}
                   style={{ maxWidth: "300px", margin: "0px" }}

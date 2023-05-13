@@ -26,111 +26,69 @@ export default function PriceCreate(props) {
           style={{
             display: "flex",
             flexDirection: "column",
+            marginBottom: "10px",
             marginRight: "20px",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              marginBottom: "10px",
-            }}
-          >
-            <label>Giá người lớn:</label>
-            <input
-              value={tour.adultPrice}
-              className="form-control"
-              onChange={(e) => handleChangeInput("adultPrice", e.target.value)}
-              onKeyDown={handleKeyDown}
-              style={{ maxWidth: "300px", margin: "0px" }}
-            />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <label>Số lượng người lớn:</label>
-            <input
-              value={tour.adultSlot}
-              className="form-control"
-              onChange={(e) => handleChangeInput("adultSlot", e.target.value)}
-              style={{ maxWidth: "300px", margin: "0px" }}
-              onKeyDown={handleKeyDown}
-            />
-          </div>
+          <label>Giá người lớn:</label>
+          <input
+            value={tour.adultPrice}
+            className="form-control"
+            onChange={(e) => handleChangeInput("adultPrice", e.target.value)}
+            onKeyDown={handleKeyDown}
+            style={{ maxWidth: "300px", margin: "0px" }}
+          />
         </div>
         <div
           style={{
             display: "flex",
             flexDirection: "column",
+            marginBottom: "10px",
             marginRight: "20px",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              marginBottom: "10px",
-            }}
-          >
-            <label>Giá trẻ em:</label>
-            <input
-              value={tour.childrenPrice}
-              className="form-control"
-              onChange={(e) =>
-                handleChangeInput("childrenPrice", e.target.value)
-              }
-              style={{ maxWidth: "300px", margin: "0px" }}
-              onKeyDown={handleKeyDown}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <label>Số lượng trẻ em:</label>
-            <input
-              value={tour.childrenSlot}
-              className="form-control"
-              onChange={(e) =>
-                handleChangeInput("childrenSlot", e.target.value)
-              }
-              style={{ maxWidth: "300px", margin: "0px" }}
-              onKeyDown={handleKeyDown}
-            />
-          </div>
+          <label>Giá trẻ em:</label>
+          <input
+            value={tour.childPrice}
+            className="form-control"
+            onChange={(e) => handleChangeInput("childPrice", e.target.value)}
+            style={{ maxWidth: "300px", margin: "0px" }}
+            onKeyDown={handleKeyDown}
+          />
         </div>
         <div
           style={{
             display: "flex",
             flexDirection: "column",
+            marginBottom: "10px",
+            marginRight: "20px",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              marginBottom: "10px",
-            }}
-          >
-            <label>Giá trẻ sơ sinh:</label>
-            <input
-              value={tour.babyPrice}
-              className="form-control"
-              onChange={(e) => handleChangeInput("babyPrice", e.target.value)}
-              style={{ maxWidth: "300px", margin: "0px" }}
-              onKeyDown={handleKeyDown}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <label>Số lượng trẻ sơ sinh:</label>
-            <input
-              value={tour.babySlot}
-              className="form-control"
-              onChange={(e) => handleChangeInput("babySlot", e.target.value)}
-              style={{ maxWidth: "300px", margin: "0px" }}
-              onKeyDown={handleKeyDown}
-            />
-          </div>
+          <label>Giá trẻ sơ sinh:</label>
+          <input
+            value={tour.babyPrice}
+            className="form-control"
+            onChange={(e) => handleChangeInput("babyPrice", e.target.value)}
+            style={{ maxWidth: "300px", margin: "0px" }}
+            onKeyDown={handleKeyDown}
+          />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginBottom: "10px",
+            marginRight: "20px",
+          }}
+        >
+          <label>Số lượng chỗ:</label>
+          <input
+            value={tour.adultSlot}
+            className="form-control"
+            onChange={(e) => handleChangeInput("adultSlot", e.target.value)}
+            style={{ maxWidth: "300px", margin: "0px" }}
+            onKeyDown={handleKeyDown}
+          />
         </div>
       </div>
     </div>

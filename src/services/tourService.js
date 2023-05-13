@@ -20,4 +20,32 @@ const handleGetTourById = (id) => {
     },
   });
 };
-export { handleGetTourByRegion, handleGetTourById, handleGetTourByContinent };
+
+const handleCreateTour = (data) => {
+  return axios.post("/api/create-new-tour", { ...data });
+};
+
+const handleGetAllTour = () => {
+  return axios.get("/api/get-all-tour?id=ALL");
+};
+
+const handleDeleteTourById = (id) => {
+  return axios.delete("/api/delete-tour", {
+    data: {
+      id: id,
+    },
+  });
+};
+
+const handleCreateTourDetail = (data) => {
+  return axios.post("/api/day-detail/create", { ...data });
+};
+export {
+  handleGetTourByRegion,
+  handleGetTourById,
+  handleGetTourByContinent,
+  handleGetAllTour,
+  handleDeleteTourById,
+  handleCreateTour,
+  handleCreateTourDetail,
+};
