@@ -137,7 +137,7 @@ function Payment() {
 
   return (
     <div className="payment-page">
-      {invoice ? (
+      {!invoice ? (
         <>
           <TourPriceDetail {...props} />
           <form className="payment-form flex" onSubmit={handleSubmit}>
