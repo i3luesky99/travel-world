@@ -5,13 +5,14 @@ import useModel from "../../../../../hook/useModel";
 import Loading from "../../../../../components/Loading/Loading";
 import { handleGetAllTour } from "../../../../../services/tourService";
 import { useEffect } from "react";
+import { handleGetAllBookTour } from "../../../../../services/bookTourService";
 
 export default function TourAdmin() {
   const [searchItem, setSearchItem] = useState("");
   const [page, setPage] = useState(1);
   const [tours, setTours] = useState();
   const { isOpen: isLoading, openModel: setIsLoading } = useModel(false);
-
+  const [selection, setSelection] = useState("list");
   const onPageChange = (e, value) => {
     setPage(value);
   };
@@ -32,7 +33,10 @@ export default function TourAdmin() {
   };
 
   const fetchTour = async (newTour) => {
-    const data = await handleGetAllTour();
+    const data =
+      selection === "list"
+        ? await handleGetAllTour()
+        : await handleGetAllBookTour();
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
@@ -43,7 +47,7 @@ export default function TourAdmin() {
 
   useEffect(() => {
     fetchTour();
-  }, []);
+  }, [selection]);
 
   const props = {
     tours: tours,
@@ -57,6 +61,14 @@ export default function TourAdmin() {
       <div className="search">
         <div>Địa điểm / Mã Tour</div>
         <div className="search-bar">
+          <select
+            value={selection}
+            className="form-control"
+            onChange={(e) => setSelection(e.target.value)}
+          >
+            <option value="list">Danh sách Tour</option>
+            <option value="booking">Các Tour được đặt</option>
+          </select>
           <input
             type="text"
             value={searchItem}

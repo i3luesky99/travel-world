@@ -46,21 +46,6 @@ const TourDetail = () => {
     fetchTour();
   }, []);
 
-  // const daysDetail = [
-  //   {
-  //     title: "TP.HCM – TRƯƠNG GIA GIỚI (Ăn nhẹ, Ăn tối)",
-  //     schedule: `Ăn sáng. Làm thủ tục trả phòng. Đoàn khởi hành đi Phượng Hoàng Cổ Trấn. Trên đường đi, đoàn tham quan:
-
-  //     Đức Hang Miêu Trại,  trải nghiệm thưởng thức tiệc Trường Long và có cơ hội tìm hiểu Phong tục chặn cửa đón khách, mời rượu, hát hò - đây là nét đẹp văn hoá đặc trưng của người dân tộc Miêu bản địa. Đoàn dùng bữa trưa tại đây.`,
-  //   },
-  //   {
-  //     title: "TRƯƠNG GIA GIỚI – PHƯỢNG HOÀNG CỔ TRẤN (Ăn ba bữa)",
-  //     schedule: `Ăn sáng. Làm thủ tục trả phòng. Đoàn khởi hành đi Phượng Hoàng Cổ Trấn. Trên đường đi, đoàn tham quan:
-
-  //     Đức Hang Miêu Trại,  trải nghiệm thưởng thức tiệc Trường Long và có cơ hội tìm hiểu Phong tục chặn cửa đón khách, mời rượu, hát hò - đây là nét đẹp văn hoá đặc trưng của người dân tộc Miêu bản địa. Đoàn dùng bữa trưa tại đây.`,
-  //   },
-  // ];
-
   const headerTable = {
     id: "Mã tour",
     dateGo: "Ngày đi",
@@ -88,9 +73,7 @@ const TourDetail = () => {
   return (
     <div>
       <div className="tour-detail" ref={componentPDF}>
-        <div className="title">
-          {tour.nameTour}
-        </div>
+        <div className="title">{tour.nameTour}</div>
         <div className="top-tour">
           <div className="tour-image-container">
             <img
@@ -101,9 +84,7 @@ const TourDetail = () => {
           </div>
           <div className="top-right">
             <div className="top">
-              <div className="title border">
-                {tour.nameTour}
-              </div>
+              <div className="title border">{tour.nameTour}</div>
               <div className="border data">Mã tour : {tour.id}</div>
               <div className="border data">Thời gian: 6 ngày 5 đêm</div>
               <div className="border data">Khởi hành: {tour.dateGo}</div>

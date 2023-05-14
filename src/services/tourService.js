@@ -40,6 +40,11 @@ const handleDeleteTourById = (id) => {
 const handleCreateTourDetail = (data) => {
   return axios.post("/api/day-detail/create", { ...data });
 };
+
+const handleUpdateTour = (data) => {
+  return axios.put("/api/edit-tour", { ...data });
+};
+
 export {
   handleGetTourByRegion,
   handleGetTourById,
@@ -48,4 +53,5 @@ export {
   handleDeleteTourById,
   handleCreateTour,
   handleCreateTourDetail,
+  handleUpdateTour,
 };

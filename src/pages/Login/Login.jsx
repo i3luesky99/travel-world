@@ -46,7 +46,7 @@ export default function Login() {
             type="text"
             className="loginInput"
             name="email"
-            placeholder="Enter your email..."
+            placeholder="Nhập email"
             onChange={(event) => {
               handleOnChangeInput(event);
             }}
@@ -57,7 +57,7 @@ export default function Login() {
             type="password"
             className="loginInput"
             name="password"
-            placeholder="Enter your password..."
+            placeholder="Nhập mật khẩu"
             onChange={(event) => {
               handleOnChangeInput(event);
             }}

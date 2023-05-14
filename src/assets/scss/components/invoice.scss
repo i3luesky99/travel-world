@@ -8,6 +8,14 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
   border: 1px solid grey;
+  position: relative;
+  .icon {
+    width: 35px;
+    height: 35px;
+    right: 30px;
+    position: absolute;
+    cursor: pointer;
+  }
 }
 
 .invoice-container h2 {

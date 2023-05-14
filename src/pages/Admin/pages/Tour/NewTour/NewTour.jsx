@@ -20,6 +20,7 @@ export default function NewTour() {
     adultPrice: "",
     childPrice: "",
     adultSlot: "",
+    childrenSlot: 0,
     babyPrice: "",
     note: "",
     transportation: "Xe du lịch đời mới",

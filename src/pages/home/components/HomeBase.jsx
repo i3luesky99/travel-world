@@ -29,7 +29,7 @@ export default function HomeBase(props) {
   const [calendar, setCalendar] = useState(false);
   const { isOpen: isOpenSearchBar, openModel: openSearchBar } = useModel(false);
   const { isOpen: isOpenFloating, openModel: openFloating } = useModel(false);
-
+  const token = localStorage.getItem("accessToken");
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
@@ -67,6 +67,10 @@ export default function HomeBase(props) {
       behavior: "smooth",
     });
   };
+
+  const handleToAdmin = () => {
+    window.location.replace("/admin/tour/create");
+  };
   return (
     <>
       <Navbar />
@@ -83,7 +87,7 @@ export default function HomeBase(props) {
                 data-aos-duration="2500"
                 className="subTitle"
               >
-                Travel to your favorite city with respectful of the environment
+                Mang bạn đến những trải nghiệm khó quên ở những nơi tuyệt đẹp
               </p>
               <Calender />
 
@@ -163,39 +167,45 @@ export default function HomeBase(props) {
           <div className="floatingButton flex">
             {isOpenFloating && (
               <div className="activeFloating flex">
-                <Zoom in={true} timeout={{ enter: 500, exit: 500 }}>
-                  <Fab
-                    size="small"
-                    sx={{
-                      marginTop: "10px",
-                      background: "#e08d21",
-                      "&:hover": {
-                        background: "#cb5e0b",
-                      },
-                      borderRadius: "5px",
-                      width: "100px",
-                      position: "absolute",
-                      top: "-50px",
-                      right: "0px",
-                    }}
-                    aria-label="add"
+                {token && (
+                  <Zoom
+                    in={true}
+                    timeout={{ enter: 500, exit: 500 }}
+                    onClick={handleToAdmin}
                   >
-                    <AiOutlinePlusCircle
-                      onClick={onScrollToSearchBar}
-                      style={{ fontSize: "20px", color: "white" }}
-                    />
-                    <p
-                      style={{
-                        fontSize: "11px",
-                        textTransform: "capitalize",
-                        color: "white",
-                        marginLeft: "3px",
+                    <Fab
+                      size="small"
+                      sx={{
+                        marginTop: "10px",
+                        background: "#e08d21",
+                        "&:hover": {
+                          background: "#cb5e0b",
+                        },
+                        borderRadius: "5px",
+                        width: "100px",
+                        position: "absolute",
+                        top: "-50px",
+                        right: "0px",
                       }}
+                      aria-label="add"
                     >
-                      Thêm Tour
-                    </p>
-                  </Fab>
-                </Zoom>
+                      <AiOutlinePlusCircle
+                        onClick={onScrollToSearchBar}
+                        style={{ fontSize: "20px", color: "white" }}
+                      />
+                      <p
+                        style={{
+                          fontSize: "11px",
+                          textTransform: "capitalize",
+                          color: "white",
+                          marginLeft: "3px",
+                        }}
+                      >
+                        Thêm Tour
+                      </p>
+                    </Fab>
+                  </Zoom>
+                )}
                 <Zoom in={true} timeout={{ enter: 500, exit: 500 }}>
                   <Fab
                     size="small"

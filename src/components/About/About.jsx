@@ -11,27 +11,27 @@ export default function About() {
   const items = [
     {
       id: 1,
-      title: "1000+ Mountains",
-      desc: "Research shows that a chance to break away from the normal rhythms of daily life reduces stress and improves health and well-being",
+      title: "1000+ Ngọn núi",
+      desc: "Nghiên cứu cho thấy rằng một cơ hội để thoát khỏi nhịp độ bình thường của cuộc sống hàng ngày giúp giảm căng thẳng và cải thiện sức khỏe và hạnh phúc",
       img: require("../../assets/picture/mountain.jpg"),
     },
     {
       id: 1,
-      title: "1023+ Hiking",
-      desc: "Research shows that a chance to break away from the normal rhythms of daily life reduces stress and improves health and well-being",
+      title: "1023+ Con đường",
+      desc: "Nghiên cứu cho thấy rằng một cơ hội để thoát khỏi nhịp độ bình thường của cuộc sống hàng ngày giúp giảm căng thẳng và cải thiện sức khỏe và hạnh phúc",
       img: require("../../assets/picture/hiking.jpg"),
     },
     {
       id: 1,
-      title: "1100+ Customers",
-      desc: "Research shows that a chance to break away from the normal rhythms of daily life reduces stress and improves health and well-being",
+      title: "1100+ Người tham gia",
+      desc: "Nghiên cứu cho thấy rằng một cơ hội để thoát khỏi nhịp độ bình thường của cuộc sống hàng ngày giúp giảm căng thẳng và cải thiện sức khỏe và hạnh phúc",
       img: require("../../assets/picture/customer.jpg"),
     },
   ];
   return (
     <section className="about section">
       <div className="secContainer">
-        <h3 className="title">Why Hiking ?</h3>
+        <h3 className="title">Đi bộ, tại sao không ?</h3>
 
         <div className="mainContent container grid">
           {items.map((item, index) => (
@@ -55,10 +55,10 @@ export default function About() {
               data-aos="fade-right"
               data-aos-duration={2000}
             >
-              <h2>Wonderful House experience in there</h2>
+              <h2>Trải nghiệm những điều tuyệt vời nơi đây</h2>
               <p>
-                The Adventure sub ranking is based on an equally weighted
-                average of scores from five country.
+                Mức độ của cuộc phiêu lưu dựa trên những thang điểm đã có từ
+                trước của các quốc gia
               </p>
             </div>
 

@@ -12,11 +12,16 @@ import Price from "./components/Price";
 import Schedule from "./components/Schedule";
 import Images from "./components/Images";
 import { useParams } from "react-router-dom";
-import { handleGetTourById } from "../../../../../services/tourService";
+import {
+  handleGetTourById,
+  handleUpdateTour,
+} from "../../../../../services/tourService";
 moment.locale("vi");
 
 export default function TourDetailAdmin() {
+  const { id } = useParams();
   const [tour, setTour] = useState({
+    id: id,
     nameTour: "",
     placeDest: "",
     placeGo: "",
@@ -28,7 +33,6 @@ export default function TourDetailAdmin() {
     note: "",
     transportation: "Xe du lịch đời mới",
   });
-  const { id } = useParams();
   const [isEdit, setIsEdit] = useState({
     nameTour: false,
     day: false,
@@ -54,17 +58,17 @@ export default function TourDetailAdmin() {
   const startDate = `${moment(`${date[0].startDate}`).format("L")}`;
   const endDate = `${moment(`${date[0].endDate}`).format("L")}`;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     const newTour = {
       ...tour,
       dateGo: startDate,
       dateBack: endDate,
-      dayDetail: dayDetail,
-      imgURL: selectedImages,
+      // dayDetail: dayDetail,
+      // imgURL: selectedImages,
     };
-    console.log(newTour);
+    await handleUpdateTour(newTour);
+    window.location.replace(`/admin/tour-detail/${id}`);
   };
-
   const handleChangeInput = (inputName, inputValue) => {
     setTour((state) => ({
       ...state,
