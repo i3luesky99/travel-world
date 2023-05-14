@@ -86,10 +86,10 @@ const TourDetail = () => {
             <div className="top">
               <div className="title border">{tour.nameTour}</div>
               <div className="border data">Mã tour : {tour.id}</div>
-              <div className="border data">Thời gian: 6 ngày 5 đêm</div>
+              <div className="border data">Thời gian: 3 ngày 2 đêm</div>
               <div className="border data">Khởi hành: {tour.dateGo}</div>
               <div className="border data">
-                {tour.transportation}
+                Vận Chuyển: {tour.transportation} {" "}
                 {/* Vận Chuyển: Xe du lịch đời mới & Máy bay khứ hồi{" "} */}
               </div>
               <div className="data">Xuất phát: {tour.placeGo}</div>

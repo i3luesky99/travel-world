@@ -1,5 +1,5 @@
 import axios from "../axios";
-const handleGetAllBookTour = () => {
-  return axios.get("/api/get-all-bookTour");
+const handleCreateBookTour = (data) => {
+    return axios.post("/api/create-new-bookTour", data);
 };
-export { handleGetAllBookTour };
+export { handleCreateBookTour };

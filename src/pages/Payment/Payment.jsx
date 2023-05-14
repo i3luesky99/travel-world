@@ -7,6 +7,7 @@ import Momo from "./components/Momo";
 import TourPriceDetail from "./components/TourPriceDetail";
 import { useParams } from "react-router-dom";
 import { handleGetTourById } from "../../services/tourService";
+import { handleCreateBookTour } from "../../services/bookTourService";
 import AuthMethods from "./components/AuthMethods";
 import {
   handleOtpApi,
@@ -47,7 +48,7 @@ function Payment() {
     });
   };
 
-  const handleCreateUserNew = () => {};
+
 
   const handleVerifyPhoneOtp = async () => {
     const dataApi = await handleVerifyPhoneOtpApi({
@@ -77,8 +78,8 @@ function Payment() {
   };
   const total =
     tour?.adultPrice * adult +
-      tour?.childPrice * kids +
-      tour?.babyPrice * baby || 0;
+    tour?.childPrice * kids +
+    tour?.babyPrice * baby || 0;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -109,6 +110,11 @@ function Payment() {
     total: total,
     tour: tour,
   };
+  const handleCreateUserNew = () => {
+
+  }
+
+
   useEffect(() => {
     fetchTour();
   }, []);
