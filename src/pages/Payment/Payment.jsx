@@ -8,6 +8,7 @@ import TourPriceDetail from "./components/TourPriceDetail";
 import { useParams } from "react-router-dom";
 import { handleGetTourById } from "../../services/tourService";
 import AuthMethods from "./components/AuthMethods";
+import { handleVNPay } from "../../services/vnPayService";
 import {
   handleOtpApi,
   handleVerifyPhoneOtpApi,
@@ -48,15 +49,25 @@ function Payment() {
   };
 
   const handleVerifyPhoneOtp = async () => {
-    const dataApi = await handleVerifyPhoneOtpApi({
-      phone: parseInt(paymentInfo.phone),
-      code: paymentInfo.otp,
-    });
-    if (dataApi.errCode !== 0) {
-      //
-      console.log("lỗi");
-    } else {
-      console.log("Thành công");
+    // const dataApi = await handleVerifyPhoneOtpApi({
+    //   phone: parseInt(paymentInfo.phone),
+    //   code: paymentInfo.otp,
+    // });
+    try {
+      const dataApi = handleVerifyPhoneOtpApi({
+        phone: parseInt(paymentInfo.phone),
+        otp: paymentInfo.otp,
+      });
+      if (dataApi.status && dataApi.status === 'pending') { setError(true); } else {
+        setInvoice(true);
+        setError(false);
+      }
+
+
+
+    } catch (error) {
+
+      return error;
     }
   };
 
@@ -66,6 +77,19 @@ function Payment() {
         email: paymentInfo.email,
         otp: paymentInfo.otp,
       });
+      await handleCreateBookTour({
+        tourId: tourId,
+        customerId: localStorage.getItem("userId"),
+        adultSlot: adult,
+        childrenSlot: kids,
+        date: new Date(),
+        type: null,
+        paymentId: 'P3',
+        state: 'S3',
+        note: 'success'
+
+      })
+
       setInvoice(true);
       setError(false);
     } catch (error) {
@@ -83,7 +107,7 @@ function Payment() {
     if (selectedOptionAuth === "Email") {
       handleVerifyEmailOtp();
     } else {
-      // handleVerifyPhoneOtp();
+      handleVerifyPhoneOtp();
     }
   };
   const props = {
@@ -137,7 +161,7 @@ function Payment() {
             {selectedOption === "Momo" && <Momo {...props} />}
             <AuthMethods {...props} />
 
-            <p className="totalText">Tổng tiền</p>
+            <p className="totalText" ><a href="http://localhost:8888/order/create_payment_url">Tổng tiền</a></p>
             <div className="tourTotalPrice flex">
               <label>{formatCurrency(total)}</label>
             </div>

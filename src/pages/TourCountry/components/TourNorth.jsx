@@ -32,7 +32,7 @@ function TourNorth() {
       dataTransfer.id = element.id;
       dataTransfer.title = element.nameTour;
       dataTransfer.location = element.placeDest;
-      dataTransfer.totalDays = 4;//dateBack-dateGo
+      dataTransfer.totalDays = 3;//dateBack-dateGo
       dataTransfer.dateStart = new Date().toLocaleString();//dateGo
       //desc = note
       dataTransfer.desc = element.note;

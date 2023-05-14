@@ -53,7 +53,7 @@ export default function TourCountry() {
         dataTransferSouth.id = element.id;
         dataTransferSouth.title = element.nameTour;
         dataTransferSouth.location = element.placeDest;
-        dataTransferSouth.totalDays = 4;//dateBack-dateGo
+        dataTransferSouth.totalDays = 3;//dateBack-dateGo
         dataTransferSouth.dateStart = element.dateGo;//dateGo
         //desc = note
         dataTransferSouth.desc = element.note;
@@ -102,7 +102,7 @@ export default function TourCountry() {
         dataTransferNorth.id = element.id;
         dataTransferNorth.title = element.nameTour;
         dataTransferNorth.location = element.placeDest;
-        dataTransferNorth.totalDays = 4;//dateBack-dateGo
+        dataTransferNorth.totalDays = 3;//dateBack-dateGo
         dataTransferNorth.dateStart = element.dateGo;//dateGo
         //desc = note
         dataTransferNorth.desc = element.note;
@@ -151,7 +151,7 @@ export default function TourCountry() {
         dataTransferCentral.id = element.id;
         dataTransferCentral.title = element.nameTour;
         dataTransferCentral.location = element.placeDest;
-        dataTransferCentral.totalDays = 4;//dateBack-dateGo
+        dataTransferCentral.totalDays = 3;//dateBack-dateGo
         dataTransferCentral.dateStart = element.dateGo;//dateGo
         //desc = note
         dataTransferCentral.desc = element.note;
