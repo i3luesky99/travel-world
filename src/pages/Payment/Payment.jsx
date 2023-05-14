@@ -14,6 +14,7 @@ import {
   handleVerifyPhoneOtpApi,
 } from "../../services/otpService";
 import Invoice from "./components/Invoice";
+import { handleCreateBookTour } from "../../services/bookTourService";
 
 function Payment() {
   const [paymentInfo, setPaymentInfo] = useState({
@@ -58,15 +59,13 @@ function Payment() {
         phone: parseInt(paymentInfo.phone),
         otp: paymentInfo.otp,
       });
-      if (dataApi.status && dataApi.status === 'pending') { setError(true); } else {
+      if (dataApi.status && dataApi.status === "pending") {
+        setError(true);
+      } else {
         setInvoice(true);
         setError(false);
       }
-
-
-
     } catch (error) {
-
       return error;
     }
   };
@@ -84,11 +83,10 @@ function Payment() {
         childrenSlot: kids,
         date: new Date(),
         type: null,
-        paymentId: 'P3',
-        state: 'S3',
-        note: 'success'
-
-      })
+        paymentId: "P3",
+        state: "S3",
+        note: "success",
+      });
 
       setInvoice(true);
       setError(false);
@@ -161,7 +159,11 @@ function Payment() {
             {selectedOption === "Momo" && <Momo {...props} />}
             <AuthMethods {...props} />
 
-            <p className="totalText" ><a href="http://localhost:8888/order/create_payment_url">Tổng tiền</a></p>
+            <p className="totalText">
+              <a href="http://localhost:8888/order/create_payment_url">
+                Tổng tiền
+              </a>
+            </p>
             <div className="tourTotalPrice flex">
               <label>{formatCurrency(total)}</label>
             </div>
