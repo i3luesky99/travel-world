@@ -4,69 +4,43 @@ function UserForm(props) {
   const { email } = props;
   const [userForm, setUserForm] = useState({
     email: email,
-    fullName: '',
-    phoneNumber: '',
-    address: '',
-    password: '',
-    confirmPassword: '',
-    roleId: 'R2'
+    fullName: "",
+    phoneNumber: "",
+    address: "",
+    password: "",
+    confirmPassword: "",
+    roleId: "R2",
   });
   const [warning, setWarning] = useState(false);
   const phoneNumberRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
-  const str = "0906624069";
   const handleClear = () => {
     setUserForm({
-
-      fullName: '',
-      phoneNumber: '',
-      address: '',
-      password: '',
-      confirmPassword: '',
+      fullName: "",
+      phoneNumber: "",
+      address: "",
+      password: "",
+      confirmPassword: "",
     });
   };
-  // let data = await handleCreateUserApi(userForm);
   const handleChangeInput = (inputName, inputValue) => {
     setUserForm((state) => ({
       ...state,
       [inputName]: inputValue,
     }));
-
   };
   const handleCreateUser = async () => {
     for (const [key, value] of Object.entries(userForm)) {
       if (value === "" && key !== "address") {
-
         setWarning(true);
         return;
       }
     }
-
     await handleCreateUserApi(userForm);
-
-  }
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-
-      for (const [key, value] of Object.entries(userForm)) {
-        if (value === "" && key !== "address") {
-
-          setWarning(true);
-          return;
-        }
-      }
-      setWarning(false);
-      //
-    } catch (error) {
-
-      console.log(error)
-    }
-
+    window.location.replace("/");
   };
 
-  //
   return (
-    <form className="registerForm" onSubmit={handleSubmit}>
+    <form className="registerForm">
       <span className="registerTitle">Thông tin</span>
       <label>Họ và tên</label>
       <input
@@ -88,7 +62,9 @@ function UserForm(props) {
         onChange={(e) => handleChangeInput("phoneNumber", e.target.value)}
         style={{
           borderColor:
-            !userForm.phoneNumber.match(phoneNumberRegex) && warning ? "red" : "black",
+            !userForm.phoneNumber.match(phoneNumberRegex) && warning
+              ? "red"
+              : "black",
         }}
       />
       <label>Địa chỉ</label>

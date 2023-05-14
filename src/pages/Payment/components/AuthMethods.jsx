@@ -1,72 +1,46 @@
 import React, { useEffect, useState } from "react";
 import {
   handlePhoneOtpApi,
-  handleVerifyPhoneOtpApi,
-  handleOtpApi,
   handleEmailOtpApi,
 } from "../../../services/otpService";
 export default function AuthMethods(props) {
-  const { paymentInfo, handleInputChange } = props;
-  const [selectedOption, setSelectedOption] = useState("Số diện thoại");
+  const {
+    paymentInfo,
+    handleInputChange,
+    selectedOptionAuth,
+    setSelectedOptionAuth,
+    error,
+  } = props;
   const [resendOTP, setResendOTP] = useState(false);
   const [resendOTPPhone, setResendOTPPhone] = useState(false);
   const [countdown, setCountdown] = useState(10);
 
   const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
+    setSelectedOptionAuth(event.target.value);
   };
+
   const handleCreatePhoneOtp = async () => {
     const regex = /^([1-9])+([0-9]{8})$/;
     if (regex.test(paymentInfo.phone)) {
       setResendOTPPhone(true);
-      const dataApi = await handlePhoneOtpApi({
+      await handlePhoneOtpApi({
         phone: parseInt(paymentInfo.phone),
       });
-      if (dataApi.errCode !== 0) {
-        //
-        console.log("lỗi");
-      } else {
-        console.log("Thành công");
-      }
     } else {
       alert("Số điện thoại không hợp lệ");
     }
   };
-  const handleCreateEmailOtp = async () => {
-    setResendOTP(true);
 
-    const dataApi = await handleEmailOtpApi({ email: paymentInfo.email });
-    if (dataApi.errCode !== 0) {
-      //
-      console.log("lỗi");
+  const handleCreateEmailOtp = async () => {
+    const regexEmail = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    if (paymentInfo.email.match(regexEmail)) {
+      setResendOTP(true);
+      await handleEmailOtpApi({ email: paymentInfo.email });
     } else {
-      console.log("Thành công");
+      alert("Email không hợp lệ");
     }
   };
-  const handleVerifyPhoneOtp = async () => {
-    const dataApi = await handleVerifyPhoneOtpApi({
-      phone: parseInt(paymentInfo.phone),
-      code: paymentInfo.otp,
-    });
-    if (dataApi.errCode !== 0) {
-      //
-      console.log("lỗi");
-    } else {
-      console.log("Thành công");
-    }
-  };
-  const handleVerifyEmailOtp = async () => {
-    const dataApi = await handleOtpApi({
-      email: paymentInfo.email,
-      code: paymentInfo.otp,
-    });
-    if (dataApi.errCode !== 0) {
-      //
-      console.log("lỗi");
-    } else {
-      console.log("Thành công");
-    }
-  };
+
   useEffect(() => {
     let timer;
     if ((countdown > 0 && resendOTP) || (countdown > 0 && resendOTPPhone)) {
@@ -78,7 +52,7 @@ export default function AuthMethods(props) {
       setCountdown(60);
     }
     return () => clearTimeout(timer);
-  }, [countdown, resendOTP]);
+  }, [countdown, resendOTP, resendOTPPhone]);
 
   return (
     <>
@@ -89,7 +63,7 @@ export default function AuthMethods(props) {
             <input
               type="radio"
               value="Số diện thoại"
-              checked={selectedOption === "Số diện thoại"}
+              checked={selectedOptionAuth === "Số diện thoại"}
               onChange={handleOptionChange}
             />
             <p>Số điện thoại</p>
@@ -100,7 +74,7 @@ export default function AuthMethods(props) {
             <input
               type="radio"
               value="Email"
-              checked={selectedOption === "Email"}
+              checked={selectedOptionAuth === "Email"}
               onChange={handleOptionChange}
             />
             <p>Email</p>
@@ -108,7 +82,7 @@ export default function AuthMethods(props) {
         </div>
       </div>
       <div className="info">
-        {selectedOption === "Email" ? (
+        {selectedOptionAuth === "Email" ? (
           <div className="optionPayment">
             <label>Nhập email :</label>
             <input
@@ -179,13 +153,7 @@ export default function AuthMethods(props) {
             )}
           </div>
         )}
-
-        <div
-          className="optionPayment"
-          onClick={() => {
-            handleVerifyPhoneOtp();
-          }}
-        >
+        <div className="optionPayment">
           <label>Nhập OTP Code :</label>
           <input
             type="text"
@@ -193,6 +161,22 @@ export default function AuthMethods(props) {
             value={paymentInfo.otp}
             onChange={handleInputChange}
           />
+          {error && (
+            <div
+              style={{
+                width: "170px",
+                background: "red",
+                height: "35px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: "7px",
+                color: "white",
+              }}
+            >
+              OTP sai hoặc rỗng
+            </div>
+          )}
         </div>
       </div>
     </>

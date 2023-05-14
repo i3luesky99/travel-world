@@ -1,0 +1,23 @@
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(
+    90deg,
+    rgb(209, 131, 131) 0%,
+    rgb(223 204 70) 50%,
+    #e08d21 100%
+  );
+  color: white;
+  .error-title {
+    font-size: 6rem;
+    margin-bottom: 2rem;
+    font-family: "digital-7 (italic)";
+  }
+  .error-message {
+    font-size: 2rem;
+    font-family: "digital-7 (italic)";
+  }
+}

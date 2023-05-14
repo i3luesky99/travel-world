@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import moment from "moment";
 import "aos/dist/aos.css";
@@ -42,26 +42,24 @@ export default function Calender() {
     default:
       break;
   }
-  const fetchWeatherData = async () => {
+  const fetchWeatherData = useCallback(async () => {
     try {
       const { data } = await axios.get(url);
       setData(data);
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [url]);
   const temp = data?.main?.temp ? (data?.main?.temp - 273.15).toFixed(0) : 0;
   const city = data?.name ? data?.name : "Ho Chi Minh City";
   const date = `${day}, ${moment().format("Do/MM/YY")}`;
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
       setLat(position.coords.latitude);
       setLong(position.coords.longitude);
     });
     long && fetchWeatherData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lat, long]);
+  }, [lat, long, fetchWeatherData]);
 
   return (
     <div className="calendar flex " data-aos="fade-up">

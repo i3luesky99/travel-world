@@ -1,0 +1,90 @@
+.invoice-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  border: 1px solid grey;
+}
+
+.invoice-container h2 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0095ff;
+  text-shadow: 1px 1px #fff;
+}
+
+.details-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.details-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.details-label {
+  font-weight: bold;
+  margin-right: 10px;
+  flex-basis: 150px;
+  color: #444;
+}
+
+.details-value {
+  font-size: 18px;
+  flex-grow: 1;
+  text-align: right;
+  color: #0095ff;
+}
+
+.details-row:last-child {
+  border-top: 1px solid #ccc;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+.details-row:last-child .details-label {
+  font-weight: bold;
+  color: #0095ff;
+}
+
+.details-row:last-child .details-value {
+  font-size: 20px;
+  font-weight: bold;
+  color: #0095ff;
+}
+
+.details-row:last-child .details-value::before,
+.details-row:last-child .details-value::after {
+  content: "";
+}
+
+@media only screen and (max-width: 768px) {
+  .invoice-container {
+    max-width: 90%;
+  }
+
+  .details-label {
+    flex-basis: 120px;
+  }
+
+  .details-value {
+    font-size: 16px;
+  }
+
+  .details-row:last-child .details-value {
+    font-size: 18px;
+  }
+}

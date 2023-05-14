@@ -1,16 +1,12 @@
-// import "./login.css";
 import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
-import axios from "axios";
 import { handleLoginApi } from "../../services/loginService";
-import { color } from "@mui/system";
 import localStorageService from "../../services/localStorageService";
 export default function Login() {
-
   const [loginInfo, setLoginInfo] = useState({
-    email: '',
-    password: '',
-    errMessage: ''
+    email: "",
+    password: "",
+    errMessage: "",
   });
 
   const emailRef = useRef();
@@ -19,60 +15,30 @@ export default function Login() {
   const handleOnChangeInput = (event) => {
     setLoginInfo({
       ...loginInfo,
-      [event.target.name]: event.target.value
-    })
+      [event.target.name]: event.target.value,
+    });
+  };
 
-
-  }
-  const handleLogin = async (req, res) => {
-    setLoginInfo({ ...loginInfo, errMessage: '' })
+  const handleLogin = async () => {
     try {
-      let data = await handleLoginApi(loginInfo.email, loginInfo.password);
-      if (data && data.errCode !== 0) {
-        setLoginInfo({ ...loginInfo, errMessage: data.errMessage })
-      }
-      if (data && data.errCode === 0) {
-        // alert('Đăng nhập thành công');
-        // Login in successfully
-        localStorageService.saveUser(data.accessToken);
-        window.location.replace("/");
-
-      }
-
+       const data = await handleLoginApi(loginInfo.email, loginInfo.password);
+      const user = data.user;
+      localStorageService.saveUser(data.accessToken);
+      localStorage.setItem("roleId", user.roleId);
+      localStorage.setItem("userId", user.id);
+      setLoginInfo({ ...loginInfo, errMessage: "" });
+      user.roleId === "R2"
+        ? window.location.replace("/")
+        : window.location.replace("/admin");
     } catch (error) {
-      console.log(error);
-      if (error.response) {
-        if (error.response.data) {
-          setLoginInfo(...loginInfo, {
-            errMessage: error.response.data.errMessage
-          })
-        }
-      }
+      setLoginInfo({ ...loginInfo, errMessage: "Sai thông tin đăng nhập" });
     }
-  }
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // dispatch({ type: "LOGIN_START" });
-    // try {
-    //   const res = await axios.post("http://localhost:3001/api/auths/login", {
-    //     email: emailRef.current.value,
-    //     password: passwordRef.current.value,
-    //   });
-    //   dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-    //   res.data && window.location.replace("/");
-    // } catch (error) {
-    //   dispatch({ type: "LOGIN_FAILURE" });
-    // }
   };
 
   return (
     <div className="login">
-      <img
-        alt=""
-        src={require("../../assets/picture/map.jpg")}
-      // style={{ width: "100px", height: "100px" }}
-      />
-      <form className="loginForm" onSubmit={handleSubmit}>
+      <img alt="" src={require("../../assets/picture/map.jpg")} />
+      <div className="loginForm">
         <div className="card">
           <span className="loginTitle">Đăng nhập</span>
           <label>Email</label>
@@ -81,7 +47,9 @@ export default function Login() {
             className="loginInput"
             name="email"
             placeholder="Enter your email..."
-            onChange={(event) => { handleOnChangeInput(event) }}
+            onChange={(event) => {
+              handleOnChangeInput(event);
+            }}
             ref={emailRef}
           />
           <label>Mật khẩu</label>
@@ -90,15 +58,16 @@ export default function Login() {
             className="loginInput"
             name="password"
             placeholder="Enter your password..."
-            onChange={(event) => { handleOnChangeInput(event) }}
+            onChange={(event) => {
+              handleOnChangeInput(event);
+            }}
             ref={passwordRef}
           />
-          <span style={{ color: "red", marginTop: "15px" }}>{loginInfo.errMessage}</span>
+          <span style={{ color: "red", marginTop: "15px" }}>
+            {loginInfo.errMessage}
+          </span>
           <div className="bottom">
-            <button className="btn loginButton"
-              type="submit"
-              onClick={() => { handleLogin() }}
-            >
+            <button className="btn loginButton" onClick={handleLogin}>
               Đăng nhập
             </button>
             <button className="btn loginRegisterButton">
@@ -108,7 +77,7 @@ export default function Login() {
             </button>
           </div>
         </div>
-      </form >
-    </div >
+      </div>
+    </div>
   );
 }
