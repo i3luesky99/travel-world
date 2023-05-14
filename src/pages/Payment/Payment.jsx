@@ -7,6 +7,7 @@ import Momo from "./components/Momo";
 import TourPriceDetail from "./components/TourPriceDetail";
 import { useLocation, useParams } from "react-router-dom";
 import { handleGetTourById } from "../../services/tourService";
+import { handleCreateBookTour } from "../../services/bookTourService";
 import AuthMethods from "./components/AuthMethods";
 
 function Payment() {
@@ -66,6 +67,22 @@ function Payment() {
   const handleCreateUserNew = () => {
 
   }
+  const handleCreateNewBookTour = async () => {
+    const dataBookTour = {
+      tourId: tourId,
+      customerId: 2,
+      adultSlot: adult,
+      childrenSlot: kids,
+      date: new Date(),
+      type: null,
+      paymentId: 1,
+      state: "S3",
+      note: null,
+    }
+    const dataApi = await handleCreateBookTour(dataBookTour);
+
+
+  }
   const total = adultPrice
     ? tour.adultPrice * adult + tour.childPrice * kids + tour.babyPrice * baby
     : 0;
@@ -96,7 +113,9 @@ function Payment() {
         <div className="tourTotalPrice flex">
           <label>{formatCurrency(total)}</label>
         </div>
-        <button type="submit">Thanh toán</button>
+        <button type="submit" onClick={() => {
+          handleCreateNewBookTour();
+        }}>Thanh toán</button>
       </form>
     </div>
   );
