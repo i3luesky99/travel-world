@@ -4,7 +4,6 @@ import { handleOtpApi } from "../../../services/otpService";
 import UserForm from "./UserForm";
 import { handleRegisterApi } from "../../../services/registerService";
 
-
 function OTPForm(props) {
   const { handleSubmit, email } = props;
   const [otp, setOtp] = useState();
@@ -15,9 +14,8 @@ function OTPForm(props) {
   // const otpRef = useRef("");
   const [otpRegex, setOtpRegex] = useState(false);
   const [otpInfo, setOtpInfo] = useState({
-
     errCode: 1,
-    errMessage: ''
+    errMessage: "",
   });
   const onHandleOTP = () => {
     if (otp === otpNum) {
@@ -27,15 +25,14 @@ function OTPForm(props) {
   };
   const HandleGetOtp = async () => {
     await handleRegisterApi({ email: email });
-  }
+  };
   const onHandleToUserForm = async (e) => {
-    setOtpInfo({ ...otpInfo, errMessage: '' });
+    setOtpInfo({ ...otpInfo, errMessage: "" });
     try {
       let data = await handleOtpApi({ email, otp });
       if (data && data.errCode !== 0) {
         setOtpInfo({ ...otpInfo, errMessage: data.errMessage });
         setOtpRegex(true);
-
       } else {
         if (data && data.errCode === 0) {
           e.preventDefault();
@@ -45,16 +42,12 @@ function OTPForm(props) {
 
           setStyle("registerForm registerAnimation");
         }
-
       }
-
     } catch (error) {
-      setOtpInfo({ ...otpInfo, errMessage: 'Invalid OTP!' });
+      setOtpInfo({ ...otpInfo, errMessage: "OTP không đúng!" });
       setOtpRegex(true);
-      console.log(error)
-
+      console.log(error);
     }
-
   };
 
   return (
@@ -64,7 +57,7 @@ function OTPForm(props) {
           <span className="registerTitle">OTP</span>
           <input
             className="registerInput"
-            placeholder="Enter your otp code ..."
+            placeholder="Nhập mã OTP ..."
             onChange={(e) => setOtp(e.target.value)}
           />
           {otpRegex && (
@@ -90,9 +83,7 @@ function OTPForm(props) {
           </div>
         </div>
       ) : (
-        <UserForm
-          email={email}
-        />
+        <UserForm email={email} />
       )}
     </>
   );
