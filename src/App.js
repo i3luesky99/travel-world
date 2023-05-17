@@ -16,7 +16,8 @@ import { Provider } from "react-redux";
 
 function App() {
   const child = <Outlet />;
-  const role = localStorage.getItem("roleId");
+  // const role = localStorage.getItem("roleId");
+  const role = "R1";
   return (
     <Provider store={store}>
       <BrowserRouter>

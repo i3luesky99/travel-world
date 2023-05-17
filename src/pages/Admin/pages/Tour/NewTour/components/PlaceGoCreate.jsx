@@ -4,7 +4,7 @@ export default function PlaceGoCreate(props) {
   const { tour, handleChangeInput } = props;
 
   return (
-    <div style={{ marginTop: "10px" }}>
+    <div>
       <div>Xuất phát :</div>
       <input
         type="text"
@@ -13,7 +13,6 @@ export default function PlaceGoCreate(props) {
         style={{
           margin: "0px",
           marginTop: "10px",
-          marginBottom: "10px",
         }}
         onChange={(e) => handleChangeInput("placeGo", e.target.value)}
       />

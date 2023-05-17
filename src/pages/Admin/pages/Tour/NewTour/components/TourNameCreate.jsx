@@ -4,7 +4,7 @@ export default function TourNameCreate(props) {
   const { tour, handleChangeInput } = props;
 
   return (
-    <div style={{ marginTop: "10px" }}>
+    <div>
       <div>Tên Tour :</div>
       <input
         type="text"
@@ -12,7 +12,6 @@ export default function TourNameCreate(props) {
         value={tour.nameTour}
         style={{
           marginTop: "10px",
-          marginBottom: "5px",
         }}
         onChange={(e) => handleChangeInput("nameTour", e.target.value)}
       />

@@ -13,63 +13,60 @@ export default function PriceCreate(props) {
   };
 
   return (
-    <div className="border" style={{ marginBottom: "10px" }}>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          marginBottom: "20px",
-        }}
-      >
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+      }}
+    >
+      <div style={{ width: "50%", marginRight: "10px" }}>
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             marginBottom: "10px",
-            marginRight: "20px",
           }}
         >
-          <label>Giá người lớn:</label>
+          <div>Giá người lớn:</div>
           <input
             value={tour.adultPrice}
             className="form-control"
             onChange={(e) => handleChangeInput("adultPrice", e.target.value)}
             onKeyDown={handleKeyDown}
-            style={{ maxWidth: "300px", margin: "0px" }}
+            style={{ maxWidth: "300px", marginTop: "10px" }}
           />
         </div>
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            marginBottom: "10px",
-            marginRight: "20px",
           }}
         >
-          <label>Giá trẻ em:</label>
+          <div>Giá trẻ em:</div>
           <input
             value={tour.childPrice}
             className="form-control"
             onChange={(e) => handleChangeInput("childPrice", e.target.value)}
-            style={{ maxWidth: "300px", margin: "0px" }}
+            style={{ maxWidth: "300px", marginTop: "10px" }}
             onKeyDown={handleKeyDown}
           />
         </div>
+      </div>
+      <div style={{ width: "50%" }}>
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             marginBottom: "10px",
-            marginRight: "20px",
           }}
         >
-          <label>Giá trẻ sơ sinh:</label>
+          <div>Giá trẻ sơ sinh:</div>
           <input
             value={tour.babyPrice}
             className="form-control"
             onChange={(e) => handleChangeInput("babyPrice", e.target.value)}
-            style={{ maxWidth: "300px", margin: "0px" }}
+            style={{ maxWidth: "300px", marginTop: "10px" }}
             onKeyDown={handleKeyDown}
           />
         </div>
@@ -77,16 +74,14 @@ export default function PriceCreate(props) {
           style={{
             display: "flex",
             flexDirection: "column",
-            marginBottom: "10px",
-            marginRight: "20px",
           }}
         >
-          <label>Số lượng chỗ:</label>
+          <div>Số lượng chỗ:</div>
           <input
             value={tour.adultSlot}
             className="form-control"
             onChange={(e) => handleChangeInput("adultSlot", e.target.value)}
-            style={{ maxWidth: "300px", margin: "0px" }}
+            style={{ maxWidth: "300px", marginTop: "10px" }}
             onKeyDown={handleKeyDown}
           />
         </div>

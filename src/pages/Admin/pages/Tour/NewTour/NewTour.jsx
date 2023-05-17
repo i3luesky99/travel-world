@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DateRange } from "react-date-range";
 import moment from "moment";
 import * as locales from "react-date-range/dist/locale";
@@ -9,12 +9,16 @@ import PlaceDestCreate from "./components/PlaceDestCreate";
 import NoteCreate from "./components/NoteCreate";
 import PriceCreate from "./components/PriceCreate";
 import { handleCreateTour } from "../../../../../services/tourService";
+import { convertToBase64 } from "../../../../../theme/functions";
+import { iconPicture } from "../../../../../theme/icon";
+import TourType from "./components/TourType";
+import Region from "./components/Region";
 moment.locale("vi");
 
 export default function NewTour() {
   const [tour, setTour] = useState({
     nameTour: "",
-    placeDest: "",
+    placeDest: "Thành phố Hồ Chí Minh",
     placeGo: "",
     state: "s1",
     adultPrice: "",
@@ -25,8 +29,11 @@ export default function NewTour() {
     note: "",
     transportation: "Xe du lịch đời mới",
     destinationId: 1,
+    tourType: "Trong nước",
+    region: "Miền Trung",
+    continent: "Châu Á",
   });
-
+  const [base64, setBase64] = useState("");
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -34,8 +41,8 @@ export default function NewTour() {
       key: "selection",
     },
   ]);
-  const [selectedImages, setSelectedImages] = useState([]);
-
+  const [selectedImages, setSelectedImages] = useState();
+  const [warning, setWarning] = useState(false);
   const startDate = `${moment(`${date[0].startDate}`).format("L")}`;
   const endDate = `${moment(`${date[0].endDate}`).format("L")}`;
 
@@ -44,12 +51,22 @@ export default function NewTour() {
       ...tour,
       dateGo: startDate,
       dateBack: endDate,
-
-      // imgURL: selectedImages,
+      imgURL: base64,
     };
     // imageToBase64();
-    const { tourId } = await handleCreateTour(newTour);
-    window.location.replace(`/admin/tour-detail/${tourId}`);
+    try {
+      for (const [key, value] of Object.entries(newTour)) {
+        if (value === "" && key !== "inviteCode") {
+          setWarning(true);
+          return;
+        }
+      }
+      const { tourId } = await handleCreateTour(newTour);
+      window.location.replace(`/admin/tour-detail/${tourId}`);
+      console.log(newTour);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleChangeInput = (inputName, inputValue) => {
@@ -58,40 +75,40 @@ export default function NewTour() {
       [inputName]: inputValue,
     }));
   };
-
   //Get image from local
   const handleImageChange = (e) => {
-    const newFiles = Array.from(e.target.files);
-    setSelectedImages((prevFiles) => [...prevFiles, ...newFiles]);
+    const url = URL.createObjectURL(e.target.files[0]);
+    setSelectedImages(url);
+    convertToBase64(url)
+      .then((base64String) => {
+        setBase64(base64String);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
-  //Change to URL image
-  const fileList = selectedImages.map((file) => {
-    return {
-      file,
-      url: URL.createObjectURL(file),
-    };
-  });
-
-  const deleteImage = useCallback(
-    (indexSelected) => {
-      const newImageList = selectedImages.filter((file, index) => {
-        return index !== indexSelected;
-      });
-      setSelectedImages(newImageList);
-    },
-    [selectedImages]
-  );
-
-  // const imageToBase64 = () => {
-  //   console.log(fileList[0].url);
-  //   var reader = new FileReader();
-  //   reader.readAsDataURL(fileList[0].url);
-  //   reader.onloadend = function () {
-  //     var base64data = reader.result;
-  //     console.log(base64data);
+  // Change to URL image
+  // const fileList = selectedImages.map((file) => {
+  //   // console.log(file.File);
+  //   const url = URL.createObjectURL(file);
+  //   // console.log(url)
+  //   convertToBase64(url)
+  //     .then((base64String) => {
+  //       setBase64(base64String);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  //   return {
+  //     file,
+  //     url: url,
   //   };
-  // };
+  // });
+
+  const deleteImage = () => {
+    setSelectedImages("");
+  };
 
   const props = {
     tour: tour,
@@ -99,65 +116,118 @@ export default function NewTour() {
     handleChangeInput: handleChangeInput,
   };
 
-  useEffect(() => {}, [deleteImage]);
+  useEffect(() => {}, []);
   return (
     <div className="new-tour">
       <div className="title-admin">Thêm mới Tour</div>
-      <form>
+      <form style={{ marginTop: "20px" }}>
         <div className="top border">
-          <label>Thời điểm :</label>
           <div className="calendar">
-            <div>
-              <DateRange
-                editableDateInputs={true}
-                onChange={(item) => setDate([item.selection])}
-                moveRangeOnFirstSelection={false}
-                ranges={date}
-                locale={locales["vi"]}
-              />
-              <PlaceGoCreate {...props} />
-              <PlaceDestCreate {...props} />
-            </div>
-            <div className="day">
-              <div style={{ display: "flex" }}>
-                Ngày đi :<p>{startDate}</p>
-                <p style={{ marginLeft: "10px", marginRight: "10px" }}>-</p>
-                Ngày về :<p>{endDate}</p>
-              </div>
-              <TourNameCreate {...props} />
-              <TransportationCreate {...props} />
-              <NoteCreate {...props} />
-            </div>
-          </div>
-        </div>
-        <PriceCreate {...props} />
-        <div className="border">
-          <label>
-            Ảnh :
-            <input
-              id="image-place"
-              type="file"
-              multiple
-              onChange={handleImageChange}
-            />
-            <div className="button-select">
-              <div className="text">Chọn hoặc thả ảnh vào đây</div>
-            </div>
-          </label>
-          <div className="image-selected">
-            {fileList.map((image, index) => (
-              <div className="picture" key={`${index}-image`}>
-                <img src={image.url} alt="Selected" />
-                <img
-                  src={require("../../../../../assets/picture/icon/cancel.png")}
-                  alt=""
-                  className="icon"
-                  onClick={() => deleteImage(index)}
+            <div style={{ display: "flex" }}>
+              <div
+                style={{
+                  height: "700px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  flexDirection: "column",
+                }}
+              >
+                <DateRange
+                  editableDateInputs={true}
+                  onChange={(item) => setDate([item.selection])}
+                  moveRangeOnFirstSelection={false}
+                  ranges={date}
+                  locale={locales["vi"]}
                 />
+                <PlaceGoCreate {...props} />
+                <PlaceDestCreate {...props} />
+                <PriceCreate {...props} />
               </div>
-            ))}
+              <div
+                className="day"
+                style={{
+                  height: "700px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  flexDirection: "column",
+                }}
+              >
+                <div
+                  style={{
+                    height: "354px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexDirection: "column",
+                  }}
+                >
+                  <div style={{ display: "flex" }}>
+                    Ngày đi :<p>{startDate}</p>
+                    <p style={{ marginLeft: "10px", marginRight: "10px" }}>-</p>
+                    Ngày về :<p>{endDate}</p>
+                  </div>
+                  <TourNameCreate {...props} />
+                  <TransportationCreate {...props} />
+                  <TourType {...props} />
+                  <Region {...props} />
+                </div>
+
+                <div>
+                  <label>
+                    Ảnh :
+                    <input
+                      id="image-place"
+                      type="file"
+                      multiple
+                      onChange={handleImageChange}
+                    />
+                    <div
+                      className="button-select"
+                      style={{ marginTop: "10px" }}
+                    >
+                      <div className="text">Chọn hoặc thả ảnh vào đây</div>
+                    </div>
+                  </label>
+                  <div className="image-selected">
+                    <div className="picture">
+                      {selectedImages ? (
+                        <>
+                          <img
+                            src={selectedImages}
+                            alt="sl"
+                            className="selected-img"
+                          />
+                          <img
+                            src={require("../../../../../assets/picture/icon/cancel.png")}
+                            alt="ic"
+                            className="icon"
+                            onClick={() => deleteImage()}
+                          />
+                        </>
+                      ) : (
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                          }}
+                        >
+                          <img
+                            src={iconPicture}
+                            alt="icp"
+                            className="icon-picture"
+                          />
+                          <div>Ảnh đầu trang</div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <NoteCreate {...props} />
           </div>
         </div>
+
         <div className="bottom">
           <div onClick={handleSubmit} className="button">
             Tạo lịch trình
