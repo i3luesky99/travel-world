@@ -225,9 +225,17 @@ function Payment() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (selectedOptionAuth === "Email" && paymentInfo.name !== '' && paymentInfo.email !== '') {
+      setPaymentInfo({
+        ...paymentInfo,
+        ['phone']: '',
+      });
       handleVerifyEmailOtp();
     } else {
       if (paymentInfo.name !== '' && paymentInfo.phone !== '') {
+        setPaymentInfo({
+          ...paymentInfo,
+          ['email']: '',
+        });
         handleVerifyPhoneOtp();
       }
 
@@ -265,7 +273,7 @@ function Payment() {
       {!invoice ? (
         <>
           <TourPriceDetail {...props} />
-          <form className="payment-form flex" onSubmit={handleSubmit}>
+          <form className="payment-form flex" action="http://localhost:8080/create_payment_url" method="post">
             <GuestContact {...props} />
             <PaymentMethod {...props} />
             <div
