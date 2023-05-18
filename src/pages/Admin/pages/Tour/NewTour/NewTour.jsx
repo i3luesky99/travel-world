@@ -18,8 +18,8 @@ moment.locale("vi");
 export default function NewTour() {
   const [tour, setTour] = useState({
     nameTour: "",
-    placeDest: "Thành phố Hồ Chí Minh",
-    placeGo: "",
+    placeDest: "",
+    placeGo: "Thành phố Hồ Chí Minh",
     state: "s1",
     adultPrice: "",
     childPrice: "",
