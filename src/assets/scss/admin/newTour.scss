@@ -120,6 +120,7 @@ label {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: white;
     &:hover {
       .icon {
         display: block;
@@ -150,7 +151,7 @@ label {
   display: none;
 }
 .button-select {
-  min-height: 60px;
+  min-height: 95px;
   width: 100%;
   border: 1px solid #bababa;
   display: flex;
@@ -175,4 +176,8 @@ label {
   .button {
     width: 120px;
   }
+}
+
+.rdrCalendarWrapper {
+  height: 381px !important;
 }

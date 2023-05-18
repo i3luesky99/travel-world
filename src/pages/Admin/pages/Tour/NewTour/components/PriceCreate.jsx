@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function PriceCreate(props) {
-  const { tour, handleChangeInput } = props;
+  const { tour, handleChangeInput, warning } = props;
 
   const handleKeyDown = (event) => {
     const keyCode = event.keyCode || event.which; // Get the keyCode of the key pressed
@@ -34,7 +34,11 @@ export default function PriceCreate(props) {
             className="form-control"
             onChange={(e) => handleChangeInput("adultPrice", e.target.value)}
             onKeyDown={handleKeyDown}
-            style={{ maxWidth: "300px", marginTop: "10px" }}
+            style={{
+              maxWidth: "300px",
+              marginTop: "10px",
+              border: warning && !tour.adultPrice && "1px solid #dc3545",
+            }}
           />
         </div>
         <div
@@ -48,7 +52,11 @@ export default function PriceCreate(props) {
             value={tour.childPrice}
             className="form-control"
             onChange={(e) => handleChangeInput("childPrice", e.target.value)}
-            style={{ maxWidth: "300px", marginTop: "10px" }}
+            style={{
+              maxWidth: "300px",
+              marginTop: "10px",
+              border: warning && !tour.childPrice && "1px solid #dc3545",
+            }}
             onKeyDown={handleKeyDown}
           />
         </div>
@@ -66,7 +74,11 @@ export default function PriceCreate(props) {
             value={tour.babyPrice}
             className="form-control"
             onChange={(e) => handleChangeInput("babyPrice", e.target.value)}
-            style={{ maxWidth: "300px", marginTop: "10px" }}
+            style={{
+              maxWidth: "300px",
+              marginTop: "10px",
+              border: warning && !tour.babyPrice && "1px solid #dc3545",
+            }}
             onKeyDown={handleKeyDown}
           />
         </div>
@@ -81,7 +93,11 @@ export default function PriceCreate(props) {
             value={tour.adultSlot}
             className="form-control"
             onChange={(e) => handleChangeInput("adultSlot", e.target.value)}
-            style={{ maxWidth: "300px", marginTop: "10px" }}
+            style={{
+              maxWidth: "300px",
+              marginTop: "10px",
+              border: warning && !tour.adultSlot && "1px solid #dc3545",
+            }}
             onKeyDown={handleKeyDown}
           />
         </div>

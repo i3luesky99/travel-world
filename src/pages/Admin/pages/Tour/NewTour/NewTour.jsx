@@ -53,7 +53,6 @@ export default function NewTour() {
       dateBack: endDate,
       image: base64,
     };
-    // imageToBase64();
     try {
       for (const [key, value] of Object.entries(newTour)) {
         if (value === "" && key !== "inviteCode") {
@@ -61,9 +60,9 @@ export default function NewTour() {
           return;
         }
       }
+      setWarning(false);
       const { tourId } = await handleCreateTour(newTour);
       window.location.replace(`/admin/tour-detail/${tourId}`);
-      console.log(newTour);
     } catch (error) {
       console.log(error);
     }
@@ -108,12 +107,14 @@ export default function NewTour() {
 
   const deleteImage = () => {
     setSelectedImages("");
+    setBase64("");
   };
 
   const props = {
     tour: tour,
     setTour: setTour,
     handleChangeInput: handleChangeInput,
+    warning: warning,
   };
 
   useEffect(() => {}, []);
@@ -126,19 +127,23 @@ export default function NewTour() {
             <div style={{ display: "flex" }} className="border-white">
               <div
                 style={{
-                  height: "700px",
+                  height: "780px",
                   display: "flex",
                   justifyContent: "space-between",
                   flexDirection: "column",
                 }}
               >
-                <DateRange
-                  editableDateInputs={true}
-                  onChange={(item) => setDate([item.selection])}
-                  moveRangeOnFirstSelection={false}
-                  ranges={date}
-                  locale={locales["vi"]}
-                />
+                <div className="border-white">
+                  <div style={{ marginBottom: "10px" }}>
+                    <DateRange
+                      editableDateInputs={true}
+                      onChange={(item) => setDate([item.selection])}
+                      moveRangeOnFirstSelection={false}
+                      ranges={date}
+                      locale={locales["vi"]}
+                    />
+                  </div>
+                </div>
                 <PlaceGoCreate {...props} />
                 <PlaceDestCreate {...props} />
                 <PriceCreate {...props} />
@@ -146,7 +151,7 @@ export default function NewTour() {
               <div
                 className="day"
                 style={{
-                  height: "700px",
+                  height: "780px",
                   display: "flex",
                   justifyContent: "space-between",
                   flexDirection: "column",
@@ -161,10 +166,14 @@ export default function NewTour() {
                     flexDirection: "column",
                   }}
                 >
-                  <div style={{ display: "flex" }}>
-                    Ngày đi :<p>{startDate}</p>
-                    <p style={{ marginLeft: "10px", marginRight: "10px" }}>-</p>
-                    Ngày về :<p>{endDate}</p>
+                  <div className="border-white">
+                    <div style={{ display: "flex", marginBottom: "10px" }}>
+                      Ngày đi :<p>{startDate}</p>
+                      <p style={{ marginLeft: "10px", marginRight: "10px" }}>
+                        -
+                      </p>
+                      Ngày về :<p>{endDate}</p>
+                    </div>
                   </div>
                   <TourNameCreate {...props} />
                   <TransportationCreate {...props} />
@@ -189,7 +198,13 @@ export default function NewTour() {
                     </div>
                   </label>
                   <div className="image-selected">
-                    <div className="picture">
+                    <div
+                      className="picture"
+                      style={{
+                        border:
+                          warning && !selectedImages && "1px solid #dc3545",
+                      }}
+                    >
                       {selectedImages ? (
                         <>
                           <img
@@ -229,10 +244,18 @@ export default function NewTour() {
           </div>
         </div>
 
-        <div className="bottom">
+        <div
+          className="bottom"
+          style={{ display: "flex", flexDirection: "column" }}
+        >
           <div onClick={handleSubmit} className="button">
             Tạo lịch trình
           </div>
+          {warning && (
+            <div className="red-text">
+              Không được để rỗng các ô còn để trống
+            </div>
+          )}
         </div>
       </form>
     </div>

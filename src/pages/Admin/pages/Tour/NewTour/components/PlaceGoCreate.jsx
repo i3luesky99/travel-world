@@ -5,13 +5,12 @@ export default function PlaceGoCreate(props) {
   const destGo = ["Thành phố Hồ Chí Minh", "Hà Nội", "Đà Nẵng"];
 
   return (
-    <div>
+    <div className="border-white">
       <div>Xuất phát :</div>
-
       <select
         className="form-control"
         value={tour.placeGo}
-        style={{ fontSize: "14px", marginTop: "10px" }}
+        style={{ fontSize: "14px", marginTop: "10px", marginBottom: "10px" }}
         onChange={(e) => handleChangeInput("placeGo", e.target.value)}
       >
         {destGo.map((dest, index) => (

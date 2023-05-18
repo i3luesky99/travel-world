@@ -227,14 +227,14 @@ function Payment() {
     if (selectedOptionAuth === "Email" && paymentInfo.name !== '' && paymentInfo.email !== '') {
       setPaymentInfo({
         ...paymentInfo,
-        ['phone']: '',
+        'phone': '',
       });
       handleVerifyEmailOtp();
     } else {
       if (paymentInfo.name !== '' && paymentInfo.phone !== '') {
         setPaymentInfo({
           ...paymentInfo,
-          ['email']: '',
+          'email': '',
         });
         handleVerifyPhoneOtp();
       }

@@ -9,12 +9,12 @@ export default function TransportationCreate(props) {
     "Xe du lịch đời mới & Máy bay khứ hồi",
   ];
   return (
-    <div>
+    <div className="border-white">
       <div>Phương tiện đưa đón:</div>
       <select
         className="form-control"
         value={tour.transportation}
-        style={{ fontSize: "14px", marginTop: "10px" }}
+        style={{ fontSize: "14px", marginTop: "10px", marginBottom: "10px" }}
         onChange={(e) => handleChangeInput("transportation", e.target.value)}
       >
         {transportation.map((transport, index) => (
