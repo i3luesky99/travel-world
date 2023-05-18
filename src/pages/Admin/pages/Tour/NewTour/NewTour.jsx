@@ -51,7 +51,7 @@ export default function NewTour() {
       ...tour,
       dateGo: startDate,
       dateBack: endDate,
-      imgURL: base64,
+      image: base64,
     };
     // imageToBase64();
     try {
