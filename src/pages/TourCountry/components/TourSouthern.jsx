@@ -24,6 +24,7 @@ function TourSouthern() {
         location: "Đà Nẵng",
         totalDays: 3,
         dateStart: "22/03/2023",
+        dateGo: "",
         slots: 10,
         prices: 3000000,
         desc: "Du lịch Đà Nẵng - Huế - Thánh Địa La Vang - Động Phong Phong Nha từ Sài Gòn 2023. Du lịch Miền Trung - Tour Du lịch Đà Nẵng được thiên nhiên đặc biệt ưu đãi, mảnh đất miền Trung đẹp với nhiều dãy núi hùng vỹ xanh rì, những bờ biển cát trắng mịn thoai thoải và những dòng sông trong vắt thơ mộng. Không những vậy, trên con đường di sản miền Trung cùng Du Lịch Việt, du khách còn được thưởng ngoạn những di sản thế giới cuả Việt Nam đó là Phố cổ Hội An – nơi bến cảng một thời sầm uất nhất Đông Dương, quần thể di tích Cố Đô Huế với hệ thống đền đài lăng tẩm nguy nga tráng lệ và Động Phong Nha với nhiều hang động kì bí của tạo hóa.",
@@ -36,6 +37,7 @@ function TourSouthern() {
       dataTransfer.totalDays = 3;//dateBack-dateGo
       dataTransfer.dateStart = new Date().toLocaleString();//dateGo
       //desc = note
+      dataTransfer.dateGo = element.dateGo;
       dataTransfer.desc = element.note;
       dataTransfer.slots = element.adultSlot + element.childrenSlot;
       dataTransfer.prices = element.adultPrice;
