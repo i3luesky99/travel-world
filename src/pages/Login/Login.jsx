@@ -21,8 +21,9 @@ export default function Login() {
 
   const handleLogin = async () => {
     try {
-       const data = await handleLoginApi(loginInfo.email, loginInfo.password);
+      const data = await handleLoginApi(loginInfo.email, loginInfo.password);
       const user = data.user;
+      //console.log(data);
       localStorageService.saveUser(data.accessToken);
       localStorage.setItem("roleId", user.roleId);
       localStorage.setItem("userId", user.id);
