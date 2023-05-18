@@ -9,6 +9,9 @@ import { useParams } from "react-router-dom";
 import { handleGetTourById } from "../../services/tourService";
 import AuthMethods from "./components/AuthMethods";
 import { handleVNPay } from "../../services/vnPayService";
+import { handleGetUserByEmail, handleCreateUserApi, handleGetUserByPhone, handleCreateUserByPhoneApi } from "../../services/userService";
+import { handleLoginByPhoneApi, handleLoginApi } from "../../services/loginService";
+import localStorageService from "../../services/localStorageService";
 import {
   handleOtpApi,
   handleVerifyPhoneOtpApi,
@@ -55,41 +58,160 @@ function Payment() {
     //   code: paymentInfo.otp,
     // });
     try {
-      const dataApi = handleVerifyPhoneOtpApi({
+      await handleVerifyPhoneOtpApi({
         phone: parseInt(paymentInfo.phone),
-        otp: paymentInfo.otp,
+        code: paymentInfo.otp,
+      }).then(async (dataOTPPhone) => {
+        if (dataOTPPhone.status && dataOTPPhone.status === "pending") {
+          setError(true);
+
+        } else {
+          if (localStorage.getItem("userId") === null) {
+            ///phone
+            if (paymentInfo.phone !== '' && paymentInfo.name !== '') {
+              try {
+                await handleGetUserByPhone("0" + paymentInfo.phone).then(async (user) => {
+                  if (user.errCode === 1) {
+                    await handleCreateUserByPhoneApi({
+                      email: "",
+                      password: "123456",
+                      fullName: paymentInfo.name,
+                      address: "",
+                      phoneNumber: paymentInfo.phone,
+                      gender: "",
+                      roleId: "R2"
+                    }).then((userNew) => {
+                      if (userNew.errCode !== 0) {
+                        alert(userNew.errMessage);
+                      }
+                    })
+                    const dataLogin = await handleLoginByPhoneApi(paymentInfo.phone, '123456');
+                    if (dataLogin) {
+                      const user = dataLogin.user;
+                      localStorageService.saveUser(dataLogin.accessToken);
+                      localStorage.setItem("roleId", user.roleId);
+                      localStorage.setItem("userId", user.id);
+                    }
+
+                  } else {
+                    if (user.errCode === 0) {
+                      localStorageService.saveUser(dataOTPPhone.accessToken);
+                      localStorage.setItem("roleId", dataOTPPhone.user.roleId);
+                      localStorage.setItem("userId", dataOTPPhone.user.id);
+                    }
+                  }
+                });
+              } catch (error) {
+
+              }
+
+            }
+
+          }
+          ///tao bookTour
+          await handleCreateBookTour({
+            tourId: tourId,
+            customerId: localStorage.getItem("userId"),
+            adultSlot: adult,
+            childrenSlot: kids,
+            date: new Date(),
+            type: null,
+            paymentId: "P4",
+            state: "S1",
+            note: "book success",
+          });
+          setInvoice(true);
+          setError(false);
+        }
       });
-      if (dataApi.status && dataApi.status === "pending") {
-        setError(true);
-      } else {
-        setInvoice(true);
-        setError(false);
-      }
+
+
     } catch (error) {
+      setError(true);
       return error;
     }
   };
 
   const handleVerifyEmailOtp = async () => {
     try {
+
       await handleOtpApi({
         email: paymentInfo.email,
         otp: paymentInfo.otp,
-      });
-      await handleCreateBookTour({
-        tourId: tourId,
-        customerId: localStorage.getItem("userId"),
-        adultSlot: adult,
-        childrenSlot: kids,
-        date: new Date(),
-        type: null,
-        paymentId: "P3",
-        state: "S3",
-        note: "success",
+      }).then(async (data) => {
+        if (data.errCode === 0) {
+          //console.log(data);
+          ///khong otp ddung 
+          //kieemr tra da co user ddang nhap hay chua
+          // chua dang nhap tao use bang email voi pass 123456
+          //va tu dong dang nhap
+          if (localStorage.getItem("userId") === null) {
+            if (paymentInfo.email !== '' && paymentInfo.name !== '') {
+              try {
+                await handleGetUserByEmail(paymentInfo.email).then(async (user) => {
+                  if (user.errCode === 1) {
+                    await handleCreateUserApi({
+                      email: paymentInfo.email,
+                      password: "123456",
+                      fullName: paymentInfo.name,
+                      address: "",
+                      phoneNumber: paymentInfo.phone,
+                      gender: "",
+                      roleId: "R2"
+                    }).then((userNew) => {
+                      if (userNew.errCode !== 0) {
+                        alert(userNew.errMessage);
+                      }
+                    })
+                    const userLogin = await handleLoginApi(paymentInfo.email, '123456');
+                    if (userLogin) {
+                      const user = userLogin.user;
+                      localStorageService.saveUser(userLogin.accessToken);
+                      localStorage.setItem("roleId", user.roleId);
+                      localStorage.setItem("userId", user.id);
+                    }
+
+                  } else {
+                    if (user.errCode === 0) {
+                      localStorageService.saveUser(data.accessToken);
+                      localStorage.setItem("roleId", data.user.roleId);
+                      localStorage.setItem("userId", data.user.id);
+                    }
+                  }
+
+                });
+              } catch (error) {
+
+              }
+
+            }
+
+          }
+          ///tao bookTour
+          if (localStorage.getItem("userId") !== null) {
+            await handleCreateBookTour({
+              tourId: tourId,
+              customerId: localStorage.getItem("userId"),
+              adultSlot: adult,
+              childrenSlot: kids,
+              date: new Date(),
+              type: null,
+              paymentId: "P4",
+              state: "S1",
+              note: "book success",
+            });
+
+            setInvoice(true);
+            setError(false);
+          }
+
+        } else {
+          alert(data.errMessage);
+          setError(true);
+        }
+
       });
 
-      setInvoice(true);
-      setError(false);
     } catch (error) {
       setError(true);
       return error;
@@ -97,15 +219,18 @@ function Payment() {
   };
   const total =
     tour?.adultPrice * adult +
-      tour?.childPrice * kids +
-      tour?.babyPrice * baby || 0;
+    tour?.childPrice * kids +
+    tour?.babyPrice * baby || 0;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (selectedOptionAuth === "Email") {
+    if (selectedOptionAuth === "Email" && paymentInfo.name !== '' && paymentInfo.email !== '') {
       handleVerifyEmailOtp();
     } else {
-      handleVerifyPhoneOtp();
+      if (paymentInfo.name !== '' && paymentInfo.phone !== '') {
+        handleVerifyPhoneOtp();
+      }
+
     }
   };
   const props = {
@@ -129,7 +254,7 @@ function Payment() {
     total: total,
     tour: tour,
   };
-  const handleCreateUserNew = () => {};
+  const handleCreateUserNew = () => { };
 
   useEffect(() => {
     fetchTour();
