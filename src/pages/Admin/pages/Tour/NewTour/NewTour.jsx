@@ -123,7 +123,7 @@ export default function NewTour() {
       <form style={{ marginTop: "20px" }}>
         <div className="top border">
           <div className="calendar">
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex" }} className="border-white">
               <div
                 style={{
                   height: "700px",
@@ -150,6 +150,7 @@ export default function NewTour() {
                   display: "flex",
                   justifyContent: "space-between",
                   flexDirection: "column",
+                  marginBottom: "20px",
                 }}
               >
                 <div

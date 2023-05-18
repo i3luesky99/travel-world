@@ -59,4 +59,22 @@ const convertToBlob = (base64String) => {
   return blob;
 };
 
-export { formatCurrency, convertToBase64, convertToBlob };
+const calculateDateDifference = (startDate, endDate) => {
+  const oneDay = 24 * 60 * 60 * 1000; // Số milliseconds trong một ngày
+
+  // Chuyển đổi ngày thành đối tượng Date
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  // Tính toán số ngày giữa hai ngày
+  const diffInDays = Math.round(Math.abs((end - start) / oneDay));
+
+  return diffInDays;
+};
+
+export {
+  formatCurrency,
+  convertToBase64,
+  convertToBlob,
+  calculateDateDifference,
+};

@@ -4,7 +4,7 @@ export default function NoteCreate(props) {
   const { tour, handleChangeInput } = props;
 
   return (
-    <div style={{ marginTop: "10px" }}>
+    <div style={{ marginTop: "10px" }} className="border-white">
       <div>Mô tả :</div>
       <textarea
         value={tour.note}
