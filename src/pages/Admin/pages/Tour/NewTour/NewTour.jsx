@@ -2,17 +2,19 @@ import React, { useEffect, useState } from "react";
 import { DateRange } from "react-date-range";
 import moment from "moment";
 import * as locales from "react-date-range/dist/locale";
-import TourNameCreate from "./components/TourNameCreate";
-import TransportationCreate from "./components/TransportationCreate";
-import PlaceGoCreate from "./components/PlaceGoCreate";
-import PlaceDestCreate from "./components/PlaceDestCreate";
-import NoteCreate from "./components/NoteCreate";
-import PriceCreate from "./components/PriceCreate";
 import { handleCreateTour } from "../../../../../services/tourService";
 import { convertToBase64 } from "../../../../../theme/functions";
-import { iconPicture } from "../../../../../theme/icon";
-import TourType from "./components/TourType";
-import Region from "./components/Region";
+import {
+  Note,
+  PickedImage,
+  PlaceDest,
+  PlaceGo,
+  Price,
+  Region,
+  TourName,
+  TourType,
+  Transportation,
+} from "../components";
 moment.locale("vi");
 
 export default function NewTour() {
@@ -115,6 +117,9 @@ export default function NewTour() {
     setTour: setTour,
     handleChangeInput: handleChangeInput,
     warning: warning,
+    selectedImages: selectedImages,
+    handleImageChange: handleImageChange,
+    deleteImage: deleteImage,
   };
 
   useEffect(() => {}, []);
@@ -144,9 +149,9 @@ export default function NewTour() {
                     />
                   </div>
                 </div>
-                <PlaceGoCreate {...props} />
-                <PlaceDestCreate {...props} />
-                <PriceCreate {...props} />
+                <PlaceGo {...props} />
+                <PlaceDest {...props} />
+                <Price {...props} />
               </div>
               <div
                 className="day"
@@ -175,72 +180,15 @@ export default function NewTour() {
                       Ngày về :<p>{endDate}</p>
                     </div>
                   </div>
-                  <TourNameCreate {...props} />
-                  <TransportationCreate {...props} />
+                  <TourName {...props} />
+                  <Transportation {...props} />
                   <TourType {...props} />
                   <Region {...props} />
                 </div>
-
-                <div>
-                  <label>
-                    Ảnh :
-                    <input
-                      id="image-place"
-                      type="file"
-                      multiple
-                      onChange={handleImageChange}
-                    />
-                    <div
-                      className="button-select"
-                      style={{ marginTop: "10px" }}
-                    >
-                      <div className="text">Chọn hoặc thả ảnh vào đây</div>
-                    </div>
-                  </label>
-                  <div className="image-selected">
-                    <div
-                      className="picture"
-                      style={{
-                        border:
-                          warning && !selectedImages && "1px solid #dc3545",
-                      }}
-                    >
-                      {selectedImages ? (
-                        <>
-                          <img
-                            src={selectedImages}
-                            alt="sl"
-                            className="selected-img"
-                          />
-                          <img
-                            src={require("../../../../../assets/picture/icon/cancel.png")}
-                            alt="ic"
-                            className="icon"
-                            onClick={() => deleteImage()}
-                          />
-                        </>
-                      ) : (
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                          }}
-                        >
-                          <img
-                            src={iconPicture}
-                            alt="icp"
-                            className="icon-picture"
-                          />
-                          <div>Ảnh đầu trang</div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
+                <PickedImage {...props} />
               </div>
             </div>
-            <NoteCreate {...props} />
+            <Note {...props} />
           </div>
         </div>
 

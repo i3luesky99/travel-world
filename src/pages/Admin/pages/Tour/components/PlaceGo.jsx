@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function PlaceGoCreate(props) {
+export default function PlaceGo(props) {
   const { tour, handleChangeInput } = props;
   const destGo = ["Thành phố Hồ Chí Minh", "Hà Nội", "Đà Nẵng"];
 

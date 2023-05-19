@@ -1,17 +1,17 @@
+import { ClickAwayListener } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
-import { iconLogoutWhite, iconPersonWhite } from "../../../theme/icon";
+import { iconPersonWhite } from "../../../theme/icon";
 
 export default function User() {
-  const color = ` linear-gradient(
-        90deg,
-        rgb(209, 131, 131) 0%,
-        rgb(223 204 70) 50%,
-        #e08d21 100%
-      )`;
   const [open, setOpen] = useState(false);
-
+  const token = localStorage.getItem("accessToken");
+  const name = "Hieu Nguyen";
   const handleOpen = () => {
     setOpen(!open);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
   const handleLogout = useCallback(() => {
     localStorage.removeItem("userId");
@@ -20,26 +20,22 @@ export default function User() {
     window.location.replace("/");
   }, []);
 
+  const handleToLogin = () => {
+    window.location.replace("/login");
+  };
+  const handleToRegister = () => {
+    window.location.replace("/register");
+  };
   useEffect(() => {}, [handleLogout]);
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative" }} className="navItem">
       <div
         style={{
-          height: "45px",
-          width: "45px",
-          color: "white",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          background: color,
-          borderRadius: "50%",
           cursor: "pointer",
-          position: "absolute",
-          top: "-25px",
-          right: "-60px",
         }}
         onClick={handleOpen}
       >
+        {token && <div className="name-space">Hi</div>}
         <img
           src={iconPersonWhite}
           alt=""
@@ -48,30 +44,32 @@ export default function User() {
         />
       </div>
       {open && (
-        <div
-          style={{
-            position: "absolute",
-            color: "white",
-            background: "#f67009",
-            height: "50px",
-            width: "200px",
-            left: "-150px",
-            top: "30px",
-            borderRadius: "7px",
-          }}
-        >
-          <div
-            style={{ display: "flex", padding: "10px", cursor: "pointer" }}
-            onClick={handleLogout}
-          >
-            <img
-              src={iconLogoutWhite}
-              alt=""
-              style={{ width: "25px", height: "25", marginRight: "10px" }}
-            />
-            Đăng xuất
-          </div>
-        </div>
+        <ClickAwayListener onClickAway={handleClose}>
+          {!token ? (
+            <div className="tab-button">
+              <div className="log-in" onClick={handleToLogin}>
+                ĐĂNG NHẬP
+              </div>
+              <div className="sign-up" onClick={handleToRegister}>
+                ĐĂNG KÝ
+              </div>
+            </div>
+          ) : (
+            <div className="tab-button">
+              <div className="hello-name">
+                <div>Xin chào {name}</div>
+              </div>
+              <div
+                style={{
+                  borderBottom: " 1px solid #cacaca",
+                }}
+              ></div>
+              <div className="log-out" onClick={handleLogout}>
+                Đăng xuất
+              </div>
+            </div>
+          )}
+        </ClickAwayListener>
       )}
     </div>
   );

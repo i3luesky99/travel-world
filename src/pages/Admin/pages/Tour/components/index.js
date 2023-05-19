@@ -1,0 +1,12 @@
+export { default as Note } from "./Note";
+export { default as PlaceDest } from "./PlaceDest";
+export { default as PlaceGo } from "./PlaceGo";
+export { default as Price } from "./Price";
+export { default as Region } from "./Region";
+export { default as TourName } from "./TourName";
+export { default as TourType } from "./TourType";
+export { default as Transportation } from "./Transportation";
+export { default as PickedImage } from "./PickedImage";
+export { default as Schedule } from "./Schedule";
+export { default as ButtonGroup } from "./ButtonGroup";
+export { default as Date } from "./Date";

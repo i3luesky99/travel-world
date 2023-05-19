@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function NoteCreate(props) {
+export default function Note(props) {
   const { tour, handleChangeInput, warning } = props;
 
   return (
@@ -9,6 +9,7 @@ export default function NoteCreate(props) {
       <textarea
         value={tour.note}
         className="form-control"
+        placeholder="Nhập mô tả của chuyến du lịch ..."
         onChange={(e) => handleChangeInput("note", e.target.value)}
         style={{
           marginBottom: "10px",

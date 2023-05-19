@@ -10,6 +10,7 @@ export default function PlaceDestCreate(props) {
         type="text"
         className="form-control "
         value={tour.placeDest}
+        placeholder="Nhập điểm đến của chuyến đi ..."
         style={{
           margin: "0px",
           marginTop: "10px",

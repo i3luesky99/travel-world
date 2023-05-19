@@ -9,7 +9,7 @@ export default function ButtonGroup(propsButton) {
         style={{
           width: "80px",
           marginRight: "15px",
-          backgroundColor: "#e86464",
+          backgroundColor: "#dc3545",
         }}
         onClick={() => onCancel(index)}
       >
@@ -17,7 +17,7 @@ export default function ButtonGroup(propsButton) {
       </div>
       <div
         className="button"
-        style={{ width: "80px" }}
+        style={{ width: "80px", background: "#56b5bb" }}
         onClick={() => onSave(index)}
       >
         Lưu

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TourNameCreate(props) {
+export default function TourName(props) {
   const { tour, handleChangeInput, warning } = props;
 
   return (
@@ -10,6 +10,7 @@ export default function TourNameCreate(props) {
         type="text"
         className="form-control"
         value={tour.nameTour}
+        placeholder="Nhập tên của tour ..."
         style={{
           marginTop: "10px",
           marginBottom: "10px",

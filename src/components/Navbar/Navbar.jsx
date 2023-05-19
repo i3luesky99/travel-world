@@ -6,12 +6,12 @@ import { Link, useLocation } from "react-router-dom";
 import useModel from "../../hook/useModel";
 import DropList from "../DropDown/DropDown";
 import User from "./User/User";
+import { iconCart, iconHeart } from "../../theme/icon";
 
 export default function Navbar() {
   const [transparent, setTransparent] = useState("header");
   const { isOpen: isOpenNavbar, openModel: openNavbar } = useModel("navBar");
   const params = useLocation().pathname;
-  const token = localStorage.getItem("accessToken");
   const tours = [
     {
       id: 0,
@@ -68,23 +68,21 @@ export default function Navbar() {
                 Giới thiệu
               </Link>
             </li>
-            {!token ? (
-              <div className="headerBtn flex">
-                <button className="btn loginBtn">
-                  <Link className="link" to="/login">
-                    Đăng nhập
-                  </Link>
-                </button>
-
-                <button className="btn">
-                  <Link className="link" to="/register">
-                    Đăng ký
-                  </Link>
-                </button>
-              </div>
-            ) : (
-              <User />
-            )}
+            <User />
+            <li className="navItem">
+              <img
+                src={iconHeart}
+                alt=""
+                style={{ width: "25px", height: "25" }}
+              />
+            </li>
+            <li className="navItem">
+              <img
+                src={iconCart}
+                alt=""
+                style={{ width: "25px", height: "25" }}
+              />
+            </li>
           </ul>
           <div className="closeNavBar" onClick={() => openNavbar("navBar")}>
             <AiFillCloseCircle className="icon" />

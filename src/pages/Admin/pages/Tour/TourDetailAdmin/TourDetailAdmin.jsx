@@ -1,21 +1,26 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DateRange } from "react-date-range";
 import moment from "moment";
 import * as locales from "react-date-range/dist/locale";
-import TourName from "./components/TourName";
-import Transportation from "./components/Transportation";
-import PlaceGo from "./components/PlaceGo";
-import PlaceDest from "./components/PlaceDest";
-import Note from "./components/Note";
-import Day from "./components/Day";
-import Price from "./components/Price";
-import Schedule from "./components/Schedule";
-import Images from "./components/Images";
+
 import { useParams } from "react-router-dom";
 import {
   handleGetTourById,
   handleUpdateTour,
 } from "../../../../../services/tourService";
+import {
+  Note,
+  PickedImage,
+  PlaceDest,
+  PlaceGo,
+  Price,
+  Region,
+  Schedule,
+  TourName,
+  TourType,
+  Transportation,
+} from "../components";
+import { convertToBase64 } from "../../../../../theme/functions";
 moment.locale("vi");
 
 export default function TourDetailAdmin() {
@@ -24,15 +29,22 @@ export default function TourDetailAdmin() {
     id: id,
     nameTour: "",
     placeDest: "",
-    placeGo: "",
-    state: 0,
+    placeGo: "Thành phố Hồ Chí Minh",
+    state: "s1",
     adultPrice: "",
     childPrice: "",
     adultSlot: "",
+    childrenSlot: 0,
     babyPrice: "",
     note: "",
     transportation: "Xe du lịch đời mới",
+    destinationId: 1,
+    tourType: "Trong nước",
+    region: "Miền Trung",
+    continent: "Châu Á",
   });
+  const [warning, setWarning] = useState(false);
+  const [base64, setBase64] = useState("");
   const [isEdit, setIsEdit] = useState({
     nameTour: false,
     day: false,
@@ -66,8 +78,19 @@ export default function TourDetailAdmin() {
       // dayDetail: dayDetail,
       // imgURL: selectedImages,
     };
-    await handleUpdateTour(newTour);
-    window.location.replace(`/admin/tour-detail/${id}`);
+    try {
+      for (const [key, value] of Object.entries(newTour)) {
+        if (value === "" && key !== "inviteCode") {
+          setWarning(true);
+          return;
+        }
+      }
+      setWarning(false);
+      const { tourId } = await handleUpdateTour(newTour);
+      window.location.replace(`/admin/tour-detail/${tourId}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleChangeInput = (inputName, inputValue) => {
     setTour((state) => ({
@@ -76,16 +99,22 @@ export default function TourDetailAdmin() {
     }));
   };
 
-  const deleteImage = useCallback(
-    (indexSelected) => {
-      const newImageList = selectedImages.filter((file, index) => {
-        return index !== indexSelected;
-      });
-      setSelectedImages(newImageList);
-    },
-    [selectedImages]
-  );
+  const deleteImage = () => {
+    setSelectedImages("");
+    setBase64("");
+  };
 
+  const handleImageChange = (e) => {
+    const url = URL.createObjectURL(e.target.files[0]);
+    setSelectedImages(url);
+    convertToBase64(url)
+      .then((base64String) => {
+        setBase64(base64String);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   const props = {
     dayDetail: dayDetail,
     setDayDetail: setDayDetail,
@@ -99,6 +128,8 @@ export default function TourDetailAdmin() {
     selectedImages: selectedImages,
     setSelectedImages: setSelectedImages,
     deleteImage: deleteImage,
+    handleImageChange: handleImageChange,
+    warning: warning,
   };
   const handleFetchTour = async () => {
     const { tour } = await handleGetTourById(id);
@@ -108,47 +139,93 @@ export default function TourDetailAdmin() {
 
   useEffect(() => {
     handleFetchTour();
-  }, [deleteImage]);
+  }, []);
 
   return (
     <div className="new-tour">
       <div className="title-admin">Chi tiết Tour</div>
-      <form>
+      <form style={{ marginTop: "20px" }}>
         <div className="top border">
-          <label>Thời điểm :</label>
-          <div
-            className="calendar"
-            style={{ flexDirection: !isEdit.day && "column" }}
-          >
-            <div>
-              {isEdit.day && (
-                <DateRange
-                  editableDateInputs={true}
-                  onChange={(item) => setDate([item.selection])}
-                  moveRangeOnFirstSelection={false}
-                  ranges={date}
-                  locale={locales["vi"]}
-                />
-              )}
-              <PlaceGo {...props} />
-              <PlaceDest {...props} />
+          <div className="calendar">
+            <div style={{ display: "flex" }} className="border-white">
+              <div
+                style={{
+                  height: "780px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  flexDirection: "column",
+                }}
+              >
+                <div className="border-white">
+                  <div style={{ marginBottom: "10px" }}>
+                    <DateRange
+                      editableDateInputs={true}
+                      onChange={(item) => setDate([item.selection])}
+                      moveRangeOnFirstSelection={false}
+                      ranges={date}
+                      locale={locales["vi"]}
+                    />
+                  </div>
+                </div>
+                <PlaceGo {...props} />
+                <PlaceDest {...props} />
+                <Price {...props} />
+              </div>
+              <div
+                className="day"
+                style={{
+                  height: "780px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  flexDirection: "column",
+                  marginBottom: "20px",
+                }}
+              >
+                <div
+                  style={{
+                    height: "354px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    flexDirection: "column",
+                  }}
+                >
+                  <div className="border-white">
+                    <div style={{ display: "flex", marginBottom: "10px" }}>
+                      Ngày đi :<p>{startDate}</p>
+                      <p style={{ marginLeft: "10px", marginRight: "10px" }}>
+                        -
+                      </p>
+                      Ngày về :<p>{endDate}</p>
+                    </div>
+                  </div>
+                  <TourName {...props} />
+                  <Transportation {...props} />
+                  <TourType {...props} />
+                  <Region {...props} />
+                </div>
+                <PickedImage {...props} />
+              </div>
             </div>
-            <div className="day" style={{ marginLeft: !isEdit.day && "0px" }}>
-              <Day {...props} />
-              <TourName {...props} />
-              <Transportation {...props} />
-              <Note {...props} />
-            </div>
+            <Note {...props} />
           </div>
         </div>
-
-        <Price {...props} />
         <Schedule {...props} />
-        <Images {...props} />
-        <div className="bottom">
-          <div onClick={handleSubmit} className="button">
+        <div
+          className="bottom"
+          style={{ display: "flex", flexDirection: "column" }}
+        >
+          <div
+            onClick={handleSubmit}
+            className="button"
+            style={{ height: "45px", width: "135px" }}
+          >
             Cập nhập tour
           </div>
+          {warning && (
+            <div className="red-text">
+              Không được để rỗng các ô còn để trống
+            </div>
+          )}
         </div>
       </form>
     </div>

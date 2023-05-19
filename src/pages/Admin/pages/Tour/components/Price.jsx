@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function PriceCreate(props) {
+export default function Price(props) {
   const { tour, handleChangeInput, warning } = props;
 
   const handleKeyDown = (event) => {
@@ -32,6 +32,7 @@ export default function PriceCreate(props) {
           <input
             value={tour.adultPrice}
             className="form-control"
+            placeholder="Nhập giá người lớn"
             onChange={(e) => handleChangeInput("adultPrice", e.target.value)}
             onKeyDown={handleKeyDown}
             style={{
@@ -51,6 +52,7 @@ export default function PriceCreate(props) {
           <input
             value={tour.childPrice}
             className="form-control"
+            placeholder="Nhập giá người trẻ em"
             onChange={(e) => handleChangeInput("childPrice", e.target.value)}
             style={{
               maxWidth: "300px",
@@ -73,6 +75,7 @@ export default function PriceCreate(props) {
           <input
             value={tour.babyPrice}
             className="form-control"
+            placeholder="Nhập giá trẻ sơ sinh"
             onChange={(e) => handleChangeInput("babyPrice", e.target.value)}
             style={{
               maxWidth: "300px",
@@ -92,6 +95,7 @@ export default function PriceCreate(props) {
           <input
             value={tour.adultSlot}
             className="form-control"
+            placeholder="Nhập số lượng chỗ"
             onChange={(e) => handleChangeInput("adultSlot", e.target.value)}
             style={{
               maxWidth: "300px",

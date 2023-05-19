@@ -10,6 +10,8 @@ const iconPrintBlue = require("../assets/picture/icon/print-blue.png");
 const iconPersonWhite = require("../assets/picture/icon/person-white.png");
 const iconLogoutWhite = require("../assets/picture/icon/logout-white.png");
 const iconPicture = require("../assets/picture/icon/picture.png");
+const iconCart = require("../assets/picture/icon/cart.png");
+const iconHeart = require("../assets/picture/icon/heart.png");
 
 export {
   iconPencil,
@@ -24,4 +26,6 @@ export {
   iconLogoutWhite,
   iconPrintBlue,
   iconPicture,
+  iconCart,
+  iconHeart,
 };

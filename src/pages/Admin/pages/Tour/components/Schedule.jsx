@@ -1,7 +1,7 @@
 import React from "react";
-import { iconPencil } from "../../../../../../theme/icon";
+import { iconPencil } from "../../../../../theme/icon";
 import ButtonGroup from "./ButtonGroup";
-import { handleCreateTourDetail } from "../../../../../../services/tourService";
+import { handleCreateTourDetail } from "../../../../../services/tourService";
 import { useParams } from "react-router-dom";
 
 export default function Schedule(props) {
@@ -48,7 +48,7 @@ export default function Schedule(props) {
   };
 
   const onSave = async (index) => {
-    const { title, schedule, tourId } = dayDetail[index ];
+    const { title, schedule, tourId } = dayDetail[index];
     await handleCreateTourDetail({ title, schedule, tourId });
     onEnableToEdit(index, false);
   };
@@ -109,6 +109,7 @@ export default function Schedule(props) {
                   <textarea
                     type="text"
                     className="form-control"
+                    placeholder="Nhập chi tiết ngày..."
                     value={day.schedule}
                     onChange={(e) => handleScheduleChangeSchedule(index, e)}
                   />
@@ -142,14 +143,18 @@ export default function Schedule(props) {
         </div>
       ) : (
         <div className="bottom" style={{ marginBottom: "15px" }}>
-          <div className="button" onClick={handleAddDay}>
+          <div
+            className="button"
+            onClick={handleAddDay}
+            style={{ background: "#56b5bb" }}
+          >
             Thêm ngày
           </div>
           {dayDetail.length > 1 && (
             <div
               className="button"
               onClick={handleDeleteDay}
-              style={{ marginLeft: "10px" }}
+              style={{ marginLeft: "10px", backgroundColor: "#dc3545" }}
             >
               Xoá ngày
             </div>

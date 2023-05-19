@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function TransportationCreate(props) {
+export default function Transportation(props) {
   const { tour, handleChangeInput } = props;
 
   const transportation = [
