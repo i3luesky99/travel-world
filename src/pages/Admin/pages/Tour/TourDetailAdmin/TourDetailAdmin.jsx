@@ -64,7 +64,7 @@ export default function TourDetailAdmin() {
     },
   ]);
 
-  const [selectedImages, setSelectedImages] = useState([]);
+  const [selectedImages, setSelectedImages] = useState();
   const [dayDetail, setDayDetail] = useState([]);
 
   const startDate = `${moment(`${date[0].startDate}`).format("L")}`;
@@ -135,6 +135,7 @@ export default function TourDetailAdmin() {
     const { tour } = await handleGetTourById(id);
     setDayDetail(tour.tourDetailData);
     setTour(tour);
+    setSelectedImages(tour.image.data);
   };
 
   useEffect(() => {

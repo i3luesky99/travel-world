@@ -1,0 +1,68 @@
+.MuiPaper-root {
+  .header {
+    height: 100px;
+    font-weight: 500;
+    width: 500px;
+    font-size: 16px;
+    align-items: center;
+    display: flex;
+  }
+  .content {
+    width: 100%;
+    display: flex;
+    padding-top: 20px;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+    .item {
+      height: 300px;
+      width: 450px;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      background-color: #e0eaf7;
+      border: 1px solid $primary-color;
+      border-radius: 5px;
+      position: relative;
+      .item-prop {
+        display: flex;
+        width: 100%;
+        .item-img {
+          height: 180px;
+          width: 35%;
+          border-radius: 5px;
+          box-shadow: 2px 2px 5px 2px grey;
+          margin-right: 20px;
+        }
+        .title-img {
+          text-align: justify;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          color: black;
+          font-weight: 500;
+          width: 65%;
+          .price {
+            font-size: 18px;
+            font-weight: 600 !important;
+            color: $primary-color !important;
+          }
+        }
+      }
+
+      .book-button {
+        height: 40px;
+        width: 200px;
+        margin-top: 20px;
+        background-color: $primary-color;
+        margin-left: 152px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+}

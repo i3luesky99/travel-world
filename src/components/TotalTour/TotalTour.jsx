@@ -4,6 +4,7 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import { formatCurrency } from "../../theme/functions";
 import { Link } from "react-router-dom";
+import Heart from "../../assets/svg/heart";
 
 export default function TotalTour(props) {
   const { title, destinations, foreign } = props;
@@ -39,11 +40,7 @@ export default function TotalTour(props) {
         <div className="mainContent grid">
           {destinations?.map((destination, index) => (
             <div key={`key-${index}-destination`}>
-              <div
-                className="singleDestination"
-                data-aos="fade-up"
-                onClick={() => handleOnClick("" + destination.id)}
-              >
+              <div className="singleDestination" data-aos="fade-up">
                 {/* <Link
                   to={
                     foreign
@@ -59,7 +56,10 @@ export default function TotalTour(props) {
                     <h3>{destination?.title}</h3>
                     <p>{destination?.desc}</p>
 
-                    <BsArrowRightShort className="icon" />
+                    <BsArrowRightShort
+                      className="icon"
+                      onClick={() => handleOnClick("" + destination.id)}
+                    />
                   </div>
                 </div>
 
@@ -91,12 +91,22 @@ export default function TotalTour(props) {
                     </h6>
                     <span>{formatCurrency(destination?.prices)}</span>
                   </div>
-                  <p
-                    className="btn"
-                    onClick={() => handleOnClick("" + destination.id)}
-                  >
-                    ĐẶT NGAY
-                  </p>
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <p
+                      className="btn"
+                      onClick={() => handleOnClick("" + destination.id)}
+                    >
+                      ĐẶT NGAY
+                    </p>
+                    <Heart
+                      style={{
+                        width: "45px",
+                        height: "45px",
+                        cursor: "pointer",
+                      }}
+                      fill="#f67009"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

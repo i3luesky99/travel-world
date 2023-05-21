@@ -9,7 +9,6 @@ const handleGetUserById = (id) => {
   return axios.get(`/api/get-all-users?id=${id}`);
 };
 
-
 const handleGetUserByPhone = (phone) => {
   return axios.get("/api/user/search/phone", {
     params: {
@@ -25,9 +24,9 @@ const handleGetUserByEmail = (email) => {
   });
 };
 export {
-  handleCreateUserApi
-  , handleGetUserById,
-  handleGetUserByPhone
-  , handleGetUserByEmail,
-  handleCreateUserByPhoneApi
+  handleCreateUserApi,
+  handleGetUserById,
+  handleGetUserByPhone,
+  handleGetUserByEmail,
+  handleCreateUserByPhoneApi,
 };

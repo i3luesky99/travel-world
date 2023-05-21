@@ -6,7 +6,8 @@ import { Link, useLocation } from "react-router-dom";
 import useModel from "../../hook/useModel";
 import DropList from "../DropDown/DropDown";
 import User from "./User/User";
-import { iconCart, iconHeart } from "../../theme/icon";
+import Cart from "./User/Cart";
+import FavoriteItem from "./User/FavoriteItem";
 
 export default function Navbar() {
   const [transparent, setTransparent] = useState("header");
@@ -70,19 +71,11 @@ export default function Navbar() {
             </li>
             <User />
             <li className="navItem">
-              <img
-                src={iconHeart}
-                alt=""
-                style={{ width: "25px", height: "25" }}
-              />
+              <FavoriteItem />
             </li>
-            <li className="navItem">
-              <img
-                src={iconCart}
-                alt=""
-                style={{ width: "25px", height: "25" }}
-              />
-            </li>
+            {/* <li className="navItem">
+              <Cart />
+            </li> */}
           </ul>
           <div className="closeNavBar" onClick={() => openNavbar("navBar")}>
             <AiFillCloseCircle className="icon" />

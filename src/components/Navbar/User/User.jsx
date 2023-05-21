@@ -1,15 +1,16 @@
 import { ClickAwayListener } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import { iconPersonWhite } from "../../../theme/icon";
+import { handleGetUserById } from "../../../services/userService";
 
 export default function User() {
   const [open, setOpen] = useState(false);
   const token = localStorage.getItem("accessToken");
-  const name = "Hieu Nguyen";
+  const id = localStorage.getItem("userId");
+  const [user, setUser] = useState();
   const handleOpen = () => {
     setOpen(!open);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -26,7 +27,17 @@ export default function User() {
   const handleToRegister = () => {
     window.location.replace("/register");
   };
-  useEffect(() => {}, [handleLogout]);
+  const fetchUser = async () => {
+    const data = await handleGetUserById(id);
+    setUser(data?.user);
+  };
+
+  const name = user?.fullName;
+  const tempName = name?.slice(0, 2) || "Hi";
+
+  useEffect(() => {
+    fetchUser();
+  }, [handleLogout]);
   return (
     <div style={{ position: "relative" }} className="navItem">
       <div
@@ -35,7 +46,7 @@ export default function User() {
         }}
         onClick={handleOpen}
       >
-        {token && <div className="name-space">Hi</div>}
+        {token && <div className="name-space">{tempName}</div>}
         <img
           src={iconPersonWhite}
           alt=""

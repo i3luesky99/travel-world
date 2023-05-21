@@ -3,7 +3,7 @@ import { iconPicture } from "../../../../../theme/icon";
 
 export default function PickedImage(props) {
   const { selectedImages, handleImageChange, warning, deleteImage } = props;
-
+  console.log(selectedImages);
   return (
     <div>
       <label>
