@@ -21,6 +21,7 @@ import {
 import NewTour from "../pages/Admin/pages/Tour/NewTour/NewTour";
 import TourDetailAdmin from "../pages/Admin/pages/Tour/TourDetailAdmin/TourDetailAdmin";
 import TourAdmin from "../pages/Admin/pages/Tour/TourAdmin/TourAdmin";
+import Invoice from "../pages/Payment/components/Invoice";
 
 export const clientWeb = [
   {
@@ -85,6 +86,10 @@ export const clientWeb = [
   {
     link: "/introduce",
     component: <Introduce />,
+  },
+  {
+    link: "/invoice/:invoiceId",
+    component: <Invoice />,
   },
 ];
 
