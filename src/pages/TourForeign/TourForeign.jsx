@@ -5,7 +5,9 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { handleGetTourByContinent } from "../../services/tourService";
+import { handleScheduleDay } from "../../theme/functions";
 import Carousel from "../../components/Carousel/Carousel";
+
 import {
   destinationAmerica,
   destinationAsia,
@@ -23,6 +25,7 @@ export default function TourForeign() {
   const handleResize = () => {
     setScreenWidth(window.innerWidth);
   };
+
   const fetchTourAsia = async () => {
     try {
       setTourAsia([]);
@@ -53,7 +56,7 @@ export default function TourForeign() {
           dataTransferAmerica.id = element.id;
           dataTransferAmerica.title = element.nameTour;
           dataTransferAmerica.location = element.placeDest;
-          dataTransferAmerica.totalDays = 4;//dateBack-dateGo
+          dataTransferAmerica.totalDays = handleScheduleDay(element.dateGo, element.dateBack);//dateBack-dateGo
           dataTransferAmerica.dateStart = element.dateGo;//dateGo
           dataTransferAmerica.dateGo = element.dateGo;
           //desc = note
@@ -112,7 +115,7 @@ export default function TourForeign() {
           dataTransferAmerica.id = element.id;
           dataTransferAmerica.title = element.nameTour;
           dataTransferAmerica.location = element.placeDest;
-          dataTransferAmerica.totalDays = 4;//dateBack-dateGo
+          dataTransferAmerica.totalDays = handleScheduleDay(element.dateGo, element.dateBack);//dateBack-dateGo
           dataTransferAmerica.dateGo = element.dateGo;//dateGo
           dataTransferAmerica.dateStart = element.dateGo;
           //desc = note
@@ -166,7 +169,7 @@ export default function TourForeign() {
           dataTransferAmerica.id = element.id;
           dataTransferAmerica.title = element.nameTour;
           dataTransferAmerica.location = element.placeDest;
-          dataTransferAmerica.totalDays = 4;//dateBack-dateGo
+          dataTransferAmerica.totalDays = handleScheduleDay(element.dateGo, element.dateBack);//dateBack-dateGo
           dataTransferAmerica.dateStart = element.dateGo;//dateGo
           dataTransferAmerica.dateGo = element.dateGo;
           //desc = note

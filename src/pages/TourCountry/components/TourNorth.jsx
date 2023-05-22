@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TotalTour } from "../../../components";
 import { destinationNorth } from "../../../theme/data";
 import { handleGetTourByRegion } from "../../../services/tourService";
-
+import { handleScheduleDay } from "../../../theme/functions";
 function TourNorth() {
   useEffect(() => {
     destinationData();
@@ -33,7 +33,7 @@ function TourNorth() {
       dataTransfer.id = element.id;
       dataTransfer.title = element.nameTour;
       dataTransfer.location = element.placeDest;
-      dataTransfer.totalDays = 3;//dateBack-dateGo
+      dataTransfer.totalDays = handleScheduleDay(element.dateGo, element.dateBack);//dateBack-dateGo
       dataTransfer.dateStart = new Date().toLocaleString();//dateGo
 
       dataTransfer.dateGo = element.dateGo;//desc = note
@@ -49,6 +49,7 @@ function TourNorth() {
     );
 
   }
+
   const fetchTour = async () => {
     try {
       const data = await handleGetTourByRegion("Mien Bac");
