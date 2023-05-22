@@ -3,6 +3,7 @@ import { TotalTour } from "../../../components";
 import { destinationAsia } from "../../../theme/data";
 import { handleScheduleDay } from "../../../theme/functions";
 import { handleGetTourByContinent } from "../../../services/tourService";
+import { handleLoadDataImageFromData } from "../../../theme/functions";
 function TourAsia() {
   const [tourAsia, setTourAsia] = useState([]);
   const destinations = destinationAsia;
@@ -40,6 +41,12 @@ function TourAsia() {
           dataTransferAmerica.dateStart = element.dateGo;//dateGo
           dataTransferAmerica.dateGo = element.dateGo;
           //desc = note
+          if (element.image) {
+            if (element.image.data) {
+              dataTransferAmerica.img = [handleLoadDataImageFromData(element.image.data)]
+            }
+
+          }
           dataTransferAmerica.desc = element.note;
           dataTransferAmerica.slots = element.adultSlot + element.childrenSlot;
           dataTransferAmerica.prices = element.adultPrice;

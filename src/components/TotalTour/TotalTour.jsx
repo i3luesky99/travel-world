@@ -4,6 +4,10 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 import { formatCurrency } from "../../theme/functions";
 import Heart from "../../assets/svg/heart";
+import {
+  handleCreateFavoriteTourAPI, handleDeleteFavoriteTourAPI
+} from "../../services/favoriteTourServise";
+import { async } from "q";
 
 export default function TotalTour(props) {
   const { title, destinations } = props;
@@ -12,9 +16,34 @@ export default function TotalTour(props) {
     window.location.replace("/tour-country/tour-detail/" + id);
   };
 
-  const handleCreateFavoriteTour = (id) => {
+  const handleCreateFavoriteTour = async (id) => {
     // const data create favoriteTour
-    window.location.replace("/tour-country/tour-detail/" + id);
+    if (localStorage.getItem("userId") !== null) {
+      try {
+        let dataAPI = await handleCreateFavoriteTourAPI({
+          tourId: id,
+          customerId: localStorage.getItem("userId")
+        });
+        if (dataAPI.errCode === 0) {
+          //tim thanhf cong set tim
+        } else {
+          //cos thif xoas tim
+          await handleDeleteFavoriteTourAPI({
+            tourId: id,
+            customerId: localStorage.getItem("userId")
+          });
+        }
+      } catch (error) {
+        await handleDeleteFavoriteTourAPI({
+          tourId: id,
+          customerId: localStorage.getItem("userId")
+        });
+      }
+
+    } else {
+      alert("Tính năng này chỉ dùng khi đã đăng nhập!")
+    }
+    // window.location.replace("/tour-country/tour-detail/" + id);
   };
 
   useEffect(() => {

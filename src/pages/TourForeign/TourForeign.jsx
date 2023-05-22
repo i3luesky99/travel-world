@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { handleGetTourByContinent } from "../../services/tourService";
+import { handleLoadDataImageFromData } from "../../theme/functions";
 import { handleScheduleDay } from "../../theme/functions";
 import Carousel from "../../components/Carousel/Carousel";
 
@@ -60,6 +61,12 @@ export default function TourForeign() {
           dataTransferAmerica.dateStart = element.dateGo;//dateGo
           dataTransferAmerica.dateGo = element.dateGo;
           //desc = note
+          if (element.image) {
+            if (element.image.data) {
+              dataTransferAmerica.img = [handleLoadDataImageFromData(element.image.data)]
+            }
+
+          }
           dataTransferAmerica.desc = element.note;
           dataTransferAmerica.slots = element.adultSlot + element.childrenSlot;
           dataTransferAmerica.prices = element.adultPrice;
@@ -119,6 +126,12 @@ export default function TourForeign() {
           dataTransferAmerica.dateGo = element.dateGo;//dateGo
           dataTransferAmerica.dateStart = element.dateGo;
           //desc = note
+          if (element.image) {
+            if (element.image.data) {
+              dataTransferAmerica.img = [handleLoadDataImageFromData(element.image.data)]
+            }
+
+          }
           dataTransferAmerica.desc = element.note;
           dataTransferAmerica.slots = element.adultSlot + element.childrenSlot;
           dataTransferAmerica.prices = element.adultPrice;
@@ -173,6 +186,12 @@ export default function TourForeign() {
           dataTransferAmerica.dateStart = element.dateGo;//dateGo
           dataTransferAmerica.dateGo = element.dateGo;
           //desc = note
+          if (element.image) {
+            if (element.image.data) {
+              dataTransferAmerica.img = [handleLoadDataImageFromData(element.image.data)]
+            }
+
+          }
           dataTransferAmerica.desc = element.note;
           dataTransferAmerica.slots = element.adultSlot + element.childrenSlot;
           dataTransferAmerica.prices = element.adultPrice;

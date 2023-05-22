@@ -48,7 +48,66 @@ export default function FavoriteItem() {
   const fetchFavoriteTour = async () => {
     // const data =
     // setTour(data)
-    setTours(tempTour);
+    // try {
+    //   const dataApi = await handleGetTourByRegion("Mien Trung");
+
+    //   let tourCentral = dataApi.tour;
+    //   let dataCentral = [];
+
+
+    //   for (let index = 0; index < tourCentral.length; index++) {
+    //     let dataTransferCentral = {
+    //       id: 1,
+    //       img: [
+    //         require("../../assets/picture/pic1.jpg"),
+    //         require("../../assets/picture/pic2.jpg")
+    //       ],
+    //       title: "Tour du lịch Đà Nẵng ",
+    //       location: "Đà Nẵng",
+    //       totalDays: 3,
+    //       dateStart: "22/03/2023",
+    //       dateGo: "",
+    //       slots: 10,
+    //       prices: 3000000,
+    //       desc: "Du lịch Đà Nẵng - Huế - Thánh Địa La Vang - Động Phong Phong Nha từ Sài Gòn 2023. Du lịch Miền Trung - Tour Du lịch Đà Nẵng được thiên nhiên đặc biệt ưu đãi, mảnh đất miền Trung đẹp với nhiều dãy núi hùng vỹ xanh rì, những bờ biển cát trắng mịn thoai thoải và những dòng sông trong vắt thơ mộng. Không những vậy, trên con đường di sản miền Trung cùng Du Lịch Việt, du khách còn được thưởng ngoạn những di sản thế giới cuả Việt Nam đó là Phố cổ Hội An – nơi bến cảng một thời sầm uất nhất Đông Dương, quần thể di tích Cố Đô Huế với hệ thống đền đài lăng tẩm nguy nga tráng lệ và Động Phong Nha với nhiều hang động kì bí của tạo hóa.",
+    //       foreign: false,
+    //     };
+    //     let element = tourCentral[index];
+    //     dataTransferCentral.id = element.id;
+    //     dataTransferCentral.title = element.nameTour;
+    //     dataTransferCentral.location = element.placeDest;
+    //     dataTransferCentral.totalDays = handleScheduleDay(element.dateGo, element.dateBack);
+
+    //     //dateBack-dateGo
+    //     dataTransferCentral.dateStart = element.dateGo;//dateGo
+    //     dataTransferCentral.dateGo = element.dateGo;
+    //     //desc = note
+    //     if (element.image) {
+    //       if (element.image.data) {
+    //         dataTransferCentral.img = [handleLoadDataImageFromData(element.image.data)];
+    //       }
+    //     }
+    //     dataTransferCentral.desc = element.note;
+    //     dataTransferCentral.slots = element.adultSlot + element.childrenSlot;
+    //     dataTransferCentral.prices = element.adultPrice;
+
+    //     dataCentral.push(dataTransferCentral);
+
+    //   }
+
+    //   setTourCentral((tourCentral) =>
+    //     ([...tourCentral, dataCentral])
+
+    //   );
+
+    //   // setDestinations(dataTour);
+
+
+
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    // setTours(tempTour);
   };
   const deleteTour = async (tourFavoriteID) => {
     fetchFavoriteTour();
