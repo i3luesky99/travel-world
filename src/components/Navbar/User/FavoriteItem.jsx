@@ -8,7 +8,7 @@ export default function FavoriteItem() {
   const [tours, setTours] = useState([]);
 
   const handleOpenCart = () => {
-    if (!token) {
+    if (token) {
       setOpen(!open);
     } else {
       window.location.replace("/login");
@@ -53,7 +53,7 @@ export default function FavoriteItem() {
   const deleteTour = async (tourFavoriteID) => {
     fetchFavoriteTour();
   };
-  
+
   useEffect(() => {
     fetchFavoriteTour();
   }, []);

@@ -8,7 +8,7 @@ export default function Cart() {
   const [tours, setTours] = useState([]);
 
   const handleOpenCart = () => {
-    if (!token) {
+    if (token) {
       setOpen(!open);
     } else {
       window.location.replace("/login");
