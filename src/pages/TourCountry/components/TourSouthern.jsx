@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { TotalTour } from "../../../components";
 import { destinationSouthern } from "../../../theme/data";
 import { handleGetTourByRegion } from "../../../services/tourService";
+import { handleScheduleDay } from "../../../theme/functions";
 import { handleLoadDataImageFromData } from "../../../theme/functions"
 
 function TourSouthern() {
   useEffect(() => {
     destinationData();
   }, []);
+
   const [destinations, setDestinations] = useState([]);
 
   const destinationData = async () => {
@@ -34,7 +36,7 @@ function TourSouthern() {
       dataTransfer.id = element.id;
       dataTransfer.title = element.nameTour;
       dataTransfer.location = element.placeDest;
-      dataTransfer.totalDays = 3;//dateBack-dateGo
+      dataTransfer.totalDays = handleScheduleDay(element.dateGo, element.dateBack);//dateBack-dateGo
       dataTransfer.dateStart = new Date().toLocaleString();//dateGo
       //desc = note
       if (element.image) {

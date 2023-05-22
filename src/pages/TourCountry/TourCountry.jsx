@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import { handleGetTourByRegion } from "../../services/tourService";
 import { handleLoadDataImageFromData } from "../../theme/functions";
 import "swiper/css/navigation";
+import { handleScheduleDay } from "../../theme/functions";
 import Carousel from "../../components/Carousel/Carousel";
 import {
   destinationCentral,
@@ -55,7 +56,7 @@ export default function TourCountry() {
         dataTransferSouth.id = element.id;
         dataTransferSouth.title = element.nameTour;
         dataTransferSouth.location = element.placeDest;
-        dataTransferSouth.totalDays = 3;//dateBack-dateGo
+        dataTransferSouth.totalDays = handleScheduleDay(element.dateGo, element.dateBack);//dateBack-dateGo
         dataTransferSouth.dateStart = element.dateGo;//dateGo
         dataTransferSouth.dateGo = element.dateGo;
         //desc = note
@@ -109,7 +110,7 @@ export default function TourCountry() {
         dataTransferNorth.id = element.id;
         dataTransferNorth.title = element.nameTour;
         dataTransferNorth.location = element.placeDest;
-        dataTransferNorth.totalDays = 3;//dateBack-dateGo
+        dataTransferNorth.totalDays = handleScheduleDay(element.dateGo, element.dateBack);//dateBack-dateGo
         dataTransferNorth.dateStart = element.dateGo;//dateGo
         dataTransferNorth.dateGo = element.dateGo;
         //desc = note
@@ -134,6 +135,7 @@ export default function TourCountry() {
       console.log(error);
     }
   }
+
   const fetchTourCentral = async () => {
     try {
       const dataApi = await handleGetTourByRegion("Mien Trung");
@@ -163,7 +165,11 @@ export default function TourCountry() {
         dataTransferCentral.id = element.id;
         dataTransferCentral.title = element.nameTour;
         dataTransferCentral.location = element.placeDest;
-        dataTransferCentral.totalDays = 3;//dateBack-dateGo
+        dataTransferCentral.totalDays = handleScheduleDay(element.dateGo, element.dateBack);
+        console.log(element.dateGo)
+        console.log(element.dateBack)
+        console.log(dataTransferCentral.totalDays)
+        //dateBack-dateGo
         dataTransferCentral.dateStart = element.dateGo;//dateGo
         dataTransferCentral.dateGo = element.dateGo;
         //desc = note

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import { formatCurrency } from "../../theme/functions";
+import { formatCurrency, handleScheduleDay } from "../../theme/functions";
+
 import { handleGetTourById } from "../../services/tourService";
 import {
   iconInfo,
@@ -11,6 +12,7 @@ import {
   iconSchedule,
   iconPrint,
 } from "../../theme/icon";
+
 import { note, service } from "../../theme/data";
 import { useReactToPrint } from "react-to-print";
 import Heart from "../../assets/svg/heart";
@@ -91,7 +93,7 @@ const TourDetail = () => {
             <div className="top">
               <div className="title border">{tour.nameTour}</div>
               <div className="border data">Mã tour : {tour.id}</div>
-              <div className="border data">Thời gian: 3 ngày 2 đêm</div>
+              <div className="border data">Thời gian: {handleScheduleDay(tour.dateGo, tour.dateBack) + " ngày " + (handleScheduleDay(tour.dateGo, tour.dateBack) - 1) + " đêm"}</div>
               <div className="border data">Khởi hành: {tour.dateGo}</div>
               <div className="border data">
                 Vận Chuyển: {tour.transportation}{" "}
