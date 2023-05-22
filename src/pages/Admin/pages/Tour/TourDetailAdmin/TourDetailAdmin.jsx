@@ -20,7 +20,11 @@ import {
   TourType,
   Transportation,
 } from "../components";
-import { convertToBase64 } from "../../../../../theme/functions";
+import {
+  convertToBase64,
+  formatDate,
+  handleLoadDataImageFromData,
+} from "../../../../../theme/functions";
 moment.locale("vi");
 
 export default function TourDetailAdmin() {
@@ -75,8 +79,7 @@ export default function TourDetailAdmin() {
       ...tour,
       dateGo: startDate,
       dateBack: endDate,
-      // dayDetail: dayDetail,
-      // imgURL: selectedImages,
+      image: base64 || selectedImages,
     };
     try {
       for (const [key, value] of Object.entries(newTour)) {
@@ -86,8 +89,8 @@ export default function TourDetailAdmin() {
         }
       }
       setWarning(false);
-      const { tourId } = await handleUpdateTour(newTour);
-      window.location.replace(`/admin/tour-detail/${tourId}`);
+      handleUpdateTour(newTour);
+      window.location.replace(`/admin/tour-detail/${id}`);
     } catch (error) {
       console.log(error);
     }
@@ -115,6 +118,23 @@ export default function TourDetailAdmin() {
         console.error(error);
       });
   };
+
+  const handleFetchTour = async () => {
+    const { tour } = await handleGetTourById(id);
+    const img = handleLoadDataImageFromData(tour?.image.data);
+    const dateGo = tour?.dateGo;
+    const dateBack = tour?.dateBack;
+    const newDate = [...date];
+    newDate[0].startDate = formatDate(dateGo);
+    newDate[0].endDate = formatDate(dateBack);
+    setDayDetail(tour?.tourDetailData);
+    setTour(tour);
+    setSelectedImages(img);
+  };
+
+  useEffect(() => {
+    handleFetchTour();
+  }, []);
   const props = {
     dayDetail: dayDetail,
     setDayDetail: setDayDetail,
@@ -130,18 +150,8 @@ export default function TourDetailAdmin() {
     deleteImage: deleteImage,
     handleImageChange: handleImageChange,
     warning: warning,
+    date: date,
   };
-  const handleFetchTour = async () => {
-    const { tour } = await handleGetTourById(id);
-    setDayDetail(tour.tourDetailData);
-    setTour(tour);
-    setSelectedImages(tour.image.data);
-  };
-
-  useEffect(() => {
-    handleFetchTour();
-  }, []);
-
   return (
     <div className="new-tour">
       <div className="title-admin">Chi tiết Tour</div>
@@ -160,6 +170,7 @@ export default function TourDetailAdmin() {
                 <div className="border-white">
                   <div style={{ marginBottom: "10px" }}>
                     <DateRange
+                      dateDisplayFormat="MM-dd-yyyy"
                       editableDateInputs={true}
                       onChange={(item) => setDate([item.selection])}
                       moveRangeOnFirstSelection={false}

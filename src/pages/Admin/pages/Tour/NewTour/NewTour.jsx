@@ -51,8 +51,8 @@ export default function NewTour() {
   const handleSubmit = async (e) => {
     const newTour = {
       ...tour,
-      dateGo: startDate,
-      dateBack: endDate,
+      dateGo: date[0].startDate,
+      dateBack: date[0].endDate,
       image: base64,
     };
     try {

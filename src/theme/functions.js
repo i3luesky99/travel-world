@@ -1,4 +1,5 @@
 import moment from "moment";
+import { Buffer } from "buffer";
 const formatCurrency = (price) => {
   const VND = new Intl.NumberFormat("vi-VN", {
     style: "currency",
@@ -86,6 +87,27 @@ const handleLoadDataImageFromData = (data) => {
   return base64;
 };
 
+function formatDate(dateString) {
+  // Tách ngày, tháng và năm từ chuỗi đầu vào
+  const parts = dateString.split("/");
+  const day = parts[0];
+  const month = parts[1];
+  const year = parts[2];
+
+  // Tạo một đối tượng Date mới với định dạng ngày/tháng/năm
+  const date = new Date(`${month}/${day}/${year}`);
+
+  // Lấy giá trị ngày, tháng và năm từ đối tượng Date
+  const formattedDay = String(date.getDate()).padStart(2, "0");
+  const formattedMonth = String(date.getMonth() + 1).padStart(2, "0");
+  const formattedYear = date.getFullYear();
+
+  // Tạo chuỗi đầu ra với định dạng mm/dd/yyyy
+  const formattedDate = `${formattedMonth}/${formattedDay}/${formattedYear}`;
+
+  return formattedDate;
+}
+
 export {
   formatCurrency,
   convertToBase64,
@@ -93,4 +115,5 @@ export {
   calculateDateDifference,
   handleScheduleDay,
   handleLoadDataImageFromData,
+  formatDate,
 };
