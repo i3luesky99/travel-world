@@ -4,6 +4,7 @@ import "aos/dist/aos.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import { handleGetTourByRegion } from "../../services/tourService";
+import { handleLoadDataImageFromData } from "../../theme/functions";
 import "swiper/css/navigation";
 import Carousel from "../../components/Carousel/Carousel";
 import {
@@ -58,6 +59,9 @@ export default function TourCountry() {
         dataTransferSouth.dateStart = element.dateGo;//dateGo
         dataTransferSouth.dateGo = element.dateGo;
         //desc = note
+        if (element.image) {
+          dataTransferSouth.img = [handleLoadDataImageFromData(element.image.data)]
+        }
         dataTransferSouth.desc = element.note;
         dataTransferSouth.slots = element.adultSlot + element.childrenSlot;
         dataTransferSouth.prices = element.adultPrice;
@@ -109,6 +113,9 @@ export default function TourCountry() {
         dataTransferNorth.dateStart = element.dateGo;//dateGo
         dataTransferNorth.dateGo = element.dateGo;
         //desc = note
+        if (element.image) {
+          dataTransferNorth.img = [handleLoadDataImageFromData(element.image.data)]
+        }
         dataTransferNorth.desc = element.note;
         dataTransferNorth.slots = element.adultSlot + element.childrenSlot;
         dataTransferNorth.prices = element.adultPrice;
@@ -160,6 +167,9 @@ export default function TourCountry() {
         dataTransferCentral.dateStart = element.dateGo;//dateGo
         dataTransferCentral.dateGo = element.dateGo;
         //desc = note
+        if (element.image) {
+          dataTransferCentral.img = [handleLoadDataImageFromData(element.image.data)]
+        }
         dataTransferCentral.desc = element.note;
         dataTransferCentral.slots = element.adultSlot + element.childrenSlot;
         dataTransferCentral.prices = element.adultPrice;

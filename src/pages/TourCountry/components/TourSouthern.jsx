@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TotalTour } from "../../../components";
 import { destinationSouthern } from "../../../theme/data";
 import { handleGetTourByRegion } from "../../../services/tourService";
-
+import { handleLoadDataImageFromData } from "../../../theme/functions"
 
 function TourSouthern() {
   useEffect(() => {
@@ -37,6 +37,9 @@ function TourSouthern() {
       dataTransfer.totalDays = 3;//dateBack-dateGo
       dataTransfer.dateStart = new Date().toLocaleString();//dateGo
       //desc = note
+      if (element.image) {
+        dataTransfer.img = [handleLoadDataImageFromData(element.image.data)]
+      }
       dataTransfer.dateGo = element.dateGo;
       dataTransfer.desc = element.note;
       dataTransfer.slots = element.adultSlot + element.childrenSlot;

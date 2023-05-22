@@ -1,3 +1,5 @@
+import { Buffer } from 'buffer';
+const moment = require('moment');
 const formatCurrency = (price) => {
   const VND = new Intl.NumberFormat("vi-VN", {
     style: "currency",
@@ -71,10 +73,25 @@ const calculateDateDifference = (startDate, endDate) => {
 
   return diffInDays;
 };
+const handleScheduleDay = (startDate, endDate) => {
+  const oneDay = 24 * 60 * 60 * 1000; // Số milliseconds trong một ngày
+  const dayStart = moment(startDate, 'DD/MM/YYYY').toDate();
+  const dayEnd = moment(endDate, 'DD/MM/YYYY').toDate();
+  const timeDiff = Math.abs(dayEnd.getTime() - dayStart.getTime());
+  const daysDiff = Math.ceil(timeDiff / oneDay);
+
+  return daysDiff;
+}
+const handleLoadDataImageFromData = (data) => {
+  const base64 = Buffer.from(data, 'base64').toString('binary');
+  return base64;
+}
 
 export {
   formatCurrency,
   convertToBase64,
   convertToBlob,
   calculateDateDifference,
+  handleScheduleDay,
+  handleLoadDataImageFromData
 };
