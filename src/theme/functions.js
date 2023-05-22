@@ -1,4 +1,5 @@
 import moment from "moment";
+import { Buffer } from "buffer";
 const formatCurrency = (price) => {
   const VND = new Intl.NumberFormat("vi-VN", {
     style: "currency",

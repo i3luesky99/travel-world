@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { formatCurrency, handleScheduleDay } from "../../theme/functions";
-
+import { handleLoadDataImageFromData } from "../../theme/functions";
 import { handleGetTourById } from "../../services/tourService";
+import {
+  handleCreateFavoriteTourAPI, handleDeleteFavoriteTourAPI
+} from "../../services/favoriteTourServise";
 import {
   iconInfo,
   iconMap,
@@ -16,6 +19,7 @@ import {
 import { note, service } from "../../theme/data";
 import { useReactToPrint } from "react-to-print";
 import Heart from "../../assets/svg/heart";
+import { async } from "q";
 
 const TourDetail = () => {
   const [tour, setTour] = useState({});
@@ -45,8 +49,33 @@ const TourDetail = () => {
     setIsNote(!isNote);
   };
 
-  const handleCreateFavoriteTour = () => {
-    window.location.replace("/tour-country/tour-detail/" + tourId);
+  const handleCreateFavoriteTour = async () => {
+    if (localStorage.getItem("userId") !== null) {
+      try {
+        let dataAPI = await handleCreateFavoriteTourAPI({
+          tourId: tourId,
+          customerId: localStorage.getItem("userId")
+        });
+        if (dataAPI.errCode === 0) {
+          //tim thanhf cong set tim
+        } else {
+          //cos thif xoas tim
+          await handleDeleteFavoriteTourAPI({
+            tourId: tourId,
+            customerId: localStorage.getItem("userId")
+          });
+        }
+      } catch (error) {
+        await handleDeleteFavoriteTourAPI({
+          tourId: tourId,
+          customerId: localStorage.getItem("userId")
+        });
+      }
+
+    } else {
+      alert("Tính năng này chỉ dùng khi đã đăng nhập!")
+    }
+    // window.location.replace("/tour-country/tour-detail/" + tourId);
   };
 
   useEffect(() => {
@@ -85,7 +114,7 @@ const TourDetail = () => {
           <div className="tour-image-container">
             <img
               className="tour-image"
-              src={require("../../assets/picture/brazil.jpg")}
+              src={tour.image ? handleLoadDataImageFromData(tour.image.data) : require("../../assets/picture/brazil.jpg")}
               alt="Tour"
             />
           </div>

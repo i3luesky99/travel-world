@@ -61,7 +61,10 @@ export default function TourCountry() {
         dataTransferSouth.dateGo = element.dateGo;
         //desc = note
         if (element.image) {
-          dataTransferSouth.img = [handleLoadDataImageFromData(element.image.data)]
+          if (element.image.data) {
+            dataTransferSouth.img = [handleLoadDataImageFromData(element.image.data)]
+          }
+
         }
         dataTransferSouth.desc = element.note;
         dataTransferSouth.slots = element.adultSlot + element.childrenSlot;
@@ -115,7 +118,10 @@ export default function TourCountry() {
         dataTransferNorth.dateGo = element.dateGo;
         //desc = note
         if (element.image) {
-          dataTransferNorth.img = [handleLoadDataImageFromData(element.image.data)]
+          if (element.image.data) {
+            dataTransferNorth.img = [handleLoadDataImageFromData(element.image.data)];
+          }
+
         }
         dataTransferNorth.desc = element.note;
         dataTransferNorth.slots = element.adultSlot + element.childrenSlot;
@@ -166,15 +172,15 @@ export default function TourCountry() {
         dataTransferCentral.title = element.nameTour;
         dataTransferCentral.location = element.placeDest;
         dataTransferCentral.totalDays = handleScheduleDay(element.dateGo, element.dateBack);
-        console.log(element.dateGo)
-        console.log(element.dateBack)
-        console.log(dataTransferCentral.totalDays)
+
         //dateBack-dateGo
         dataTransferCentral.dateStart = element.dateGo;//dateGo
         dataTransferCentral.dateGo = element.dateGo;
         //desc = note
         if (element.image) {
-          dataTransferCentral.img = [handleLoadDataImageFromData(element.image.data)]
+          if (element.image.data) {
+            dataTransferCentral.img = [handleLoadDataImageFromData(element.image.data)];
+          }
         }
         dataTransferCentral.desc = element.note;
         dataTransferCentral.slots = element.adultSlot + element.childrenSlot;
