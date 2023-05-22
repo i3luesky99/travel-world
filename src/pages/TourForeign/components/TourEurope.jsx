@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { TotalTour } from "../../../components";
 import { destinationEurope } from "../../../theme/data";
 import { handleGetTourByContinent } from "../../../services/tourService";
+import { handleScheduleDay } from "../../../theme/functions";
 function TourEurope() {
   const destinations = destinationEurope;
   const [tourEurope, setTourEurope] = useState([]);
+
   const fetchTourEurope = async () => {
     try {
       setTourEurope([]);
@@ -35,7 +37,7 @@ function TourEurope() {
           dataTransferAmerica.id = element.id;
           dataTransferAmerica.title = element.nameTour;
           dataTransferAmerica.location = element.placeDest;
-          dataTransferAmerica.totalDays = 4;//dateBack-dateGo
+          dataTransferAmerica.totalDays = handleScheduleDay(element.dateGo, element.dateBack);//dateBack-dateGo
           dataTransferAmerica.dateStart = element.dateGo;//dateGo
           dataTransferAmerica.dateGo = element.dateGo;
           //desc = note

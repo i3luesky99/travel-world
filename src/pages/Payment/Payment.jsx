@@ -8,7 +8,7 @@ import TourPriceDetail from "./components/TourPriceDetail";
 import { useParams } from "react-router-dom";
 import { handleGetTourById } from "../../services/tourService";
 import AuthMethods from "./components/AuthMethods";
-import { handleVNPay } from "../../services/vnPayService";
+import { handleStripe } from "../../services/stripeService";
 import { handleGetUserByEmail, handleCreateUserApi, handleGetUserByPhone, handleCreateUserByPhoneApi } from "../../services/userService";
 import { handleLoginByPhoneApi, handleLoginApi } from "../../services/loginService";
 import localStorageService from "../../services/localStorageService";
@@ -28,6 +28,8 @@ function Payment() {
     expirationDate: "",
     cvv: "",
     otp: "",
+    amount: "",
+    orderDescription: ""
   });
   const [selectedOption, setSelectedOption] = useState("Tiền mặt");
   const [selectedOptionAuth, setSelectedOptionAuth] = useState("Số diện thoại");
@@ -52,6 +54,29 @@ function Payment() {
     });
   };
 
+  const handlePaymentWithStripe = async () => {
+    try {
+      const dataPayment = {
+        amount: 2000000
+        , name: "du lich viet",
+        param: 2
+        //   , success_url: window.location.origin + window.location.pathname
+
+        //   , cancel_url: window.location.origin + window.location.pathname
+        // 
+      };
+      console.log(dataPayment);
+      const urlPayment = await handleStripe(dataPayment);
+      if (urlPayment.errCode && urlPayment.errCode === 0) {
+        await window.location.replace(urlPayment.url)
+      } else {
+        alert("Lỗi thanh toán");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
   const handleVerifyPhoneOtp = async () => {
     // const dataApi = await handleVerifyPhoneOtpApi({
     //   phone: parseInt(paymentInfo.phone),
@@ -118,7 +143,7 @@ function Payment() {
             type: null,
             paymentId: "P4",
             state: "S1",
-            note: "book success",
+            note: "book tour success",
           });
           setInvoice(true);
           setError(false);
@@ -273,9 +298,39 @@ function Payment() {
       {!invoice ? (
         <>
           <TourPriceDetail {...props} />
-          <form className="payment-form flex" action="http://localhost:8080/create_payment_url" method="post">
+          <form className="payment-form flex" action="http://localhost:8080/create_payment_stripe" method="post">
             <GuestContact {...props} />
             <PaymentMethod {...props} />
+            {/*  */}
+            <div className="optionPayment" hidden>
+              <label>Họ và tên :</label>
+              <input
+                type="number"
+                name="amount"
+                value={total}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="optionPayment" hidden>
+              <label>Họ và tên :</label>
+              <input
+                type="text"
+                name="name"
+                value={tour.nameTour}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="optionPayment" hidden>
+              <label>Họ và tên :</label>
+              <input
+                type="number"
+                name="param"
+                value={tourId}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            {/*  */}
             <div
               className="info"
               style={{ gridTemplateColumns: "repeat(3, 1fr)" }}
@@ -293,9 +348,9 @@ function Payment() {
             <AuthMethods {...props} />
 
             <p className="totalText">
-              <a href="http://localhost:8888/order/create_payment_url">
-                Tổng tiền
-              </a>
+
+              Tổng tiền
+
             </p>
             <div className="tourTotalPrice flex">
               <label>{formatCurrency(total)}</label>
