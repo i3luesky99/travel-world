@@ -3,7 +3,7 @@ import { TotalTour } from "../../../components";
 import { destinationCentral } from "../../../theme/data";
 import { handleScheduleDay } from "../../../theme/functions";
 import { handleGetTourByRegion } from "../../../services/tourService";
-
+import { handleLoadDataImageFromData } from "../../../theme/functions";
 function TourCentral() {
   useEffect(() => {
     destinationData();
@@ -38,6 +38,9 @@ function TourCentral() {
       dataTransfer.dateStart = new Date().toLocaleString();//dateGo
       dataTransfer.dateGo = element.dateGo;
       //desc = note
+      if (element.image) {
+        dataTransfer.img = [handleLoadDataImageFromData(element.image.data)]
+      }
       dataTransfer.desc = element.note;
       dataTransfer.slots = element.adultSlot + element.childrenSlot;
       dataTransfer.prices = element.adultPrice;

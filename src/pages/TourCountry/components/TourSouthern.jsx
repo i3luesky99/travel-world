@@ -3,6 +3,7 @@ import { TotalTour } from "../../../components";
 import { destinationSouthern } from "../../../theme/data";
 import { handleGetTourByRegion } from "../../../services/tourService";
 import { handleScheduleDay } from "../../../theme/functions";
+import { handleLoadDataImageFromData } from "../../../theme/functions"
 
 function TourSouthern() {
   useEffect(() => {
@@ -38,6 +39,9 @@ function TourSouthern() {
       dataTransfer.totalDays = handleScheduleDay(element.dateGo, element.dateBack);//dateBack-dateGo
       dataTransfer.dateStart = new Date().toLocaleString();//dateGo
       //desc = note
+      if (element.image) {
+        dataTransfer.img = [handleLoadDataImageFromData(element.image.data)]
+      }
       dataTransfer.dateGo = element.dateGo;
       dataTransfer.desc = element.note;
       dataTransfer.slots = element.adultSlot + element.childrenSlot;
