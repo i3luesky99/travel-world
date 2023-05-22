@@ -48,6 +48,7 @@ export const clientWeb = [
     link: "/tour-country/tour-detail/:tourId",
     component: <TourDetail />,
   },
+
   //foreign
   {
     link: "/tour-foreign",
@@ -76,6 +77,10 @@ export const clientWeb = [
   {
     link: "/blog",
     component: <BlogPage />,
+  },
+  {
+    link: "/introduce",
+    component: <Introduce />,
   },
   {
     link: "/introduce",

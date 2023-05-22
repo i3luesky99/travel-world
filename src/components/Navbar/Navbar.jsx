@@ -73,9 +73,9 @@ export default function Navbar() {
             <li className="navItem">
               <FavoriteItem />
             </li>
-            {/* <li className="navItem">
+            <li className="navItem">
               <Cart />
-            </li> */}
+            </li>
           </ul>
           <div className="closeNavBar" onClick={() => openNavbar("navBar")}>
             <AiFillCloseCircle className="icon" />

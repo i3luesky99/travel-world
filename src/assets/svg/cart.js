@@ -1,4 +1,4 @@
-const Cart = ({ style, fill = "black", onClick }) => {
+const CartIcon = ({ style, fill = "black", onClick }) => {
   return (
     <svg
       width="800px"
@@ -19,4 +19,4 @@ const Cart = ({ style, fill = "black", onClick }) => {
   );
 };
 
-export default Cart;
+export default CartIcon;

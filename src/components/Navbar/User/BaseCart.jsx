@@ -1,15 +1,20 @@
 import { Drawer } from "@mui/material";
 import React from "react";
 import Cancel from "../../../assets/svg/cancel";
+import CartIcon from "../../../assets/svg/cart";
 import Heart from "../../../assets/svg/heart";
 import { formatCurrency } from "../../../theme/functions";
 
 export default function BaseCart(props) {
-  const { item, open, title, setOpen } = props;
+  const { tours, open, title, setOpen, heart, deleteTour } = props;
   const handleClose = () => {
     setOpen(false);
   };
-  const tours = [1, 2, 3, 4, 5];
+
+  const handleToTourDetail = (id) => {
+    window.location.replace(`/tour-country/tour-detail/${id}`);
+  };
+
   return (
     <Drawer
       open={open}
@@ -19,13 +24,23 @@ export default function BaseCart(props) {
       style={{ display: "flex", position: "relative" }}
     >
       <div className="header">
-        <Heart
-          style={{
-            width: "35px",
-            height: "35px",
-            marginRight: "15px",
-          }}
-        />
+        {heart ? (
+          <Heart
+            style={{
+              width: "35px",
+              height: "35px",
+              marginRight: "15px",
+            }}
+          />
+        ) : (
+          <CartIcon
+            style={{
+              width: "30px",
+              height: "30px",
+              marginRight: "15px",
+            }}
+          />
+        )}
         {title}
       </div>
 
@@ -41,8 +56,8 @@ export default function BaseCart(props) {
         onClick={handleClose}
       />
       <div className="content">
-        {tours.map((tour) => (
-          <>
+        {tours.map((tour, index) => (
+          <div key={`tour-select-${index}`}>
             <div className="item">
               <Cancel
                 style={{
@@ -53,26 +68,37 @@ export default function BaseCart(props) {
                   top: "5px",
                   cursor: "pointer",
                 }}
+                onClick={() => deleteTour(tour?.id)}
               />
               <div className="item-prop">
-                <img
-                  className="item-img"
-                  src={require("../../../assets/picture/brazil.jpg")}
-                  alt=""
-                />
+                <img className="item-img" src={tour?.img} alt="" />
                 <div className="title-img">
-                  <div style={{ width: "100%" }}>
-                    Mua 2 Tặng Bình Nước Áo Thun Organic Cotton Tay Ngắn Nam Cổ
-                    Tròn Form Fitted - 10S23TSS003C
-                  </div>
+                  <div style={{ width: "100%" }}>{tour?.tourName}</div>
                   <div>Ngày khởi hành: 30/04/2022</div>
-                  <div>Số lượng chỗ: 30</div>
+                  <div>Số lượng chỗ: {tour?.totalSlot}</div>
                   <div className="price">
                     Giá tour: {formatCurrency(10000000)}
                   </div>
                 </div>
               </div>
-              <div className="book-button">ĐẶT TOUR</div>
+              {heart ? (
+                <div
+                  className="book-button"
+                  onClick={() => handleToTourDetail(tour?.id)}
+                >
+                  ĐẶT TOUR
+                </div>
+              ) : (
+                <div
+                  className="book-button"
+                  style={{
+                    backgroundColor: "#dc3545",
+                  }}
+                  onClick={() => deleteTour(tour?.id)}
+                >
+                  HUỶ ĐẶT TOUR
+                </div>
+              )}
             </div>
             <div
               style={{
@@ -82,7 +108,7 @@ export default function BaseCart(props) {
                 marginBottom: "10px",
               }}
             ></div>
-          </>
+          </div>
         ))}
       </div>
     </Drawer>

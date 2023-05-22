@@ -13,6 +13,7 @@ import {
 } from "../../theme/icon";
 import { note, service } from "../../theme/data";
 import { useReactToPrint } from "react-to-print";
+import Heart from "../../assets/svg/heart";
 
 const TourDetail = () => {
   const [tour, setTour] = useState({});
@@ -40,6 +41,10 @@ const TourDetail = () => {
 
   const handleOpenNote = () => {
     setIsNote(!isNote);
+  };
+
+  const handleCreateFavoriteTour = () => {
+    window.location.replace("/tour-country/tour-detail/" + tourId);
   };
 
   useEffect(() => {
@@ -89,7 +94,7 @@ const TourDetail = () => {
               <div className="border data">Thời gian: 3 ngày 2 đêm</div>
               <div className="border data">Khởi hành: {tour.dateGo}</div>
               <div className="border data">
-                Vận Chuyển: {tour.transportation} {" "}
+                Vận Chuyển: {tour.transportation}{" "}
                 {/* Vận Chuyển: Xe du lịch đời mới & Máy bay khứ hồi{" "} */}
               </div>
               <div className="data">Xuất phát: {tour.placeGo}</div>
@@ -107,6 +112,13 @@ const TourDetail = () => {
                   CHI TIẾT
                   <img src={iconPrint} alt="" className="icon" />
                 </div>
+                <div className="heart-button">
+                  <Heart
+                    style={{ height: "35px", width: "35px" }}
+                    fill={"orange"}
+                    onClick={handleCreateFavoriteTour}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -121,17 +133,6 @@ const TourDetail = () => {
             </div>
             <div style={{ textAlign: "justify", fontStyle: "italic" }}>
               {tour.note}
-              {/* Du lịch Trương Gia Giới mùa Hè là nơi hội tụ những kỳ quan thiên
-              nhiên kỳ ảo bậc nhất Trung Hoa. Tour Trương Gia Giới mùa Hè có thể
-              tham quan những gì? Trước khi tham gia Tour Trương Gia Giới hãy
-              cùng Du Lịch Việt chúng tôi tìm hiểu ngay nhé! Tour du lịchTrương
-              Gia Giới mùa Hè được thiên nhiên ưu ái ban cho địa hình đồi núi,
-              sa thạch, đồng bằng đa dạng, phức tạp, hiếm có trên thế giới. Khi
-              lớp vỏ Trái Đất hình thành, những dòng chảy chia cắt ở vùng đất
-              này tạo thành sông, thung lũng và các hẻm núi. Nhờ vào sự kiến tạo
-              này, Trương Gia Giới sở hữu những khối trụ sa thạch cao vút, độc
-              đáo, trở thành bối cảnh cho những ngọn núi bay trong phim chiếu
-              rạp nổi tiếng "Avatar". */}
             </div>
             <div className="days">
               <div className="border">
