@@ -5,4 +5,17 @@ const handleCreateBookTour = (data) => {
 const handleGetAllBookTour = () => {
   return axios.post("/api/get-all-bookTour?id=ALL");
 };
-export { handleCreateBookTour, handleGetAllBookTour };
+const handleGetBookTourByCustomerId = (id) => {
+  return axios.get("/api/bookTour/get-by-customerId", {
+    params: {
+      customerId: id,
+    },
+  });
+};
+const handleCancellationBookTourAPI = (data) => {
+  return axios.put("/api/bookTour/cancellation", data);
+};
+export {
+  handleCreateBookTour, handleGetAllBookTour,
+  handleGetBookTourByCustomerId, handleCancellationBookTourAPI
+};

@@ -7,4 +7,11 @@ const handleDeleteFavoriteTourAPI = (data) => {
         data
     });
 };
-export { handleCreateFavoriteTourAPI, handleDeleteFavoriteTourAPI };
+const handleGetFavoriteTour = (id) => {
+    return axios.get("/api/favorite-tour/get-by-customerId", {
+        params: {
+            customerId: id,
+        },
+    });
+};
+export { handleCreateFavoriteTourAPI, handleDeleteFavoriteTourAPI, handleGetFavoriteTour };
