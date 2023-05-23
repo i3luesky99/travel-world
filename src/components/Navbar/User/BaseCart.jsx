@@ -4,13 +4,15 @@ import Cancel from "../../../assets/svg/cancel";
 import CartIcon from "../../../assets/svg/cart";
 import Heart from "../../../assets/svg/heart";
 import { formatCurrency } from "../../../theme/functions";
-
+import { handleCancellationBookTourAPI } from "../../../services/bookTourService";
 export default function BaseCart(props) {
   const { tours, open, title, setOpen, heart, deleteTour } = props;
   const handleClose = () => {
     setOpen(false);
   };
-
+  const handleCancellationBookTour = async (id) => {
+    await handleCancellationBookTourAPI({ id: id });
+  }
   const handleToTourDetail = (id) => {
     window.location.replace(`/tour-country/tour-detail/${id}`);
   };
@@ -74,27 +76,29 @@ export default function BaseCart(props) {
                 <img className="item-img" src={tour?.img} alt="" />
                 <div className="title-img">
                   <div style={{ width: "100%" }}>{tour?.tourName}</div>
-                  <div>Ngày khởi hành: 30/04/2022</div>
+                  <div>Ngày khởi hành: {tour?.dateStart}</div>
                   <div>Số lượng chỗ: {tour?.totalSlot}</div>
                   <div className="price">
-                    Giá tour: {formatCurrency(10000000)}
+                    Giá tour: {formatCurrency(tour?.price)}
                   </div>
                 </div>
               </div>
               {heart ? (
+
                 <div
                   className="book-button"
                   onClick={() => handleToTourDetail(tour?.id)}
                 >
                   ĐẶT TOUR
                 </div>
+
               ) : (
                 <div
                   className="book-button"
                   style={{
                     backgroundColor: "#dc3545",
                   }}
-                  onClick={() => deleteTour(tour?.id)}
+                  onClick={() => handleCancellationBookTour(tour?.bookTourId)}
                 >
                   HUỶ ĐẶT TOUR
                 </div>
