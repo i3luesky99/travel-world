@@ -68,7 +68,11 @@ function TourEurope() {
   }, []);
   return (
     <div>
-      <TotalTour title="Châu Âu" destinations={destinations} foreign={true} />
+      <TotalTour
+        title="Châu Âu"
+        destinations={tourEurope.flat()}
+        foreign={true}
+      />
     </div>
   );
 }
