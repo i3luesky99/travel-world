@@ -30,12 +30,12 @@ export default function BlogCountry() {
 
   const bottom = [
     {
-      link: require("../../../assets/picture/pic4.jpg"),
+      link: require("../../../assets/picture/danang.jpg"),
       name: "image4",
       place: "Đà Nẵng",
     },
     {
-      link: require("../../../assets/picture/pic5.jpg"),
+      link: require("../../../assets/picture/nhatrang.jpg"),
       name: "image5",
       place: "Nha Trang",
     },

@@ -1,47 +1,53 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BsArrowRightShort } from "react-icons/bs";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { formatCurrency } from "../../theme/functions";
 import Heart from "../../assets/svg/heart";
 import {
-  handleCreateFavoriteTourAPI, handleDeleteFavoriteTourAPI
+  handleCreateFavoriteTourAPI,
+  handleDeleteFavoriteTourAPI,
 } from "../../services/favoriteTourServise";
-import { async } from "q";
 
 export default function TotalTour(props) {
   const { title, destinations } = props;
+  const [selectedHearts, setSelectedHearts] = useState([]);
 
   const handleOnClick = (id) => {
     window.location.replace("/tour-country/tour-detail/" + id);
   };
-
-  const handleCreateFavoriteTour = async (id) => {
+  const handleCreateFavoriteTour = async (id, index) => {
     // const data create favoriteTour
+    const updatedHearts = [...selectedHearts];
+    if (updatedHearts.includes(index)) {
+      updatedHearts.splice(updatedHearts.indexOf(index), 1);
+    } else {
+      updatedHearts.push(index);
+    }
+    setSelectedHearts(updatedHearts);
+
     if (localStorage.getItem("userId") !== null) {
       try {
         let dataAPI = await handleCreateFavoriteTourAPI({
           tourId: id,
-          customerId: localStorage.getItem("userId")
+          customerId: localStorage.getItem("userId"),
         });
         if (dataAPI.errCode === 0) {
-          //tim thanhf cong set tim
         } else {
           //cos thif xoas tim
           await handleDeleteFavoriteTourAPI({
             tourId: id,
-            customerId: localStorage.getItem("userId")
+            customerId: localStorage.getItem("userId"),
           });
         }
       } catch (error) {
         await handleDeleteFavoriteTourAPI({
           tourId: id,
-          customerId: localStorage.getItem("userId")
+          customerId: localStorage.getItem("userId"),
         });
       }
-
     } else {
-      alert("Tính năng này chỉ dùng khi đã đăng nhập!")
+      alert("Tính năng này chỉ dùng khi đã đăng nhập!");
     }
     // window.location.replace("/tour-country/tour-detail/" + id);
   };
@@ -49,7 +55,6 @@ export default function TotalTour(props) {
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
-
   return (
     <section className="country section container">
       <div className="secContainer ">
@@ -94,7 +99,10 @@ export default function TotalTour(props) {
                     top: "0px",
                   }}
                   fill="#f67009"
-                  onClick={() => handleCreateFavoriteTour(destination?.id)}
+                  fillAll={selectedHearts.includes(index) ? true : false}
+                  onClick={() =>
+                    handleCreateFavoriteTour(destination?.id, index)
+                  }
                 />
                 <div className="destFooter flex">
                   {index < 9 ? (

@@ -22,7 +22,7 @@ function TourEurope() {
             id: 1,
             img: [
               require("../../../assets/picture/pic1.jpg"),
-              require("../../../assets/picture/pic2.jpg")
+              require("../../../assets/picture/pic2.jpg"),
             ],
             title: "Tour du lịch Đà Nẵng ",
             location: "Đà Nẵng",
@@ -38,40 +38,37 @@ function TourEurope() {
           dataTransferAmerica.id = element.id;
           dataTransferAmerica.title = element.nameTour;
           dataTransferAmerica.location = element.placeDest;
-          dataTransferAmerica.totalDays = handleScheduleDay(element.dateGo, element.dateBack);//dateBack-dateGo
-          dataTransferAmerica.dateStart = element.dateGo;//dateGo
+          dataTransferAmerica.totalDays = handleScheduleDay(
+            element.dateGo,
+            element.dateBack
+          ); //dateBack-dateGo
+          dataTransferAmerica.dateStart = element.dateGo; //dateGo
           dataTransferAmerica.dateGo = element.dateGo;
           //desc = note
           if (element.image) {
             if (element.image.data) {
-              dataTransferAmerica.img = [handleLoadDataImageFromData(element.image.data)]
+              dataTransferAmerica.img = [
+                handleLoadDataImageFromData(element.image.data),
+              ];
             }
-
           }
           dataTransferAmerica.desc = element.note;
           dataTransferAmerica.slots = element.adultSlot + element.childrenSlot;
           dataTransferAmerica.prices = element.adultPrice;
           data.push(dataTransferAmerica);
-
         }
-        setTourEurope((tourEurope) =>
-          ([...tourEurope, data])
-
-        );
-
+        setTourEurope((tourEurope) => [...tourEurope, data]);
       }
-
-
-
-
     } catch (error) {
       console.log(error);
     }
-  }
-  useEffect(() => { fetchTourEurope(); }, [])
+  };
+  useEffect(() => {
+    fetchTourEurope();
+  }, []);
   return (
     <div>
-      <TotalTour title="Châu Âu" destinations={tourEurope.flat()} foreign={true} />
+      <TotalTour title="Châu Âu" destinations={destinations} foreign={true} />
     </div>
   );
 }
