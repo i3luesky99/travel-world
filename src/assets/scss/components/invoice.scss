@@ -4,8 +4,7 @@
   min-height: 50vh;
 
   .invoice-container {
-    max-width: 900px;
-    margin: 0 auto;
+    width: 900px;
     border-radius: 10px;
     background-color: #ffffff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -80,7 +79,7 @@
         align-items: center;
         margin-top: 20px;
         cursor: pointer;
-        background-color: #e3e3e3;
+        // background-color: #e3e3e3;
         width: 180px;
         height: 40px;
       }
