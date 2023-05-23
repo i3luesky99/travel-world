@@ -26,23 +26,27 @@ export default function PaymentMethod(props) {
           <label>
             <input
               type="radio"
-              value="Momo"
-              checked={selectedOption === "Momo"}
+              value="VNPay"
+              checked={selectedOption === "VNPay"}
               onChange={handleOptionChange}
             />
-            <p>Momo</p>
-            <img src={require("../../../assets/picture/momo.png")} alt="" />
+            <p>VNPay</p>
+            <img
+              src={require("../../../assets/picture/vnpay1.png")}
+              alt=""
+              style={{ scale: "0.5" }}
+            />
           </label>
         </div>
         <div className="optionSelect ">
           <label>
             <input
               type="radio"
-              value="Internet Banking"
-              checked={selectedOption === "Internet Banking"}
+              value="visa"
+              checked={selectedOption === "visa"}
               onChange={handleOptionChange}
             />
-            <p>Internet Banking</p>
+            <p>Thẻ visa</p>
             <BsBank2 className="icon" />
           </label>
         </div>

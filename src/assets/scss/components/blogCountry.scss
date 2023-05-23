@@ -1,0 +1,131 @@
+.main-blog {
+  padding: 20px;
+  height: 1000px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .blog-country {
+    width: 100%;
+
+    .title {
+      img {
+        width: 350px;
+        height: 120px;
+      }
+    }
+    .container-img {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+
+      .top {
+        display: flex;
+        img {
+          object-fit: cover;
+          box-shadow: 2px 2px 5px 2px grey;
+          height: 100%;
+          width: 100%;
+          border-radius: 15px;
+          &:hover {
+            box-shadow: none;
+          }
+        }
+        .place {
+          z-index: 10;
+          position: absolute;
+          font-size: 30px;
+          bottom: 25px;
+          left: 43px;
+          color: white;
+          font-weight: 600;
+
+          &:hover {
+            color: $primary-color;
+          }
+        }
+        .image1,
+        .image3 {
+          width: 325px;
+          height: 325px;
+          border-radius: 15px;
+          position: relative;
+          // transform-style: preserve-3d;
+          transition: all 0.8s ease;
+          &:hover {
+            //   scale: 1.1;
+            z-index: 5;
+            transform: rotateY(180deg);
+          }
+        }
+        .image2 {
+          width: 550px;
+          height: 325px;
+          margin-right: 15px;
+          margin-left: 15px;
+          margin-bottom: 15px;
+          border-radius: 15px;
+          position: relative;
+          transition: all 0.5s ease;
+          &:hover {
+            scale: 1.1;
+            z-index: 5;
+          }
+        }
+      }
+      .bottom-img {
+        display: flex;
+        img {
+          object-fit: cover;
+          box-shadow: 2px 2px 5px 2px grey;
+          height: 100%;
+          width: 100%;
+          border-radius: 15px;
+          &:hover {
+            box-shadow: none;
+          }
+        }
+        .place {
+          z-index: 10;
+          position: absolute;
+          font-size: 30px;
+          bottom: 25px;
+          left: 43px;
+          color: white;
+          font-weight: 600;
+
+          &:hover {
+            color: $primary-color;
+          }
+        }
+        .image5 {
+          width: 607.5px;
+          height: 325px;
+          margin-left: 7.5px;
+          border-radius: 15px;
+          position: relative;
+          transition: all 0.5s ease;
+          &:hover {
+            scale: 1.1;
+            z-index: 5;
+          }
+        }
+        .image4 {
+          width: 607.5px;
+          height: 325px;
+          margin-right: 7.5px;
+          border-radius: 15px;
+          position: relative;
+          transition: all 0.5s ease;
+          &:hover {
+            scale: 1.1;
+            z-index: 5;
+          }
+        }
+      }
+    }
+  }
+}

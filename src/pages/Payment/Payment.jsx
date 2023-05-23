@@ -3,12 +3,10 @@ import { formatCurrency } from "../../theme/functions";
 import InternetBanking from "./components/InternetBanking";
 import GuestContact from "./components/GuestContact";
 import PaymentMethod from "./components/PaymentMethod";
-import Momo from "./components/Momo";
 import TourPriceDetail from "./components/TourPriceDetail";
 import { useParams } from "react-router-dom";
 import { handleGetTourById } from "../../services/tourService";
 import AuthMethods from "./components/AuthMethods";
-import { handleVNPay } from "../../services/vnPayService";
 import {
   handleGetUserByEmail,
   handleCreateUserApi,
@@ -310,7 +308,7 @@ function Payment() {
           >
             <GuestContact {...props} />
             <PaymentMethod {...props} />
-            {/*  */}
+
             <div className="optionPayment" hidden>
               <label>Họ và tên :</label>
               <input
@@ -338,8 +336,6 @@ function Payment() {
                 onChange={handleInputChange}
               />
             </div>
-
-            {/*  */}
             <div
               className="info"
               style={{ gridTemplateColumns: "repeat(3, 1fr)" }}
@@ -352,10 +348,35 @@ function Payment() {
                   <label>Đi đến cửa hàng để thanh toán trực tiếp</label>
                 </div>
               )}
+              {selectedOption === "VNPay" && (
+                <div
+                  className="optionPayment"
+                  style={{ display: "flex", alignItems: "center" }}
+                >
+                  <label style={{ margin: "0px" }}>Thanh toán qua trang</label>
+                  <img
+                    src={require("../../assets/picture/vnpay.png")}
+                    alt=""
+                    style={{ width: "100px", height: "100px" }}
+                  />
+                </div>
+              )}
+              {selectedOption === "visa" && (
+                <div
+                  className="optionPayment"
+                  style={{ display: "flex", alignItems: "center" }}
+                >
+                  <label style={{ margin: "0px" }}>Thanh toán bằng thẻ</label>
+                  <img
+                    src={require("../../assets/picture/visa.png")}
+                    alt=""
+                    style={{ width: "100px", height: "100px" }}
+                  />
+                </div>
+              )}
             </div>
-            {selectedOption === "Momo" && <Momo {...props} />}
-            <AuthMethods {...props} />
 
+            <AuthMethods {...props} />
             <p className="totalText">Tổng tiền</p>
             <div className="tourTotalPrice flex">
               <label>{formatCurrency(total)}</label>
