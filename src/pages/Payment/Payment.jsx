@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { formatCurrency } from "../../theme/functions";
 import InternetBanking from "./components/InternetBanking";
 import GuestContact from "./components/GuestContact";
@@ -6,6 +6,7 @@ import PaymentMethod from "./components/PaymentMethod";
 import TourPriceDetail from "./components/TourPriceDetail";
 import { useParams } from "react-router-dom";
 import { handleGetTourById } from "../../services/tourService";
+
 import AuthMethods from "./components/AuthMethods";
 import {
   handleGetUserByEmail,
@@ -38,6 +39,8 @@ function Payment() {
     amount: "",
     orderDescription: "",
   });
+  const formRef = useRef(null);
+  const [urlPayment, setUrlPayment] = useState("http://localhost:8080/create_payment_url");
   const [selectedOption, setSelectedOption] = useState("Tiền mặt");
   const [selectedOptionAuth, setSelectedOptionAuth] = useState("Số diện thoại");
   const [adult, setAdult] = useState(1);
@@ -138,7 +141,7 @@ function Payment() {
                     }
                   }
                 );
-              } catch (error) {}
+              } catch (error) { }
             }
           }
           ///tao bookTour
@@ -213,7 +216,7 @@ function Payment() {
                     }
                   }
                 );
-              } catch (error) {}
+              } catch (error) { }
             }
           }
           ///tao bookTour
@@ -245,31 +248,60 @@ function Payment() {
   };
   const total =
     tour?.adultPrice * adult +
-      tour?.childPrice * kids +
-      tour?.babyPrice * baby || 0;
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (
-      selectedOptionAuth === "Email" &&
-      paymentInfo.name !== "" &&
-      paymentInfo.email !== ""
-    ) {
-      setPaymentInfo({
-        ...paymentInfo,
-        phone: "",
-      });
-      handleVerifyEmailOtp();
+    tour?.childPrice * kids +
+    tour?.babyPrice * baby || 0;
+  const handlePaymentBank = () => {
+    if (formRef.current) {
+      formRef.current.submit();
+    }
+  }
+  const handlePaymentMethods = async () => {
+    if (selectedOption === "VNPay") {
+      //Thanh toán bằng VNPay
+      await setUrlPayment("http://localhost:8080/create_payment_url");
+      handlePaymentBank();
     } else {
-      if (paymentInfo.name !== "" && paymentInfo.phone !== "") {
-        setPaymentInfo({
-          ...paymentInfo,
-          email: "",
-        });
-        handleVerifyPhoneOtp();
+      if (selectedOption === "visa") {
+        //Thanh toán bằng visa
+        await setUrlPayment("http://localhost:8080/create_payment_stripe");
+        handlePaymentBank();
+      } else {
+        //Thanh toán bằng tiền
+
       }
     }
+
+  }
+  const handleValueValidation = () => {
+
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+
   };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (
+  //     selectedOptionAuth === "Email" &&
+  //     paymentInfo.name !== "" &&
+  //     paymentInfo.email !== ""
+  //   ) {
+  //     setPaymentInfo({
+  //       ...paymentInfo,
+  //       phone: "",
+  //     });
+  //     handleVerifyEmailOtp();
+  //   } else {
+  //     if (paymentInfo.name !== "" && paymentInfo.phone !== "") {
+  //       setPaymentInfo({
+  //         ...paymentInfo,
+  //         email: "",
+  //       });
+  //       handleVerifyPhoneOtp();
+  //     }
+  //   }
+  // };
   const props = {
     adultPrice: tour.adultPrice,
     kidPrice: tour.childPrice,
@@ -303,39 +335,48 @@ function Payment() {
           <TourPriceDetail {...props} />
           <form
             className="payment-form flex"
-            action="http://localhost:8080/create_payment_url"
-            method="post"
+            onSubmit={handleSubmit}
           >
             <GuestContact {...props} />
             <PaymentMethod {...props} />
+            <form action={urlPayment} method="POST" ref={formRef}>
+              <div className="optionPayment" hidden>
 
-            <div className="optionPayment" hidden>
-              <label>Họ và tên :</label>
-              <input
-                type="number"
-                name="amount"
-                value={total}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="optionPayment" hidden>
-              <label>Họ và tên :</label>
-              <input
-                type="text"
-                name="name"
-                value={tour.nameTour}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="optionPayment" hidden>
-              <label>Họ và tên :</label>
-              <input
-                type="number"
-                name="param"
-                value={tourId}
-                onChange={handleInputChange}
-              />
-            </div>
+                <input
+                  type="number"
+                  name="amount"
+                  value={total}
+
+                />
+              </div>
+              <div className="optionPayment" hidden>
+
+                <input
+                  type="text"
+                  name="orderDescription"
+                  value={tour.nameTour}
+
+                />
+              </div>
+              <div className="optionPayment" hidden>
+
+                <input
+                  type="text"
+                  name="name"
+                  value={tour.nameTour}
+
+                />
+              </div>
+              <div className="optionPayment" hidden>
+
+                <input
+                  type="number"
+                  name="param"
+                  value={tourId}
+
+                />
+              </div>
+            </form>
             <div
               className="info"
               style={{ gridTemplateColumns: "repeat(3, 1fr)" }}
@@ -387,8 +428,9 @@ function Payment() {
         </>
       ) : (
         <Invoice {...props} />
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 }
 
