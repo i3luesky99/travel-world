@@ -3,7 +3,14 @@ const handleCreateBookTour = (data) => {
   return axios.post("/api/bookTour/book", data);
 };
 const handleGetAllBookTour = () => {
-  return axios.get("/api/get-all-bookTour?id=ALL");
+  return axios.post("/api/get-all-bookTour?id=ALL");
+};
+const handleGetBookTourByTourId = (id) => {
+  return axios.get("/api/get-all-bookTour", {
+    params: {
+      id: id,
+    },
+  });
 };
 const handleGetBookTourByCustomerId = (id) => {
   return axios.get("/api/bookTour/get-by-customerId", {
@@ -23,10 +30,15 @@ const handleGetBookTourById = (id) => {
 const handleCancellationBookTourAPI = (data) => {
   return axios.put("/api/bookTour/cancellation", data);
 };
+const handleChangeStateBookTourAPI = (data) => {
+  return axios.put("/api/bookTour/editState", data);
+};
 export {
   handleCreateBookTour,
   handleGetAllBookTour,
   handleGetBookTourByCustomerId,
   handleCancellationBookTourAPI,
+  handleChangeStateBookTourAPI,
   handleGetBookTourById,
+  handleGetBookTourByTourId,
 };

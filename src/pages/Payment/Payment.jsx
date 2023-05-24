@@ -25,7 +25,8 @@ import {
   handleVerifyPhoneOtpApi,
 } from "../../services/otpService";
 import Invoice from "./components/Invoice";
-import { handleCreateBookTour } from "../../services/bookTourService";
+import { handleCreateBookTour, handleChangeStateBookTourAPI, handleCancellationBookTourAPI, handleGetBookTourById } from "../../services/bookTourService";
+import { handleCreateBillAPI } from "../../services/billService";
 
 function Payment() {
   const [paymentInfo, setPaymentInfo] = useState({
@@ -40,6 +41,7 @@ function Payment() {
     orderDescription: "",
   });
   const formRef = useRef(null);
+  const [bookTour, setBookTour] = useState();
   const [urlPayment, setUrlPayment] = useState("http://localhost:8080/create_payment_url");
   const [selectedOption, setSelectedOption] = useState("Tiền mặt");
   const [selectedOptionAuth, setSelectedOptionAuth] = useState("Số diện thoại");
@@ -48,6 +50,7 @@ function Payment() {
   const [baby, setBaby] = useState(0);
   const [tour, setTour] = useState({});
   const { tourId } = useParams();
+  const [bill, setBill] = useState();
   const [error, setError] = useState(false);
   const [invoice, setInvoice] = useState(false);
   const fetchTour = async () => {
@@ -145,19 +148,8 @@ function Payment() {
             }
           }
           ///tao bookTour
-          await handleCreateBookTour({
-            tourId: tourId,
-            customerId: localStorage.getItem("userId"),
-            adultSlot: adult,
-            childrenSlot: kids,
-            date: new Date(),
-            type: null,
-            paymentId: "P4",
-            state: "S1",
-            note: "book tour success",
-          });
-          setInvoice(true);
-          setError(false);
+          await handlePaymentMethods();
+
         }
       });
     } catch (error) {
@@ -221,20 +213,10 @@ function Payment() {
           }
           ///tao bookTour
           if (localStorage.getItem("userId") !== null) {
-            await handleCreateBookTour({
-              tourId: tourId,
-              customerId: localStorage.getItem("userId"),
-              adultSlot: adult,
-              childrenSlot: kids,
-              date: new Date(),
-              type: null,
-              paymentId: "P4",
-              state: "S1",
-              note: "book success",
-            });
+            //tao bookTour thành công
 
-            setInvoice(true);
-            setError(false);
+            await handlePaymentMethods();
+
           }
         } else {
           alert(data.errMessage);
@@ -255,31 +237,202 @@ function Payment() {
       formRef.current.submit();
     }
   }
+  const handleCreateBookTourPayMoney = async () => {
+    await handleCreateBookTour({
+      tourId: tourId,
+      customerId: localStorage.getItem("userId"),
+      adultSlot: adult,
+      childrenSlot: kids,
+      date: new Date(),
+      type: null,
+      paymentId: "P4",
+      state: "S1",
+      note: "success",
+    });
+  }
+  const handleCreateBookTourVNPay = async () => {
+    await handleCreateBookTour({
+      tourId: tourId,
+      customerId: localStorage.getItem("userId"),
+      adultSlot: adult,
+      childrenSlot: kids,
+      date: new Date(),
+      type: null,
+      paymentId: "P6",
+      state: "S1",
+      note: "success",
+    });
+  }
+  const handleCreateBookTourPayVisa = async () => {
+    await handleCreateBookTour({
+      tourId: tourId,
+      customerId: localStorage.getItem("userId"),
+      adultSlot: adult,
+      childrenSlot: kids,
+      date: new Date(),
+      type: null,
+      paymentId: "P7",
+      state: "S1",
+      note: "success",
+    }).then((data) => {
+      if (data.errCode === 0) {
+        setBookTour(data.bookTourId);
+      }
+    });
+  }
   const handlePaymentMethods = async () => {
     if (selectedOption === "VNPay") {
       //Thanh toán bằng VNPay
       await setUrlPayment("http://localhost:8080/create_payment_url");
+      await handleCreateBookTourVNPay();
       handlePaymentBank();
     } else {
       if (selectedOption === "visa") {
         //Thanh toán bằng visa
         await setUrlPayment("http://localhost:8080/create_payment_stripe");
+        await handleCreateBookTourPayVisa();
         handlePaymentBank();
       } else {
         //Thanh toán bằng tiền
-
+        handleCreateBookTourPayMoney();
+        setInvoice(true);
+        setError(false);
       }
     }
 
   }
-  const handleValueValidation = () => {
+  const handleValueValidation = async () => {
+    if (selectedOption === "VNPay") {
+      //Thanh toán bằng VNPay
+      await setUrlPayment("http://localhost:8080/create_payment_url");
 
+    } else {
+      if (selectedOption === "visa") {
+        //Thanh toán bằng visa
+        await setUrlPayment("http://localhost:8080/create_payment_stripe");
+
+      }
+    }
+    if (
+      selectedOptionAuth === "Email" &&
+      paymentInfo.name !== "" &&
+      paymentInfo.email !== ""
+    ) {
+      setPaymentInfo({
+        ...paymentInfo,
+        phone: "",
+      });
+      await handleVerifyEmailOtp();
+    } else {
+      if (paymentInfo.name !== "" && paymentInfo.phone !== "") {
+        setPaymentInfo({
+          ...paymentInfo,
+          email: "",
+        });
+        await handleVerifyPhoneOtp();
+      } else {
+        alert("Thông tin nhập chưa đầy đủ")
+      }
+    }
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    await handleValueValidation();
 
   };
+
+  const handleCreateBill = async () => {
+
+    const searchParams = new URLSearchParams(window.location.search);
+    const paymentStatus = searchParams.get('payment');
+    const tourId = searchParams.get('tourId');
+    const amount = searchParams.get('amount');
+    if (paymentStatus && tourId) {
+      if (paymentStatus === 'success') {
+        //tao bill đổi state book tour
+        await handleChangeStateBookTourAPI({
+          tourId: tourId,
+          customerId: localStorage.getItem("userId"),
+          state: 'S3',
+          paymentId: 'P7'
+        }).then(async (dataBookTour) => {
+          await handleCreateBillAPI({
+            bookTourId: dataBookTour.bookTourId,
+            customerId: localStorage.getItem("userId"),
+            totalCost: amount,
+            bookTourDate: new Date(),
+            promotionCode: '',
+            status: 'S3'
+          }).then(async (dataBill) => {
+            if (dataBill.errCode === 0) {
+              setBill(dataBill.bill.id);
+              let dataApiBookTour = await handleGetBookTourById(dataBookTour.bookTourId);
+              setAdult(dataApiBookTour.bookTour.adultSlot ? dataApiBookTour.bookTour.adultSlot : 0);
+              setKids(dataApiBookTour.bookTour.childrenSlot ? dataApiBookTour.bookTour.childrenSlot : 0);
+              setBaby(dataApiBookTour.bookTour.babySlot ? dataApiBookTour.bookTour.babySlot : 0)
+              setInvoice(true);
+              setError(false);
+            }
+          });
+        })
+      }
+      else {
+        if (paymentStatus === 'fail') {
+          await handleChangeStateBookTourAPI({
+            tourId: tourId,
+            customerId: localStorage.getItem("userId"),
+            state: 'S1',
+            paymentId: 'P7'
+          }).then(async (dataBookTour) => {
+            await handleCancellationBookTourAPI({ id: dataBookTour.bookTourId });
+          });
+        }
+      }
+    } else {
+      const paymentStatusVNPay = searchParams.get('vnp_TransactionStatus');
+      const tourIdVNPay = searchParams.get('vnp_TxnRef');
+      const amountVNPay = searchParams.get('vnp_Amount');
+      if (paymentStatusVNPay === '00') {
+        //tao bill đổi state book tour
+        await handleChangeStateBookTourAPI({
+          tourId: tourIdVNPay,
+          customerId: localStorage.getItem("userId"),
+          state: 'S3',
+          paymentId: 'P6'
+        }).then(async (dataBookTour) => {
+          await handleCreateBillAPI({
+            bookTourId: dataBookTour.bookTourId,
+            customerId: localStorage.getItem("userId"),
+            totalCost: parseFloat(amountVNPay) / 100,
+            bookTourDate: new Date(),
+            promotionCode: '',
+            status: 'S3'
+          }).then(async (dataBill) => {
+            if (dataBill.errCode === 0) {
+              setBill(dataBill.bill.id);
+              let dataApiBookTour = await handleGetBookTourById(dataBookTour.bookTourId);
+              setAdult(dataApiBookTour.bookTour.adultSlot ? dataApiBookTour.bookTour.adultSlot : 0);
+              setKids(dataApiBookTour.bookTour.childrenSlot ? dataApiBookTour.bookTour.childrenSlot : 0);
+              setBaby(dataApiBookTour.bookTour.babySlot ? dataApiBookTour.bookTour.babySlot : 0)
+
+              setInvoice(true);
+              setError(false);
+            }
+          });
+
+        })
+      } else {
+        await handleChangeStateBookTourAPI({
+          tourId: tourIdVNPay,
+          customerId: localStorage.getItem("userId"),
+          state: 'S1',
+          paymentId: 'P6'
+        }).then(async (dataBookTour) => {
+          await handleCancellationBookTourAPI({ id: dataBookTour.bookTourId });
+        });
+      }
+    }
+  }
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   if (
@@ -322,14 +475,22 @@ function Payment() {
     error: error,
     total: total,
     tour: tour,
+    bill: bill
   };
-
+  //window.addEventListener('beforeunload', handleCreateBill());
   useEffect(() => {
     fetchTour();
+
+
+    // handleCreateBill();
+
+    // 
   }, []);
 
   return (
-    <div className="payment-page">
+    <div className="payment-page" onLoad={() => {
+      handleCreateBill();
+    }} >
       {!invoice ? (
         <>
           <TourPriceDetail {...props} />
@@ -364,6 +525,15 @@ function Payment() {
                   type="text"
                   name="name"
                   value={tour.nameTour}
+
+                />
+              </div>
+              <div className="optionPayment" hidden>
+
+                <input
+                  type="text"
+                  name="bookTourId"
+                  value={bookTour}
 
                 />
               </div>
