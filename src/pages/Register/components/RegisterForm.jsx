@@ -45,7 +45,7 @@ function RegisterForm() {
   const handleRegister = async () => {
     setRegisterInfo({ ...registerInfo, errMessage: "" });
     try {
-      let data = await handleRegisterApi({ email: emailRef.current.value });
+      let data = await handleRegisterApi({ email: registerInfo.email });
       if (data && data.errCode !== 0) {
         return data;
       }

@@ -42,7 +42,7 @@ export default function TourDetailAdmin() {
     babyPrice: "",
     note: "",
     transportation: "Xe du lịch đời mới",
-    destinationId: 1,
+    destinationId: 4,
     tourType: "Trong nước",
     region: "Miền Trung",
     continent: "Châu Á",
