@@ -84,8 +84,7 @@ function Payment() {
         //   , cancel_url: window.location.origin + window.location.pathname
         //
       };
-      console.log(dataPayment);
-      const urlPayment = await handleStripe(dataPayment);
+       const urlPayment = await handleStripe(dataPayment);
       if (urlPayment.errCode && urlPayment.errCode === 0) {
         await window.location.replace(urlPayment.url);
       } else {
@@ -170,8 +169,7 @@ function Payment() {
         otp: paymentInfo.otp,
       }).then(async (data) => {
         if (data.errCode === 0) {
-          //console.log(data);
-          ///khong otp ddung
+           ///khong otp ddung
           //kieemr tra da co user ddang nhap hay chua
           // chua dang nhap tao use bang email voi pass 123456
           //va tu dong dang nhap

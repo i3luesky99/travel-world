@@ -23,8 +23,7 @@ export default function Login() {
     try {
       const data = await handleLoginApi(loginInfo.email, loginInfo.password);
       const user = data.user;
-      //console.log(data);
-      localStorageService.saveUser(data.accessToken);
+       localStorageService.saveUser(data.accessToken);
       localStorage.setItem("roleId", user.roleId);
       localStorage.setItem("userId", user.id);
       setLoginInfo({ ...loginInfo, errMessage: "" });

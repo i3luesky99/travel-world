@@ -14,8 +14,7 @@ export default function GuestContact(props) {
   } = props;
   const handleOnChange = (e, name) => {
     let value = e.target.value;
-    console.log(totalSlot)
-    if (name !== 'baby') {
+     if (name !== 'baby') {
       if (name === 'adult') {
         if (totalSlot < (parseInt(kids ? kids : 0) + parseInt(value))) {
           alert('Vượt quá số chỗ còn lại');

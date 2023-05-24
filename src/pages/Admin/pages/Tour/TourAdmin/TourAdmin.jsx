@@ -79,8 +79,8 @@ export default function TourAdmin() {
     fetchTour: fetchTour,
     selection: selection,
   };
-  // console.log(tours);
-  return (
+  
+   return (
     <div className="tour-admin">
       <div className="title-admin">Danh sách Tour</div>
       <div className="search">
