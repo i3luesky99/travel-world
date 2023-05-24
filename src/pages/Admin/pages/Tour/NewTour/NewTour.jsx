@@ -30,10 +30,10 @@ export default function NewTour() {
     babyPrice: "",
     note: "",
     transportation: "Xe du lịch đời mới",
-    destinationId: 4,
+    destinationId: null,
     tourType: "Trong nước",
-    region: "Miền Trung",
-    continent: "Châu Á",
+    // region: "Miền Trung",
+    // continent: "Châu Á",
   });
   const [base64, setBase64] = useState("");
   const [date, setDate] = useState([
@@ -43,6 +43,7 @@ export default function NewTour() {
       key: "selection",
     },
   ]);
+  const [destinationId, setDestinationId] = useState(4);
   const [selectedImages, setSelectedImages] = useState();
   const [warning, setWarning] = useState(false);
   const startDate = `${moment(`${date[0].startDate}`).format("L")}`;
@@ -54,6 +55,7 @@ export default function NewTour() {
       dateGo: startDate,
       dateBack: endDate,
       image: base64,
+      destinationId: destinationId,
     };
     try {
       for (const [key, value] of Object.entries(newTour)) {
@@ -120,6 +122,8 @@ export default function NewTour() {
     selectedImages: selectedImages,
     handleImageChange: handleImageChange,
     deleteImage: deleteImage,
+    setDestinationId: setDestinationId,
+    destinationId: destinationId,
   };
 
   useEffect(() => {}, []);
