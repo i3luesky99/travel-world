@@ -37,11 +37,36 @@ export default function TourAdmin() {
       selection === "list"
         ? await handleGetAllTour()
         : await handleGetAllBookTour();
+
+    const groupedDataMap = new Map();
+
+    selection === "booking" &&
+      data?.bookTour.forEach((booking) => {
+        const { tourId, customerId } = booking;
+
+        // Kiểm tra nếu đã có tourId trong Map
+        if (groupedDataMap.has(tourId)) {
+          // Nếu đã tồn tại, thêm customerId vào mảng tương ứng với tourId
+          const customerIds = groupedDataMap.get(tourId);
+          customerIds.push(customerId);
+        } else {
+          // Nếu chưa tồn tại, tạo một mảng mới chứa customerId và thêm vào Map
+          groupedDataMap.set(tourId, [customerId]);
+        }
+      });
+
+    const groupedData = Array.from(groupedDataMap).map(
+      ([tourId, customerIds]) => ({
+        tourId,
+        customerIds,
+      })
+    );
+
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
       setSearchItem("");
-      setTours(newTour || data.tour);
+      setTours(newTour || data.tour || groupedData);
     }, 1000);
   };
 
@@ -53,8 +78,9 @@ export default function TourAdmin() {
     tours: tours,
     setTours: setTours,
     fetchTour: fetchTour,
+    selection: selection,
   };
-
+  // console.log(tours);
   return (
     <div className="tour-admin">
       <div className="title-admin">Danh sách Tour</div>
@@ -90,15 +116,6 @@ export default function TourAdmin() {
       {tours?.length > 0 ? (
         <>
           <BaseTable {...props} />
-          {/* <Stack className="stack">
-            <Pagination
-              count={10}
-              page={page}
-              variant="outlined"
-              color="primary"
-              onChange={onPageChange}
-            />
-          </Stack> */}
         </>
       ) : (
         <div className="empty-text">Không có tour nào</div>

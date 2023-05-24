@@ -43,6 +43,15 @@ export default function BlogCountry() {
   return (
     <div className="main-blog">
       <div className="blog-country">
+        <div class="video-background">
+          <video
+            src={require("../../../assets/video/video2.mp4")}
+            autoPlay
+            loop
+            muted
+            type="video/mp4"
+          />
+        </div>
         <div className="title">
           <img src={require("../../../assets/picture/logo1.png")} alt="" />
         </div>

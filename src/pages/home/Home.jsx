@@ -5,9 +5,9 @@ import BlogCountry from "./components/BlogCountry";
 export default function Home() {
   return (
     <>
-      {/* <TourCountry /> */}
-      {/* <TourForeign /> */}
       <BlogCountry />
+      <TourCountry />
+      <TourForeign />
       <Hotels />
       <About />
       <Blog />
