@@ -5,7 +5,7 @@ import { iconPrintBlue } from "../../../theme/icon";
 import Print from "../../../assets/svg/print";
 
 const Invoice = (props) => {
-  const { total, paymentInfo, totalSlot, tour, adult, kids, baby } = props;
+  const { total, paymentInfo, totalSlot, tour, adult, kids, baby, bill } = props;
   const componentPDF = useRef();
   const [open, setOpen] = useState(true);
   const handelToPDF = useReactToPrint({
@@ -22,9 +22,11 @@ const Invoice = (props) => {
     id: "Mã tour",
     dateGo: "Điểm đến",
     dateBack: "Ngày đi",
-    book: "",
-    slot: "Số chỗ đặt",
-    price: "Đơn giá",
+    price: "Ngày về",
+    adultSlot: "Người lớn",
+    childrenSlot: "Trẻ em",
+    babySlot: "Trẻ sơ sinh",
+
   };
 
   const headerArr = Object.values(headerTable);
@@ -56,9 +58,9 @@ const Invoice = (props) => {
                 justifyContent: "space-between",
               }}
             >
-              <div className="customer-title">Hoá đơn của: Anh A</div>
-              <div>Địa chỉ: 96 đường số 2 phường 13, quận Gò Vấp</div>
-              <div>Số điện thoại: 0906624069</div>
+              <div className="customer-title">Hoá đơn của: {paymentInfo.name}</div>
+              <div>Email: {paymentInfo.email}</div>
+              <div>Số điện thoại: {paymentInfo.phone}</div>
             </div>
             <div
               style={{
@@ -69,7 +71,7 @@ const Invoice = (props) => {
                 fontSize: "15px",
               }}
             >
-              <div>Mã hoá đơn: 1233</div>
+              <div>Mã hoá đơn: {bill}</div>
             </div>
           </div>
           <div className="invoice-tour">
@@ -85,12 +87,15 @@ const Invoice = (props) => {
               </thead>
               <tbody>
                 <tr>
-                  <td>101</td>
-                  <td>Đà Lạt</td>
-                  <td>22/04/2023</td>
-                  <td></td>
-                  <td>{30}</td>
-                  <td>{formatCurrency(10000)}</td>
+                  <td>{tour.id}</td>
+                  <td>{tour.placeDest}</td>
+                  <td>{tour.dateGo}</td>
+                  <td>{tour.dateBack}</td>
+                  <td>{adult}</td>
+                  <td>{kids}</td>
+                  <td>{baby}</td>
+
+
                 </tr>
               </tbody>
             </table>
@@ -98,7 +103,7 @@ const Invoice = (props) => {
           <div className="total">
             <div className="total-prices">
               <div>TỔNG CỘNG:</div>
-              <div>{formatCurrency(30000000)}</div>
+              <div>{total}</div>
             </div>
           </div>
           {open && (
