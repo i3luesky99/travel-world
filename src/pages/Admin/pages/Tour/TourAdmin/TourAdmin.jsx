@@ -39,7 +39,6 @@ export default function TourAdmin() {
         : await handleGetAllBookTour();
 
     const groupedDataMap = new Map();
-
     selection === "booking" &&
       data?.bookTour.forEach((booking) => {
         const { tourId, customerId } = booking;

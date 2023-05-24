@@ -11,7 +11,6 @@ export default function BookingTable(props) {
   useEffect(() => {
     fetchTourBook();
   }, [tourId]);
-
   return (
     <div>
       {tours?.map((tour, index) => (

@@ -1,15 +1,9 @@
 import React, { useState } from "react";
-import { useCallback } from "react";
 import { useEffect } from "react";
 import { Popup } from "../../../components";
-import Loading from "../../../components/Loading/Loading";
 import { formatCurrency } from "../../../theme/functions";
 import "../../../assets/scss/components/loading.scss";
-import useModel from "../../../hook/useModel";
-import {
-  handleDeleteTourById,
-  handleGetAllTour,
-} from "../../../services/tourService";
+import { handleDeleteTourById } from "../../../services/tourService";
 import BookingTable from "./BookingTable";
 export default function BaseTable(props) {
   const headerTable = {
@@ -61,7 +55,6 @@ export default function BaseTable(props) {
       setIsAccept(false);
     }
   }, [isAccept]);
-
   const propsPopup = {
     open: open,
     setOpen: setOpen,

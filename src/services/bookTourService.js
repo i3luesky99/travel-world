@@ -3,7 +3,7 @@ const handleCreateBookTour = (data) => {
   return axios.post("/api/bookTour/book", data);
 };
 const handleGetAllBookTour = () => {
-  return axios.post("/api/get-all-bookTour?id=ALL");
+  return axios.get("/api/get-all-bookTour?id=ALL");
 };
 const handleGetBookTourByTourId = (id) => {
   return axios.get("/api/get-all-bookTour", {

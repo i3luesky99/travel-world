@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import { formatCurrency } from "../../theme/functions";
-import InternetBanking from "./components/InternetBanking";
 import GuestContact from "./components/GuestContact";
 import PaymentMethod from "./components/PaymentMethod";
 import TourPriceDetail from "./components/TourPriceDetail";
@@ -25,7 +24,12 @@ import {
   handleVerifyPhoneOtpApi,
 } from "../../services/otpService";
 import Invoice from "./components/Invoice";
-import { handleCreateBookTour, handleChangeStateBookTourAPI, handleCancellationBookTourAPI, handleGetBookTourById } from "../../services/bookTourService";
+import {
+  handleCreateBookTour,
+  handleChangeStateBookTourAPI,
+  handleCancellationBookTourAPI,
+  handleGetBookTourById,
+} from "../../services/bookTourService";
 import { handleCreateBillAPI } from "../../services/billService";
 
 function Payment() {
@@ -42,7 +46,9 @@ function Payment() {
   });
   const formRef = useRef(null);
   const [bookTour, setBookTour] = useState();
-  const [urlPayment, setUrlPayment] = useState("http://localhost:8080/create_payment_url");
+  const [urlPayment, setUrlPayment] = useState(
+    "http://localhost:8080/create_payment_url"
+  );
   const [selectedOption, setSelectedOption] = useState("Tiền mặt");
   const [selectedOptionAuth, setSelectedOptionAuth] = useState("Số diện thoại");
   const [adult, setAdult] = useState(1);
@@ -144,12 +150,11 @@ function Payment() {
                     }
                   }
                 );
-              } catch (error) { }
+              } catch (error) {}
             }
           }
           ///tao bookTour
           await handlePaymentMethods();
-
         }
       });
     } catch (error) {
@@ -208,7 +213,7 @@ function Payment() {
                     }
                   }
                 );
-              } catch (error) { }
+              } catch (error) {}
             }
           }
           ///tao bookTour
@@ -216,7 +221,6 @@ function Payment() {
             //tao bookTour thành công
 
             await handlePaymentMethods();
-
           }
         } else {
           alert(data.errMessage);
@@ -230,13 +234,13 @@ function Payment() {
   };
   const total =
     tour?.adultPrice * adult +
-    tour?.childPrice * kids +
-    tour?.babyPrice * baby || 0;
+      tour?.childPrice * kids +
+      tour?.babyPrice * baby || 0;
   const handlePaymentBank = () => {
     if (formRef.current) {
       formRef.current.submit();
     }
-  }
+  };
   const handleCreateBookTourPayMoney = async () => {
     await handleCreateBookTour({
       tourId: tourId,
@@ -249,7 +253,7 @@ function Payment() {
       state: "S1",
       note: "success",
     });
-  }
+  };
   const handleCreateBookTourVNPay = async () => {
     await handleCreateBookTour({
       tourId: tourId,
@@ -262,7 +266,7 @@ function Payment() {
       state: "S1",
       note: "success",
     });
-  }
+  };
   const handleCreateBookTourPayVisa = async () => {
     await handleCreateBookTour({
       tourId: tourId,
@@ -279,7 +283,7 @@ function Payment() {
         setBookTour(data.bookTourId);
       }
     });
-  }
+  };
   const handlePaymentMethods = async () => {
     if (selectedOption === "VNPay") {
       //Thanh toán bằng VNPay
@@ -299,18 +303,15 @@ function Payment() {
         setError(false);
       }
     }
-
-  }
+  };
   const handleValueValidation = async () => {
     if (selectedOption === "VNPay") {
       //Thanh toán bằng VNPay
       await setUrlPayment("http://localhost:8080/create_payment_url");
-
     } else {
       if (selectedOption === "visa") {
         //Thanh toán bằng visa
         await setUrlPayment("http://localhost:8080/create_payment_stripe");
-
       }
     }
     if (
@@ -331,108 +332,134 @@ function Payment() {
         });
         await handleVerifyPhoneOtp();
       } else {
-        alert("Thông tin nhập chưa đầy đủ")
+        alert("Thông tin nhập chưa đầy đủ");
       }
     }
-  }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     await handleValueValidation();
-
   };
 
   const handleCreateBill = async () => {
-
     const searchParams = new URLSearchParams(window.location.search);
-    const paymentStatus = searchParams.get('payment');
-    const tourId = searchParams.get('tourId');
-    const amount = searchParams.get('amount');
+    const paymentStatus = searchParams.get("payment");
+    const tourId = searchParams.get("tourId");
+    const amount = searchParams.get("amount");
     if (paymentStatus && tourId) {
-      if (paymentStatus === 'success') {
+      if (paymentStatus === "success") {
         //tao bill đổi state book tour
         await handleChangeStateBookTourAPI({
           tourId: tourId,
           customerId: localStorage.getItem("userId"),
-          state: 'S3',
-          paymentId: 'P7'
+          state: "S3",
+          paymentId: "P7",
         }).then(async (dataBookTour) => {
           await handleCreateBillAPI({
             bookTourId: dataBookTour.bookTourId,
             customerId: localStorage.getItem("userId"),
             totalCost: amount,
             bookTourDate: new Date(),
-            promotionCode: '',
-            status: 'S3'
+            promotionCode: "",
+            status: "S3",
           }).then(async (dataBill) => {
             if (dataBill.errCode === 0) {
               setBill(dataBill.bill.id);
-              let dataApiBookTour = await handleGetBookTourById(dataBookTour.bookTourId);
-              setAdult(dataApiBookTour.bookTour.adultSlot ? dataApiBookTour.bookTour.adultSlot : 0);
-              setKids(dataApiBookTour.bookTour.childrenSlot ? dataApiBookTour.bookTour.childrenSlot : 0);
-              setBaby(dataApiBookTour.bookTour.babySlot ? dataApiBookTour.bookTour.babySlot : 0)
+              let dataApiBookTour = await handleGetBookTourById(
+                dataBookTour.bookTourId
+              );
+              setAdult(
+                dataApiBookTour.bookTour.adultSlot
+                  ? dataApiBookTour.bookTour.adultSlot
+                  : 0
+              );
+              setKids(
+                dataApiBookTour.bookTour.childrenSlot
+                  ? dataApiBookTour.bookTour.childrenSlot
+                  : 0
+              );
+              setBaby(
+                dataApiBookTour.bookTour.babySlot
+                  ? dataApiBookTour.bookTour.babySlot
+                  : 0
+              );
               setInvoice(true);
               setError(false);
             }
           });
-        })
-      }
-      else {
-        if (paymentStatus === 'fail') {
+        });
+      } else {
+        if (paymentStatus === "fail") {
           await handleChangeStateBookTourAPI({
             tourId: tourId,
             customerId: localStorage.getItem("userId"),
-            state: 'S1',
-            paymentId: 'P7'
+            state: "S1",
+            paymentId: "P7",
           }).then(async (dataBookTour) => {
-            await handleCancellationBookTourAPI({ id: dataBookTour.bookTourId });
+            await handleCancellationBookTourAPI({
+              id: dataBookTour.bookTourId,
+            });
           });
         }
       }
     } else {
-      const paymentStatusVNPay = searchParams.get('vnp_TransactionStatus');
-      const tourIdVNPay = searchParams.get('vnp_TxnRef');
-      const amountVNPay = searchParams.get('vnp_Amount');
-      if (paymentStatusVNPay === '00') {
+      const paymentStatusVNPay = searchParams.get("vnp_TransactionStatus");
+      const tourIdVNPay = searchParams.get("vnp_TxnRef");
+      const amountVNPay = searchParams.get("vnp_Amount");
+      if (paymentStatusVNPay === "00") {
         //tao bill đổi state book tour
         await handleChangeStateBookTourAPI({
           tourId: tourIdVNPay,
           customerId: localStorage.getItem("userId"),
-          state: 'S3',
-          paymentId: 'P6'
+          state: "S3",
+          paymentId: "P6",
         }).then(async (dataBookTour) => {
           await handleCreateBillAPI({
             bookTourId: dataBookTour.bookTourId,
             customerId: localStorage.getItem("userId"),
             totalCost: parseFloat(amountVNPay) / 100,
             bookTourDate: new Date(),
-            promotionCode: '',
-            status: 'S3'
+            promotionCode: "",
+            status: "S3",
           }).then(async (dataBill) => {
             if (dataBill.errCode === 0) {
               setBill(dataBill.bill.id);
-              let dataApiBookTour = await handleGetBookTourById(dataBookTour.bookTourId);
-              setAdult(dataApiBookTour.bookTour.adultSlot ? dataApiBookTour.bookTour.adultSlot : 0);
-              setKids(dataApiBookTour.bookTour.childrenSlot ? dataApiBookTour.bookTour.childrenSlot : 0);
-              setBaby(dataApiBookTour.bookTour.babySlot ? dataApiBookTour.bookTour.babySlot : 0)
+              let dataApiBookTour = await handleGetBookTourById(
+                dataBookTour.bookTourId
+              );
+              setAdult(
+                dataApiBookTour.bookTour.adultSlot
+                  ? dataApiBookTour.bookTour.adultSlot
+                  : 0
+              );
+              setKids(
+                dataApiBookTour.bookTour.childrenSlot
+                  ? dataApiBookTour.bookTour.childrenSlot
+                  : 0
+              );
+              setBaby(
+                dataApiBookTour.bookTour.babySlot
+                  ? dataApiBookTour.bookTour.babySlot
+                  : 0
+              );
 
               setInvoice(true);
               setError(false);
             }
           });
-
-        })
+        });
       } else {
         await handleChangeStateBookTourAPI({
           tourId: tourIdVNPay,
           customerId: localStorage.getItem("userId"),
-          state: 'S1',
-          paymentId: 'P6'
+          state: "S1",
+          paymentId: "P6",
         }).then(async (dataBookTour) => {
           await handleCancellationBookTourAPI({ id: dataBookTour.bookTourId });
         });
       }
     }
-  }
+  };
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   if (
@@ -475,85 +502,55 @@ function Payment() {
     error: error,
     total: total,
     tour: tour,
-    bill: bill
+    bill: bill,
   };
   //window.addEventListener('beforeunload', handleCreateBill());
   useEffect(() => {
     fetchTour();
 
-
     // handleCreateBill();
 
-    // 
+    //
   }, []);
 
   return (
-    <div className="payment-page" onLoad={() => {
-      handleCreateBill();
-    }} >
+    <div
+      className="payment-page"
+      onLoad={() => {
+        handleCreateBill();
+      }}
+    >
       {!invoice ? (
         <>
           <TourPriceDetail {...props} />
-          <form
-            className="payment-form flex"
-            onSubmit={handleSubmit}
-          >
+          <form className="payment-form flex" onSubmit={handleSubmit}>
             <GuestContact {...props} />
             <PaymentMethod {...props} />
             <form action={urlPayment} method="POST" ref={formRef}>
               <div className="optionPayment" hidden>
-
-                <input
-                  type="number"
-                  name="amount"
-                  value={total}
-
-                />
+                <input type="number" name="amount" value={total} />
               </div>
               <div className="optionPayment" hidden>
-
                 <input
                   type="text"
                   name="orderDescription"
                   value={tour.nameTour}
-
                 />
               </div>
               <div className="optionPayment" hidden>
-
-                <input
-                  type="text"
-                  name="name"
-                  value={tour.nameTour}
-
-                />
+                <input type="text" name="name" value={tour.nameTour} />
               </div>
               <div className="optionPayment" hidden>
-
-                <input
-                  type="text"
-                  name="bookTourId"
-                  value={bookTour}
-
-                />
+                <input type="text" name="bookTourId" value={bookTour} />
               </div>
               <div className="optionPayment" hidden>
-
-                <input
-                  type="number"
-                  name="param"
-                  value={tourId}
-
-                />
+                <input type="number" name="param" value={tourId} />
               </div>
             </form>
             <div
               className="info"
               style={{ gridTemplateColumns: "repeat(3, 1fr)" }}
             >
-              {selectedOption === "Internet Banking" && (
-                <InternetBanking {...props} />
-              )}
               {selectedOption === "Tiền mặt" && (
                 <div className="optionPayment">
                   <label>Đi đến cửa hàng để thanh toán trực tiếp</label>
@@ -598,9 +595,8 @@ function Payment() {
         </>
       ) : (
         <Invoice {...props} />
-      )
-      }
-    </div >
+      )}
+    </div>
   );
 }
 
