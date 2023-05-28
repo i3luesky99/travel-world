@@ -8,7 +8,8 @@ import {
   handleCreateFavoriteTourAPI,
   handleDeleteFavoriteTourAPI,
 } from "../../services/favoriteTourServise";
-
+import { handleScheduleDay } from "../../theme/functions";
+import { handleLoadDataImageFromData } from "../../theme/functions";
 export default function TotalTour(props) {
   const { title, destinations } = props;
   const [selectedHearts, setSelectedHearts] = useState([]);
@@ -77,11 +78,11 @@ export default function TotalTour(props) {
             <div key={`key-${index}-destination`}>
               <div className="singleDestination" data-aos="fade-up">
                 <div className="destImage">
-                  <img src={destination?.img[0]} alt="Img title" />
+                  <img src={destination.img ? destination?.img[0] : handleLoadDataImageFromData(destination.image)} alt="Img title" />
 
                   <div className="overplayInfo">
-                    <h3>{destination?.title}</h3>
-                    <p>{destination?.desc}</p>
+                    <h3>{destination.title ? destination?.title : destination.nameTour}</h3>
+                    <p>{destination.desc ? destination?.desc : destination.note}</p>
 
                     <BsArrowRightShort
                       className="icon"
@@ -107,12 +108,13 @@ export default function TotalTour(props) {
                 <div className="destFooter">
                   <div className="destText">
                     <p className="destination">
-                      Địa điểm: {destination?.location}
+                      Địa điểm: {destination.location ? destination?.location : destination.placeDest}
                     </p>
                     <h6>Ngày khởi hàng: {destination?.dateGo}</h6>
                     <h6>
-                      Lịch trình: {destination?.totalDays} ngày&nbsp;
-                      {destination?.totalDays - 1} đêm
+                      Lịch trình: {
+                        destination.totalDays ? destination?.totalDays : handleScheduleDay(destination.dateGo, destination.dateBack)} ngày&nbsp;
+                      {destination.totalDays ? destination?.totalDays : handleScheduleDay(destination.dateGo, destination.dateBack) - 1} đêm
                     </h6>
                   </div>
                 </div>
@@ -122,10 +124,10 @@ export default function TotalTour(props) {
                     <h6>
                       Chỗ đặt tour còn:
                       <span style={{ fontSize: 24, marginLeft: 10 }}>
-                        {destination?.slots}
+                        {destination.slots ? destination?.slots : (destination.adultSlot + destination.childrenSlot)}
                       </span>
                     </h6>
-                    <span>{formatCurrency(destination?.prices)}</span>
+                    <span>{formatCurrency(destination.prices ? destination?.prices : destination.adultPrice)}</span>
                   </div>
                   <div
                     style={{ display: "flex", alignItems: "center" }}
