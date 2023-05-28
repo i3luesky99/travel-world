@@ -23,10 +23,24 @@ const handleGetUserByEmail = (email) => {
     },
   });
 };
+
+const handleAllGetUser = () => {
+  return axios.get("/api/get-all-users?id=ALL");
+};
+
+const handleDeleteUserById = (id) => {
+  return axios.delete("/api/delete-user", {
+    data: {
+      id: id,
+    },
+  });
+};
 export {
   handleCreateUserApi,
   handleGetUserById,
   handleGetUserByPhone,
   handleGetUserByEmail,
   handleCreateUserByPhoneApi,
+  handleAllGetUser,
+  handleDeleteUserById,
 };

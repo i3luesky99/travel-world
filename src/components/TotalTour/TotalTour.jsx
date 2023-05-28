@@ -104,13 +104,8 @@ export default function TotalTour(props) {
                     handleCreateFavoriteTour(destination?.id, index)
                   }
                 />
-                <div className="destFooter flex">
-                  {index < 9 ? (
-                    <div className="number">0{index + 1}</div>
-                  ) : (
-                    <div className="number">{index + 1}</div>
-                  )}
-                  <div className="destText flex">
+                <div className="destFooter">
+                  <div className="destText">
                     <p className="destination">
                       Địa điểm: {destination?.location}
                     </p>
@@ -132,13 +127,11 @@ export default function TotalTour(props) {
                     </h6>
                     <span>{formatCurrency(destination?.prices)}</span>
                   </div>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <p
-                      className="btn"
-                      onClick={() => handleOnClick("" + destination.id)}
-                    >
-                      ĐẶT NGAY
-                    </p>
+                  <div
+                    style={{ display: "flex", alignItems: "center" }}
+                    onClick={() => handleOnClick("" + destination.id)}
+                  >
+                    <p className="btn">ĐẶT NGAY</p>
                   </div>
                 </div>
               </div>

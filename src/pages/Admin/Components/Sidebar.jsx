@@ -37,7 +37,13 @@ function Sidebar() {
       message: "Khách hàng",
       // link: "/admin/clients",
       iconPath: require("../../../assets/picture/icon/person.png"),
-      children: [],
+      children: [
+        {
+          message: "Danh sách",
+          link: "/admin/users",
+          iconPath: require("../../../assets/picture/icon/list.png"),
+        },
+      ],
     },
     {
       message: "Cài đặt",

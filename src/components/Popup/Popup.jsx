@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 export default function Popup(prop) {
-  const { open, setOpen, setIsAccept } = prop;
+  const { open, setOpen, setIsAccept, title } = prop;
 
   const handleClose = () => {
     setOpen(false);
@@ -29,7 +29,7 @@ export default function Popup(prop) {
         <DialogTitle id="alert-dialog-title">Cảnh báo</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Bạn có chắc chắn khi xoá Tour này không ?
+            {title}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

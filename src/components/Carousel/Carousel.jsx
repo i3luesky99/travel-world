@@ -8,7 +8,9 @@ import { formatCurrency } from "../../theme/functions";
 
 export default function Carousel(props) {
   const { destinations, page, title, link, foreign } = props;
-
+  const handleOnClick = (id) => {
+    window.location.replace("/tour-country/tour-detail/" + id);
+  };
   return (
     <div className="secContainer ">
       <div className="secHeader flex ">
@@ -65,12 +67,7 @@ export default function Carousel(props) {
                 </div>
 
                 <div className="destFooter flex">
-                  {index < 9 ? (
-                    <div className="number">0{index + 1}</div>
-                  ) : (
-                    <div className="number">{index + 1}</div>
-                  )}
-                  <div className="destText flex">
+                  <div className="destText">
                     <p className="destination">
                       Địa điểm: {destination?.location}
                     </p>
@@ -93,7 +90,12 @@ export default function Carousel(props) {
                   </h6>
                   <span>{formatCurrency(destination?.prices)}</span>
                 </div>
-                <p className="btn">ĐẶT NGAY</p>
+                <p
+                  className="btn"
+                  onClick={() => handleOnClick("" + destination.id)}
+                >
+                  ĐẶT NGAY
+                </p>
               </div>
             </div>
           </SwiperSlide>

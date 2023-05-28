@@ -106,23 +106,15 @@
         }
 
         .destFooter {
-          padding: 0 1rem;
           justify-content: space-between;
-
-          .number {
-            font-size: 4.5rem;
-            font-weight: 700;
-            color: $--blackColor;
-            width: max-content;
-          }
-
           .destText {
-            align-items: flex-end;
             flex-direction: column;
+            justify-content: flex-start;
+            padding: 20px;
             .destination {
-              font-size: 16px;
+              font-size: 20px;
               font-weight: 700;
-              line-height: 20px;
+              line-height: 25px;
             }
             h6 {
               line-height: 20px;

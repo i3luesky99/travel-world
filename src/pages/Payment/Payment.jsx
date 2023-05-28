@@ -23,7 +23,6 @@ import {
   handleOtpApi,
   handleVerifyPhoneOtpApi,
 } from "../../services/otpService";
-import Invoice from "./components/Invoice";
 import {
   handleCreateBookTour,
   handleChangeStateBookTourAPI,
@@ -31,6 +30,7 @@ import {
   handleGetBookTourById,
 } from "../../services/bookTourService";
 import { handleCreateBillAPI } from "../../services/billService";
+import TourInfo from "./components/TourInfo";
 
 function Payment() {
   const [paymentInfo, setPaymentInfo] = useState({
@@ -58,7 +58,6 @@ function Payment() {
   const { tourId } = useParams();
   const [bill, setBill] = useState();
   const [error, setError] = useState(false);
-  const [invoice, setInvoice] = useState(false);
   const fetchTour = async () => {
     const data = await handleGetTourById(tourId);
     const tourData = data.tour;
@@ -84,7 +83,7 @@ function Payment() {
         //   , cancel_url: window.location.origin + window.location.pathname
         //
       };
-       const urlPayment = await handleStripe(dataPayment);
+      const urlPayment = await handleStripe(dataPayment);
       if (urlPayment.errCode && urlPayment.errCode === 0) {
         await window.location.replace(urlPayment.url);
       } else {
@@ -169,7 +168,7 @@ function Payment() {
         otp: paymentInfo.otp,
       }).then(async (data) => {
         if (data.errCode === 0) {
-           ///khong otp ddung
+          ///khong otp ddung
           //kieemr tra da co user ddang nhap hay chua
           // chua dang nhap tao use bang email voi pass 123456
           //va tu dong dang nhap
@@ -297,7 +296,6 @@ function Payment() {
       } else {
         //Thanh toán bằng tiền
         handleCreateBookTourPayMoney();
-        setInvoice(true);
         setError(false);
       }
     }
@@ -381,7 +379,6 @@ function Payment() {
                   ? dataApiBookTour.bookTour.babySlot
                   : 0
               );
-              setInvoice(true);
               setError(false);
             }
           });
@@ -441,7 +438,6 @@ function Payment() {
                   : 0
               );
 
-              setInvoice(true);
               setError(false);
             }
           });
@@ -518,82 +514,79 @@ function Payment() {
         handleCreateBill();
       }}
     >
-      {!invoice ? (
-        <>
-          <TourPriceDetail {...props} />
-          <form className="payment-form flex" onSubmit={handleSubmit}>
-            <GuestContact {...props} />
-            <PaymentMethod {...props} />
-            <form action={urlPayment} method="POST" ref={formRef}>
-              <div className="optionPayment" hidden>
-                <input type="number" name="amount" value={total} />
+      <>
+        <TourPriceDetail {...props} />
+        <form className="payment-form flex" onSubmit={handleSubmit}>
+          <TourInfo {...props} />
+          <GuestContact {...props} />
+          <PaymentMethod {...props} />
+          <form action={urlPayment} method="POST" ref={formRef}>
+            <div className="optionPayment" hidden>
+              <input type="number" name="amount" value={total} />
+            </div>
+            <div className="optionPayment" hidden>
+              <input
+                type="text"
+                name="orderDescription"
+                value={tour.nameTour}
+              />
+            </div>
+            <div className="optionPayment" hidden>
+              <input type="text" name="name" value={tour.nameTour} />
+            </div>
+            <div className="optionPayment" hidden>
+              <input type="text" name="bookTourId" value={bookTour} />
+            </div>
+            <div className="optionPayment" hidden>
+              <input type="number" name="param" value={tourId} />
+            </div>
+          </form>
+          <div
+            className="info"
+            style={{ gridTemplateColumns: "repeat(3, 1fr)" }}
+          >
+            {selectedOption === "Tiền mặt" && (
+              <div className="optionPayment">
+                <label>Đi đến cửa hàng để thanh toán trực tiếp</label>
               </div>
-              <div className="optionPayment" hidden>
-                <input
-                  type="text"
-                  name="orderDescription"
-                  value={tour.nameTour}
+            )}
+            {selectedOption === "VNPay" && (
+              <div
+                className="optionPayment"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <label style={{ margin: "0px" }}>Thanh toán qua trang</label>
+                <img
+                  src={require("../../assets/picture/vnpay.png")}
+                  alt=""
+                  style={{ width: "100px", height: "100px" }}
                 />
               </div>
-              <div className="optionPayment" hidden>
-                <input type="text" name="name" value={tour.nameTour} />
+            )}
+            {selectedOption === "visa" && (
+              <div
+                className="optionPayment"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <label style={{ margin: "0px" }}>Thanh toán bằng thẻ</label>
+                <img
+                  src={require("../../assets/picture/visa.png")}
+                  alt=""
+                  style={{ width: "100px", height: "100px" }}
+                />
               </div>
-              <div className="optionPayment" hidden>
-                <input type="text" name="bookTourId" value={bookTour} />
-              </div>
-              <div className="optionPayment" hidden>
-                <input type="number" name="param" value={tourId} />
-              </div>
-            </form>
-            <div
-              className="info"
-              style={{ gridTemplateColumns: "repeat(3, 1fr)" }}
-            >
-              {selectedOption === "Tiền mặt" && (
-                <div className="optionPayment">
-                  <label>Đi đến cửa hàng để thanh toán trực tiếp</label>
-                </div>
-              )}
-              {selectedOption === "VNPay" && (
-                <div
-                  className="optionPayment"
-                  style={{ display: "flex", alignItems: "center" }}
-                >
-                  <label style={{ margin: "0px" }}>Thanh toán qua trang</label>
-                  <img
-                    src={require("../../assets/picture/vnpay.png")}
-                    alt=""
-                    style={{ width: "100px", height: "100px" }}
-                  />
-                </div>
-              )}
-              {selectedOption === "visa" && (
-                <div
-                  className="optionPayment"
-                  style={{ display: "flex", alignItems: "center" }}
-                >
-                  <label style={{ margin: "0px" }}>Thanh toán bằng thẻ</label>
-                  <img
-                    src={require("../../assets/picture/visa.png")}
-                    alt=""
-                    style={{ width: "100px", height: "100px" }}
-                  />
-                </div>
-              )}
-            </div>
+            )}
+          </div>
 
-            <AuthMethods {...props} />
-            <p className="totalText">Tổng tiền</p>
-            <div className="tourTotalPrice flex">
-              <label>{formatCurrency(total)}</label>
-            </div>
+          <AuthMethods {...props} />
+          <p className="totalText">Tổng tiền</p>
+          <div className="tourTotalPrice flex">
+            <label>{formatCurrency(total)}</label>
+          </div>
 
-            <button type="submit">Thanh toán</button>
-          </form>
-        </>
-      ) : (
-        <Invoice {...props} />
-      )}
+          <button type="submit">Thanh toán</button>
+        </form>
+      </>
     </div>
   );
 }

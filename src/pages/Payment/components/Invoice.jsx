@@ -1,11 +1,10 @@
 import React, { useRef, useState } from "react";
 import { formatCurrency } from "../../../theme/functions";
 import { useReactToPrint } from "react-to-print";
-import { iconPrintBlue } from "../../../theme/icon";
 import Print from "../../../assets/svg/print";
 
-const Invoice = (props) => {
-  const { total, paymentInfo, totalSlot, tour, adult, kids, baby, bill } = props;
+const Invoice = () => {
+  const [bill, setBill] = useState();
   const componentPDF = useRef();
   const [open, setOpen] = useState(true);
   const handelToPDF = useReactToPrint({
@@ -19,14 +18,11 @@ const Invoice = (props) => {
   });
 
   const headerTable = {
-    id: "Mã tour",
-    dateGo: "Điểm đến",
-    dateBack: "Ngày đi",
-    price: "Ngày về",
-    adultSlot: "Người lớn",
-    childrenSlot: "Trẻ em",
-    babySlot: "Trẻ sơ sinh",
-
+    tourName: "Độ tuổi",
+    dateGo: "",
+    dateBack: "",
+    slot: "Số lượng",
+    price: "Đơn giá",
   };
 
   const headerArr = Object.values(headerTable);
@@ -58,9 +54,11 @@ const Invoice = (props) => {
                 justifyContent: "space-between",
               }}
             >
-              <div className="customer-title">Hoá đơn của: {paymentInfo.name}</div>
-              <div>Email: {paymentInfo.email}</div>
-              <div>Số điện thoại: {paymentInfo.phone}</div>
+              <div className="customer-title">
+                Hoá đơn của: {bill?.userName}
+              </div>
+              <div>Email: {bill?.userEmail}</div>
+              <div>Số điện thoại: {bill?.userPhone}</div>
             </div>
             <div
               style={{
@@ -71,7 +69,21 @@ const Invoice = (props) => {
                 fontSize: "15px",
               }}
             >
-              <div>Mã hoá đơn: {bill}</div>
+              <div>Mã hoá đơn: {bill?.id}</div>
+            </div>
+          </div>
+          <div className="customer">
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <div className="customer-title">Thông tin của tour:</div>
+              <div>Tên tour: {bill?.tourName}</div>
+              <div>Thời gian: {bill?.time} </div>
+              {/* 3 ngày 2 đêm */}
             </div>
           </div>
           <div className="invoice-tour">
@@ -87,15 +99,25 @@ const Invoice = (props) => {
               </thead>
               <tbody>
                 <tr>
-                  <td>{tour.id}</td>
-                  <td>{tour.placeDest}</td>
-                  <td>{tour.dateGo}</td>
-                  <td>{tour.dateBack}</td>
-                  <td>{adult}</td>
-                  <td>{kids}</td>
-                  <td>{baby}</td>
-
-
+                  <td>Người lớn (trên 11 tuổi)</td>
+                  <td></td>
+                  <td></td>
+                  <td>10</td>
+                  <td>{formatCurrency(10000)}</td>
+                </tr>
+                <tr>
+                  <td>Trẻ em (2 - 11 tuổi)</td>
+                  <td></td>
+                  <td></td>
+                  <td>10</td>
+                  <td>{formatCurrency(10000)}</td>
+                </tr>
+                <tr>
+                  <td>{`Sơ sinh (< 2 tuổi)`}</td>
+                  <td></td>
+                  <td></td>
+                  <td>10</td>
+                  <td>{formatCurrency(10000)}</td>
                 </tr>
               </tbody>
             </table>
@@ -103,7 +125,7 @@ const Invoice = (props) => {
           <div className="total">
             <div className="total-prices">
               <div>TỔNG CỘNG:</div>
-              <div>{total}</div>
+              <div>{formatCurrency(bill?.totalPrice)}</div>
             </div>
           </div>
           {open && (

@@ -60,6 +60,7 @@ export default function BaseTable(props) {
     setOpen: setOpen,
     isDelete: isAccept,
     setIsAccept: setIsAccept,
+    title:'Bạn có chắc muốn xóa Tour này không ?'
   };
   return (
     <div className="table-container">
