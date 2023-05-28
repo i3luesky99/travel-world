@@ -5,7 +5,7 @@ import PaymentMethod from "./components/PaymentMethod";
 import TourPriceDetail from "./components/TourPriceDetail";
 import { useParams } from "react-router-dom";
 import { handleGetTourById } from "../../services/tourService";
-
+import { handleSendMailBookTourAPI } from "../../services/sendMailService";
 import AuthMethods from "./components/AuthMethods";
 import {
   handleGetUserByEmail,
@@ -150,7 +150,7 @@ function Payment() {
                     }
                   }
                 );
-              } catch (error) {}
+              } catch (error) { }
             }
           }
           ///tao bookTour
@@ -213,7 +213,7 @@ function Payment() {
                     }
                   }
                 );
-              } catch (error) {}
+              } catch (error) { }
             }
           }
           ///tao bookTour
@@ -234,8 +234,8 @@ function Payment() {
   };
   const total =
     tour?.adultPrice * adult +
-      tour?.childPrice * kids +
-      tour?.babyPrice * baby || 0;
+    tour?.childPrice * kids +
+    tour?.babyPrice * baby || 0;
   const handlePaymentBank = () => {
     if (formRef.current) {
       formRef.current.submit();
@@ -266,6 +266,13 @@ function Payment() {
       state: "S1",
       note: "success",
     });
+    // .then(async (dataBook) => {
+    //   await handleSendMailBookTourAPI({
+    //     customerId: localStorage.getItem("userId"),
+    //     bookTourId: dataBook.bookTourId
+    //   })
+
+    // })
   };
   const handleCreateBookTourPayVisa = async () => {
     await handleCreateBookTour({
@@ -278,9 +285,10 @@ function Payment() {
       paymentId: "P7",
       state: "S1",
       note: "success",
-    }).then((data) => {
+    }).then(async (data) => {
       if (data.errCode === 0) {
         setBookTour(data.bookTourId);
+
       }
     });
   };
@@ -368,6 +376,13 @@ function Payment() {
               let dataApiBookTour = await handleGetBookTourById(
                 dataBookTour.bookTourId
               );
+
+              await handleSendMailBookTourAPI({
+                customerId: localStorage.getItem("userId"),
+                bookTourId: dataBookTour.bookTourId
+              })
+
+
               setAdult(
                 dataApiBookTour.bookTour.adultSlot
                   ? dataApiBookTour.bookTour.adultSlot

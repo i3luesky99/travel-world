@@ -61,25 +61,31 @@ export default function Cart() {
           dateStart: "30/04/2022",
           totalSlot: 30,
           price: 3000000,
-          bookTourId: ''
+          bookTourId: '',
+          stateBookTour: ''
         };
-        let element = bookTour[index];
-        dataTransfer.bookTourId = element.id;
-        let dataTourApi = await handleGetTourById(element.tourId);
 
-        dataTransfer.id = dataTourApi.tour.id;
-        dataTransfer.tourName = dataTourApi.tour.nameTour;
-        if (dataTourApi.tour.image) {
-          if (dataTourApi.tour.image.data) {
-            dataTransfer.img = handleLoadDataImageFromData(dataTourApi.tour.image.data);
+        let element = bookTour[index];
+        if (element.state !== 'S4') {
+          dataTransfer.bookTourId = element.id;
+          dataTransfer.stateBookTour = element.state;
+          let dataTourApi = await handleGetTourById(element.tourId);
+
+          dataTransfer.id = dataTourApi.tour.id;
+          dataTransfer.tourName = dataTourApi.tour.nameTour;
+          if (dataTourApi.tour.image) {
+            if (dataTourApi.tour.image.data) {
+              dataTransfer.img = handleLoadDataImageFromData(dataTourApi.tour.image.data);
+            }
           }
+          dataTransfer.dateStart = dataTourApi.tour.dateGo;
+          dataTransfer.totalSlot = dataTourApi.tour.adultSlot + dataTourApi.tour.childrenSlot;
+          dataTransfer.price = dataTourApi.tour.adultPrice;
+          setTours((tours) =>
+            ([...tours, dataTransfer])
+          );
+
         }
-        dataTransfer.dateStart = dataTourApi.tour.dateGo;
-        dataTransfer.totalSlot = dataTourApi.tour.adultSlot + dataTourApi.tour.childrenSlot;
-        dataTransfer.price = dataTourApi.tour.adultPrice;
-        setTours((tours) =>
-          ([...tours, dataTransfer])
-        );
 
       }
 
@@ -107,6 +113,7 @@ export default function Cart() {
     title: "Các tour đã đặt",
     tours: tours,
     deleteTour: deleteTour,
+
   };
 
   useEffect(() => {

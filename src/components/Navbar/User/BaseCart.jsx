@@ -5,18 +5,26 @@ import CartIcon from "../../../assets/svg/cart";
 import Heart from "../../../assets/svg/heart";
 import { formatCurrency } from "../../../theme/functions";
 import { handleCancellationBookTourAPI } from "../../../services/bookTourService";
+import { handleSendMailBookTourAPI } from "../../../services/sendMailService";
 export default function BaseCart(props) {
   const { tours, open, title, setOpen, heart, deleteTour } = props;
   const handleClose = () => {
     setOpen(false);
   };
-  const handleCancellationBookTour = async (id) => {
-    await handleCancellationBookTourAPI({ id: id });
+  const handleCancellationBookTour = async (bookTourId, tourId) => {
+    await handleCancellationBookTourAPI({ id: bookTourId });
+    deleteTour(tourId);
   }
   const handleToTourDetail = (id) => {
     window.location.replace(`/tour-country/tour-detail/${id}`);
   };
+  const handleSendMailHoaDon = async (bookTourId) => {
 
+    await handleSendMailBookTourAPI({
+      bookTourId: bookTourId,
+      customerId: localStorage.getItem("userId")
+    });
+  };
   return (
     <Drawer
       open={open}
@@ -92,17 +100,24 @@ export default function BaseCart(props) {
                   ĐẶT TOUR
                 </div>
 
-              ) : (
-                <div
+              ) : (tour.stateBookTour !== 'S3' ?
+                (<div
                   className="book-button"
                   style={{
                     backgroundColor: "#dc3545",
                   }}
-                  onClick={() => handleCancellationBookTour(tour?.bookTourId)}
+                  onClick={() => handleCancellationBookTour(tour?.bookTourId, tour?.id)}
                 >
                   HUỶ ĐẶT TOUR
-                </div>
-              )}
+                </div>) : (<div
+                  className="book-button"
+                  onClick={() => handleSendMailHoaDon(tour?.bookTourId)}
+
+                >
+                  XEM HÓA ĐƠN
+                </div>))
+
+              }
             </div>
             <div
               style={{
@@ -115,6 +130,6 @@ export default function BaseCart(props) {
           </div>
         ))}
       </div>
-    </Drawer>
+    </Drawer >
   );
 }
