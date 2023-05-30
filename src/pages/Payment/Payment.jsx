@@ -5,8 +5,10 @@ import PaymentMethod from "./components/PaymentMethod";
 import TourPriceDetail from "./components/TourPriceDetail";
 import { useParams } from "react-router-dom";
 import { handleGetTourById } from "../../services/tourService";
-import { handleSendMailBookTourAPI } from "../../services/sendMailService";
+import { handleSendMailBookTourAPI, handleSendMailBookTourByMoneyAPI } from "../../services/sendMailService";
+
 import AuthMethods from "./components/AuthMethods";
+
 import {
   handleGetUserByEmail,
   handleCreateUserApi,
@@ -244,11 +246,18 @@ function Payment() {
       customerId: localStorage.getItem("userId"),
       adultSlot: adult,
       childrenSlot: kids,
+      babySlot: baby,
       date: new Date(),
       type: null,
       paymentId: "P4",
       state: "S1",
       note: "success",
+    }).then(async (dataBook) => {
+      await handleSendMailBookTourByMoneyAPI({
+        customerId: localStorage.getItem("userId"),
+        bookTourId: dataBook.bookTourId
+      })
+      window.location.replace("/travel-order/" + dataBook.bookTourId);
     });
   };
   const handleCreateBookTourVNPay = async () => {
@@ -257,11 +266,14 @@ function Payment() {
       customerId: localStorage.getItem("userId"),
       adultSlot: adult,
       childrenSlot: kids,
+      babySlot: baby,
       date: new Date(),
       type: null,
       paymentId: "P6",
       state: "S1",
       note: "success",
+    }).then((dataBookTour) => {
+
     });
     // .then(async (dataBook) => {
     //   await handleSendMailBookTourAPI({
@@ -277,6 +289,7 @@ function Payment() {
       customerId: localStorage.getItem("userId"),
       adultSlot: adult,
       childrenSlot: kids,
+      babySlot: baby,
       date: new Date(),
       type: null,
       paymentId: "P7",
@@ -348,13 +361,13 @@ function Payment() {
   const handleCreateBill = async () => {
     const searchParams = new URLSearchParams(window.location.search);
     const paymentStatus = searchParams.get("payment");
-    const tourId = searchParams.get("tourId");
+    const tourIdReturn = searchParams.get("tourId");
     const amount = searchParams.get("amount");
-    if (paymentStatus && tourId) {
+    if (paymentStatus && tourIdReturn) {
       if (paymentStatus === "success") {
         //tao bill đổi state book tour
         await handleChangeStateBookTourAPI({
-          tourId: tourId,
+          tourId: tourIdReturn,
           customerId: localStorage.getItem("userId"),
           state: "S3",
           paymentId: "P7",
@@ -377,23 +390,23 @@ function Payment() {
                 customerId: localStorage.getItem("userId"),
                 bookTourId: dataBookTour.bookTourId
               })
+              window.location.replace("/invoice/" + dataBill.bill.id);
 
-
-              setAdult(
-                dataApiBookTour.bookTour.adultSlot
-                  ? dataApiBookTour.bookTour.adultSlot
-                  : 0
-              );
-              setKids(
-                dataApiBookTour.bookTour.childrenSlot
-                  ? dataApiBookTour.bookTour.childrenSlot
-                  : 0
-              );
-              setBaby(
-                dataApiBookTour.bookTour.babySlot
-                  ? dataApiBookTour.bookTour.babySlot
-                  : 0
-              );
+              // setAdult(
+              //   dataApiBookTour.bookTour.adultSlot
+              //     ? dataApiBookTour.bookTour.adultSlot
+              //     : 0
+              // );
+              // setKids(
+              //   dataApiBookTour.bookTour.childrenSlot
+              //     ? dataApiBookTour.bookTour.childrenSlot
+              //     : 0
+              // );
+              // setBaby(
+              //   dataApiBookTour.bookTour.babySlot
+              //     ? dataApiBookTour.bookTour.babySlot
+              //     : 0
+              // );
               setError(false);
             }
           });
@@ -414,7 +427,7 @@ function Payment() {
       }
     } else {
       const paymentStatusVNPay = searchParams.get("vnp_TransactionStatus");
-      const tourIdVNPay = searchParams.get("vnp_TxnRef");
+      const tourIdVNPay = tourId;
       const amountVNPay = searchParams.get("vnp_Amount");
       if (paymentStatusVNPay === "00") {
         //tao bill đổi state book tour
@@ -437,21 +450,26 @@ function Payment() {
               let dataApiBookTour = await handleGetBookTourById(
                 dataBookTour.bookTourId
               );
-              setAdult(
-                dataApiBookTour.bookTour.adultSlot
-                  ? dataApiBookTour.bookTour.adultSlot
-                  : 0
-              );
-              setKids(
-                dataApiBookTour.bookTour.childrenSlot
-                  ? dataApiBookTour.bookTour.childrenSlot
-                  : 0
-              );
-              setBaby(
-                dataApiBookTour.bookTour.babySlot
-                  ? dataApiBookTour.bookTour.babySlot
-                  : 0
-              );
+              await handleSendMailBookTourAPI({
+                customerId: localStorage.getItem("userId"),
+                bookTourId: dataBookTour.bookTourId
+              })
+              window.location.replace("/invoice/" + dataBill.bill.id);
+              // setAdult(
+              //   dataApiBookTour.bookTour.adultSlot
+              //     ? dataApiBookTour.bookTour.adultSlot
+              //     : 0
+              // );
+              // setKids(
+              //   dataApiBookTour.bookTour.childrenSlot
+              //     ? dataApiBookTour.bookTour.childrenSlot
+              //     : 0
+              // );
+              // setBaby(
+              //   dataApiBookTour.bookTour.babySlot
+              //     ? dataApiBookTour.bookTour.babySlot
+              //     : 0
+              // );
 
               setError(false);
             }

@@ -62,13 +62,22 @@ export default function Cart() {
           totalSlot: 30,
           price: 3000000,
           bookTourId: '',
-          stateBookTour: ''
+          stateBookTour: '',
+          adultSlot: 0,
+          childSlot: 0,
+          babySlot: 0,
+          adultPrice: 0,
+          childPrice: 0,
+          babyPrice: 0
         };
 
         let element = bookTour[index];
         if (element.state !== 'S4') {
           dataTransfer.bookTourId = element.id;
           dataTransfer.stateBookTour = element.state;
+          dataTransfer.adultSlot = element.adultSlot ? element.adultSlot : 0;
+          dataTransfer.childSlot = element.childrenSlot ? element.childrenSlot : 0;
+          dataTransfer.babySlot = element.babySlot ? element.babySlot : 0;
           let dataTourApi = await handleGetTourById(element.tourId);
 
           dataTransfer.id = dataTourApi.tour.id;
@@ -81,6 +90,9 @@ export default function Cart() {
           dataTransfer.dateStart = dataTourApi.tour.dateGo;
           dataTransfer.totalSlot = dataTourApi.tour.adultSlot + dataTourApi.tour.childrenSlot;
           dataTransfer.price = dataTourApi.tour.adultPrice;
+          dataTransfer.adultPrice = dataTourApi.tour.adultPrice;
+          dataTransfer.childPrice = dataTourApi.tour.childPrice;
+          dataTransfer.babyPrice = dataTourApi.tour.babyPrice;
           setTours((tours) =>
             ([...tours, dataTransfer])
           );
