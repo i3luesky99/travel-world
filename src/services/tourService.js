@@ -24,7 +24,7 @@ const handleGetTourByPlaceDestAndPrice = (placeDest, price) => {
   return axios.get("/api/tour/search", {
     params: {
       placeDest: placeDest,
-      price: price
+      price: price,
     },
   });
 };
@@ -76,4 +76,5 @@ export {
   handleUpdateTour,
   handleGetTourByPlaceDestAndPrice,
   handleDeleteDayDetail,
- };
+  handleUpdateDayDetail,
+};

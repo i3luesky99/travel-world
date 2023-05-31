@@ -21,7 +21,6 @@ import { useRef } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { RiFunctionFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import { async } from "q";
 import Moment from "moment";
 import { handleGetTourByPlaceDestAndPrice } from "../../../services/tourService";
 moment.locale("vi");
@@ -43,32 +42,32 @@ export default function HomeBase(props) {
     let dataTourApi = dataApi.tour;
     const startDate = `${moment(`${date[0].startDate}`).format("L")}`;
     const endDate = `${moment(`${date[0].endDate}`).format("L")}`;
-    const dateGoSelect = Moment(startDate, 'DD/MM/YYYY');
-    const dateBackSelect = Moment(endDate, 'DD/MM/YYYY');
+    const dateGoSelect = Moment(startDate, "DD/MM/YYYY");
+    const dateBackSelect = Moment(endDate, "DD/MM/YYYY");
     let array = [];
     for (let index = 0; index < dataTourApi.length; index++) {
       const element = dataTourApi[index];
-      const dateGoApi = Moment(element.dateGo, 'DD/MM/YYYY');
-      const dateBackApi = Moment(element.dateBack, 'DD/MM/YYYY');
+      const dateGoApi = Moment(element.dateGo, "DD/MM/YYYY");
+      const dateBackApi = Moment(element.dateBack, "DD/MM/YYYY");
 
       //console.log(dateGoSelect.isSameOrBefore(dateGoApi) + "và:" + dateBackApi.isSameOrBefore(dateBackSelect))
       if (dateGoSelect.isSame(dateBackSelect)) {
-
         if (dateGoSelect.isSameOrBefore(dateGoApi)) {
-
-          array.push(element)
+          array.push(element);
         }
       } else {
-        if (dateGoSelect.isSameOrBefore(dateGoApi) && dateBackApi.isSameOrBefore(dateBackSelect)) {
-          array.push(element)
+        if (
+          dateGoSelect.isSameOrBefore(dateGoApi) &&
+          dateBackApi.isSameOrBefore(dateBackSelect)
+        ) {
+          array.push(element);
         }
       }
-
     }
     setTourSearch(array);
     console.log(tourSearch);
     // console.log(dataTourApi.tour[0].dateGo);
-  }
+  };
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -80,15 +79,15 @@ export default function HomeBase(props) {
     setCalendar(!calendar);
   };
   const handleInputChange = (event) => {
-    if (event.target.name === 'location') {
+    if (event.target.name === "location") {
       setLocation(event.target.value);
     } else {
-      if (event.target.name === 'price') {
+      if (event.target.name === "price") {
         setPrice(event.target.value);
       }
     }
     //console.log(location)
-  }
+  };
   const handleClickAway = () => {
     setCalendar(false);
   };
@@ -157,8 +156,13 @@ export default function HomeBase(props) {
                   ref={searchSection}
                 >
                   <label htmlFor="location">Địa điểm</label>
-                  <input type="text" placeholder="Điểm đến mong ước" name="location" value={location
-                  } onChange={handleInputChange} />
+                  <input
+                    type="text"
+                    placeholder="Điểm đến mong ước"
+                    name="location"
+                    value={location}
+                    onChange={handleInputChange}
+                  />
                 </div>
 
                 <div
@@ -167,7 +171,13 @@ export default function HomeBase(props) {
                   className="priceDiv"
                 >
                   <label htmlFor="price">Giá</label>
-                  <input type="text" name="price" placeholder="1.000.000₫" value={price} onChange={handleInputChange} />
+                  <input
+                    type="text"
+                    name="price"
+                    placeholder="1.000.000₫"
+                    value={price}
+                    onChange={handleInputChange}
+                  />
                 </div>
 
                 <div
