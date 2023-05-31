@@ -94,16 +94,16 @@ export default function Carousel(props) {
                       {destination?.totalDays
                         ? destination?.totalDays
                         : handleScheduleDay(
-                            destination?.dateGo,
-                            destination?.dateBack
-                          )}
+                          destination?.dateGo,
+                          destination?.dateBack
+                        )}
                       ngày&nbsp;
                       {destination?.totalDays
                         ? destination?.totalDays
                         : handleScheduleDay(
-                            destination?.dateGo,
-                            destination?.dateBack
-                          ) - 1}{" "}
+                          destination?.dateGo,
+                          destination?.dateBack
+                        ) - 1}{" "}
                       đêm
                     </h6>
                   </div>

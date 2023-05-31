@@ -100,7 +100,7 @@ export default function FavoriteItem() {
   };
 
   useEffect(() => {
-    fetchFavoriteTour();
+    //fetchFavoriteTour();
   }, []);
 
   const props = {

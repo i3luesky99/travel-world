@@ -20,6 +20,14 @@ const handleGetTourById = (id) => {
     },
   });
 };
+const handleGetTourByPlaceDestAndPrice = (placeDest, price) => {
+  return axios.get("/api/tour/search", {
+    params: {
+      placeDest: placeDest,
+      price: price
+    },
+  });
+};
 
 const handleCreateTour = (data) => {
   return axios.post("/api/create-new-tour", { ...data });
@@ -66,6 +74,6 @@ export {
   handleCreateTour,
   handleCreateTourDetail,
   handleUpdateTour,
+  handleGetTourByPlaceDestAndPrice,
   handleDeleteDayDetail,
-  handleUpdateDayDetail,
-};
+ };
