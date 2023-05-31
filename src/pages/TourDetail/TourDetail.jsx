@@ -94,7 +94,7 @@ const TourDetail = () => {
       setIsNote(true);
     },
   });
-console.log(tour)
+  console.log(tour)
   return (
     <div className="tour-detail" ref={componentPDF}>
       <div className="title">{tour.nameTour}</div>

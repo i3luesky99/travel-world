@@ -1,7 +1,8 @@
 import React from "react";
-
+import { handleLoadDataImageFromData } from "../../../theme/functions";
 export default function TourInfo(props) {
   const { tour } = props;
+
   return (
     <>
       <p className="title">THÔNG TIN TOUR</p>
@@ -28,7 +29,7 @@ export default function TourInfo(props) {
             <p>Điểm xuất phát: {tour?.placeGo}</p>
           </label>
           <img
-            src={tour?.image || require("../../../assets/picture/danang.jpg")}
+            src={tour?.image ? handleLoadDataImageFromData(tour.image) : require("../../../assets/picture/danang.jpg")}
             alt=""
             style={{
               width: "400px",

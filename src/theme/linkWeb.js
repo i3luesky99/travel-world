@@ -22,6 +22,7 @@ import NewTour from "../pages/Admin/pages/Tour/NewTour/NewTour";
 import TourDetailAdmin from "../pages/Admin/pages/Tour/TourDetailAdmin/TourDetailAdmin";
 import TourAdmin from "../pages/Admin/pages/Tour/TourAdmin/TourAdmin";
 import Invoice from "../pages/Payment/components/Invoice";
+import TravelOrder from "../pages/Payment/components/TravelOrder";
 import UserAdmin from "../pages/Admin/pages/UserAdmin/UserAdmin";
 
 export const clientWeb = [
@@ -91,6 +92,9 @@ export const clientWeb = [
   {
     link: "/invoice/:invoiceId",
     component: <Invoice />,
+  }, {
+    link: "/travel-order/:bookTourId",
+    component: <TravelOrder />,
   },
   {
     link: "/search/tours",
