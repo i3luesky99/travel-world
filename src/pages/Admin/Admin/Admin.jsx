@@ -82,7 +82,7 @@ export default function Admin() {
 
   const handleGetStatistic = async (daysOfWeek) => {
     const data = await getStatistic({ dateArray: daysOfWeek });
-    console.log(data);
+    setTotalMoney(data.arrData);
   };
 
   const changeType = () => {
@@ -100,14 +100,17 @@ export default function Admin() {
         const daysOfWeek = Array.from({ length: 7 }, (_, i) =>
           startOfWeek.clone().add(i, "days").format("DD/MM/YYYY")
         );
+        const dayOfWeekFormat = Array.from({ length: 7 }, (_, i) =>
+          startOfWeek.clone().add(i, "days").format("dddd, DD/MM")
+        );
         handleGetStatistic(daysOfWeek);
-        setTotalMoney([10, 20, 30, 40, 50, 20, 10]);
-        setTotalDays(daysOfWeek);
+        setTotalDays(dayOfWeekFormat);
         break;
       case "month":
         const daysOfMonth = Array.from({ length: daysInMonth }, (_, i) =>
           startOfMonth.clone().add(i, "days").format("DD/MM/YYYY")
         );
+        handleGetStatistic(daysOfMonth);
 
         setTotalDays(daysOfMonth);
         break;

@@ -10,9 +10,9 @@ function Sidebar() {
       iconPath: require("../../../assets/picture/icon/home.png"),
       children: [
         {
-          message: "Trang chủ",
+          message: "Thống kê",
           link: "/admin",
-          iconPath: require("../../../assets/picture/icon/list.png"),
+          iconPath: require("../../../assets/picture/icon/chart.png"),
         },
       ],
     },
@@ -51,12 +51,12 @@ function Sidebar() {
       iconPath: require("../../../assets/picture/icon/setting.png"),
       children: [],
     },
-    {
-      message: "Thống kê",
-      // link: "/admin/chart",
-      iconPath: require("../../../assets/picture/icon/chart.png"),
-      children: [],
-    },
+    // {
+    //   message: "Thống kê",
+    //   // link: "/admin/chart",
+    //   iconPath: require("../../../assets/picture/icon/chart.png"),
+    //   children: [],
+    // },
   ];
 
   return (
