@@ -131,7 +131,6 @@ export default function TourDetailAdmin() {
     setTour(tour);
     setSelectedImages(img);
   };
-
   useEffect(() => {
     handleFetchTour();
   }, []);

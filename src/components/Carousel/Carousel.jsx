@@ -58,11 +58,11 @@ export default function Carousel(props) {
               >
                 <div className="destImage">
                   <img
-                    // src={
-                    //   destination?.img
-                    //     ? destination?.img[0]
-                    //     : handleLoadDataImageFromData(destination?.image)
-                    // }
+                    src={
+                      destination?.img
+                        ? destination?.img[0]
+                        : handleLoadDataImageFromData(destination?.image)
+                    }
                     alt="Img title"
                   />
 

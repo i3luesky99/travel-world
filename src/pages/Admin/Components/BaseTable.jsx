@@ -82,9 +82,12 @@ export default function BaseTable(props) {
 
   const handleClose = () => {
     if (selection !== "list") {
-      fetchTour();
-    } else {
-      handleCancelPayment();
+      try {
+        handleCancelPayment();
+        fetchTour();
+      } catch (error) {
+        return;
+      }
     }
     setOpen(false);
   };
