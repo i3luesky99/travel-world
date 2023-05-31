@@ -30,10 +30,8 @@ export default function NewTour() {
     babyPrice: "",
     note: "",
     transportation: "Xe du lịch đời mới",
-    destinationId: null,
+    regionType: null,
     tourType: "Trong nước",
-    // region: "Miền Trung",
-    // continent: "Châu Á",
   });
   const [base64, setBase64] = useState("");
   const [date, setDate] = useState([
@@ -43,7 +41,8 @@ export default function NewTour() {
       key: "selection",
     },
   ]);
-  const [destinationId, setDestinationId] = useState(4);
+  const [regionType, setRegionType] = useState("Mien Bac");
+  const [continentType, setContinentType] = useState("Chau My");
   const [selectedImages, setSelectedImages] = useState();
   const [warning, setWarning] = useState(false);
   const startDate = `${moment(`${date[0].startDate}`).format("L")}`;
@@ -55,7 +54,8 @@ export default function NewTour() {
       dateGo: startDate,
       dateBack: endDate,
       image: base64,
-      destinationId: destinationId,
+      destinationId:
+        tour.tourType === "Ngoài nước" ? continentType : regionType,
     };
     try {
       for (const [key, value] of Object.entries(newTour)) {
@@ -91,24 +91,6 @@ export default function NewTour() {
       });
   };
 
-  // Change to URL image
-  // const fileList = selectedImages.map((file) => {
-  //   // console.log(file.File);
-  //   const url = URL.createObjectURL(file);
-  //   // console.log(url)
-  //   convertToBase64(url)
-  //     .then((base64String) => {
-  //       setBase64(base64String);
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  //   return {
-  //     file,
-  //     url: url,
-  //   };
-  // });
-
   const deleteImage = () => {
     setSelectedImages("");
     setBase64("");
@@ -122,8 +104,10 @@ export default function NewTour() {
     selectedImages: selectedImages,
     handleImageChange: handleImageChange,
     deleteImage: deleteImage,
-    setDestinationId: setDestinationId,
-    destinationId: destinationId,
+    setRegionType: setRegionType,
+    regionType: regionType,
+    continentType: continentType,
+    setContinentType: setContinentType,
   };
 
   useEffect(() => {}, []);

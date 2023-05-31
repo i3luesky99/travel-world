@@ -218,7 +218,6 @@ export default function BaseTable(props) {
         </>
       )}
       <Popup {...propsPopup} />
-      {/* {isLoading && <Loading />} */}
-    </div>
+     </div>
   );
 }

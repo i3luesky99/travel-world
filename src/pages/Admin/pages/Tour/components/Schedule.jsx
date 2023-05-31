@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { iconPencil } from "../../../../../theme/icon";
 import ButtonGroup from "./ButtonGroup";
-import { handleCreateTourDetail } from "../../../../../services/tourService";
+import {
+  handleCreateTourDetail,
+  handleDeleteDayDetail,
+  handleUpdateDayDetail,
+} from "../../../../../services/tourService";
 import { useParams } from "react-router-dom";
+import { Popup } from "../../../../../components/index";
 
 export default function Schedule(props) {
   const { dayDetail, setDayDetail } = props;
   const { id } = useParams();
+  const [open, setOpen] = useState(false);
+  const [selectedId, setSelectedId] = useState();
 
   const handleAddDay = () => {
     setDayDetail([
@@ -15,14 +22,19 @@ export default function Schedule(props) {
         title: "",
         schedule: "",
         tourId: id,
-        isEdit: false,
+        isEdit: true,
       },
     ]);
   };
 
-  const handleDeleteDay = () => {
-    const newDays = dayDetail.slice(0, -1);
-    setDayDetail(newDays);
+  const handleDeleteDay = async () => {
+    try {
+      const newDays = dayDetail.slice(0, -1);
+      setDayDetail(newDays);
+      await handleDeleteDayDetail(selectedId);
+    } catch (error) {
+      return error;
+    }
   };
 
   const handleScheduleChangeSchedule = (index, e) => {
@@ -47,9 +59,17 @@ export default function Schedule(props) {
     onEnableToEdit(index, true);
   };
 
-  const onSave = async (index) => {
+  const onSave = async (index, id) => {
     const { title, schedule, tourId } = dayDetail[index];
-    await handleCreateTourDetail({ title, schedule, tourId });
+    try {
+      if (id) {
+        await handleUpdateDayDetail({ title, schedule, tourId, id: id });
+      } else {
+        await handleCreateTourDetail({ title, schedule, tourId });
+      }
+    } catch (error) {
+      return error;
+    }
     onEnableToEdit(index, false);
   };
 
@@ -61,6 +81,27 @@ export default function Schedule(props) {
     onSave: onSave,
     onCancel: onCancel,
   };
+
+  const handleOpenDialog = (id) => {
+    setSelectedId(id);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleAccept = () => {
+    handleDeleteDay();
+    setOpen(false);
+  };
+  const propsPopup = {
+    open: open,
+    title: `Bạn có chắc muốn xóa chi tiết ngày thứ ${dayDetail.length} ?`,
+    handleClose: handleClose,
+    handleAccept: handleAccept,
+    setOpen: setOpen,
+  };
+
   return (
     <div className="border">
       <label>Lịch trình :</label>
@@ -91,7 +132,7 @@ export default function Schedule(props) {
                   Ngày {index + 1} :
                 </div>
                 {!day.isEdit ? (
-                  <div>{day.title}</div>
+                  <div>{day?.title}</div>
                 ) : (
                   <input
                     type="text"
@@ -114,7 +155,7 @@ export default function Schedule(props) {
                     onChange={(e) => handleScheduleChangeSchedule(index, e)}
                   />
                 ) : (
-                  <div>{day.schedule}</div>
+                  <div>{day?.schedule}</div>
                 )}
               </div>
             </div>
@@ -126,7 +167,29 @@ export default function Schedule(props) {
                 onClick={() => enableEdit(index, day.isEdit)}
               />
             ) : (
-              <ButtonGroup {...propsButton} index={index} />
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}
+              >
+                <ButtonGroup {...propsButton} index={index} id={day?.id} />
+                {index === dayDetail.length - 1 && (
+                  <div
+                    className="button"
+                    onClick={() => handleOpenDialog(day?.id)}
+                    style={{
+                      marginLeft: "10px",
+                      backgroundColor: "red",
+                      marginTop: "10px",
+                      width: "100px",
+                    }}
+                  >
+                    Xoá ngày
+                  </div>
+                )}
+              </div>
             )}
           </div>
 
@@ -150,17 +213,9 @@ export default function Schedule(props) {
           >
             Thêm ngày
           </div>
-          {dayDetail.length > 1 && (
-            <div
-              className="button"
-              onClick={handleDeleteDay}
-              style={{ marginLeft: "10px", backgroundColor: "#dc3545" }}
-            >
-              Xoá ngày
-            </div>
-          )}
         </div>
       )}
+      <Popup {...propsPopup} />
     </div>
   );
 }

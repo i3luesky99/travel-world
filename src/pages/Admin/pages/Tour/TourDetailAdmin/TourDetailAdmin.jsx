@@ -25,6 +25,8 @@ import {
   formatDate,
   handleLoadDataImageFromData,
 } from "../../../../../theme/functions";
+import useModel from "../../../../../hook/useModel";
+import Loading from "../../../../../components/Loading/Loading";
 moment.locale("vi");
 
 export default function TourDetailAdmin() {
@@ -42,10 +44,8 @@ export default function TourDetailAdmin() {
     babyPrice: "",
     note: "",
     transportation: "Xe du lịch đời mới",
-    destinationId: 4,
+    regionType: null,
     tourType: "Trong nước",
-    region: "Miền Trung",
-    continent: "Châu Á",
   });
   const [warning, setWarning] = useState(false);
   const [base64, setBase64] = useState("");
@@ -59,7 +59,9 @@ export default function TourDetailAdmin() {
     image: false,
     transportation: false,
   });
-
+  const { isOpen: isLoading, openModel: setIsLoading } = useModel(false);
+  const [regionType, setRegionType] = useState("Mien Bac");
+  const [continentType, setContinentType] = useState("Chau My");
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -80,6 +82,8 @@ export default function TourDetailAdmin() {
       dateGo: startDate,
       dateBack: endDate,
       image: base64 || selectedImages,
+      destinationId:
+        tour.tourType === "Ngoài nước" ? continentType : regionType,
     };
     try {
       for (const [key, value] of Object.entries(newTour)) {
@@ -120,16 +124,24 @@ export default function TourDetailAdmin() {
   };
 
   const handleFetchTour = async () => {
-    const { tour } = await handleGetTourById(id);
-    const img = handleLoadDataImageFromData(tour?.image.data);
-    const dateGo = tour?.dateGo;
-    const dateBack = tour?.dateBack;
-    const newDate = [...date];
-    newDate[0].startDate = formatDate(dateGo);
-    newDate[0].endDate = formatDate(dateBack);
-    setDayDetail(tour?.tourDetailData);
-    setTour(tour);
-    setSelectedImages(img);
+    setIsLoading(true);
+    try {
+      const { tour } = await handleGetTourById(id);
+      const img = handleLoadDataImageFromData(tour?.image.data);
+      const dateGo = tour?.dateGo;
+      const dateBack = tour?.dateBack;
+      const newDate = [...date];
+      newDate[0].startDate = formatDate(dateGo);
+      newDate[0].endDate = formatDate(dateBack);
+      setDayDetail(tour?.tourDetailData);
+      setTour(tour);
+      setSelectedImages(img);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
   useEffect(() => {
     handleFetchTour();
@@ -150,6 +162,10 @@ export default function TourDetailAdmin() {
     handleImageChange: handleImageChange,
     warning: warning,
     date: date,
+    setRegionType: setRegionType,
+    regionType: regionType,
+    continentType: continentType,
+    setContinentType: setContinentType,
   };
   return (
     <div className="new-tour">
@@ -239,6 +255,7 @@ export default function TourDetailAdmin() {
           )}
         </div>
       </form>
+      {isLoading && <Loading />}
     </div>
   );
 }

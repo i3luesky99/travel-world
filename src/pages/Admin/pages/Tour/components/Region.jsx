@@ -1,20 +1,24 @@
 import React from "react";
 
 export default function Region(props) {
-  const { tour, setDestinationId, destinationId } = props;
+  const { tour, setRegionType, regionType, continentType, setContinentType } =
+    props;
   const regions = [
-    { value: 4, label: "Miền Bắc" },
-    { value: 5, label: "Miền Trung" },
-    { value: 3, label: "Miền Nam" },
+    { value: "Mien Bac", label: "Miền Bắc" },
+    { value: "Mien Trung", label: "Miền Trung" },
+    { value: "Mien Nam", label: "Miền Nam" },
   ];
   const continents = [
-    { value: 6, label: "Châu Mỹ" },
-    { value: 7, label: "Châu Âu" },
-    { value: 8, label: "Châu Á" },
+    { value: "Chau My", label: "Châu Mỹ" },
+    { value: "Chau Au", label: "Châu Âu" },
+    { value: "Chau A", label: "Châu Á" },
   ];
+  const handleSelectChangeRegions = (event) => {
+    setRegionType(event.target.value);
+  };
 
-  const handleSelectChange = (event) => {
-    setDestinationId(parseInt(event.target.value));
+  const handleSelectChangeContinent = (event) => {
+    setContinentType(event.target.value);
   };
 
   return (
@@ -24,13 +28,13 @@ export default function Region(props) {
           Châu lục :
           <select
             className="form-control"
-            value={destinationId}
+            value={continentType}
             style={{
               fontSize: "14px",
               marginTop: "10px",
               marginBottom: "10px",
             }}
-            onChange={handleSelectChange}
+            onChange={handleSelectChangeContinent}
           >
             {continents.map((continent, index) => (
               <option key={`${index}-continent`} value={continent.value}>
@@ -44,13 +48,13 @@ export default function Region(props) {
           Miền :
           <select
             className="form-control"
-            value={destinationId}
+            value={regionType}
             style={{
               fontSize: "14px",
               marginTop: "10px",
               marginBottom: "10px",
             }}
-            onChange={handleSelectChange}
+            onChange={handleSelectChangeRegions}
           >
             {regions.map((region, index) => (
               <option key={index} value={region.value}>

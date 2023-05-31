@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function ButtonGroup(propsButton) {
-  const { onSave, onCancel, index } = propsButton;
+  const { onSave, onCancel, index, id } = propsButton;
   return (
     <div style={{ display: "flex" }}>
       <div
@@ -18,7 +18,7 @@ export default function ButtonGroup(propsButton) {
       <div
         className="button"
         style={{ width: "80px", background: "#56b5bb" }}
-        onClick={() => onSave(index)}
+        onClick={() => onSave(index, id)}
       >
         Lưu
       </div>
