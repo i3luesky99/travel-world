@@ -40,8 +40,12 @@ export default function BaseTable(props) {
   };
 
   const deleteTour = async () => {
-    await handleDeleteTourById(selectedId);
-    fetchTour();
+    try {
+      await handleDeleteTourById(selectedId);
+      fetchTour();
+    } catch (error) {
+      return error;
+    }
   };
 
   const handleToTouDetail = (id) => {
@@ -54,8 +58,12 @@ export default function BaseTable(props) {
       id: selectedId,
       creatorId: 2,
     };
-    await handleConfirmPaymentAPI(data);
-    fetchTour();
+    try {
+      await handleConfirmPaymentAPI(data);
+      fetchTour();
+    } catch (error) {
+      return;
+    }
   };
 
   const handleAcceptPayment = async () => {
@@ -64,8 +72,12 @@ export default function BaseTable(props) {
       id: selectedId,
       creatorId: 2,
     };
-    await handleConfirmPaymentAPI(data);
-    fetchTour();
+    try {
+      await handleConfirmPaymentAPI(data);
+      fetchTour();
+    } catch (error) {
+      return error;
+    }
   };
 
   const handleClose = () => {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import BaseTable from "../../../Components/BaseTable";
-import Pagination from "@mui/material/Pagination";
+// import Pagination from "@mui/material/Pagination";
 import useModel from "../../../../../hook/useModel";
 import Loading from "../../../../../components/Loading/Loading";
 import { handleGetAllTour } from "../../../../../services/tourService";
@@ -9,13 +9,13 @@ import { handleGetAllBookTour } from "../../../../../services/bookTourService";
 
 export default function TourAdmin() {
   const [searchItem, setSearchItem] = useState("");
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const [tours, setTours] = useState();
   const { isOpen: isLoading, openModel: setIsLoading } = useModel(false);
   const [selection, setSelection] = useState("list");
-  const onPageChange = (e, value) => {
-    setPage(value);
-  };
+  // const onPageChange = (e, value) => {
+  //   setPage(value);
+  // };
 
   const onFindTour = async () => {
     const data = await handleGetAllTour();
@@ -34,15 +34,18 @@ export default function TourAdmin() {
 
   const fetchTour = async (newTour) => {
     setIsLoading(true);
+    try {
+      const data =
+        selection === "list"
+          ? await handleGetAllTour()
+          : await handleGetAllBookTour();
 
-    const data =
-      selection === "list"
-        ? await handleGetAllTour()
-        : await handleGetAllBookTour();
-
-    setIsLoading(false);
-    setSearchItem("");
-    setTours(newTour || data?.tour || data?.bookTour);
+      setIsLoading(false);
+      setSearchItem("");
+      setTours(newTour || data?.tour || data?.bookTour);
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
