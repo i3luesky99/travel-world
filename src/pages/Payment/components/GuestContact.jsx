@@ -14,7 +14,7 @@ export default function GuestContact(props) {
   } = props;
   const handleOnChange = (e, name) => {
     let value = e.target.value;
-     if (name !== 'baby') {
+    if (name !== 'baby') {
       if (name === 'adult') {
         if (totalSlot < (parseInt(kids ? kids : 0) + parseInt(value))) {
           alert('Vượt quá số chỗ còn lại');
@@ -29,11 +29,9 @@ export default function GuestContact(props) {
         }
       }
     } else {
-      if (value > 2) {
-        alert('Số trẻ sơ sinh không được lớn hơn 2 !');
-      } else {
-        setBaby(value);
-      }
+
+      setBaby(value);
+
     }
 
   }

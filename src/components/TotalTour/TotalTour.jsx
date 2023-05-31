@@ -78,15 +78,15 @@ export default function TotalTour(props) {
             <div key={`key-${index}-destination`}>
               <div className="singleDestination" data-aos="fade-up">
                 <div className="destImage">
-                  <img src={destination.img ? destination?.img[0] : handleLoadDataImageFromData(destination.image)} alt="Img title" />
+                  <img src={destination.img ? destination?.img[0] : handleLoadDataImageFromData(destination?.image)} alt="Img title" />
 
                   <div className="overplayInfo">
-                    <h3>{destination.title ? destination?.title : destination.nameTour}</h3>
-                    <p>{destination.desc ? destination?.desc : destination.note}</p>
+                    <h3>{destination.title ? destination?.title : destination?.nameTour}</h3>
+                    <p>{destination.desc ? destination?.desc : destination?.note}</p>
 
                     <BsArrowRightShort
                       className="icon"
-                      onClick={() => handleOnClick("" + destination.id)}
+                      onClick={() => handleOnClick("" + destination?.id)}
                     />
                   </div>
                 </div>

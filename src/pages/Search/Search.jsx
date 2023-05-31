@@ -7,7 +7,7 @@ export default function Search() {
   console.log(tours);
   return (
     <div>
-      {/* <TotalTour title="Tìm kiếm" destinations={tours} foreign={true} /> */}
+      <TotalTour title="Tìm kiếm" destinations={tours} foreign={true} />
     </div>
   );
 }
