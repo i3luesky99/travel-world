@@ -96,8 +96,13 @@ export default function BaseCart(props) {
                 <div className="title-img">
                   <div style={{ width: "100%" }}>{tour?.tourName}</div>
                   <div>Ngày khởi hành: {tour?.dateStart}</div>
-                  {
-                    tour.stateBookTour !== 'S3'
+                  {heart ? (<>
+                    <div>Số chỗ còn lại: {tour?.totalSlot}</div>
+                    <div className="price">
+                      Tổng tiền: {formatCurrency(tour?.price)}
+                    </div>
+                  </>) :
+                    (tour.stateBookTour !== 'S3'
                       ? (<>
                         <div>Mã đặt tour: {tour?.bookTourId}</div>
                         <div>Chỗ người lớn: {tour?.adultSlot ? tour?.adultSlot : 0}</div>
@@ -116,7 +121,7 @@ export default function BaseCart(props) {
                           <div className="price">
                             Tổng tiền: {formatCurrency(tour?.adultPrice * tour?.adultSlot + tour?.childPrice * tour?.childSlot + tour?.babyPrice * tour?.babySlot)}
                           </div>
-                        </>)
+                        </>))
                   }
 
 
