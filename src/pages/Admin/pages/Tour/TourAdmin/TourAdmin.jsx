@@ -33,40 +33,16 @@ export default function TourAdmin() {
   };
 
   const fetchTour = async (newTour) => {
+    setIsLoading(true);
+
     const data =
       selection === "list"
         ? await handleGetAllTour()
         : await handleGetAllBookTour();
 
-    const groupedDataMap = new Map();
-    selection === "booking" &&
-      data?.bookTour.forEach((booking) => {
-        const { tourId, customerId } = booking;
-
-        // Kiểm tra nếu đã có tourId trong Map
-        if (groupedDataMap.has(tourId)) {
-          // Nếu đã tồn tại, thêm customerId vào mảng tương ứng với tourId
-          const customerIds = groupedDataMap.get(tourId);
-          customerIds.push(customerId);
-        } else {
-          // Nếu chưa tồn tại, tạo một mảng mới chứa customerId và thêm vào Map
-          groupedDataMap.set(tourId, [customerId]);
-        }
-      });
-
-    const groupedData = Array.from(groupedDataMap).map(
-      ([tourId, customerIds]) => ({
-        tourId,
-        customerIds,
-      })
-    );
-
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      setSearchItem("");
-      setTours(newTour || data.tour || groupedData);
-    }, 1000);
+    setIsLoading(false);
+    setSearchItem("");
+    setTours(newTour || data?.tour || data?.bookTour);
   };
 
   useEffect(() => {
@@ -79,8 +55,8 @@ export default function TourAdmin() {
     fetchTour: fetchTour,
     selection: selection,
   };
-  
-   return (
+
+  return (
     <div className="tour-admin">
       <div className="title-admin">Danh sách Tour</div>
       <div className="search">

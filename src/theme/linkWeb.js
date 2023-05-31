@@ -92,6 +92,10 @@ export const clientWeb = [
     link: "/invoice/:invoiceId",
     component: <Invoice />,
   },
+  {
+    link: "/search/tours",
+    component: <Invoice />,
+  },
 ];
 
 export const adminWeb = [

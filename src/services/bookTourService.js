@@ -33,6 +33,11 @@ const handleCancellationBookTourAPI = (data) => {
 const handleChangeStateBookTourAPI = (data) => {
   return axios.put("/api/bookTour/editState", data);
 };
+
+const handleConfirmPaymentAPI = (data) => {
+  return axios.post("api/bookTour/payment-confirmation", data);
+};
+
 export {
   handleCreateBookTour,
   handleGetAllBookTour,
@@ -41,4 +46,5 @@ export {
   handleChangeStateBookTourAPI,
   handleGetBookTourById,
   handleGetBookTourByTourId,
+  handleConfirmPaymentAPI,
 };

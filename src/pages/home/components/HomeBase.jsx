@@ -21,7 +21,6 @@ import { useRef } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { RiFunctionFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
-
 moment.locale("vi");
 
 export default function HomeBase(props) {
@@ -101,7 +100,7 @@ export default function HomeBase(props) {
                   className="iconSearch"
                   onClick={onScrollToSearchBar}
                 />
-                <p>Khám phá</p>
+                <p>TÌM TOUR</p>
               </button>
             </div>
             {isOpenSearchBar && (
@@ -130,7 +129,7 @@ export default function HomeBase(props) {
                   data-aos="fade-right"
                   data-aos-duration="2500"
                 >
-                  <label htmlFor="distance">Ngày</label>
+                  <label htmlFor="distance">Ngày đi</label>
                   <div className="datePicker" onClick={openCalendar}>
                     <p>
                       {`${moment(`${date[0].startDate}`).format("L")}`} -{` `}

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../../../../components/Loading/Loading";
 import BaseTable from "../../Components/BaseTable";
-// import { handleGetAllUser } from "../../../../services/tourService";
-// import { handleGetAllBookUser } from "../../../../services/bookUserService";
 import useModel from "../../../../hook/useModel";
 import TableUser from "./components/TableUser";
 import { handleAllGetUser } from "../../../../services/userService";
@@ -91,7 +89,7 @@ export default function UserAdmin() {
           <TableUser {...props} />
         </>
       ) : (
-        <div className="empty-text">Không có tour nào</div>
+        <div className="empty-text">Không có khách hàng nào</div>
       )}
 
       {isLoading && <Loading />}
