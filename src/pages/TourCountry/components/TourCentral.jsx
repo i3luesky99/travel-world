@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { TotalTour } from "../../../components";
-import { destinationCentral } from "../../../theme/data";
 import { handleScheduleDay } from "../../../theme/functions";
 import { handleGetTourByRegion } from "../../../services/tourService";
 import { handleLoadDataImageFromData } from "../../../theme/functions";
 function TourCentral() {
   useEffect(() => {
     destinationData();
-  }, []);
+  }, [destinationData]);
   const [destinations, setDestinations] = useState([]);
 
   const destinationData = async () => {
@@ -18,7 +17,7 @@ function TourCentral() {
         id: 1,
         img: [
           require("../../../assets/picture/pic1.jpg"),
-          require("../../../assets/picture/pic2.jpg")
+          require("../../../assets/picture/pic2.jpg"),
         ],
         title: "Tour du lịch Đà Nẵng ",
         location: "Đà Nẵng",
@@ -34,25 +33,23 @@ function TourCentral() {
       dataTransfer.id = element.id;
       dataTransfer.title = element.nameTour;
       dataTransfer.location = element.placeDest;
-      dataTransfer.totalDays = handleScheduleDay(element.dateGo, element.dateBack);//dateBack-dateGo
-      dataTransfer.dateStart = new Date().toLocaleString();//dateGo
+      dataTransfer.totalDays = handleScheduleDay(
+        element.dateGo,
+        element.dateBack
+      ); //dateBack-dateGo
+      dataTransfer.dateStart = new Date().toLocaleString(); //dateGo
       dataTransfer.dateGo = element.dateGo;
       //desc = note
       if (element.image) {
-        dataTransfer.img = [handleLoadDataImageFromData(element.image.data)]
+        dataTransfer.img = [handleLoadDataImageFromData(element.image.data)];
       }
       dataTransfer.desc = element.note;
       dataTransfer.slots = element.adultSlot + element.childrenSlot;
       dataTransfer.prices = element.adultPrice;
       data.push(dataTransfer);
-
     }
-    setDestinations((destinations) =>
-      ([...destinations, data])
-
-    );
-
-  }
+    setDestinations((destinations) => [...destinations, data]);
+  };
 
   const fetchTour = async () => {
     try {
@@ -60,12 +57,10 @@ function TourCentral() {
       const dataTour = data.tour;
       // setDestinations(dataTour);
       return dataTour;
-
-
     } catch (error) {
-      return error
+      return error;
     }
-  }
+  };
   return (
     <div>
       <TotalTour title="miền Trung" destinations={destinations[0]} />

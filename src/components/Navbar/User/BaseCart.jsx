@@ -3,7 +3,6 @@ import React from "react";
 import Cancel from "../../../assets/svg/cancel";
 import CartIcon from "../../../assets/svg/cart";
 import Heart from "../../../assets/svg/heart";
-import { Popup } from "../../../components";
 import { formatCurrency } from "../../../theme/functions";
 import { handleCancellationBookTourAPI } from "../../../services/bookTourService";
 import { handleSendMailBookTourAPI } from "../../../services/sendMailService";
@@ -13,28 +12,21 @@ export default function BaseCart(props) {
     setOpen(false);
   };
   const handleCancellationBookTour = async (bookTourId, tourId) => {
-
     await handleCancellationBookTourAPI({ id: bookTourId });
     deleteTour(tourId);
-  }
+  };
   const handleToTourDetail = (id) => {
     window.location.replace(`/tour-country/tour-detail/${id}`);
   };
   const handleSendMailHoaDon = async (bookTourId) => {
-
     await handleSendMailBookTourAPI({
       bookTourId: bookTourId,
-      customerId: localStorage.getItem("userId")
+      customerId: localStorage.getItem("userId"),
     }).then((dataBill) => {
-      if (dataBill.errCode == 0) {
-
+      if (dataBill.errCode === 0) {
         window.location.replace("/Invoice/" + dataBill.billId);
       }
-
-
-    }
-    );
-
+    });
   };
   return (
     <Drawer
@@ -96,64 +88,84 @@ export default function BaseCart(props) {
                 <div className="title-img">
                   <div style={{ width: "100%" }}>{tour?.tourName}</div>
                   <div>Ngày khởi hành: {tour?.dateStart}</div>
-                  {heart ? (<>
-                    <div>Số chỗ còn lại: {tour?.totalSlot}</div>
-                    <div className="price">
-                      Tổng tiền: {formatCurrency(tour?.price)}
-                    </div>
-                  </>) :
-                    (tour.stateBookTour !== 'S3'
-                      ? (<>
-                        <div>Mã đặt tour: {tour?.bookTourId}</div>
-                        <div>Chỗ người lớn: {tour?.adultSlot ? tour?.adultSlot : 0}</div>
-                        <div>Chỗ trẻ em: {tour?.childSlot ? tour?.childSlot : 0}</div>
-                        <div>Chỗ trẻ sơ sinh: {tour?.babySlot ? tour?.babySlot : 0}</div>
-                        <div className="price">
-                          Tổng tiền: {formatCurrency(tour?.adultPrice * tour?.adultSlot + tour?.childPrice * tour?.childSlot + tour?.babyPrice * tour?.babySlot)}
-                        </div>
-                      </>)
-                      : (
-                        <>
-
-                          <div>Chỗ người lớn: {tour?.adultSlot ? tour?.adultSlot : 0}</div>
-                          <div>Chỗ trẻ em: {tour?.childSlot ? tour?.childSlot : 0}</div>
-                          <div>Chỗ trẻ sơ sinh: {tour?.babySlot ? tour?.babySlot : 0}</div>
-                          <div className="price">
-                            Tổng tiền: {formatCurrency(tour?.adultPrice * tour?.adultSlot + tour?.childPrice * tour?.childSlot + tour?.babyPrice * tour?.babySlot)}
-                          </div>
-                        </>))
-                  }
-
-
+                  {heart ? (
+                    <>
+                      <div>Số chỗ còn lại: {tour?.totalSlot}</div>
+                      <div className="price">
+                        Tổng tiền: {formatCurrency(tour?.price)}
+                      </div>
+                    </>
+                  ) : tour.stateBookTour !== "S3" ? (
+                    <>
+                      <div>Mã đặt tour: {tour?.bookTourId}</div>
+                      <div>
+                        Chỗ người lớn: {tour?.adultSlot ? tour?.adultSlot : 0}
+                      </div>
+                      <div>
+                        Chỗ trẻ em: {tour?.childSlot ? tour?.childSlot : 0}
+                      </div>
+                      <div>
+                        Chỗ trẻ sơ sinh: {tour?.babySlot ? tour?.babySlot : 0}
+                      </div>
+                      <div className="price">
+                        Tổng tiền:{" "}
+                        {formatCurrency(
+                          tour?.adultPrice * tour?.adultSlot +
+                            tour?.childPrice * tour?.childSlot +
+                            tour?.babyPrice * tour?.babySlot
+                        )}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div>
+                        Chỗ người lớn: {tour?.adultSlot ? tour?.adultSlot : 0}
+                      </div>
+                      <div>
+                        Chỗ trẻ em: {tour?.childSlot ? tour?.childSlot : 0}
+                      </div>
+                      <div>
+                        Chỗ trẻ sơ sinh: {tour?.babySlot ? tour?.babySlot : 0}
+                      </div>
+                      <div className="price">
+                        Tổng tiền:{" "}
+                        {formatCurrency(
+                          tour?.adultPrice * tour?.adultSlot +
+                            tour?.childPrice * tour?.childSlot +
+                            tour?.babyPrice * tour?.babySlot
+                        )}
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
               {heart ? (
-
                 <div
                   className="book-button"
                   onClick={() => handleToTourDetail(tour?.id)}
                 >
                   ĐẶT TOUR
                 </div>
-
-              ) : (tour.stateBookTour !== 'S3' ?
-                (<div
+              ) : tour.stateBookTour !== "S3" ? (
+                <div
                   className="book-button"
                   style={{
                     backgroundColor: "#dc3545",
                   }}
-                  onClick={() => handleCancellationBookTour(tour?.bookTourId, tour?.id)}
+                  onClick={() =>
+                    handleCancellationBookTour(tour?.bookTourId, tour?.id)
+                  }
                 >
                   HUỶ ĐẶT TOUR
-                </div>) : (<div
+                </div>
+              ) : (
+                <div
                   className="book-button"
                   onClick={() => handleSendMailHoaDon(tour?.bookTourId)}
-
                 >
                   XEM HÓA ĐƠN
-                </div>))
-
-              }
+                </div>
+              )}
             </div>
             <div
               style={{
@@ -166,6 +178,6 @@ export default function BaseCart(props) {
           </div>
         ))}
       </div>
-    </Drawer >
+    </Drawer>
   );
 }

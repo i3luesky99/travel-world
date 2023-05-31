@@ -20,9 +20,11 @@ import { IoIosArrowUp } from "react-icons/io";
 import { useRef } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { RiFunctionFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Moment from "moment";
 import { handleGetTourByPlaceDestAndPrice } from "../../../services/tourService";
+import { useDispatch } from "react-redux";
+import { setTours } from "../../../redux/Tours/tourAction";
 moment.locale("vi");
 
 export default function HomeBase(props) {
@@ -31,12 +33,16 @@ export default function HomeBase(props) {
   const [location, setLocation] = useState();
   const [price, setPrice] = useState();
   const [calendar, setCalendar] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isOpen: isOpenSearchBar, openModel: openSearchBar } = useModel(false);
   const { isOpen: isOpenFloating, openModel: openFloating } = useModel(false);
   const token = localStorage.getItem("accessToken");
+
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
+
   const handleSearchTour = async () => {
     let dataApi = await handleGetTourByPlaceDestAndPrice(location, price);
     let dataTourApi = dataApi.tour;
@@ -44,29 +50,23 @@ export default function HomeBase(props) {
     const endDate = `${moment(`${date[0].endDate}`).format("L")}`;
     const dateGoSelect = Moment(startDate, "DD/MM/YYYY");
     const dateBackSelect = Moment(endDate, "DD/MM/YYYY");
-    let array = [];
-    for (let index = 0; index < dataTourApi.length; index++) {
-      const element = dataTourApi[index];
-      const dateGoApi = Moment(element.dateGo, "DD/MM/YYYY");
-      const dateBackApi = Moment(element.dateBack, "DD/MM/YYYY");
 
-      //console.log(dateGoSelect.isSameOrBefore(dateGoApi) + "và:" + dateBackApi.isSameOrBefore(dateBackSelect))
+    const filteredArray = dataTourApi.filter((element) => {
+      const dateGoApi = moment(element.dateGo, "DD/MM/YYYY");
+      const dateBackApi = moment(element.dateBack, "DD/MM/YYYY");
+
       if (dateGoSelect.isSame(dateBackSelect)) {
-        if (dateGoSelect.isSameOrBefore(dateGoApi)) {
-          array.push(element);
-        }
+        return dateGoSelect.isSameOrBefore(dateGoApi);
       } else {
-        if (
+        return (
           dateGoSelect.isSameOrBefore(dateGoApi) &&
           dateBackApi.isSameOrBefore(dateBackSelect)
-        ) {
-          array.push(element);
-        }
+        );
       }
-    }
-    setTourSearch(array);
-    console.log(tourSearch);
-    // console.log(dataTourApi.tour[0].dateGo);
+    });
+    navigate("/search/tours");
+    dispatch(setTours(filteredArray));
+    setTourSearch(filteredArray);
   };
   const [date, setDate] = useState([
     {
@@ -86,7 +86,6 @@ export default function HomeBase(props) {
         setPrice(event.target.value);
       }
     }
-    //console.log(location)
   };
   const handleClickAway = () => {
     setCalendar(false);

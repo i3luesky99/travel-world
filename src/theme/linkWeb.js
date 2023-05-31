@@ -24,6 +24,7 @@ import TourAdmin from "../pages/Admin/pages/Tour/TourAdmin/TourAdmin";
 import Invoice from "../pages/Payment/components/Invoice";
 import TravelOrder from "../pages/Payment/components/TravelOrder";
 import UserAdmin from "../pages/Admin/pages/UserAdmin/UserAdmin";
+import Search from "../pages/Search/Search";
 
 export const clientWeb = [
   {
@@ -98,7 +99,7 @@ export const clientWeb = [
   },
   {
     link: "/search/tours",
-    component: <Invoice />,
+    component: <Search />,
   },
 ];
 
