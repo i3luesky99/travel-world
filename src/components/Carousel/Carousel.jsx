@@ -58,11 +58,11 @@ export default function Carousel(props) {
               >
                 <div className="destImage">
                   <img
-                    // src={
-                    //   destination?.img
-                    //     ? destination?.img[0]
-                    //     : handleLoadDataImageFromData(destination?.image)
-                    // }
+                    src={
+                      destination?.img
+                        ? destination?.img[0]
+                        : handleLoadDataImageFromData(destination?.image)
+                    }
                     alt="Img title"
                   />
 
@@ -94,16 +94,16 @@ export default function Carousel(props) {
                       {destination?.totalDays
                         ? destination?.totalDays
                         : handleScheduleDay(
-                            destination?.dateGo,
-                            destination?.dateBack
-                          )}
+                          destination?.dateGo,
+                          destination?.dateBack
+                        )}
                       ngày&nbsp;
                       {destination?.totalDays
                         ? destination?.totalDays
                         : handleScheduleDay(
-                            destination?.dateGo,
-                            destination?.dateBack
-                          ) - 1}{" "}
+                          destination?.dateGo,
+                          destination?.dateBack
+                        ) - 1}{" "}
                       đêm
                     </h6>
                   </div>
