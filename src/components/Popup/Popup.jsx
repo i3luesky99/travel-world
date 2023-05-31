@@ -9,7 +9,7 @@ import Cancel from "../../assets/svg/cancel";
 import { IconButton } from "@mui/material";
 
 export default function Popup(prop) {
-  const { open, setOpen, title, handleClose, handleAccept } = prop;
+  const { open, setOpen, title, handleClose, handleAccept, cancelText } = prop;
 
   return (
     <div>
@@ -41,7 +41,7 @@ export default function Popup(prop) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Huỷ bỏ</Button>
+          <Button onClick={handleClose}>{cancelText || `Huỷ bỏ`}</Button>
           <Button onClick={handleAccept}>Đồng ý</Button>
         </DialogActions>
       </Dialog>

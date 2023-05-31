@@ -72,7 +72,7 @@ export default function BaseCart(props) {
         {tours.map((tour, index) => (
           <div key={`tour-select-${index}`}>
             <div className="item">
-              <Cancel
+              {/* <Cancel
                 style={{
                   position: "absolute",
                   width: "20px",
@@ -82,7 +82,7 @@ export default function BaseCart(props) {
                   cursor: "pointer",
                 }}
                 onClick={() => deleteTour(tour?.id)}
-              />
+              /> */}
               <div className="item-prop">
                 <img className="item-img" src={tour?.img} alt="" />
                 <div className="title-img">

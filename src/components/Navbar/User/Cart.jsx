@@ -116,7 +116,7 @@ export default function Cart() {
   };
 
   const deleteTour = async (tourBookedID) => {
-    fetchFavoriteTour();
+    // fetchFavoriteTour();
   };
 
   const props = {

@@ -14,6 +14,7 @@ import "moment/locale/vi";
 import { formatCurrency } from "../../../theme/functions";
 import useModel from "../../../hook/useModel";
 import Loading from "../../../components/Loading/Loading";
+import { getStatistic } from "../../../services/statistic";
 moment.locale("vi");
 
 ChartJS.register(
@@ -79,6 +80,11 @@ export default function Admin() {
     ],
   };
 
+  const handleGetStatistic = async (daysOfWeek) => {
+    const data = await getStatistic({ dateArray: daysOfWeek });
+    console.log(data);
+  };
+
   const changeType = () => {
     const today = moment();
     const startOfWeek = today.clone().startOf("isoWeek");
@@ -92,8 +98,9 @@ export default function Admin() {
     switch (selectType) {
       case "week":
         const daysOfWeek = Array.from({ length: 7 }, (_, i) =>
-          startOfWeek.clone().add(i, "days").format("dddd, DD/MM")
+          startOfWeek.clone().add(i, "days").format("DD/MM/YYYY")
         );
+        handleGetStatistic(daysOfWeek);
         setTotalMoney([10, 20, 30, 40, 50, 20, 10]);
         setTotalDays(daysOfWeek);
         break;
@@ -101,6 +108,7 @@ export default function Admin() {
         const daysOfMonth = Array.from({ length: daysInMonth }, (_, i) =>
           startOfMonth.clone().add(i, "days").format("DD/MM/YYYY")
         );
+
         setTotalDays(daysOfMonth);
         break;
       case "year":

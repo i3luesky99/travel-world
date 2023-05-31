@@ -106,12 +106,15 @@ export default function BaseTable(props) {
       ? "Bạn có chắc muốn xóa Tour này không ?"
       : "Xác nhận thanh toán hóa đơn cho khách hàng ?";
 
+  const cancelText = selection === "booking" && "Hủy thanh toán";
+
   const propsPopup = {
     open: open,
     title: title,
     handleClose: handleClose,
     handleAccept: handleAccept,
     setOpen: setOpen,
+    cancelText: cancelText,
   };
 
   return (
@@ -204,13 +207,13 @@ export default function BaseTable(props) {
                   </td>
                   <td>{destination?.dataCustomer?.fullName}</td>
                   <td>
-                    {destination?.paymentId === "P3" && <div>Tiền mặt</div>}
+                    {destination?.paymentId === "P4" && <div>Tiền mặt</div>}
                     {destination?.paymentId === "P6" && <div>VnPay</div>}
                     {destination?.paymentId === "P7" && <div>Visa</div>}
                   </td>
                   <td>{destination?.adultSlot}</td>
                   <td>{destination?.childrenSlot}</td>
-                  <td>{destination?.babySlot}</td>
+                  <td>{destination?.babySlot || 0}</td>
                 </tr>
               ))}
             </tbody>
@@ -218,6 +221,6 @@ export default function BaseTable(props) {
         </>
       )}
       <Popup {...propsPopup} />
-     </div>
+    </div>
   );
 }
